@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/franka_gen.cpp
+math.h
+-
+
+/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/franka_gen.h
+
+/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/thunder_franka.cpp
+thunder_franka.h
+/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/thunder_franka.h
+franka_gen.h
+/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/franka_gen.h
+
+/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/thunder_franka.h
+iostream
+-
+string
+-
+cmath
+-
+eigen3/Eigen/Dense
+-
+yaml-cpp/yaml.h
+-
+fstream
+-
+
