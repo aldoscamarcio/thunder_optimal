@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_state_controller.pdb"
-  "/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_state_controller.so"
+  "/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_state_controller.pdb"
+  "/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_state_controller.so"
   "CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o"
 )
 

@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -O3 -DNDEBUG  -shared -Wl,-soname,libthunder_franka.so -o /home/franko/Scrivania/catkin_ws/devel/lib/libthunder_franka.so CMakeFiles/thunder_franka.dir/src/thunder_franka.cpp.o 

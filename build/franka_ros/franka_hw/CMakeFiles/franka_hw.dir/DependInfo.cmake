@@ -4,12 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/src/control_mode.cpp" "/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/control_mode.cpp.o"
-  "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/src/franka_combinable_hw.cpp" "/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/franka_combinable_hw.cpp.o"
-  "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/src/franka_combined_hw.cpp" "/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/franka_combined_hw.cpp.o"
-  "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/src/franka_hw.cpp" "/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/franka_hw.cpp.o"
-  "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/src/resource_helpers.cpp" "/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/resource_helpers.cpp.o"
-  "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/src/trigger_rate.cpp" "/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/trigger_rate.cpp.o"
+  "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/src/control_mode.cpp" "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/control_mode.cpp.o"
+  "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/src/franka_combinable_hw.cpp" "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/franka_combinable_hw.cpp.o"
+  "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/src/franka_combined_hw.cpp" "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/franka_combined_hw.cpp.o"
+  "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/src/franka_hw.cpp" "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/franka_hw.cpp.o"
+  "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/src/resource_helpers.cpp" "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/resource_helpers.cpp.o"
+  "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/src/trigger_rate.cpp" "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/trigger_rate.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -24,15 +24,15 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include"
-  "/home/franko/Scrivania/catkin_ws/devel/include"
+  "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include"
+  "/home/franko/Scrivania/thunder_optimal/devel/include"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_hw/CMakeFiles/franka_control_services.dir/DependInfo.cmake"
+  "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_hw/CMakeFiles/franka_control_services.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

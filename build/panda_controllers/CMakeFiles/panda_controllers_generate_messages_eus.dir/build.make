@@ -43,25 +43,25 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 # Utility rule file for panda_controllers_generate_messages_eus.
 
 # Include the progress variables for this target.
 include panda_controllers/CMakeFiles/panda_controllers_generate_messages_eus.dir/progress.make
 
-panda_controllers/CMakeFiles/panda_controllers_generate_messages_eus: /home/franko/Scrivania/catkin_ws/devel/share/roseus/ros/panda_controllers/manifest.l
+panda_controllers/CMakeFiles/panda_controllers_generate_messages_eus: /home/franko/Scrivania/thunder_optimal/devel/share/roseus/ros/panda_controllers/manifest.l
 
 
-/home/franko/Scrivania/catkin_ws/devel/share/roseus/ros/panda_controllers/manifest.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/franko/Scrivania/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp manifest code for panda_controllers"
-	cd /home/franko/Scrivania/catkin_ws/build/panda_controllers && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/franko/Scrivania/catkin_ws/devel/share/roseus/ros/panda_controllers panda_controllers std_msgs geometry_msgs
+/home/franko/Scrivania/thunder_optimal/devel/share/roseus/ros/panda_controllers/manifest.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/franko/Scrivania/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp manifest code for panda_controllers"
+	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/franko/Scrivania/thunder_optimal/devel/share/roseus/ros/panda_controllers panda_controllers std_msgs geometry_msgs
 
 panda_controllers_generate_messages_eus: panda_controllers/CMakeFiles/panda_controllers_generate_messages_eus
-panda_controllers_generate_messages_eus: /home/franko/Scrivania/catkin_ws/devel/share/roseus/ros/panda_controllers/manifest.l
+panda_controllers_generate_messages_eus: /home/franko/Scrivania/thunder_optimal/devel/share/roseus/ros/panda_controllers/manifest.l
 panda_controllers_generate_messages_eus: panda_controllers/CMakeFiles/panda_controllers_generate_messages_eus.dir/build.make
 
 .PHONY : panda_controllers_generate_messages_eus
@@ -72,10 +72,10 @@ panda_controllers/CMakeFiles/panda_controllers_generate_messages_eus.dir/build: 
 .PHONY : panda_controllers/CMakeFiles/panda_controllers_generate_messages_eus.dir/build
 
 panda_controllers/CMakeFiles/panda_controllers_generate_messages_eus.dir/clean:
-	cd /home/franko/Scrivania/catkin_ws/build/panda_controllers && $(CMAKE_COMMAND) -P CMakeFiles/panda_controllers_generate_messages_eus.dir/cmake_clean.cmake
+	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && $(CMAKE_COMMAND) -P CMakeFiles/panda_controllers_generate_messages_eus.dir/cmake_clean.cmake
 .PHONY : panda_controllers/CMakeFiles/panda_controllers_generate_messages_eus.dir/clean
 
 panda_controllers/CMakeFiles/panda_controllers_generate_messages_eus.dir/depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/catkin_ws/src /home/franko/Scrivania/catkin_ws/src/panda_controllers /home/franko/Scrivania/catkin_ws/build /home/franko/Scrivania/catkin_ws/build/panda_controllers /home/franko/Scrivania/catkin_ws/build/panda_controllers/CMakeFiles/panda_controllers_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/thunder_optimal/src /home/franko/Scrivania/thunder_optimal/src/panda_controllers /home/franko/Scrivania/thunder_optimal/build /home/franko/Scrivania/thunder_optimal/build/panda_controllers /home/franko/Scrivania/thunder_optimal/build/panda_controllers/CMakeFiles/panda_controllers_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : panda_controllers/CMakeFiles/panda_controllers_generate_messages_eus.dir/depend
 

@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "${prefix}/include;/opt/ros/noetic/include".sp
 PROJECT_CATKIN_DEPENDS = "controller_interface;franka_hw;franka_msgs;geometry_msgs;pluginlib;realtime_tools;roscpp;sensor_msgs;tf2_msgs;std_srvs".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "-lfranka_state_controller;/opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2".split(';') if "-lfranka_state_controller;/opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2" != "" else []
 PROJECT_NAME = "franka_control"
-PROJECT_SPACE_DIR = "/home/franko/Scrivania/thunder_optimal/panda_controllers/install"
+PROJECT_SPACE_DIR = "/home/franko/Scrivania/thunder_optimal/install"
 PROJECT_VERSION = "0.10.1"

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_hw.pdb"
-  "/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_hw.so"
+  "/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_hw.pdb"
+  "/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_hw.so"
   "CMakeFiles/franka_hw.dir/src/control_mode.cpp.o"
   "CMakeFiles/franka_hw.dir/src/franka_combinable_hw.cpp.o"
   "CMakeFiles/franka_hw.dir/src/franka_combined_hw.cpp.o"

@@ -1,8 +1,8 @@
-# Install script for directory: /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/test
+# Install script for directory: /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/franko/Scrivania/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/franko/Scrivania/thunder_optimal/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

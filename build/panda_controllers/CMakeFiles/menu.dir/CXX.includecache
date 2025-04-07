@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/franko/Scrivania/catkin_ws/src/panda_controllers/include/utils/thunder_franka.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/include/utils/thunder_franka.h
 iostream
 -
 string
@@ -20,13 +20,13 @@ yaml-cpp/yaml.h
 fstream
 -
 
-/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/franka_gen.cpp
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/franka_gen.cpp
 math.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/franka_gen.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/franka_gen.h
 
-/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/menu.cpp
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/menu.cpp
 iostream
 -
 eigen3/Eigen/Dense
@@ -40,27 +40,27 @@ signal.h
 geometry_msgs/PoseStamped.h
 -
 ros/ros.h
-/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/ros/ros.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/ros/ros.h
 utils/thunder_franka.h
-/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/utils/thunder_franka.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/utils/thunder_franka.h
 sstream
 -
 std_msgs/Float64.h
-/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/std_msgs/Float64.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/std_msgs/Float64.h
 std_msgs/Bool.h
-/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/std_msgs/Bool.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/std_msgs/Bool.h
 std_srvs/SetBool.h
-/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/std_srvs/SetBool.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/std_srvs/SetBool.h
 sensor_msgs/JointState.h
-/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/sensor_msgs/JointState.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/sensor_msgs/JointState.h
 
-/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/thunder_franka.cpp
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp
 thunder_franka.h
-/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/thunder_franka.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.h
 franka_gen.h
-/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/franka_gen.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/franka_gen.h
 
-/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/thunder_franka.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.h
 iostream
 -
 string

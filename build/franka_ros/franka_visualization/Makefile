@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,14 +137,14 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/catkin_ws/build/CMakeFiles /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_visualization/CMakeFiles/progress.marks
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_visualization/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/catkin_ws/build/CMakeFiles 0
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/thunder_optimal/build/CMakeFiles /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_visualization/CMakeFiles/progress.marks
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_visualization/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/thunder_optimal/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_visualization/clean
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_visualization/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_visualization/preinstall
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_visualization/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_visualization/preinstall
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_visualization/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/rule
 .PHONY : franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/rule
 
 # Convenience name for target.
@@ -179,12 +179,12 @@ gripper_joint_state_publisher: franka_ros/franka_visualization/CMakeFiles/grippe
 
 # fast build rule for target.
 gripper_joint_state_publisher/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/build
 .PHONY : gripper_joint_state_publisher/fast
 
 # Convenience name for target.
 franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/rule
 .PHONY : franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/rule
 
 # Convenience name for target.
@@ -194,7 +194,7 @@ robot_joint_state_publisher: franka_ros/franka_visualization/CMakeFiles/robot_jo
 
 # fast build rule for target.
 robot_joint_state_publisher/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/build
 .PHONY : robot_joint_state_publisher/fast
 
 src/gripper_joint_state_publisher.o: src/gripper_joint_state_publisher.cpp.o
@@ -203,7 +203,7 @@ src/gripper_joint_state_publisher.o: src/gripper_joint_state_publisher.cpp.o
 
 # target to build an object file
 src/gripper_joint_state_publisher.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/src/gripper_joint_state_publisher.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/src/gripper_joint_state_publisher.cpp.o
 .PHONY : src/gripper_joint_state_publisher.cpp.o
 
 src/gripper_joint_state_publisher.i: src/gripper_joint_state_publisher.cpp.i
@@ -212,7 +212,7 @@ src/gripper_joint_state_publisher.i: src/gripper_joint_state_publisher.cpp.i
 
 # target to preprocess a source file
 src/gripper_joint_state_publisher.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/src/gripper_joint_state_publisher.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/src/gripper_joint_state_publisher.cpp.i
 .PHONY : src/gripper_joint_state_publisher.cpp.i
 
 src/gripper_joint_state_publisher.s: src/gripper_joint_state_publisher.cpp.s
@@ -221,7 +221,7 @@ src/gripper_joint_state_publisher.s: src/gripper_joint_state_publisher.cpp.s
 
 # target to generate assembly for a file
 src/gripper_joint_state_publisher.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/src/gripper_joint_state_publisher.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/gripper_joint_state_publisher.dir/src/gripper_joint_state_publisher.cpp.s
 .PHONY : src/gripper_joint_state_publisher.cpp.s
 
 src/robot_joint_state_publisher.o: src/robot_joint_state_publisher.cpp.o
@@ -230,7 +230,7 @@ src/robot_joint_state_publisher.o: src/robot_joint_state_publisher.cpp.o
 
 # target to build an object file
 src/robot_joint_state_publisher.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/src/robot_joint_state_publisher.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/src/robot_joint_state_publisher.cpp.o
 .PHONY : src/robot_joint_state_publisher.cpp.o
 
 src/robot_joint_state_publisher.i: src/robot_joint_state_publisher.cpp.i
@@ -239,7 +239,7 @@ src/robot_joint_state_publisher.i: src/robot_joint_state_publisher.cpp.i
 
 # target to preprocess a source file
 src/robot_joint_state_publisher.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/src/robot_joint_state_publisher.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/src/robot_joint_state_publisher.cpp.i
 .PHONY : src/robot_joint_state_publisher.cpp.i
 
 src/robot_joint_state_publisher.s: src/robot_joint_state_publisher.cpp.s
@@ -248,7 +248,7 @@ src/robot_joint_state_publisher.s: src/robot_joint_state_publisher.cpp.s
 
 # target to generate assembly for a file
 src/robot_joint_state_publisher.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/src/robot_joint_state_publisher.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/build.make franka_ros/franka_visualization/CMakeFiles/robot_joint_state_publisher.dir/src/robot_joint_state_publisher.cpp.s
 .PHONY : src/robot_joint_state_publisher.cpp.s
 
 # Help Target
@@ -283,6 +283,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

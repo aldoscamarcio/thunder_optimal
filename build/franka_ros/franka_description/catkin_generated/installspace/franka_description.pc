@@ -1,4 +1,4 @@
-prefix=/home/franko/Scrivania/thunder_optimal/panda_controllers/install
+prefix=/home/franko/Scrivania/thunder_optimal/install
 
 Name: franka_description
 Description: Description of franka_description

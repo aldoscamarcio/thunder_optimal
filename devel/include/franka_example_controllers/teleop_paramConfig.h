@@ -664,73 +664,73 @@ double ddq_u_7;
 
 
 
-//#line 9 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 9 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double leader_damping_scaling;
-//#line 12 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 12 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double follower_stiffness_scaling;
-//#line 18 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 18 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double force_feedback_idle;
-//#line 21 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 21 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double force_feedback_guiding;
-//#line 26 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 26 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double leader_contact_force_threshold;
-//#line 30 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 30 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double follower_contact_force_threshold;
-//#line 39 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 39 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double dq_l_1;
-//#line 40 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 40 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double dq_l_2;
-//#line 41 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 41 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double dq_l_3;
-//#line 42 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 42 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double dq_l_4;
-//#line 43 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 43 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double dq_l_5;
-//#line 44 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 44 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double dq_l_6;
-//#line 45 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 45 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double dq_l_7;
-//#line 49 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 49 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double dq_u_1;
-//#line 50 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 50 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double dq_u_2;
-//#line 51 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 51 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double dq_u_3;
-//#line 52 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 52 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double dq_u_4;
-//#line 53 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 53 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double dq_u_5;
-//#line 54 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 54 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double dq_u_6;
-//#line 55 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 55 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double dq_u_7;
-//#line 60 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 60 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double ddq_l_1;
-//#line 61 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 61 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double ddq_l_2;
-//#line 62 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 62 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double ddq_l_3;
-//#line 63 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 63 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double ddq_l_4;
-//#line 64 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 64 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double ddq_l_5;
-//#line 65 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 65 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double ddq_l_6;
-//#line 66 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 66 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double ddq_l_7;
-//#line 70 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 70 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double ddq_u_1;
-//#line 71 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 71 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double ddq_u_2;
-//#line 72 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 72 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double ddq_u_3;
-//#line 73 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 73 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double ddq_u_4;
-//#line 74 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 74 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double ddq_u_5;
-//#line 75 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 75 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double ddq_u_6;
-//#line 76 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 76 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       double ddq_u_7;
 //#line 231 "/opt/ros/noetic/share/dynamic_reconfigure/cmake/../templates/ConfigType.h.template"
 
@@ -871,25 +871,25 @@ double ddq_u_7;
     {
 teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT, teleop_paramConfig> Default("Default", "", 0, 0, true, &teleop_paramConfig::groups);
 teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::CONTROLLER_GAINS, teleop_paramConfig::DEFAULT> Controller_Gains("Controller_Gains", "apply", 0, 1, true, &teleop_paramConfig::DEFAULT::controller_gains);
-//#line 9 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 9 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.leader_damping_scaling = 0.0;
-//#line 9 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 9 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.leader_damping_scaling = 8.0;
-//#line 9 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 9 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.leader_damping_scaling = 1.0;
-//#line 9 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 9 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       Controller_Gains.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("leader_damping_scaling", "double", 0, "Factor to be multiplied with initial leader d_gains", "", &teleop_paramConfig::leader_damping_scaling)));
-//#line 9 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 9 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("leader_damping_scaling", "double", 0, "Factor to be multiplied with initial leader d_gains", "", &teleop_paramConfig::leader_damping_scaling)));
-//#line 12 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 12 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.follower_stiffness_scaling = 0.1;
-//#line 12 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 12 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.follower_stiffness_scaling = 1.3;
-//#line 12 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 12 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.follower_stiffness_scaling = 1.0;
-//#line 12 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 12 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       Controller_Gains.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("follower_stiffness_scaling", "double", 0, "Factor to be multiplied with initial p-gains of follower arm, damping will also be adapted", "", &teleop_paramConfig::follower_stiffness_scaling)));
-//#line 12 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 12 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("follower_stiffness_scaling", "double", 0, "Factor to be multiplied with initial p-gains of follower arm, damping will also be adapted", "", &teleop_paramConfig::follower_stiffness_scaling)));
 //#line 124 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Controller_Gains.convertParams();
@@ -898,25 +898,25 @@ teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::CONTROLLER_GAI
 //#line 124 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __group_descriptions__.push_back(teleop_paramConfig::AbstractGroupDescriptionConstPtr(new teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::CONTROLLER_GAINS, teleop_paramConfig::DEFAULT>(Controller_Gains)));
 teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::FORCE_FEEDBACK, teleop_paramConfig::DEFAULT> Force_Feedback("Force_Feedback", "", 0, 2, true, &teleop_paramConfig::DEFAULT::force_feedback);
-//#line 18 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 18 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.force_feedback_idle = 0.0;
-//#line 18 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 18 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.force_feedback_idle = 1.0;
-//#line 18 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 18 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.force_feedback_idle = 0.5;
-//#line 18 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 18 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       Force_Feedback.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("force_feedback_idle", "double", 0, "Applied feedback force when leader arm is idle", "", &teleop_paramConfig::force_feedback_idle)));
-//#line 18 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 18 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("force_feedback_idle", "double", 0, "Applied feedback force when leader arm is idle", "", &teleop_paramConfig::force_feedback_idle)));
-//#line 21 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 21 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.force_feedback_guiding = 0.0;
-//#line 21 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 21 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.force_feedback_guiding = 1.0;
-//#line 21 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 21 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.force_feedback_guiding = 0.98;
-//#line 21 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 21 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       Force_Feedback.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("force_feedback_guiding", "double", 0, "Applied feedback force when leader arm is guided", "", &teleop_paramConfig::force_feedback_guiding)));
-//#line 21 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 21 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("force_feedback_guiding", "double", 0, "Applied feedback force when leader arm is guided", "", &teleop_paramConfig::force_feedback_guiding)));
 //#line 124 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Force_Feedback.convertParams();
@@ -925,25 +925,25 @@ teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::FORCE_FEEDBACK
 //#line 124 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __group_descriptions__.push_back(teleop_paramConfig::AbstractGroupDescriptionConstPtr(new teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::FORCE_FEEDBACK, teleop_paramConfig::DEFAULT>(Force_Feedback)));
 teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::CARTESIAN_CONTACT, teleop_paramConfig::DEFAULT> Cartesian_Contact("Cartesian_Contact", "", 0, 3, true, &teleop_paramConfig::DEFAULT::cartesian_contact);
-//#line 26 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 26 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.leader_contact_force_threshold = 0.1;
-//#line 26 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 26 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.leader_contact_force_threshold = 10.0;
-//#line 26 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 26 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.leader_contact_force_threshold = 4.0;
-//#line 26 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 26 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       Cartesian_Contact.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("leader_contact_force_threshold", "double", 0, "Force threshold at leader endeffector to determine whether the arm is in contact.", "", &teleop_paramConfig::leader_contact_force_threshold)));
-//#line 26 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 26 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("leader_contact_force_threshold", "double", 0, "Force threshold at leader endeffector to determine whether the arm is in contact.", "", &teleop_paramConfig::leader_contact_force_threshold)));
-//#line 30 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 30 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.follower_contact_force_threshold = 0.1;
-//#line 30 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 30 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.follower_contact_force_threshold = 10.0;
-//#line 30 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 30 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.follower_contact_force_threshold = 5.0;
-//#line 30 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 30 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       Cartesian_Contact.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("follower_contact_force_threshold", "double", 0, "Force threshold at follower endeffector to determine whether the arm is in contact.", "", &teleop_paramConfig::follower_contact_force_threshold)));
-//#line 30 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 30 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("follower_contact_force_threshold", "double", 0, "Force threshold at follower endeffector to determine whether the arm is in contact.", "", &teleop_paramConfig::follower_contact_force_threshold)));
 //#line 124 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Cartesian_Contact.convertParams();
@@ -954,75 +954,75 @@ teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::CARTESIAN_CONT
 teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_VELOCITIES, teleop_paramConfig::DEFAULT> Max_Velocities("Max_Velocities", "", 0, 4, true, &teleop_paramConfig::DEFAULT::max_velocities);
 teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_VELOCITIES::DQ_MAXLOWER, teleop_paramConfig::DEFAULT::MAX_VELOCITIES> Dq_MaxLower("Dq_MaxLower", "tab", 4, 5, true, &teleop_paramConfig::DEFAULT::MAX_VELOCITIES::dq_maxlower);
 teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_VELOCITIES::DQ_MAXLOWER::DQ_MAX_LOWER, teleop_paramConfig::DEFAULT::MAX_VELOCITIES::DQ_MAXLOWER> dq_max_lower("dq_max_lower", "apply", 5, 6, true, &teleop_paramConfig::DEFAULT::MAX_VELOCITIES::DQ_MAXLOWER::dq_max_lower);
-//#line 39 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 39 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.dq_l_1 = 0.1;
-//#line 39 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 39 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.dq_l_1 = 2.17;
-//#line 39 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 39 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.dq_l_1 = 0.8;
-//#line 39 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 39 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       dq_max_lower.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_l_1", "double", 0, "Description", "", &teleop_paramConfig::dq_l_1)));
-//#line 39 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 39 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_l_1", "double", 0, "Description", "", &teleop_paramConfig::dq_l_1)));
-//#line 40 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 40 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.dq_l_2 = 0.1;
-//#line 40 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 40 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.dq_l_2 = 2.17;
-//#line 40 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 40 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.dq_l_2 = 0.8;
-//#line 40 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 40 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       dq_max_lower.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_l_2", "double", 0, "Description", "", &teleop_paramConfig::dq_l_2)));
-//#line 40 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 40 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_l_2", "double", 0, "Description", "", &teleop_paramConfig::dq_l_2)));
-//#line 41 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 41 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.dq_l_3 = 0.1;
-//#line 41 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 41 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.dq_l_3 = 2.17;
-//#line 41 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 41 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.dq_l_3 = 0.8;
-//#line 41 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 41 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       dq_max_lower.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_l_3", "double", 0, "Description", "", &teleop_paramConfig::dq_l_3)));
-//#line 41 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 41 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_l_3", "double", 0, "Description", "", &teleop_paramConfig::dq_l_3)));
-//#line 42 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 42 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.dq_l_4 = 0.1;
-//#line 42 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 42 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.dq_l_4 = 2.17;
-//#line 42 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 42 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.dq_l_4 = 0.8;
-//#line 42 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 42 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       dq_max_lower.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_l_4", "double", 0, "Description", "", &teleop_paramConfig::dq_l_4)));
-//#line 42 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 42 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_l_4", "double", 0, "Description", "", &teleop_paramConfig::dq_l_4)));
-//#line 43 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 43 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.dq_l_5 = 0.1;
-//#line 43 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 43 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.dq_l_5 = 2.6;
-//#line 43 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 43 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.dq_l_5 = 2.5;
-//#line 43 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 43 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       dq_max_lower.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_l_5", "double", 0, "Description", "", &teleop_paramConfig::dq_l_5)));
-//#line 43 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 43 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_l_5", "double", 0, "Description", "", &teleop_paramConfig::dq_l_5)));
-//#line 44 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 44 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.dq_l_6 = 0.1;
-//#line 44 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 44 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.dq_l_6 = 2.6;
-//#line 44 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 44 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.dq_l_6 = 2.5;
-//#line 44 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 44 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       dq_max_lower.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_l_6", "double", 0, "Description", "", &teleop_paramConfig::dq_l_6)));
-//#line 44 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 44 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_l_6", "double", 0, "Description", "", &teleop_paramConfig::dq_l_6)));
-//#line 45 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 45 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.dq_l_7 = 0.1;
-//#line 45 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 45 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.dq_l_7 = 2.6;
-//#line 45 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 45 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.dq_l_7 = 2.5;
-//#line 45 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 45 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       dq_max_lower.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_l_7", "double", 0, "Description", "", &teleop_paramConfig::dq_l_7)));
-//#line 45 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 45 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_l_7", "double", 0, "Description", "", &teleop_paramConfig::dq_l_7)));
 //#line 124 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       dq_max_lower.convertParams();
@@ -1038,75 +1038,75 @@ teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_VELOCITIES
       __group_descriptions__.push_back(teleop_paramConfig::AbstractGroupDescriptionConstPtr(new teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_VELOCITIES::DQ_MAXLOWER, teleop_paramConfig::DEFAULT::MAX_VELOCITIES>(Dq_MaxLower)));
 teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_VELOCITIES::DQ_MAXUPPER, teleop_paramConfig::DEFAULT::MAX_VELOCITIES> Dq_MaxUpper("Dq_MaxUpper", "tab", 4, 7, true, &teleop_paramConfig::DEFAULT::MAX_VELOCITIES::dq_maxupper);
 teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_VELOCITIES::DQ_MAXUPPER::DQ_MAX_UPPER, teleop_paramConfig::DEFAULT::MAX_VELOCITIES::DQ_MAXUPPER> dq_max_upper("dq_max_upper", "apply", 7, 8, true, &teleop_paramConfig::DEFAULT::MAX_VELOCITIES::DQ_MAXUPPER::dq_max_upper);
-//#line 49 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 49 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.dq_u_1 = 0.1;
-//#line 49 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 49 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.dq_u_1 = 2.17;
-//#line 49 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 49 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.dq_u_1 = 2.0;
-//#line 49 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 49 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       dq_max_upper.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_u_1", "double", 0, "Description", "", &teleop_paramConfig::dq_u_1)));
-//#line 49 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 49 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_u_1", "double", 0, "Description", "", &teleop_paramConfig::dq_u_1)));
-//#line 50 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 50 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.dq_u_2 = 0.1;
-//#line 50 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 50 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.dq_u_2 = 2.17;
-//#line 50 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 50 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.dq_u_2 = 2.0;
-//#line 50 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 50 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       dq_max_upper.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_u_2", "double", 0, "Description", "", &teleop_paramConfig::dq_u_2)));
-//#line 50 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 50 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_u_2", "double", 0, "Description", "", &teleop_paramConfig::dq_u_2)));
-//#line 51 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 51 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.dq_u_3 = 0.1;
-//#line 51 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 51 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.dq_u_3 = 2.17;
-//#line 51 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 51 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.dq_u_3 = 2.0;
-//#line 51 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 51 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       dq_max_upper.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_u_3", "double", 0, "Description", "", &teleop_paramConfig::dq_u_3)));
-//#line 51 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 51 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_u_3", "double", 0, "Description", "", &teleop_paramConfig::dq_u_3)));
-//#line 52 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 52 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.dq_u_4 = 0.1;
-//#line 52 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 52 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.dq_u_4 = 2.17;
-//#line 52 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 52 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.dq_u_4 = 2.0;
-//#line 52 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 52 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       dq_max_upper.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_u_4", "double", 0, "Description", "", &teleop_paramConfig::dq_u_4)));
-//#line 52 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 52 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_u_4", "double", 0, "Description", "", &teleop_paramConfig::dq_u_4)));
-//#line 53 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 53 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.dq_u_5 = 0.1;
-//#line 53 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 53 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.dq_u_5 = 2.6;
-//#line 53 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 53 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.dq_u_5 = 2.5;
-//#line 53 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 53 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       dq_max_upper.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_u_5", "double", 0, "Description", "", &teleop_paramConfig::dq_u_5)));
-//#line 53 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 53 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_u_5", "double", 0, "Description", "", &teleop_paramConfig::dq_u_5)));
-//#line 54 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 54 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.dq_u_6 = 0.1;
-//#line 54 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 54 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.dq_u_6 = 2.6;
-//#line 54 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 54 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.dq_u_6 = 2.5;
-//#line 54 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 54 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       dq_max_upper.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_u_6", "double", 0, "Description", "", &teleop_paramConfig::dq_u_6)));
-//#line 54 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 54 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_u_6", "double", 0, "Description", "", &teleop_paramConfig::dq_u_6)));
-//#line 55 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 55 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.dq_u_7 = 0.1;
-//#line 55 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 55 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.dq_u_7 = 2.6;
-//#line 55 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 55 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.dq_u_7 = 2.5;
-//#line 55 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 55 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       dq_max_upper.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_u_7", "double", 0, "Description", "", &teleop_paramConfig::dq_u_7)));
-//#line 55 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 55 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("dq_u_7", "double", 0, "Description", "", &teleop_paramConfig::dq_u_7)));
 //#line 124 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       dq_max_upper.convertParams();
@@ -1129,75 +1129,75 @@ teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_VELOCITIES
 teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_ACCELERATION, teleop_paramConfig::DEFAULT> Max_Acceleration("Max_Acceleration", "", 0, 9, true, &teleop_paramConfig::DEFAULT::max_acceleration);
 teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_ACCELERATION::DDQ_MAXLOWER, teleop_paramConfig::DEFAULT::MAX_ACCELERATION> Ddq_MaxLower("Ddq_MaxLower", "tab", 9, 10, true, &teleop_paramConfig::DEFAULT::MAX_ACCELERATION::ddq_maxlower);
 teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_ACCELERATION::DDQ_MAXLOWER::DDQ_MAX_LOWER, teleop_paramConfig::DEFAULT::MAX_ACCELERATION::DDQ_MAXLOWER> ddq_max_lower("ddq_max_lower", "apply", 10, 11, true, &teleop_paramConfig::DEFAULT::MAX_ACCELERATION::DDQ_MAXLOWER::ddq_max_lower);
-//#line 60 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 60 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.ddq_l_1 = 0.1;
-//#line 60 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 60 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.ddq_l_1 = 15.0;
-//#line 60 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 60 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.ddq_l_1 = 0.8;
-//#line 60 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 60 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       ddq_max_lower.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_l_1", "double", 0, "Description", "", &teleop_paramConfig::ddq_l_1)));
-//#line 60 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 60 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_l_1", "double", 0, "Description", "", &teleop_paramConfig::ddq_l_1)));
-//#line 61 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 61 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.ddq_l_2 = 0.1;
-//#line 61 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 61 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.ddq_l_2 = 7.5;
-//#line 61 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 61 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.ddq_l_2 = 0.8;
-//#line 61 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 61 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       ddq_max_lower.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_l_2", "double", 0, "Description", "", &teleop_paramConfig::ddq_l_2)));
-//#line 61 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 61 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_l_2", "double", 0, "Description", "", &teleop_paramConfig::ddq_l_2)));
-//#line 62 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 62 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.ddq_l_3 = 0.1;
-//#line 62 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 62 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.ddq_l_3 = 10.0;
-//#line 62 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 62 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.ddq_l_3 = 0.8;
-//#line 62 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 62 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       ddq_max_lower.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_l_3", "double", 0, "Description", "", &teleop_paramConfig::ddq_l_3)));
-//#line 62 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 62 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_l_3", "double", 0, "Description", "", &teleop_paramConfig::ddq_l_3)));
-//#line 63 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 63 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.ddq_l_4 = 0.1;
-//#line 63 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 63 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.ddq_l_4 = 12.5;
-//#line 63 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 63 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.ddq_l_4 = 0.8;
-//#line 63 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 63 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       ddq_max_lower.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_l_4", "double", 0, "Description", "", &teleop_paramConfig::ddq_l_4)));
-//#line 63 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 63 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_l_4", "double", 0, "Description", "", &teleop_paramConfig::ddq_l_4)));
-//#line 64 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 64 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.ddq_l_5 = 0.1;
-//#line 64 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 64 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.ddq_l_5 = 15.0;
-//#line 64 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 64 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.ddq_l_5 = 10.0;
-//#line 64 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 64 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       ddq_max_lower.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_l_5", "double", 0, "Description", "", &teleop_paramConfig::ddq_l_5)));
-//#line 64 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 64 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_l_5", "double", 0, "Description", "", &teleop_paramConfig::ddq_l_5)));
-//#line 65 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 65 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.ddq_l_6 = 0.1;
-//#line 65 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 65 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.ddq_l_6 = 20.0;
-//#line 65 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 65 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.ddq_l_6 = 10.0;
-//#line 65 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 65 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       ddq_max_lower.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_l_6", "double", 0, "Description", "", &teleop_paramConfig::ddq_l_6)));
-//#line 65 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 65 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_l_6", "double", 0, "Description", "", &teleop_paramConfig::ddq_l_6)));
-//#line 66 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 66 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.ddq_l_7 = 0.1;
-//#line 66 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 66 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.ddq_l_7 = 20.0;
-//#line 66 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 66 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.ddq_l_7 = 10.0;
-//#line 66 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 66 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       ddq_max_lower.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_l_7", "double", 0, "Description", "", &teleop_paramConfig::ddq_l_7)));
-//#line 66 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 66 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_l_7", "double", 0, "Description", "", &teleop_paramConfig::ddq_l_7)));
 //#line 124 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       ddq_max_lower.convertParams();
@@ -1213,75 +1213,75 @@ teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_ACCELERATI
       __group_descriptions__.push_back(teleop_paramConfig::AbstractGroupDescriptionConstPtr(new teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_ACCELERATION::DDQ_MAXLOWER, teleop_paramConfig::DEFAULT::MAX_ACCELERATION>(Ddq_MaxLower)));
 teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_ACCELERATION::DDQ_MAXUPPER, teleop_paramConfig::DEFAULT::MAX_ACCELERATION> Ddq_MaxUpper("Ddq_MaxUpper", "tab", 9, 12, true, &teleop_paramConfig::DEFAULT::MAX_ACCELERATION::ddq_maxupper);
 teleop_paramConfig::GroupDescription<teleop_paramConfig::DEFAULT::MAX_ACCELERATION::DDQ_MAXUPPER::DDQ_MAX_UPPER, teleop_paramConfig::DEFAULT::MAX_ACCELERATION::DDQ_MAXUPPER> ddq_max_upper("ddq_max_upper", "apply", 12, 13, true, &teleop_paramConfig::DEFAULT::MAX_ACCELERATION::DDQ_MAXUPPER::ddq_max_upper);
-//#line 70 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 70 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.ddq_u_1 = 0.1;
-//#line 70 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 70 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.ddq_u_1 = 15.0;
-//#line 70 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 70 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.ddq_u_1 = 6.0;
-//#line 70 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 70 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       ddq_max_upper.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_u_1", "double", 0, "Description", "", &teleop_paramConfig::ddq_u_1)));
-//#line 70 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 70 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_u_1", "double", 0, "Description", "", &teleop_paramConfig::ddq_u_1)));
-//#line 71 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 71 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.ddq_u_2 = 0.1;
-//#line 71 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 71 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.ddq_u_2 = 7.5;
-//#line 71 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 71 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.ddq_u_2 = 6.0;
-//#line 71 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 71 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       ddq_max_upper.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_u_2", "double", 0, "Description", "", &teleop_paramConfig::ddq_u_2)));
-//#line 71 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 71 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_u_2", "double", 0, "Description", "", &teleop_paramConfig::ddq_u_2)));
-//#line 72 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 72 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.ddq_u_3 = 0.1;
-//#line 72 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 72 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.ddq_u_3 = 10.0;
-//#line 72 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 72 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.ddq_u_3 = 6.0;
-//#line 72 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 72 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       ddq_max_upper.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_u_3", "double", 0, "Description", "", &teleop_paramConfig::ddq_u_3)));
-//#line 72 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 72 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_u_3", "double", 0, "Description", "", &teleop_paramConfig::ddq_u_3)));
-//#line 73 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 73 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.ddq_u_4 = 0.1;
-//#line 73 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 73 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.ddq_u_4 = 12.5;
-//#line 73 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 73 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.ddq_u_4 = 6.0;
-//#line 73 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 73 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       ddq_max_upper.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_u_4", "double", 0, "Description", "", &teleop_paramConfig::ddq_u_4)));
-//#line 73 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 73 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_u_4", "double", 0, "Description", "", &teleop_paramConfig::ddq_u_4)));
-//#line 74 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 74 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.ddq_u_5 = 0.1;
-//#line 74 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 74 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.ddq_u_5 = 15.0;
-//#line 74 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 74 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.ddq_u_5 = 15.0;
-//#line 74 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 74 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       ddq_max_upper.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_u_5", "double", 0, "Description", "", &teleop_paramConfig::ddq_u_5)));
-//#line 74 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 74 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_u_5", "double", 0, "Description", "", &teleop_paramConfig::ddq_u_5)));
-//#line 75 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 75 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.ddq_u_6 = 0.1;
-//#line 75 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 75 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.ddq_u_6 = 20.0;
-//#line 75 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 75 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.ddq_u_6 = 20.0;
-//#line 75 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 75 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       ddq_max_upper.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_u_6", "double", 0, "Description", "", &teleop_paramConfig::ddq_u_6)));
-//#line 75 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 75 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_u_6", "double", 0, "Description", "", &teleop_paramConfig::ddq_u_6)));
-//#line 76 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 76 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __min__.ddq_u_7 = 0.1;
-//#line 76 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 76 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __max__.ddq_u_7 = 20.0;
-//#line 76 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 76 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __default__.ddq_u_7 = 20.0;
-//#line 76 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 76 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       ddq_max_upper.abstract_parameters.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_u_7", "double", 0, "Description", "", &teleop_paramConfig::ddq_u_7)));
-//#line 76 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
+//#line 76 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_param.cfg"
       __param_descriptions__.push_back(teleop_paramConfig::AbstractParamDescriptionConstPtr(new teleop_paramConfig::ParamDescription<double>("ddq_u_7", "double", 0, "Description", "", &teleop_paramConfig::ddq_u_7)));
 //#line 124 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       ddq_max_upper.convertParams();

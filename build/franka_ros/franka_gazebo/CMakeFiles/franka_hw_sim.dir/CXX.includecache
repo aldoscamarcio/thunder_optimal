@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/ErrorRecoveryAction.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/ErrorRecoveryAction.h
 string
 -
 vector
@@ -28,7 +28,7 @@ franka_msgs/ErrorRecoveryActionResult.h
 franka_msgs/ErrorRecoveryActionFeedback.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/ErrorRecoveryActionFeedback.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/ErrorRecoveryActionFeedback.h
 string
 -
 vector
@@ -50,7 +50,7 @@ actionlib_msgs/GoalStatus.h
 franka_msgs/ErrorRecoveryFeedback.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/ErrorRecoveryActionGoal.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/ErrorRecoveryActionGoal.h
 string
 -
 vector
@@ -72,7 +72,7 @@ actionlib_msgs/GoalID.h
 franka_msgs/ErrorRecoveryGoal.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/ErrorRecoveryActionResult.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/ErrorRecoveryActionResult.h
 string
 -
 vector
@@ -94,7 +94,7 @@ actionlib_msgs/GoalStatus.h
 franka_msgs/ErrorRecoveryResult.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/ErrorRecoveryFeedback.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/ErrorRecoveryFeedback.h
 string
 -
 vector
@@ -110,7 +110,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/ErrorRecoveryGoal.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/ErrorRecoveryGoal.h
 string
 -
 vector
@@ -126,7 +126,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/ErrorRecoveryResult.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/ErrorRecoveryResult.h
 string
 -
 vector
@@ -142,7 +142,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetCartesianImpedance.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetCartesianImpedance.h
 ros/service_traits.h
 -
 franka_msgs/SetCartesianImpedanceRequest.h
@@ -150,7 +150,7 @@ franka_msgs/SetCartesianImpedanceRequest.h
 franka_msgs/SetCartesianImpedanceResponse.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetCartesianImpedanceRequest.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetCartesianImpedanceRequest.h
 string
 -
 vector
@@ -166,7 +166,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetCartesianImpedanceResponse.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetCartesianImpedanceResponse.h
 string
 -
 vector
@@ -182,7 +182,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetEEFrame.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetEEFrame.h
 ros/service_traits.h
 -
 franka_msgs/SetEEFrameRequest.h
@@ -190,7 +190,7 @@ franka_msgs/SetEEFrameRequest.h
 franka_msgs/SetEEFrameResponse.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetEEFrameRequest.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetEEFrameRequest.h
 string
 -
 vector
@@ -206,7 +206,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetEEFrameResponse.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetEEFrameResponse.h
 string
 -
 vector
@@ -222,7 +222,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetForceTorqueCollisionBehavior.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetForceTorqueCollisionBehavior.h
 ros/service_traits.h
 -
 franka_msgs/SetForceTorqueCollisionBehaviorRequest.h
@@ -230,7 +230,7 @@ franka_msgs/SetForceTorqueCollisionBehaviorRequest.h
 franka_msgs/SetForceTorqueCollisionBehaviorResponse.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetForceTorqueCollisionBehaviorRequest.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetForceTorqueCollisionBehaviorRequest.h
 string
 -
 vector
@@ -246,7 +246,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetForceTorqueCollisionBehaviorResponse.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetForceTorqueCollisionBehaviorResponse.h
 string
 -
 vector
@@ -262,7 +262,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetFullCollisionBehavior.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetFullCollisionBehavior.h
 ros/service_traits.h
 -
 franka_msgs/SetFullCollisionBehaviorRequest.h
@@ -270,7 +270,7 @@ franka_msgs/SetFullCollisionBehaviorRequest.h
 franka_msgs/SetFullCollisionBehaviorResponse.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetFullCollisionBehaviorRequest.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetFullCollisionBehaviorRequest.h
 string
 -
 vector
@@ -286,7 +286,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetFullCollisionBehaviorResponse.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetFullCollisionBehaviorResponse.h
 string
 -
 vector
@@ -302,7 +302,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetJointImpedance.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetJointImpedance.h
 ros/service_traits.h
 -
 franka_msgs/SetJointImpedanceRequest.h
@@ -310,7 +310,7 @@ franka_msgs/SetJointImpedanceRequest.h
 franka_msgs/SetJointImpedanceResponse.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetJointImpedanceRequest.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetJointImpedanceRequest.h
 string
 -
 vector
@@ -326,7 +326,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetJointImpedanceResponse.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetJointImpedanceResponse.h
 string
 -
 vector
@@ -342,7 +342,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetKFrame.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetKFrame.h
 ros/service_traits.h
 -
 franka_msgs/SetKFrameRequest.h
@@ -350,7 +350,7 @@ franka_msgs/SetKFrameRequest.h
 franka_msgs/SetKFrameResponse.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetKFrameRequest.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetKFrameRequest.h
 string
 -
 vector
@@ -366,7 +366,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetKFrameResponse.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetKFrameResponse.h
 string
 -
 vector
@@ -382,7 +382,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetLoad.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetLoad.h
 ros/service_traits.h
 -
 franka_msgs/SetLoadRequest.h
@@ -390,7 +390,7 @@ franka_msgs/SetLoadRequest.h
 franka_msgs/SetLoadResponse.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetLoadRequest.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetLoadRequest.h
 string
 -
 vector
@@ -406,7 +406,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/SetLoadResponse.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/SetLoadResponse.h
 string
 -
 vector
@@ -422,7 +422,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/include/franka_example_controllers/pseudo_inversion.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/include/franka_example_controllers/pseudo_inversion.h
 Eigen/Core
 -
 Eigen/LU
@@ -430,7 +430,7 @@ Eigen/LU
 Eigen/SVD
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/include/franka_gazebo/controller_verifier.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/include/franka_gazebo/controller_verifier.h
 franka_gazebo/joint.h
 -
 hardware_interface/controller_info.h
@@ -442,7 +442,7 @@ hardware_interface/internal/hardware_resource_manager.h
 boost/optional.hpp
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/include/franka_gazebo/franka_hw_sim.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/include/franka_gazebo/franka_hw_sim.h
 actionlib/server/simple_action_server.h
 -
 franka/robot_state.h
@@ -496,7 +496,7 @@ mutex
 string
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/include/franka_gazebo/joint.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/include/franka_gazebo/joint.h
 angles/angles.h
 -
 control_toolbox/pid.h
@@ -514,7 +514,7 @@ boost/optional.hpp
 gazebo/physics/Joint.hh
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/include/franka_gazebo/model_kdl.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/include/franka_gazebo/model_kdl.h
 franka/robot_state.h
 -
 franka_hw/model_base.h
@@ -534,7 +534,7 @@ memory
 string
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/include/franka_gazebo/statemachine.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/include/franka_gazebo/statemachine.h
 franka/robot_state.h
 -
 franka_gazebo/joint.h
@@ -550,7 +550,11 @@ memory
 string
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/src/franka_hw_sim.cpp
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/src/controller_verifier.cpp
+franka_gazebo/controller_verifier.h
+-
+
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/src/franka_hw_sim.cpp
 angles/angles.h
 -
 controller_manager_msgs/ListControllers.h
@@ -600,13 +604,47 @@ sstream
 string
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/control_mode.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/src/joint.cpp
+franka_gazebo/joint.h
+-
+urdf/model.h
+-
+gazebo/physics/Link.hh
+-
+
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/src/model_kdl.cpp
+franka_gazebo/model_kdl.h
+-
+eigen_conversions/eigen_kdl.h
+-
+ros/ros.h
+-
+Eigen/Dense
+-
+algorithm
+-
+array
+-
+kdl/chain.hpp
+-
+kdl/chainfksolverpos_recursive.hpp
+-
+kdl/frames.hpp
+-
+kdl/solveri.hpp
+-
+kdl/tree.hpp
+-
+kdl_parser/kdl_parser.hpp
+-
+
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/control_mode.h
 ostream
 -
 type_traits
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/franka_cartesian_command_interface.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/franka_cartesian_command_interface.h
 array
 -
 franka_hw/franka_state_interface.h
@@ -614,7 +652,7 @@ franka_hw/franka_state_interface.h
 hardware_interface/internal/hardware_resource_manager.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/franka_hw.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/franka_hw.h
 array
 -
 atomic
@@ -664,7 +702,7 @@ franka_hw/model_base.h
 franka_hw/resource_helpers.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/franka_model_interface.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/franka_model_interface.h
 array
 -
 string
@@ -680,7 +718,7 @@ franka_hw/model_base.h
 hardware_interface/internal/hardware_resource_manager.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
 string
 -
 franka/robot_state.h
@@ -688,7 +726,7 @@ franka/robot_state.h
 hardware_interface/internal/hardware_resource_manager.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/model.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/model.h
 array
 -
 franka/model.h
@@ -696,13 +734,13 @@ franka/model.h
 franka_hw/model_base.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/model_base.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/model_base.h
 franka/model.h
 -
 franka/robot_state.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/resource_helpers.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/resource_helpers.h
 list
 -
 map
@@ -716,7 +754,7 @@ hardware_interface/controller_info.h
 franka_hw/control_mode.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/services.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/services.h
 mutex
 -
 vector
@@ -1478,6 +1516,14 @@ dynamic_reconfigure/ConfigDescription.h
 dynamic_reconfigure/Reconfigure.h
 -
 
+/opt/ros/noetic/include/eigen_conversions/eigen_kdl.h
+Eigen/Core
+-
+Eigen/Geometry
+-
+kdl/frames.hpp
+-
+
 /opt/ros/noetic/include/franka/command_types.h
 array
 -
@@ -1735,6 +1781,22 @@ urdf/urdfdom_compatibility.h
 -
 joint_limits_interface/joint_limits.h
 -
+
+/opt/ros/noetic/include/kdl_parser/kdl_parser.hpp
+kdl/tree.hpp
+-
+string
+-
+urdf_model/model.h
+-
+tinyxml2.h
+-
+tinyxml.h
+-
+kdl_parser/visibility_control.hpp
+/opt/ros/noetic/include/kdl_parser/kdl_parser/visibility_control.hpp
+
+/opt/ros/noetic/include/kdl_parser/visibility_control.hpp
 
 /opt/ros/noetic/include/pluginlib/class_list_macros.h
 ./class_list_macros.hpp

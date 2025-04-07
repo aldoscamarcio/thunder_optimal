@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_example_controllers/teleop_gripper_paramConfig.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_example_controllers/teleop_gripper_paramConfig.h
 dynamic_reconfigure/config_tools.h
 -
 limits
@@ -24,7 +24,7 @@ dynamic_reconfigure/config_init_mutex.h
 boost/any.hpp
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/GraspAction.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/GraspAction.h
 string
 -
 vector
@@ -46,7 +46,7 @@ franka_gripper/GraspActionResult.h
 franka_gripper/GraspActionFeedback.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/GraspActionFeedback.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/GraspActionFeedback.h
 string
 -
 vector
@@ -68,7 +68,7 @@ actionlib_msgs/GoalStatus.h
 franka_gripper/GraspFeedback.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/GraspActionGoal.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/GraspActionGoal.h
 string
 -
 vector
@@ -90,7 +90,7 @@ actionlib_msgs/GoalID.h
 franka_gripper/GraspGoal.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/GraspActionResult.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/GraspActionResult.h
 string
 -
 vector
@@ -112,7 +112,7 @@ actionlib_msgs/GoalStatus.h
 franka_gripper/GraspResult.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/GraspEpsilon.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/GraspEpsilon.h
 string
 -
 vector
@@ -128,7 +128,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/GraspFeedback.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/GraspFeedback.h
 string
 -
 vector
@@ -144,7 +144,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/GraspGoal.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/GraspGoal.h
 string
 -
 vector
@@ -162,7 +162,7 @@ ros/message_operations.h
 franka_gripper/GraspEpsilon.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/GraspResult.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/GraspResult.h
 string
 -
 vector
@@ -178,7 +178,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/HomingAction.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/HomingAction.h
 string
 -
 vector
@@ -200,7 +200,7 @@ franka_gripper/HomingActionResult.h
 franka_gripper/HomingActionFeedback.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/HomingActionFeedback.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/HomingActionFeedback.h
 string
 -
 vector
@@ -222,7 +222,7 @@ actionlib_msgs/GoalStatus.h
 franka_gripper/HomingFeedback.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/HomingActionGoal.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/HomingActionGoal.h
 string
 -
 vector
@@ -244,7 +244,7 @@ actionlib_msgs/GoalID.h
 franka_gripper/HomingGoal.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/HomingActionResult.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/HomingActionResult.h
 string
 -
 vector
@@ -266,7 +266,7 @@ actionlib_msgs/GoalStatus.h
 franka_gripper/HomingResult.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/HomingFeedback.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/HomingFeedback.h
 string
 -
 vector
@@ -282,7 +282,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/HomingGoal.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/HomingGoal.h
 string
 -
 vector
@@ -298,7 +298,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/HomingResult.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/HomingResult.h
 string
 -
 vector
@@ -314,7 +314,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/MoveAction.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/MoveAction.h
 string
 -
 vector
@@ -336,7 +336,7 @@ franka_gripper/MoveActionResult.h
 franka_gripper/MoveActionFeedback.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/MoveActionFeedback.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/MoveActionFeedback.h
 string
 -
 vector
@@ -358,7 +358,7 @@ actionlib_msgs/GoalStatus.h
 franka_gripper/MoveFeedback.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/MoveActionGoal.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/MoveActionGoal.h
 string
 -
 vector
@@ -380,7 +380,7 @@ actionlib_msgs/GoalID.h
 franka_gripper/MoveGoal.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/MoveActionResult.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/MoveActionResult.h
 string
 -
 vector
@@ -402,7 +402,7 @@ actionlib_msgs/GoalStatus.h
 franka_gripper/MoveResult.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/MoveFeedback.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/MoveFeedback.h
 string
 -
 vector
@@ -418,7 +418,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/MoveGoal.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/MoveGoal.h
 string
 -
 vector
@@ -434,7 +434,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/MoveResult.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/MoveResult.h
 string
 -
 vector
@@ -450,7 +450,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/StopAction.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/StopAction.h
 string
 -
 vector
@@ -472,7 +472,7 @@ franka_gripper/StopActionResult.h
 franka_gripper/StopActionFeedback.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/StopActionFeedback.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/StopActionFeedback.h
 string
 -
 vector
@@ -494,7 +494,7 @@ actionlib_msgs/GoalStatus.h
 franka_gripper/StopFeedback.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/StopActionGoal.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/StopActionGoal.h
 string
 -
 vector
@@ -516,7 +516,7 @@ actionlib_msgs/GoalID.h
 franka_gripper/StopGoal.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/StopActionResult.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/StopActionResult.h
 string
 -
 vector
@@ -538,7 +538,7 @@ actionlib_msgs/GoalStatus.h
 franka_gripper/StopResult.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/StopFeedback.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/StopFeedback.h
 string
 -
 vector
@@ -554,7 +554,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/StopGoal.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/StopGoal.h
 string
 -
 vector
@@ -570,7 +570,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_gripper/StopResult.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_gripper/StopResult.h
 string
 -
 vector
@@ -586,7 +586,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/src/teleop_gripper_node.cpp
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/src/teleop_gripper_node.cpp
 franka/gripper.h
 -
 franka_example_controllers/teleop_gripper_paramConfig.h

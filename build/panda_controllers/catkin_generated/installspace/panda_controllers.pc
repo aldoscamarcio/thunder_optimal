@@ -1,4 +1,4 @@
-prefix=/home/franko/Scrivania/thunder_optimal/panda_controllers/install
+prefix=/home/franko/Scrivania/thunder_optimal/install
 
 Name: panda_controllers
 Description: Description of panda_controllers

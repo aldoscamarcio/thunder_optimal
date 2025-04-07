@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,14 +137,14 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/catkin_ws/build/CMakeFiles /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo/CMakeFiles/progress.marks
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/catkin_ws/build/CMakeFiles 0
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/thunder_optimal/build/CMakeFiles /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo/CMakeFiles/progress.marks
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/thunder_optimal/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/clean
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/preinstall
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/preinstall
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_gencfg.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_gencfg.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_gencfg.dir/rule
 .PHONY : franka_ros/franka_gazebo/CMakeFiles/control_toolbox_gencfg.dir/rule
 
 # Convenience name for target.
@@ -179,12 +179,12 @@ control_toolbox_gencfg: franka_ros/franka_gazebo/CMakeFiles/control_toolbox_genc
 
 # fast build rule for target.
 control_toolbox_gencfg/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/control_toolbox_gencfg.dir/build.make franka_ros/franka_gazebo/CMakeFiles/control_toolbox_gencfg.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/control_toolbox_gencfg.dir/build.make franka_ros/franka_gazebo/CMakeFiles/control_toolbox_gencfg.dir/build
 .PHONY : control_toolbox_gencfg/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_cpp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_cpp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_cpp.dir/rule
 .PHONY : franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -194,12 +194,12 @@ control_toolbox_generate_messages_cpp: franka_ros/franka_gazebo/CMakeFiles/contr
 
 # fast build rule for target.
 control_toolbox_generate_messages_cpp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_cpp.dir/build.make franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_cpp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_cpp.dir/build.make franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_cpp.dir/build
 .PHONY : control_toolbox_generate_messages_cpp/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_eus.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_eus.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_eus.dir/rule
 .PHONY : franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -209,12 +209,12 @@ control_toolbox_generate_messages_eus: franka_ros/franka_gazebo/CMakeFiles/contr
 
 # fast build rule for target.
 control_toolbox_generate_messages_eus/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_eus.dir/build.make franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_eus.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_eus.dir/build.make franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_eus.dir/build
 .PHONY : control_toolbox_generate_messages_eus/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_lisp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_lisp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_lisp.dir/rule
 .PHONY : franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ control_toolbox_generate_messages_lisp: franka_ros/franka_gazebo/CMakeFiles/cont
 
 # fast build rule for target.
 control_toolbox_generate_messages_lisp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_lisp.dir/build.make franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_lisp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_lisp.dir/build.make franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_lisp.dir/build
 .PHONY : control_toolbox_generate_messages_lisp/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_nodejs.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_nodejs.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_nodejs.dir/rule
 .PHONY : franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -239,12 +239,12 @@ control_toolbox_generate_messages_nodejs: franka_ros/franka_gazebo/CMakeFiles/co
 
 # fast build rule for target.
 control_toolbox_generate_messages_nodejs/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_nodejs.dir/build.make franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_nodejs.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_nodejs.dir/build.make franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_nodejs.dir/build
 .PHONY : control_toolbox_generate_messages_nodejs/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_py.dir/rule
 .PHONY : franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -254,12 +254,12 @@ control_toolbox_generate_messages_py: franka_ros/franka_gazebo/CMakeFiles/contro
 
 # fast build rule for target.
 control_toolbox_generate_messages_py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_py.dir/build.make franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_py.dir/build.make franka_ros/franka_gazebo/CMakeFiles/control_toolbox_generate_messages_py.dir/build
 .PHONY : control_toolbox_generate_messages_py/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/rule
 .PHONY : franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/rule
 
 # Convenience name for target.
@@ -269,12 +269,12 @@ franka_gripper_sim: franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/r
 
 # fast build rule for target.
 franka_gripper_sim/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build
 .PHONY : franka_gripper_sim/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/rule
 .PHONY : franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/rule
 
 # Convenience name for target.
@@ -284,7 +284,7 @@ franka_hw_sim: franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/rule
 
 # fast build rule for target.
 franka_hw_sim/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build
 .PHONY : franka_hw_sim/fast
 
 src/controller_verifier.o: src/controller_verifier.cpp.o
@@ -293,7 +293,7 @@ src/controller_verifier.o: src/controller_verifier.cpp.o
 
 # target to build an object file
 src/controller_verifier.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/controller_verifier.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/controller_verifier.cpp.o
 .PHONY : src/controller_verifier.cpp.o
 
 src/controller_verifier.i: src/controller_verifier.cpp.i
@@ -302,7 +302,7 @@ src/controller_verifier.i: src/controller_verifier.cpp.i
 
 # target to preprocess a source file
 src/controller_verifier.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/controller_verifier.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/controller_verifier.cpp.i
 .PHONY : src/controller_verifier.cpp.i
 
 src/controller_verifier.s: src/controller_verifier.cpp.s
@@ -311,7 +311,7 @@ src/controller_verifier.s: src/controller_verifier.cpp.s
 
 # target to generate assembly for a file
 src/controller_verifier.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/controller_verifier.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/controller_verifier.cpp.s
 .PHONY : src/controller_verifier.cpp.s
 
 src/franka_gripper_sim.o: src/franka_gripper_sim.cpp.o
@@ -320,7 +320,7 @@ src/franka_gripper_sim.o: src/franka_gripper_sim.cpp.o
 
 # target to build an object file
 src/franka_gripper_sim.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.o
 .PHONY : src/franka_gripper_sim.cpp.o
 
 src/franka_gripper_sim.i: src/franka_gripper_sim.cpp.i
@@ -329,7 +329,7 @@ src/franka_gripper_sim.i: src/franka_gripper_sim.cpp.i
 
 # target to preprocess a source file
 src/franka_gripper_sim.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.i
 .PHONY : src/franka_gripper_sim.cpp.i
 
 src/franka_gripper_sim.s: src/franka_gripper_sim.cpp.s
@@ -338,7 +338,7 @@ src/franka_gripper_sim.s: src/franka_gripper_sim.cpp.s
 
 # target to generate assembly for a file
 src/franka_gripper_sim.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.s
 .PHONY : src/franka_gripper_sim.cpp.s
 
 src/franka_hw_sim.o: src/franka_hw_sim.cpp.o
@@ -347,7 +347,7 @@ src/franka_hw_sim.o: src/franka_hw_sim.cpp.o
 
 # target to build an object file
 src/franka_hw_sim.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/franka_hw_sim.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/franka_hw_sim.cpp.o
 .PHONY : src/franka_hw_sim.cpp.o
 
 src/franka_hw_sim.i: src/franka_hw_sim.cpp.i
@@ -356,7 +356,7 @@ src/franka_hw_sim.i: src/franka_hw_sim.cpp.i
 
 # target to preprocess a source file
 src/franka_hw_sim.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/franka_hw_sim.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/franka_hw_sim.cpp.i
 .PHONY : src/franka_hw_sim.cpp.i
 
 src/franka_hw_sim.s: src/franka_hw_sim.cpp.s
@@ -365,7 +365,7 @@ src/franka_hw_sim.s: src/franka_hw_sim.cpp.s
 
 # target to generate assembly for a file
 src/franka_hw_sim.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/franka_hw_sim.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/franka_hw_sim.cpp.s
 .PHONY : src/franka_hw_sim.cpp.s
 
 src/joint.o: src/joint.cpp.o
@@ -374,7 +374,7 @@ src/joint.o: src/joint.cpp.o
 
 # target to build an object file
 src/joint.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/joint.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/joint.cpp.o
 .PHONY : src/joint.cpp.o
 
 src/joint.i: src/joint.cpp.i
@@ -383,7 +383,7 @@ src/joint.i: src/joint.cpp.i
 
 # target to preprocess a source file
 src/joint.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/joint.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/joint.cpp.i
 .PHONY : src/joint.cpp.i
 
 src/joint.s: src/joint.cpp.s
@@ -392,7 +392,7 @@ src/joint.s: src/joint.cpp.s
 
 # target to generate assembly for a file
 src/joint.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/joint.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/joint.cpp.s
 .PHONY : src/joint.cpp.s
 
 src/model_kdl.o: src/model_kdl.cpp.o
@@ -401,7 +401,7 @@ src/model_kdl.o: src/model_kdl.cpp.o
 
 # target to build an object file
 src/model_kdl.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/model_kdl.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/model_kdl.cpp.o
 .PHONY : src/model_kdl.cpp.o
 
 src/model_kdl.i: src/model_kdl.cpp.i
@@ -410,7 +410,7 @@ src/model_kdl.i: src/model_kdl.cpp.i
 
 # target to preprocess a source file
 src/model_kdl.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/model_kdl.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/model_kdl.cpp.i
 .PHONY : src/model_kdl.cpp.i
 
 src/model_kdl.s: src/model_kdl.cpp.s
@@ -419,7 +419,7 @@ src/model_kdl.s: src/model_kdl.cpp.s
 
 # target to generate assembly for a file
 src/model_kdl.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/model_kdl.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/build.make franka_ros/franka_gazebo/CMakeFiles/franka_hw_sim.dir/src/model_kdl.cpp.s
 .PHONY : src/model_kdl.cpp.s
 
 # Help Target
@@ -469,6 +469,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

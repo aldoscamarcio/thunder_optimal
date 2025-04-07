@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,14 +137,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/catkin_ws/build/CMakeFiles /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo/test/CMakeFiles/progress.marks
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/catkin_ws/build/CMakeFiles 0
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/thunder_optimal/build/CMakeFiles /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo/test/CMakeFiles/progress.marks
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/thunder_optimal/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/clean
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/preinstall
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/preinstall
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest.dir/rule
 
 # Convenience name for target.
@@ -179,12 +179,12 @@ _run_tests_franka_gazebo_gtest: franka_ros/franka_gazebo/test/CMakeFiles/_run_te
 
 # fast build rule for target.
 _run_tests_franka_gazebo_gtest/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest.dir/build
 .PHONY : _run_tests_franka_gazebo_gtest/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest.dir/rule
 
 # Convenience name for target.
@@ -194,12 +194,12 @@ run_tests_franka_gazebo_gtest: franka_ros/franka_gazebo/test/CMakeFiles/run_test
 
 # fast build rule for target.
 run_tests_franka_gazebo_gtest/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest.dir/build
 .PHONY : run_tests_franka_gazebo_gtest/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/rule
 
 # Convenience name for target.
@@ -209,12 +209,12 @@ franka_hw_sim_controller_verifier_test: franka_ros/franka_gazebo/test/CMakeFiles
 
 # fast build rule for target.
 franka_hw_sim_controller_verifier_test/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build
 .PHONY : franka_hw_sim_controller_verifier_test/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ _run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test
 
 # fast build rule for target.
 _run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/build
 .PHONY : _run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/rule
 
 # Convenience name for target.
@@ -239,12 +239,12 @@ run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test:
 
 # fast build rule for target.
 run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test.dir/build
 .PHONY : run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim_with_object.test/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/rule
 
 # Convenience name for target.
@@ -254,12 +254,12 @@ franka_gripper_sim_test_with_object: franka_ros/franka_gazebo/test/CMakeFiles/fr
 
 # fast build rule for target.
 franka_gripper_sim_test_with_object/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build
 .PHONY : franka_gripper_sim_test_with_object/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/rule
 
 # Convenience name for target.
@@ -269,12 +269,12 @@ franka_hw_sim_test: franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.
 
 # fast build rule for target.
 franka_hw_sim_test/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build
 .PHONY : franka_hw_sim_test/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo.dir/rule
 
 # Convenience name for target.
@@ -284,12 +284,12 @@ _run_tests_franka_gazebo: franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_fr
 
 # fast build rule for target.
 _run_tests_franka_gazebo/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo.dir/build
 .PHONY : _run_tests_franka_gazebo/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/rule
 
 # Convenience name for target.
@@ -299,12 +299,12 @@ _run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test: franka_r
 
 # fast build rule for target.
 _run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/build
 .PHONY : _run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/rule
 
 # Convenience name for target.
@@ -314,12 +314,12 @@ _run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test: franka_ros
 
 # fast build rule for target.
 _run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/build
 .PHONY : _run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo.dir/rule
 
 # Convenience name for target.
@@ -329,12 +329,12 @@ run_tests_franka_gazebo: franka_ros/franka_gazebo/test/CMakeFiles/run_tests_fran
 
 # fast build rule for target.
 run_tests_franka_gazebo/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo.dir/build
 .PHONY : run_tests_franka_gazebo/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest.dir/rule
 
 # Convenience name for target.
@@ -344,12 +344,12 @@ run_tests_franka_gazebo_rostest: franka_ros/franka_gazebo/test/CMakeFiles/run_te
 
 # fast build rule for target.
 run_tests_franka_gazebo_rostest/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest.dir/build
 .PHONY : run_tests_franka_gazebo_rostest/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/rule
 
 # Convenience name for target.
@@ -359,12 +359,12 @@ _run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test: franka_ro
 
 # fast build rule for target.
 _run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/build
 .PHONY : _run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/rule
 
 # Convenience name for target.
@@ -374,12 +374,12 @@ run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test: franka_ros/
 
 # fast build rule for target.
 run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/build
 .PHONY : run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/rule
 
 # Convenience name for target.
@@ -389,12 +389,12 @@ run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test: franka_ros
 
 # fast build rule for target.
 run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test.dir/build
 .PHONY : run_tests_franka_gazebo_gtest_franka_hw_sim_controller_verifier_test/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest.dir/rule
 
 # Convenience name for target.
@@ -404,12 +404,12 @@ _run_tests_franka_gazebo_rostest: franka_ros/franka_gazebo/test/CMakeFiles/_run_
 
 # fast build rule for target.
 _run_tests_franka_gazebo_rostest/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest.dir/build
 .PHONY : _run_tests_franka_gazebo_rostest/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/rule
 
 # Convenience name for target.
@@ -419,12 +419,12 @@ _run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test: franka_ros/fran
 
 # fast build rule for target.
 _run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/build
 .PHONY : _run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/clean_test_results_franka_gazebo.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/clean_test_results_franka_gazebo.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/clean_test_results_franka_gazebo.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/clean_test_results_franka_gazebo.dir/rule
 
 # Convenience name for target.
@@ -434,12 +434,12 @@ clean_test_results_franka_gazebo: franka_ros/franka_gazebo/test/CMakeFiles/clean
 
 # fast build rule for target.
 clean_test_results_franka_gazebo/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/clean_test_results_franka_gazebo.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/clean_test_results_franka_gazebo.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/clean_test_results_franka_gazebo.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/clean_test_results_franka_gazebo.dir/build
 .PHONY : clean_test_results_franka_gazebo/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/rule
 
 # Convenience name for target.
@@ -449,12 +449,12 @@ run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test: franka_ros/frank
 
 # fast build rule for target.
 run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test.dir/build
 .PHONY : run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim.test/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/rule
 
 # Convenience name for target.
@@ -464,12 +464,12 @@ franka_hw_sim_gazebo_test: franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_si
 
 # fast build rule for target.
 franka_hw_sim_gazebo_test/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/build
 .PHONY : franka_hw_sim_gazebo_test/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/rule
 
 # Convenience name for target.
@@ -479,12 +479,12 @@ run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test: franka_ro
 
 # fast build rule for target.
 run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test.dir/build
 .PHONY : run_tests_franka_gazebo_rostest_test_launch_franka_hw_sim_gazebo.test/fast
 
 # Convenience name for target.
 franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/rule
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/rule
 
 # Convenience name for target.
@@ -494,7 +494,7 @@ franka_gripper_sim_test: franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper
 
 # fast build rule for target.
 franka_gripper_sim_test/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build
 .PHONY : franka_gripper_sim_test/fast
 
 controller_verifier_test.o: controller_verifier_test.cpp.o
@@ -503,7 +503,7 @@ controller_verifier_test.o: controller_verifier_test.cpp.o
 
 # target to build an object file
 controller_verifier_test.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/controller_verifier_test.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/controller_verifier_test.cpp.o
 .PHONY : controller_verifier_test.cpp.o
 
 controller_verifier_test.i: controller_verifier_test.cpp.i
@@ -512,7 +512,7 @@ controller_verifier_test.i: controller_verifier_test.cpp.i
 
 # target to preprocess a source file
 controller_verifier_test.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/controller_verifier_test.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/controller_verifier_test.cpp.i
 .PHONY : controller_verifier_test.cpp.i
 
 controller_verifier_test.s: controller_verifier_test.cpp.s
@@ -521,7 +521,7 @@ controller_verifier_test.s: controller_verifier_test.cpp.s
 
 # target to generate assembly for a file
 controller_verifier_test.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/controller_verifier_test.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/controller_verifier_test.cpp.s
 .PHONY : controller_verifier_test.cpp.s
 
 fk_tests.o: fk_tests.cpp.o
@@ -530,7 +530,7 @@ fk_tests.o: fk_tests.cpp.o
 
 # target to build an object file
 fk_tests.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/fk_tests.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/fk_tests.cpp.o
 .PHONY : fk_tests.cpp.o
 
 fk_tests.i: fk_tests.cpp.i
@@ -539,7 +539,7 @@ fk_tests.i: fk_tests.cpp.i
 
 # target to preprocess a source file
 fk_tests.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/fk_tests.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/fk_tests.cpp.i
 .PHONY : fk_tests.cpp.i
 
 fk_tests.s: fk_tests.cpp.s
@@ -548,7 +548,7 @@ fk_tests.s: fk_tests.cpp.s
 
 # target to generate assembly for a file
 fk_tests.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/fk_tests.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/fk_tests.cpp.s
 .PHONY : fk_tests.cpp.s
 
 franka_gripper_sim_test.o: franka_gripper_sim_test.cpp.o
@@ -557,7 +557,7 @@ franka_gripper_sim_test.o: franka_gripper_sim_test.cpp.o
 
 # target to build an object file
 franka_gripper_sim_test.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/franka_gripper_sim_test.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/franka_gripper_sim_test.cpp.o
 .PHONY : franka_gripper_sim_test.cpp.o
 
 franka_gripper_sim_test.i: franka_gripper_sim_test.cpp.i
@@ -566,7 +566,7 @@ franka_gripper_sim_test.i: franka_gripper_sim_test.cpp.i
 
 # target to preprocess a source file
 franka_gripper_sim_test.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/franka_gripper_sim_test.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/franka_gripper_sim_test.cpp.i
 .PHONY : franka_gripper_sim_test.cpp.i
 
 franka_gripper_sim_test.s: franka_gripper_sim_test.cpp.s
@@ -575,7 +575,7 @@ franka_gripper_sim_test.s: franka_gripper_sim_test.cpp.s
 
 # target to generate assembly for a file
 franka_gripper_sim_test.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/franka_gripper_sim_test.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/franka_gripper_sim_test.cpp.s
 .PHONY : franka_gripper_sim_test.cpp.s
 
 franka_gripper_sim_test_with_object.o: franka_gripper_sim_test_with_object.cpp.o
@@ -584,7 +584,7 @@ franka_gripper_sim_test_with_object.o: franka_gripper_sim_test_with_object.cpp.o
 
 # target to build an object file
 franka_gripper_sim_test_with_object.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/franka_gripper_sim_test_with_object.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/franka_gripper_sim_test_with_object.cpp.o
 .PHONY : franka_gripper_sim_test_with_object.cpp.o
 
 franka_gripper_sim_test_with_object.i: franka_gripper_sim_test_with_object.cpp.i
@@ -593,7 +593,7 @@ franka_gripper_sim_test_with_object.i: franka_gripper_sim_test_with_object.cpp.i
 
 # target to preprocess a source file
 franka_gripper_sim_test_with_object.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/franka_gripper_sim_test_with_object.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/franka_gripper_sim_test_with_object.cpp.i
 .PHONY : franka_gripper_sim_test_with_object.cpp.i
 
 franka_gripper_sim_test_with_object.s: franka_gripper_sim_test_with_object.cpp.s
@@ -602,7 +602,7 @@ franka_gripper_sim_test_with_object.s: franka_gripper_sim_test_with_object.cpp.s
 
 # target to generate assembly for a file
 franka_gripper_sim_test_with_object.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/franka_gripper_sim_test_with_object.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/franka_gripper_sim_test_with_object.cpp.s
 .PHONY : franka_gripper_sim_test_with_object.cpp.s
 
 franka_hw_sim_gazebo_test.o: franka_hw_sim_gazebo_test.cpp.o
@@ -611,7 +611,7 @@ franka_hw_sim_gazebo_test.o: franka_hw_sim_gazebo_test.cpp.o
 
 # target to build an object file
 franka_hw_sim_gazebo_test.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/franka_hw_sim_gazebo_test.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/franka_hw_sim_gazebo_test.cpp.o
 .PHONY : franka_hw_sim_gazebo_test.cpp.o
 
 franka_hw_sim_gazebo_test.i: franka_hw_sim_gazebo_test.cpp.i
@@ -620,7 +620,7 @@ franka_hw_sim_gazebo_test.i: franka_hw_sim_gazebo_test.cpp.i
 
 # target to preprocess a source file
 franka_hw_sim_gazebo_test.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/franka_hw_sim_gazebo_test.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/franka_hw_sim_gazebo_test.cpp.i
 .PHONY : franka_hw_sim_gazebo_test.cpp.i
 
 franka_hw_sim_gazebo_test.s: franka_hw_sim_gazebo_test.cpp.s
@@ -629,7 +629,7 @@ franka_hw_sim_gazebo_test.s: franka_hw_sim_gazebo_test.cpp.s
 
 # target to generate assembly for a file
 franka_hw_sim_gazebo_test.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/franka_hw_sim_gazebo_test.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_gazebo_test.dir/franka_hw_sim_gazebo_test.cpp.s
 .PHONY : franka_hw_sim_gazebo_test.cpp.s
 
 gravity_tests.o: gravity_tests.cpp.o
@@ -638,7 +638,7 @@ gravity_tests.o: gravity_tests.cpp.o
 
 # target to build an object file
 gravity_tests.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/gravity_tests.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/gravity_tests.cpp.o
 .PHONY : gravity_tests.cpp.o
 
 gravity_tests.i: gravity_tests.cpp.i
@@ -647,7 +647,7 @@ gravity_tests.i: gravity_tests.cpp.i
 
 # target to preprocess a source file
 gravity_tests.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/gravity_tests.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/gravity_tests.cpp.i
 .PHONY : gravity_tests.cpp.i
 
 gravity_tests.s: gravity_tests.cpp.s
@@ -656,7 +656,7 @@ gravity_tests.s: gravity_tests.cpp.s
 
 # target to generate assembly for a file
 gravity_tests.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/gravity_tests.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/gravity_tests.cpp.s
 .PHONY : gravity_tests.cpp.s
 
 gripper_sim_test_setup.o: gripper_sim_test_setup.cpp.o
@@ -665,8 +665,8 @@ gripper_sim_test_setup.o: gripper_sim_test_setup.cpp.o
 
 # target to build an object file
 gripper_sim_test_setup.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/gripper_sim_test_setup.cpp.o
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/gripper_sim_test_setup.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/gripper_sim_test_setup.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/gripper_sim_test_setup.cpp.o
 .PHONY : gripper_sim_test_setup.cpp.o
 
 gripper_sim_test_setup.i: gripper_sim_test_setup.cpp.i
@@ -675,8 +675,8 @@ gripper_sim_test_setup.i: gripper_sim_test_setup.cpp.i
 
 # target to preprocess a source file
 gripper_sim_test_setup.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/gripper_sim_test_setup.cpp.i
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/gripper_sim_test_setup.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/gripper_sim_test_setup.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/gripper_sim_test_setup.cpp.i
 .PHONY : gripper_sim_test_setup.cpp.i
 
 gripper_sim_test_setup.s: gripper_sim_test_setup.cpp.s
@@ -685,8 +685,8 @@ gripper_sim_test_setup.s: gripper_sim_test_setup.cpp.s
 
 # target to generate assembly for a file
 gripper_sim_test_setup.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/gripper_sim_test_setup.cpp.s
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/gripper_sim_test_setup.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test_with_object.dir/gripper_sim_test_setup.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_gripper_sim_test.dir/gripper_sim_test_setup.cpp.s
 .PHONY : gripper_sim_test_setup.cpp.s
 
 jacobian_tests.o: jacobian_tests.cpp.o
@@ -695,7 +695,7 @@ jacobian_tests.o: jacobian_tests.cpp.o
 
 # target to build an object file
 jacobian_tests.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/jacobian_tests.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/jacobian_tests.cpp.o
 .PHONY : jacobian_tests.cpp.o
 
 jacobian_tests.i: jacobian_tests.cpp.i
@@ -704,7 +704,7 @@ jacobian_tests.i: jacobian_tests.cpp.i
 
 # target to preprocess a source file
 jacobian_tests.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/jacobian_tests.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/jacobian_tests.cpp.i
 .PHONY : jacobian_tests.cpp.i
 
 jacobian_tests.s: jacobian_tests.cpp.s
@@ -713,7 +713,7 @@ jacobian_tests.s: jacobian_tests.cpp.s
 
 # target to generate assembly for a file
 jacobian_tests.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/jacobian_tests.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/jacobian_tests.cpp.s
 .PHONY : jacobian_tests.cpp.s
 
 main.o: main.cpp.o
@@ -722,8 +722,8 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/main.cpp.o
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/main.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/main.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -732,8 +732,8 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/main.cpp.i
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/main.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/main.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -742,8 +742,8 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/main.cpp.s
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/main.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_controller_verifier_test.dir/main.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/build.make franka_ros/franka_gazebo/test/CMakeFiles/franka_hw_sim_test.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -819,6 +819,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

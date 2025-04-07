@@ -67,14 +67,14 @@ set(franka_gripper_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(franka_gripper_SOURCE_PREFIX /home/franko/Scrivania/thunder_optimal/panda_controllers/src/franka_ros/franka_gripper)
-  set(franka_gripper_DEVEL_PREFIX /home/franko/Scrivania/thunder_optimal/panda_controllers/devel)
+  set(franka_gripper_SOURCE_PREFIX /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gripper)
+  set(franka_gripper_DEVEL_PREFIX /home/franko/Scrivania/thunder_optimal/devel)
   set(franka_gripper_INSTALL_PREFIX "")
   set(franka_gripper_PREFIX ${franka_gripper_DEVEL_PREFIX})
 else()
   set(franka_gripper_SOURCE_PREFIX "")
   set(franka_gripper_DEVEL_PREFIX "")
-  set(franka_gripper_INSTALL_PREFIX /home/franko/Scrivania/thunder_optimal/panda_controllers/install)
+  set(franka_gripper_INSTALL_PREFIX /home/franko/Scrivania/thunder_optimal/install)
   set(franka_gripper_PREFIX ${franka_gripper_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(franka_gripper_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/franko/Scrivania/thunder_optimal/panda_controllers/devel/include;/home/franko/Scrivania/thunder_optimal/panda_controllers/src/franka_ros/franka_gripper/include;/opt/ros/noetic/include " STREQUAL " ")
+if(NOT "/home/franko/Scrivania/thunder_optimal/devel/include;/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gripper/include;/opt/ros/noetic/include " STREQUAL " ")
   set(franka_gripper_INCLUDE_DIRS "")
-  set(_include_dirs "/home/franko/Scrivania/thunder_optimal/panda_controllers/devel/include;/home/franko/Scrivania/thunder_optimal/panda_controllers/src/franka_ros/franka_gripper/include;/opt/ros/noetic/include")
+  set(_include_dirs "/home/franko/Scrivania/thunder_optimal/devel/include;/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gripper/include;/opt/ros/noetic/include")
   if(NOT "https://github.com/frankaemika/franka_ros/issues " STREQUAL " ")
     set(_report "Check the issue tracker 'https://github.com/frankaemika/franka_ros/issues' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT "http://wiki.ros.org/franka_gripper " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/franko/Scrivania/thunder_optimal/panda_controllers/devel/include;/
         message(FATAL_ERROR "Project 'franka_gripper' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'franka_gripper' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/franko/Scrivania/thunder_optimal/panda_controllers/src/franka_ros/franka_gripper/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'franka_gripper' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gripper/${idir}'.  ${_report}")
     endif()
     _list_append_unique(franka_gripper_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/franko/Scrivania/thunder_optimal/panda_controllers/devel/lib;/home/franko/Scrivania/catkin_ws/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/franko/Scrivania/thunder_optimal/devel/lib;/home/franko/Scrivania/catkin_ws/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

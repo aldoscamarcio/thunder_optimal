@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.pdb"
-  "/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so"
+  "/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.pdb"
+  "/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so"
   "CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.o"
 )
 

@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,14 +137,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/catkin_ws/build/CMakeFiles /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper/CMakeFiles/progress.marks
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/catkin_ws/build/CMakeFiles 0
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/thunder_optimal/build/CMakeFiles /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper/CMakeFiles/progress.marks
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/thunder_optimal/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/clean
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/preinstall
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/preinstall
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/rule
 
 # Convenience name for target.
@@ -179,12 +179,12 @@ franka_gripper: franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/rule
 
 # fast build rule for target.
 franka_gripper/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build
 .PHONY : franka_gripper/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_gennodejs.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_gennodejs.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_gennodejs.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper_gennodejs.dir/rule
 
 # Convenience name for target.
@@ -194,12 +194,12 @@ franka_gripper_gennodejs: franka_ros/franka_gripper/CMakeFiles/franka_gripper_ge
 
 # fast build rule for target.
 franka_gripper_gennodejs/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_gennodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_gennodejs.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_gennodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_gennodejs.dir/build
 .PHONY : franka_gripper_gennodejs/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_gencpp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_gencpp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_gencpp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper_gencpp.dir/rule
 
 # Convenience name for target.
@@ -209,12 +209,12 @@ franka_gripper_gencpp: franka_ros/franka_gripper/CMakeFiles/franka_gripper_gencp
 
 # fast build rule for target.
 franka_gripper_gencpp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_gencpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_gencpp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_gencpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_gencpp.dir/build
 .PHONY : franka_gripper_gencpp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_cpp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_cpp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_cpp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ franka_gripper_generate_messages_cpp: franka_ros/franka_gripper/CMakeFiles/frank
 
 # fast build rule for target.
 franka_gripper_generate_messages_cpp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_cpp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_cpp.dir/build
 .PHONY : franka_gripper_generate_messages_cpp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspEpsilon.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspEpsilon.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspEpsilon.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspEpsilon.dir/rule
 
 # Convenience name for target.
@@ -239,12 +239,12 @@ _franka_gripper_generate_messages_check_deps_GraspEpsilon: franka_ros/franka_gri
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_GraspEpsilon/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspEpsilon.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspEpsilon.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspEpsilon.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspEpsilon.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_GraspEpsilon/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveFeedback.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveFeedback.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveFeedback.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveFeedback.dir/rule
 
 # Convenience name for target.
@@ -254,12 +254,12 @@ _franka_gripper_generate_messages_check_deps_MoveFeedback: franka_ros/franka_gri
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_MoveFeedback/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveFeedback.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveFeedback.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_MoveFeedback/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveGoal.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveGoal.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveGoal.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveGoal.dir/rule
 
 # Convenience name for target.
@@ -269,12 +269,12 @@ _franka_gripper_generate_messages_check_deps_MoveGoal: franka_ros/franka_gripper
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_MoveGoal/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveGoal.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveGoal.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_MoveGoal/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionResult.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionResult.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionResult.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionResult.dir/rule
 
 # Convenience name for target.
@@ -284,12 +284,12 @@ _franka_gripper_generate_messages_check_deps_MoveActionResult: franka_ros/franka
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_MoveActionResult/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionResult.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionResult.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_MoveActionResult/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/rule
 
 # Convenience name for target.
@@ -299,12 +299,12 @@ _franka_gripper_generate_messages_check_deps_MoveActionGoal: franka_ros/franka_g
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_MoveActionGoal/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_MoveActionGoal/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveAction.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveAction.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveAction.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveAction.dir/rule
 
 # Convenience name for target.
@@ -314,12 +314,12 @@ _franka_gripper_generate_messages_check_deps_MoveAction: franka_ros/franka_gripp
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_MoveAction/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveAction.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveAction.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveAction.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveAction.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_MoveAction/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopFeedback.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopFeedback.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopFeedback.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopFeedback.dir/rule
 
 # Convenience name for target.
@@ -329,12 +329,12 @@ _franka_gripper_generate_messages_check_deps_StopFeedback: franka_ros/franka_gri
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_StopFeedback/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopFeedback.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopFeedback.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_StopFeedback/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopResult.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopResult.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopResult.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopResult.dir/rule
 
 # Convenience name for target.
@@ -344,12 +344,12 @@ _franka_gripper_generate_messages_check_deps_StopResult: franka_ros/franka_gripp
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_StopResult/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopResult.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopResult.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_StopResult/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopGoal.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopGoal.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopGoal.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopGoal.dir/rule
 
 # Convenience name for target.
@@ -359,12 +359,12 @@ _franka_gripper_generate_messages_check_deps_StopGoal: franka_ros/franka_gripper
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_StopGoal/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopGoal.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopGoal.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_StopGoal/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionFeedback.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionFeedback.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionFeedback.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionFeedback.dir/rule
 
 # Convenience name for target.
@@ -374,12 +374,12 @@ _franka_gripper_generate_messages_check_deps_StopActionFeedback: franka_ros/fran
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_StopActionFeedback/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionFeedback.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionFeedback.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_StopActionFeedback/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionResult.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionResult.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionResult.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionResult.dir/rule
 
 # Convenience name for target.
@@ -389,12 +389,12 @@ _franka_gripper_generate_messages_check_deps_StopActionResult: franka_ros/franka
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_StopActionResult/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionResult.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionResult.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_StopActionResult/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_lisp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_lisp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_lisp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -404,12 +404,12 @@ franka_gripper_generate_messages_lisp: franka_ros/franka_gripper/CMakeFiles/fran
 
 # fast build rule for target.
 franka_gripper_generate_messages_lisp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_lisp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_lisp.dir/build
 .PHONY : franka_gripper_generate_messages_lisp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopAction.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopAction.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopAction.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopAction.dir/rule
 
 # Convenience name for target.
@@ -419,12 +419,12 @@ _franka_gripper_generate_messages_check_deps_StopAction: franka_ros/franka_gripp
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_StopAction/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopAction.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopAction.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopAction.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopAction.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_StopAction/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionFeedback.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionFeedback.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionFeedback.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionFeedback.dir/rule
 
 # Convenience name for target.
@@ -434,12 +434,12 @@ _franka_gripper_generate_messages_check_deps_MoveActionFeedback: franka_ros/fran
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_MoveActionFeedback/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionFeedback.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionFeedback.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_MoveActionFeedback/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingFeedback.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingFeedback.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingFeedback.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingFeedback.dir/rule
 
 # Convenience name for target.
@@ -449,12 +449,12 @@ _franka_gripper_generate_messages_check_deps_HomingFeedback: franka_ros/franka_g
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_HomingFeedback/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingFeedback.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingFeedback.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_HomingFeedback/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -464,12 +464,12 @@ geometry_msgs_generate_messages_eus: franka_ros/franka_gripper/CMakeFiles/geomet
 
 # fast build rule for target.
 geometry_msgs_generate_messages_eus/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
 .PHONY : geometry_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -479,12 +479,12 @@ std_msgs_generate_messages_nodejs: franka_ros/franka_gripper/CMakeFiles/std_msgs
 
 # fast build rule for target.
 std_msgs_generate_messages_nodejs/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
 .PHONY : std_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -494,12 +494,12 @@ actionlib_msgs_generate_messages_py: franka_ros/franka_gripper/CMakeFiles/action
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
 .PHONY : actionlib_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -509,12 +509,12 @@ rosgraph_msgs_generate_messages_nodejs: franka_ros/franka_gripper/CMakeFiles/ros
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_nodejs/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
 .PHONY : rosgraph_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveResult.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveResult.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveResult.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveResult.dir/rule
 
 # Convenience name for target.
@@ -524,12 +524,12 @@ _franka_gripper_generate_messages_check_deps_MoveResult: franka_ros/franka_gripp
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_MoveResult/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveResult.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveResult.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_MoveResult/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_cpp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -539,12 +539,12 @@ actionlib_generate_messages_cpp: franka_ros/franka_gripper/CMakeFiles/actionlib_
 
 # fast build rule for target.
 actionlib_generate_messages_cpp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_cpp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_cpp.dir/build
 .PHONY : actionlib_generate_messages_cpp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_py.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -554,12 +554,12 @@ control_msgs_generate_messages_py: franka_ros/franka_gripper/CMakeFiles/control_
 
 # fast build rule for target.
 control_msgs_generate_messages_py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_py.dir/build
 .PHONY : control_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -569,12 +569,12 @@ geometry_msgs_generate_messages_cpp: franka_ros/franka_gripper/CMakeFiles/geomet
 
 # fast build rule for target.
 geometry_msgs_generate_messages_cpp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
 .PHONY : geometry_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_eus.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_eus.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_eus.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -584,12 +584,12 @@ franka_gripper_generate_messages_eus: franka_ros/franka_gripper/CMakeFiles/frank
 
 # fast build rule for target.
 franka_gripper_generate_messages_eus/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_eus.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_eus.dir/build
 .PHONY : franka_gripper_generate_messages_eus/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_cpp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_cpp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_cpp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -599,12 +599,12 @@ control_msgs_generate_messages_cpp: franka_ros/franka_gripper/CMakeFiles/control
 
 # fast build rule for target.
 control_msgs_generate_messages_cpp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_cpp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_cpp.dir/build
 .PHONY : control_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -614,12 +614,12 @@ std_msgs_generate_messages_py: franka_ros/franka_gripper/CMakeFiles/std_msgs_gen
 
 # fast build rule for target.
 std_msgs_generate_messages_py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -629,12 +629,12 @@ roscpp_generate_messages_cpp: franka_ros/franka_gripper/CMakeFiles/roscpp_genera
 
 # fast build rule for target.
 roscpp_generate_messages_cpp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_cpp.dir/build
 .PHONY : roscpp_generate_messages_cpp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -644,12 +644,12 @@ roscpp_generate_messages_eus: franka_ros/franka_gripper/CMakeFiles/roscpp_genera
 
 # fast build rule for target.
 roscpp_generate_messages_eus/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_eus.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_eus.dir/build
 .PHONY : roscpp_generate_messages_eus/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_eus.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_eus.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_eus.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -659,12 +659,12 @@ control_msgs_generate_messages_eus: franka_ros/franka_gripper/CMakeFiles/control
 
 # fast build rule for target.
 control_msgs_generate_messages_eus/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_eus.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_eus.dir/build
 .PHONY : control_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -674,12 +674,12 @@ trajectory_msgs_generate_messages_nodejs: franka_ros/franka_gripper/CMakeFiles/t
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_nodejs/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build
 .PHONY : trajectory_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -689,12 +689,12 @@ actionlib_generate_messages_nodejs: franka_ros/franka_gripper/CMakeFiles/actionl
 
 # fast build rule for target.
 actionlib_generate_messages_nodejs/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
 .PHONY : actionlib_generate_messages_nodejs/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -704,12 +704,12 @@ std_msgs_generate_messages_lisp: franka_ros/franka_gripper/CMakeFiles/std_msgs_g
 
 # fast build rule for target.
 std_msgs_generate_messages_lisp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
 .PHONY : std_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -719,12 +719,12 @@ trajectory_msgs_generate_messages_eus: franka_ros/franka_gripper/CMakeFiles/traj
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_eus/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build
 .PHONY : trajectory_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_py.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -734,12 +734,12 @@ roscpp_generate_messages_py: franka_ros/franka_gripper/CMakeFiles/roscpp_generat
 
 # fast build rule for target.
 roscpp_generate_messages_py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_py.dir/build
 .PHONY : roscpp_generate_messages_py/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages.dir/rule
 
 # Convenience name for target.
@@ -749,12 +749,12 @@ franka_gripper_generate_messages: franka_ros/franka_gripper/CMakeFiles/franka_gr
 
 # fast build rule for target.
 franka_gripper_generate_messages/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages.dir/build
 .PHONY : franka_gripper_generate_messages/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingAction.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingAction.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingAction.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingAction.dir/rule
 
 # Convenience name for target.
@@ -764,12 +764,12 @@ _franka_gripper_generate_messages_check_deps_HomingAction: franka_ros/franka_gri
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_HomingAction/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingAction.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingAction.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingAction.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingAction.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_HomingAction/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -779,12 +779,12 @@ geometry_msgs_generate_messages_lisp: franka_ros/franka_gripper/CMakeFiles/geome
 
 # fast build rule for target.
 geometry_msgs_generate_messages_lisp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
 .PHONY : geometry_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -794,12 +794,12 @@ std_msgs_generate_messages_cpp: franka_ros/franka_gripper/CMakeFiles/std_msgs_ge
 
 # fast build rule for target.
 std_msgs_generate_messages_cpp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
 .PHONY : std_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -809,12 +809,12 @@ rosgraph_msgs_generate_messages_eus: franka_ros/franka_gripper/CMakeFiles/rosgra
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_eus/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
 .PHONY : rosgraph_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionGoal.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionGoal.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionGoal.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionGoal.dir/rule
 
 # Convenience name for target.
@@ -824,12 +824,12 @@ _franka_gripper_generate_messages_check_deps_GraspActionGoal: franka_ros/franka_
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_GraspActionGoal/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionGoal.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionGoal.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_GraspActionGoal/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -839,12 +839,12 @@ actionlib_msgs_generate_messages_cpp: franka_ros/franka_gripper/CMakeFiles/actio
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_cpp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
 .PHONY : actionlib_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspGoal.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspGoal.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspGoal.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspGoal.dir/rule
 
 # Convenience name for target.
@@ -854,12 +854,12 @@ _franka_gripper_generate_messages_check_deps_GraspGoal: franka_ros/franka_grippe
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_GraspGoal/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspGoal.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspGoal.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_GraspGoal/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_genlisp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_genlisp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_genlisp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper_genlisp.dir/rule
 
 # Convenience name for target.
@@ -869,12 +869,12 @@ franka_gripper_genlisp: franka_ros/franka_gripper/CMakeFiles/franka_gripper_genl
 
 # fast build rule for target.
 franka_gripper_genlisp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_genlisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_genlisp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_genlisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_genlisp.dir/build
 .PHONY : franka_gripper_genlisp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -884,12 +884,12 @@ actionlib_msgs_generate_messages_lisp: franka_ros/franka_gripper/CMakeFiles/acti
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_lisp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
 .PHONY : actionlib_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -899,12 +899,12 @@ std_msgs_generate_messages_eus: franka_ros/franka_gripper/CMakeFiles/std_msgs_ge
 
 # fast build rule for target.
 std_msgs_generate_messages_eus/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_eus.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/std_msgs_generate_messages_eus.dir/build
 .PHONY : std_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionFeedback.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionFeedback.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionFeedback.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionFeedback.dir/rule
 
 # Convenience name for target.
@@ -914,12 +914,12 @@ _franka_gripper_generate_messages_check_deps_GraspActionFeedback: franka_ros/fra
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_GraspActionFeedback/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionFeedback.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionFeedback.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_GraspActionFeedback/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -929,12 +929,12 @@ actionlib_msgs_generate_messages_nodejs: franka_ros/franka_gripper/CMakeFiles/ac
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_nodejs/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
 .PHONY : actionlib_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspFeedback.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspFeedback.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspFeedback.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspFeedback.dir/rule
 
 # Convenience name for target.
@@ -944,12 +944,12 @@ _franka_gripper_generate_messages_check_deps_GraspFeedback: franka_ros/franka_gr
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_GraspFeedback/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspFeedback.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspFeedback.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_GraspFeedback/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -959,12 +959,12 @@ trajectory_msgs_generate_messages_cpp: franka_ros/franka_gripper/CMakeFiles/traj
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_cpp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build
 .PHONY : trajectory_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_py.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -974,12 +974,12 @@ actionlib_generate_messages_py: franka_ros/franka_gripper/CMakeFiles/actionlib_g
 
 # fast build rule for target.
 actionlib_generate_messages_py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_py.dir/build
 .PHONY : actionlib_generate_messages_py/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -989,12 +989,12 @@ rosgraph_msgs_generate_messages_lisp: franka_ros/franka_gripper/CMakeFiles/rosgr
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_lisp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_nodejs.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_nodejs.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1004,12 +1004,12 @@ control_msgs_generate_messages_nodejs: franka_ros/franka_gripper/CMakeFiles/cont
 
 # fast build rule for target.
 control_msgs_generate_messages_nodejs/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_nodejs.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_nodejs.dir/build
 .PHONY : control_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -1019,12 +1019,12 @@ actionlib_msgs_generate_messages_eus: franka_ros/franka_gripper/CMakeFiles/actio
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_eus/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
 .PHONY : actionlib_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1034,12 +1034,12 @@ geometry_msgs_generate_messages_nodejs: franka_ros/franka_gripper/CMakeFiles/geo
 
 # fast build rule for target.
 geometry_msgs_generate_messages_nodejs/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
 .PHONY : geometry_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/rule
 
 # Convenience name for target.
@@ -1049,12 +1049,12 @@ franka_gripper_node: franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.di
 
 # fast build rule for target.
 franka_gripper_node/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/build
 .PHONY : franka_gripper_node/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1064,12 +1064,12 @@ roscpp_generate_messages_lisp: franka_ros/franka_gripper/CMakeFiles/roscpp_gener
 
 # fast build rule for target.
 roscpp_generate_messages_lisp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_lisp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_lisp.dir/build
 .PHONY : roscpp_generate_messages_lisp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionGoal.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionGoal.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionGoal.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionGoal.dir/rule
 
 # Convenience name for target.
@@ -1079,12 +1079,12 @@ _franka_gripper_generate_messages_check_deps_StopActionGoal: franka_ros/franka_g
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_StopActionGoal/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionGoal.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_StopActionGoal.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_StopActionGoal/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_lisp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1094,12 +1094,12 @@ actionlib_generate_messages_lisp: franka_ros/franka_gripper/CMakeFiles/actionlib
 
 # fast build rule for target.
 actionlib_generate_messages_lisp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_lisp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_lisp.dir/build
 .PHONY : actionlib_generate_messages_lisp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -1109,12 +1109,12 @@ rosgraph_msgs_generate_messages_py: franka_ros/franka_gripper/CMakeFiles/rosgrap
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -1124,12 +1124,12 @@ geometry_msgs_generate_messages_py: franka_ros/franka_gripper/CMakeFiles/geometr
 
 # fast build rule for target.
 geometry_msgs_generate_messages_py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
 .PHONY : geometry_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -1139,12 +1139,12 @@ sensor_msgs_generate_messages_py: franka_ros/franka_gripper/CMakeFiles/sensor_ms
 
 # fast build rule for target.
 sensor_msgs_generate_messages_py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
 .PHONY : sensor_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_nodejs.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_nodejs.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_nodejs.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1154,12 +1154,12 @@ franka_gripper_generate_messages_nodejs: franka_ros/franka_gripper/CMakeFiles/fr
 
 # fast build rule for target.
 franka_gripper_generate_messages_nodejs/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_nodejs.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_nodejs.dir/build
 .PHONY : franka_gripper_generate_messages_nodejs/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1169,12 +1169,12 @@ roscpp_generate_messages_nodejs: franka_ros/franka_gripper/CMakeFiles/roscpp_gen
 
 # fast build rule for target.
 roscpp_generate_messages_nodejs/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
 .PHONY : roscpp_generate_messages_nodejs/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspAction.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspAction.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspAction.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspAction.dir/rule
 
 # Convenience name for target.
@@ -1184,12 +1184,12 @@ _franka_gripper_generate_messages_check_deps_GraspAction: franka_ros/franka_grip
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_GraspAction/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspAction.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspAction.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspAction.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspAction.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_GraspAction/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1199,12 +1199,12 @@ trajectory_msgs_generate_messages_lisp: franka_ros/franka_gripper/CMakeFiles/tra
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_lisp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build
 .PHONY : trajectory_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_eus.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_eus.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_eus.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -1214,12 +1214,12 @@ actionlib_generate_messages_eus: franka_ros/franka_gripper/CMakeFiles/actionlib_
 
 # fast build rule for target.
 actionlib_generate_messages_eus/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_eus.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/actionlib_generate_messages_eus.dir/build
 .PHONY : actionlib_generate_messages_eus/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -1229,12 +1229,12 @@ rosgraph_msgs_generate_messages_cpp: franka_ros/franka_gripper/CMakeFiles/rosgra
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_cpp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -1244,12 +1244,12 @@ trajectory_msgs_generate_messages_py: franka_ros/franka_gripper/CMakeFiles/traje
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build
 .PHONY : trajectory_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -1259,12 +1259,12 @@ sensor_msgs_generate_messages_eus: franka_ros/franka_gripper/CMakeFiles/sensor_m
 
 # fast build rule for target.
 sensor_msgs_generate_messages_eus/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
 .PHONY : sensor_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_lisp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_lisp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_lisp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1274,12 +1274,12 @@ control_msgs_generate_messages_lisp: franka_ros/franka_gripper/CMakeFiles/contro
 
 # fast build rule for target.
 control_msgs_generate_messages_lisp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_lisp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/control_msgs_generate_messages_lisp.dir/build
 .PHONY : control_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1289,12 +1289,12 @@ sensor_msgs_generate_messages_lisp: franka_ros/franka_gripper/CMakeFiles/sensor_
 
 # fast build rule for target.
 sensor_msgs_generate_messages_lisp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
 .PHONY : sensor_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_genpy.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_genpy.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_genpy.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper_genpy.dir/rule
 
 # Convenience name for target.
@@ -1304,12 +1304,12 @@ franka_gripper_genpy: franka_ros/franka_gripper/CMakeFiles/franka_gripper_genpy.
 
 # fast build rule for target.
 franka_gripper_genpy/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_genpy.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_genpy.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_genpy.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_genpy.dir/build
 .PHONY : franka_gripper_genpy/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1319,12 +1319,12 @@ sensor_msgs_generate_messages_nodejs: franka_ros/franka_gripper/CMakeFiles/senso
 
 # fast build rule for target.
 sensor_msgs_generate_messages_nodejs/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
 .PHONY : sensor_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspResult.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspResult.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspResult.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspResult.dir/rule
 
 # Convenience name for target.
@@ -1334,12 +1334,12 @@ _franka_gripper_generate_messages_check_deps_GraspResult: franka_ros/franka_grip
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_GraspResult/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspResult.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspResult.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_GraspResult/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_geneus.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_geneus.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_geneus.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper_geneus.dir/rule
 
 # Convenience name for target.
@@ -1349,12 +1349,12 @@ franka_gripper_geneus: franka_ros/franka_gripper/CMakeFiles/franka_gripper_geneu
 
 # fast build rule for target.
 franka_gripper_geneus/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_geneus.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_geneus.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_geneus.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_geneus.dir/build
 .PHONY : franka_gripper_geneus/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionResult.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionResult.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionResult.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionResult.dir/rule
 
 # Convenience name for target.
@@ -1364,12 +1364,12 @@ _franka_gripper_generate_messages_check_deps_GraspActionResult: franka_ros/frank
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_GraspActionResult/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionResult.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_GraspActionResult.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_GraspActionResult/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionGoal.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionGoal.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionGoal.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionGoal.dir/rule
 
 # Convenience name for target.
@@ -1379,12 +1379,12 @@ _franka_gripper_generate_messages_check_deps_HomingActionGoal: franka_ros/franka
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_HomingActionGoal/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionGoal.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionGoal.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_HomingActionGoal/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionResult.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionResult.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionResult.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionResult.dir/rule
 
 # Convenience name for target.
@@ -1394,12 +1394,12 @@ _franka_gripper_generate_messages_check_deps_HomingActionResult: franka_ros/fran
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_HomingActionResult/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionResult.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionResult.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_HomingActionResult/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_py.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -1409,12 +1409,12 @@ franka_gripper_generate_messages_py: franka_ros/franka_gripper/CMakeFiles/franka
 
 # fast build rule for target.
 franka_gripper_generate_messages_py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_py.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_generate_messages_py.dir/build
 .PHONY : franka_gripper_generate_messages_py/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionFeedback.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionFeedback.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionFeedback.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionFeedback.dir/rule
 
 # Convenience name for target.
@@ -1424,12 +1424,12 @@ _franka_gripper_generate_messages_check_deps_HomingActionFeedback: franka_ros/fr
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_HomingActionFeedback/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionFeedback.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionFeedback.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingActionFeedback.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_HomingActionFeedback/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingGoal.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingGoal.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingGoal.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingGoal.dir/rule
 
 # Convenience name for target.
@@ -1439,12 +1439,12 @@ _franka_gripper_generate_messages_check_deps_HomingGoal: franka_ros/franka_gripp
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_HomingGoal/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingGoal.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingGoal.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingGoal.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_HomingGoal/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -1454,12 +1454,12 @@ sensor_msgs_generate_messages_cpp: franka_ros/franka_gripper/CMakeFiles/sensor_m
 
 # fast build rule for target.
 sensor_msgs_generate_messages_cpp/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make franka_ros/franka_gripper/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
 .PHONY : sensor_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingResult.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingResult.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingResult.dir/rule
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingResult.dir/rule
 
 # Convenience name for target.
@@ -1469,7 +1469,7 @@ _franka_gripper_generate_messages_check_deps_HomingResult: franka_ros/franka_gri
 
 # fast build rule for target.
 _franka_gripper_generate_messages_check_deps_HomingResult/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingResult.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingResult.dir/build.make franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_HomingResult.dir/build
 .PHONY : _franka_gripper_generate_messages_check_deps_HomingResult/fast
 
 src/franka_gripper.o: src/franka_gripper.cpp.o
@@ -1478,7 +1478,7 @@ src/franka_gripper.o: src/franka_gripper.cpp.o
 
 # target to build an object file
 src/franka_gripper.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.o
 .PHONY : src/franka_gripper.cpp.o
 
 src/franka_gripper.i: src/franka_gripper.cpp.i
@@ -1487,7 +1487,7 @@ src/franka_gripper.i: src/franka_gripper.cpp.i
 
 # target to preprocess a source file
 src/franka_gripper.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.i
 .PHONY : src/franka_gripper.cpp.i
 
 src/franka_gripper.s: src/franka_gripper.cpp.s
@@ -1496,7 +1496,7 @@ src/franka_gripper.s: src/franka_gripper.cpp.s
 
 # target to generate assembly for a file
 src/franka_gripper.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.s
 .PHONY : src/franka_gripper.cpp.s
 
 src/franka_gripper_node.o: src/franka_gripper_node.cpp.o
@@ -1505,7 +1505,7 @@ src/franka_gripper_node.o: src/franka_gripper_node.cpp.o
 
 # target to build an object file
 src/franka_gripper_node.cpp.o:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o
 .PHONY : src/franka_gripper_node.cpp.o
 
 src/franka_gripper_node.i: src/franka_gripper_node.cpp.i
@@ -1514,7 +1514,7 @@ src/franka_gripper_node.i: src/franka_gripper_node.cpp.i
 
 # target to preprocess a source file
 src/franka_gripper_node.cpp.i:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.i
 .PHONY : src/franka_gripper_node.cpp.i
 
 src/franka_gripper_node.s: src/franka_gripper_node.cpp.s
@@ -1523,7 +1523,7 @@ src/franka_gripper_node.s: src/franka_gripper_node.cpp.s
 
 # target to generate assembly for a file
 src/franka_gripper_node.cpp.s:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/build.make franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.s
 .PHONY : src/franka_gripper_node.cpp.s
 
 # Help Target
@@ -1643,6 +1643,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

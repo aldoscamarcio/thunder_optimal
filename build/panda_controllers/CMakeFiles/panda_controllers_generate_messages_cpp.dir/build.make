@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 # Utility rule file for panda_controllers_generate_messages_cpp.
 
@@ -63,10 +63,10 @@ panda_controllers/CMakeFiles/panda_controllers_generate_messages_cpp.dir/build: 
 .PHONY : panda_controllers/CMakeFiles/panda_controllers_generate_messages_cpp.dir/build
 
 panda_controllers/CMakeFiles/panda_controllers_generate_messages_cpp.dir/clean:
-	cd /home/franko/Scrivania/catkin_ws/build/panda_controllers && $(CMAKE_COMMAND) -P CMakeFiles/panda_controllers_generate_messages_cpp.dir/cmake_clean.cmake
+	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && $(CMAKE_COMMAND) -P CMakeFiles/panda_controllers_generate_messages_cpp.dir/cmake_clean.cmake
 .PHONY : panda_controllers/CMakeFiles/panda_controllers_generate_messages_cpp.dir/clean
 
 panda_controllers/CMakeFiles/panda_controllers_generate_messages_cpp.dir/depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/catkin_ws/src /home/franko/Scrivania/catkin_ws/src/panda_controllers /home/franko/Scrivania/catkin_ws/build /home/franko/Scrivania/catkin_ws/build/panda_controllers /home/franko/Scrivania/catkin_ws/build/panda_controllers/CMakeFiles/panda_controllers_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/thunder_optimal/src /home/franko/Scrivania/thunder_optimal/src/panda_controllers /home/franko/Scrivania/thunder_optimal/build /home/franko/Scrivania/thunder_optimal/build/panda_controllers /home/franko/Scrivania/thunder_optimal/build/panda_controllers/CMakeFiles/panda_controllers_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : panda_controllers/CMakeFiles/panda_controllers_generate_messages_cpp.dir/depend
 

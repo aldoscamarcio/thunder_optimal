@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/franko/Scrivania/catkin_ws/devel/include/franka_example_controllers/JointTorqueComparison.h"
+  "/home/franko/Scrivania/thunder_optimal/devel/include/franka_example_controllers/JointTorqueComparison.h"
   "CMakeFiles/franka_example_controllers_generate_messages_cpp"
 )
 

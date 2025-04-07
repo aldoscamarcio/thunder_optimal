@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/franko/Scrivania/catkin_ws/devel/share/roseus/ros/panda_controllers/manifest.l"
+  "/home/franko/Scrivania/thunder_optimal/devel/share/roseus/ros/panda_controllers/manifest.l"
   "CMakeFiles/panda_controllers_generate_messages_eus"
 )
 

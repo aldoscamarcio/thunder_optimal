@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 # Utility rule file for _run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
 include franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/progress.make
 
 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test:
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo/test && ../../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/catkin/cmake/test/run_tests.py /home/franko/Scrivania/catkin_ws/build/test_results/franka_gazebo/rostest-test_launch_franka_gripper_sim.xml "/usr/bin/python3 /opt/ros/noetic/share/rostest/cmake/../../../bin/rostest --pkgdir=/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo --package=franka_gazebo --results-filename test_launch_franka_gripper_sim.xml --results-base-dir \"/home/franko/Scrivania/catkin_ws/build/test_results\" /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/test/launch/franka_gripper_sim.test "
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo/test && ../../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/catkin/cmake/test/run_tests.py /home/franko/Scrivania/thunder_optimal/build/test_results/franka_gazebo/rostest-test_launch_franka_gripper_sim.xml "/usr/bin/python3 /opt/ros/noetic/share/rostest/cmake/../../../bin/rostest --pkgdir=/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo --package=franka_gazebo --results-filename test_launch_franka_gripper_sim.xml --results-base-dir \"/home/franko/Scrivania/thunder_optimal/build/test_results\" /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/test/launch/franka_gripper_sim.test "
 
 _run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test: franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test
 _run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test: franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/build.make
@@ -67,10 +67,10 @@ franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_l
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/build
 
 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/clean:
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo/test && $(CMAKE_COMMAND) -P CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/cmake_clean.cmake
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo/test && $(CMAKE_COMMAND) -P CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/cmake_clean.cmake
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/clean
 
 franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/catkin_ws/src /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/test /home/franko/Scrivania/catkin_ws/build /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo/test /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/thunder_optimal/src /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/test /home/franko/Scrivania/thunder_optimal/build /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo/test /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : franka_ros/franka_gazebo/test/CMakeFiles/_run_tests_franka_gazebo_rostest_test_launch_franka_gripper_sim.test.dir/depend
 

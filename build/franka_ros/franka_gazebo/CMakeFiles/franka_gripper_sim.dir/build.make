@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 # Include any dependencies generated for this target.
 include franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/depend.make
@@ -58,17 +58,17 @@ include franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/progress.make
 include franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/flags.make
 
 franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.o: franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/flags.make
-franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.o: /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/src/franka_gripper_sim.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/franko/Scrivania/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.o"
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.o -c /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/src/franka_gripper_sim.cpp
+franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.o: /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/src/franka_gripper_sim.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/franko/Scrivania/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.o"
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.o -c /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/src/franka_gripper_sim.cpp
 
 franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.i"
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/src/franka_gripper_sim.cpp > CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/src/franka_gripper_sim.cpp > CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.i
 
 franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.s"
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/src/franka_gripper_sim.cpp -o CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/src/franka_gripper_sim.cpp -o CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.s
 
 # Object files for target franka_gripper_sim
 franka_gripper_sim_OBJECTS = \
@@ -77,135 +77,135 @@ franka_gripper_sim_OBJECTS = \
 # External object files for target franka_gripper_sim
 franka_gripper_sim_EXTERNAL_OBJECTS =
 
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.o
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build.make
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libSimTKsimbody.so.3.6
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libdart.so.6.9.2
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_client.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_gui.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_sensors.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_rendering.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_physics.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_ode.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_transport.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_msgs.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_util.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_common.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_gimpact.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_opcode.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_opende_ou.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libsdformat9.so.9.10.1
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libOgreMain.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libOgreTerrain.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libOgrePaging.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.17.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libgazebo_ros_control.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libdefault_robot_hw_sim.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libkdl_parser.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libboost_sml_example.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libcontrol_toolbox.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libcontroller_manager.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libtransmission_interface_parser.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libtransmission_interface_loader.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libtransmission_interface_loader_plugins.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /home/franko/Scrivania/catkin_ws/devel/lib/libfranka_example_controllers.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libdynamic_reconfigure_config_init_mutex.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libeigen_conversions.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /home/franko/Scrivania/catkin_ws/devel/lib/libfranka_hw.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /home/franko/Scrivania/catkin_ws/devel/lib/libfranka_control_services.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libcombined_robot_hw.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libtf_conversions.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libkdl_conversions.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/liborocos-kdl.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libtf.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libtf2_ros.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libactionlib.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libmessage_filters.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libtf2.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/librealtime_tools.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/liburdf.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liburdfdom_sensor.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liburdfdom_model_state.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liburdfdom_model.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liburdfdom_world.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libtinyxml.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libclass_loader.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libPocoFoundation.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libdl.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libroslib.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/librospack.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libpython3.8.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/librosconsole_bridge.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libroscpp.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libpthread.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/librosconsole.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/librosconsole_log4cxx.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/librosconsole_backend_interface.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libxmlrpcpp.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libroscpp_serialization.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/librostime.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libcpp_common.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libSimTKmath.so.3.6
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libSimTKcommon.so.3.6
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libblas.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liblapack.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libblas.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liblapack.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libdart-external-odelcpsolver.so.6.9.2
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libccd.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libfcl.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libassimp.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liboctomap.so.1.9.3
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liboctomath.so.1.9.3
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.5.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.9.1
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.11.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.15.1
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.17.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libuuid.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libuuid.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so: franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/franko/Scrivania/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library /home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so"
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/franka_gripper_sim.dir/link.txt --verbose=$(VERBOSE)
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/src/franka_gripper_sim.cpp.o
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build.make
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libSimTKsimbody.so.3.6
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libdart.so.6.9.2
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_client.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_gui.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_sensors.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_rendering.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_physics.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_ode.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_transport.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_msgs.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_util.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_common.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_gimpact.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_opcode.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libgazebo_opende_ou.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libsdformat9.so.9.10.1
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libOgreMain.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libOgreTerrain.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libOgrePaging.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.17.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libgazebo_ros_control.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libdefault_robot_hw_sim.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libkdl_parser.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libboost_sml_example.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libcontrol_toolbox.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libcontroller_manager.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libtransmission_interface_parser.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libtransmission_interface_loader.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libtransmission_interface_loader_plugins.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_example_controllers.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libdynamic_reconfigure_config_init_mutex.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libeigen_conversions.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_hw.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_control_services.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libcombined_robot_hw.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libtf_conversions.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libkdl_conversions.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/liborocos-kdl.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libtf.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libtf2_ros.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libactionlib.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libmessage_filters.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libtf2.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/librealtime_tools.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/liburdf.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liburdfdom_sensor.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liburdfdom_model_state.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liburdfdom_model.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liburdfdom_world.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libtinyxml.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libclass_loader.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libPocoFoundation.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libdl.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libroslib.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/librospack.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libpython3.8.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/librosconsole_bridge.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libroscpp.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libpthread.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/librosconsole.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/librosconsole_log4cxx.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/librosconsole_backend_interface.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libxmlrpcpp.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libroscpp_serialization.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/librostime.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/libcpp_common.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libSimTKmath.so.3.6
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libSimTKcommon.so.3.6
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libblas.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liblapack.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libblas.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liblapack.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libdart-external-odelcpsolver.so.6.9.2
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libccd.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libfcl.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libassimp.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liboctomap.so.1.9.3
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/liboctomath.so.1.9.3
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.5.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.9.1
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.11.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.15.1
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.17.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libuuid.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /usr/lib/x86_64-linux-gnu/libuuid.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so: franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/franko/Scrivania/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library /home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so"
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/franka_gripper_sim.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build: /home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so
+franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build: /home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so
 
 .PHONY : franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/build
 
 franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/clean:
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo && $(CMAKE_COMMAND) -P CMakeFiles/franka_gripper_sim.dir/cmake_clean.cmake
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo && $(CMAKE_COMMAND) -P CMakeFiles/franka_gripper_sim.dir/cmake_clean.cmake
 .PHONY : franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/clean
 
 franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/catkin_ws/src /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo /home/franko/Scrivania/catkin_ws/build /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/thunder_optimal/src /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo /home/franko/Scrivania/thunder_optimal/build /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : franka_ros/franka_gazebo/CMakeFiles/franka_gripper_sim.dir/depend
 

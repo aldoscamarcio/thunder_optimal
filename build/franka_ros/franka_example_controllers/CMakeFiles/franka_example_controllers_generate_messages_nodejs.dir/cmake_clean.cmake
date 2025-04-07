@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/franko/Scrivania/catkin_ws/devel/share/gennodejs/ros/franka_example_controllers/msg/JointTorqueComparison.js"
+  "/home/franko/Scrivania/thunder_optimal/devel/share/gennodejs/ros/franka_example_controllers/msg/JointTorqueComparison.js"
   "CMakeFiles/franka_example_controllers_generate_messages_nodejs"
 )
 

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/Errors.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/Errors.h
 string
 -
 vector
@@ -22,7 +22,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/franko/Scrivania/catkin_ws/devel/include/franka_msgs/FrankaState.h
+/home/franko/Scrivania/thunder_optimal/devel/include/franka_msgs/FrankaState.h
 string
 -
 vector
@@ -44,7 +44,7 @@ franka_msgs/Errors.h
 franka_msgs/Errors.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_control/include/franka_control/franka_state_controller.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_control/include/franka_control/franka_state_controller.h
 cstdint
 -
 memory
@@ -68,7 +68,7 @@ sensor_msgs/JointState.h
 tf2_msgs/TFMessage.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_control/src/franka_state_controller.cpp
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_control/src/franka_state_controller.cpp
 franka_control/franka_state_controller.h
 -
 cmath
@@ -96,7 +96,7 @@ tf/tf.h
 tf/transform_datatypes.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/franka_cartesian_command_interface.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/franka_cartesian_command_interface.h
 array
 -
 franka_hw/franka_state_interface.h
@@ -104,7 +104,7 @@ franka_hw/franka_state_interface.h
 hardware_interface/internal/hardware_resource_manager.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
 string
 -
 franka/robot_state.h
@@ -112,7 +112,7 @@ franka/robot_state.h
 hardware_interface/internal/hardware_resource_manager.h
 -
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/trigger_rate.h
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/trigger_rate.h
 ros/time.h
 -
 

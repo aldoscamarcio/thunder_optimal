@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "${prefix}/include;/opt/ros/noetic/include;/us
 PROJECT_CATKIN_DEPENDS = "roscpp;std_msgs;gazebo_ros_control;kdl_parser;boost_sml;controller_manager;controller_interface;control_toolbox;pluginlib;hardware_interface;transmission_interface;joint_limits_interface;eigen_conversions;urdf;angles;franka_hw;franka_msgs;franka_gripper;franka_example_controllers".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "-lfranka_hw_sim;-lfranka_gripper_sim;/opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2;-lorocos-kdl".split(';') if "-lfranka_hw_sim;-lfranka_gripper_sim;/opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2;-lorocos-kdl" != "" else []
 PROJECT_NAME = "franka_gazebo"
-PROJECT_SPACE_DIR = "/home/franko/Scrivania/thunder_optimal/panda_controllers/install"
+PROJECT_SPACE_DIR = "/home/franko/Scrivania/thunder_optimal/install"
 PROJECT_VERSION = "0.10.1"

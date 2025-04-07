@@ -1,8 +1,8 @@
-# Install script for directory: /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo
+# Install script for directory: /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/franko/Scrivania/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/franko/Scrivania/thunder_optimal/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,28 +38,28 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo/catkin_generated/installspace/franka_gazebo.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo/catkin_generated/installspace/franka_gazebo.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/franka_gazebo/cmake" TYPE FILE FILES
-    "/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo/catkin_generated/installspace/franka_gazeboConfig.cmake"
-    "/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo/catkin_generated/installspace/franka_gazeboConfig-version.cmake"
+    "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo/catkin_generated/installspace/franka_gazeboConfig.cmake"
+    "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo/catkin_generated/installspace/franka_gazeboConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/franka_gazebo" TYPE FILE FILES "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/franka_gazebo" TYPE FILE FILES "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/package.xml")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/franka_gazebo" TYPE DIRECTORY FILES "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/include/franka_gazebo/")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/franka_gazebo" TYPE DIRECTORY FILES "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/include/franka_gazebo/")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/franka_gazebo" TYPE FILE FILES
-    "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/franka_hw_sim_plugin.xml"
-    "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/franka_gripper_sim_plugin.xml"
+    "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/franka_hw_sim_plugin.xml"
+    "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/franka_gripper_sim_plugin.xml"
     )
 endif()
 
@@ -70,12 +70,12 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfranka_hw_sim.so"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_hw_sim.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_hw_sim.so")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfranka_hw_sim.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfranka_hw_sim.so")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfranka_hw_sim.so"
-         OLD_RPATH "/home/franko/Scrivania/catkin_ws/devel/lib:/opt/ros/noetic/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/noetic/lib/x86_64-linux-gnu:"
+         OLD_RPATH "/home/franko/Scrivania/thunder_optimal/devel/lib:/opt/ros/noetic/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/noetic/lib/x86_64-linux-gnu:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfranka_hw_sim.so")
@@ -93,12 +93,12 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfranka_gripper_sim.so"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper_sim.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper_sim.so")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfranka_gripper_sim.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfranka_gripper_sim.so")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfranka_gripper_sim.so"
-         OLD_RPATH "/home/franko/Scrivania/catkin_ws/devel/lib:/opt/ros/noetic/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/noetic/lib/x86_64-linux-gnu:"
+         OLD_RPATH "/home/franko/Scrivania/thunder_optimal/devel/lib:/opt/ros/noetic/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/noetic/lib/x86_64-linux-gnu:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfranka_gripper_sim.so")
@@ -110,16 +110,16 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/franka_gazebo" TYPE DIRECTORY FILES "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/launch")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/franka_gazebo" TYPE DIRECTORY FILES "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/launch")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/franka_gazebo" TYPE DIRECTORY FILES "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gazebo/config")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/franka_gazebo" TYPE DIRECTORY FILES "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gazebo/config")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gazebo/test/cmake_install.cmake")
+  include("/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gazebo/test/cmake_install.cmake")
 
 endif()
 

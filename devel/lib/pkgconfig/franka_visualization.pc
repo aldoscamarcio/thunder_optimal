@@ -1,4 +1,4 @@
-prefix=/home/franko/Scrivania/thunder_optimal/panda_controllers/devel
+prefix=/home/franko/Scrivania/thunder_optimal/devel
 
 Name: franka_visualization
 Description: Description of franka_visualization

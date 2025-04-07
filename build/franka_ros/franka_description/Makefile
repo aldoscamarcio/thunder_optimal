@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,14 +137,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/catkin_ws/build/CMakeFiles /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_description/CMakeFiles/progress.marks
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/catkin_ws/build/CMakeFiles 0
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/thunder_optimal/build/CMakeFiles /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_description/CMakeFiles/progress.marks
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/franko/Scrivania/thunder_optimal/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/clean
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/preinstall
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/preinstall
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/rule
 .PHONY : franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/rule
 
 # Convenience name for target.
@@ -179,12 +179,12 @@ _run_tests_franka_description_nosetests_test.franka_robot_urdf.py: franka_ros/fr
 
 # fast build rule for target.
 _run_tests_franka_description_nosetests_test.franka_robot_urdf.py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/build.make franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/build.make franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/build
 .PHONY : _run_tests_franka_description_nosetests_test.franka_robot_urdf.py/fast
 
 # Convenience name for target.
 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description.dir/rule
 .PHONY : franka_ros/franka_description/CMakeFiles/_run_tests_franka_description.dir/rule
 
 # Convenience name for target.
@@ -194,12 +194,12 @@ _run_tests_franka_description: franka_ros/franka_description/CMakeFiles/_run_tes
 
 # fast build rule for target.
 _run_tests_franka_description/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/_run_tests_franka_description.dir/build.make franka_ros/franka_description/CMakeFiles/_run_tests_franka_description.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/_run_tests_franka_description.dir/build.make franka_ros/franka_description/CMakeFiles/_run_tests_franka_description.dir/build
 .PHONY : _run_tests_franka_description/fast
 
 # Convenience name for target.
 franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests.dir/rule
 .PHONY : franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests.dir/rule
 
 # Convenience name for target.
@@ -209,12 +209,12 @@ run_tests_franka_description_nosetests: franka_ros/franka_description/CMakeFiles
 
 # fast build rule for target.
 run_tests_franka_description_nosetests/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests.dir/build.make franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests.dir/build.make franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests.dir/build
 .PHONY : run_tests_franka_description_nosetests/fast
 
 # Convenience name for target.
 franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/rule
 .PHONY : franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ clean_test_results_franka_description: franka_ros/franka_description/CMakeFiles/
 
 # fast build rule for target.
 clean_test_results_franka_description/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/build.make franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/build.make franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/build
 .PHONY : clean_test_results_franka_description/fast
 
 # Convenience name for target.
 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests.dir/rule
 .PHONY : franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests.dir/rule
 
 # Convenience name for target.
@@ -239,12 +239,12 @@ _run_tests_franka_description_nosetests: franka_ros/franka_description/CMakeFile
 
 # fast build rule for target.
 _run_tests_franka_description_nosetests/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests.dir/build.make franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests.dir/build.make franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests.dir/build
 .PHONY : _run_tests_franka_description_nosetests/fast
 
 # Convenience name for target.
 franka_ros/franka_description/CMakeFiles/run_tests_franka_description.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/run_tests_franka_description.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/run_tests_franka_description.dir/rule
 .PHONY : franka_ros/franka_description/CMakeFiles/run_tests_franka_description.dir/rule
 
 # Convenience name for target.
@@ -254,12 +254,12 @@ run_tests_franka_description: franka_ros/franka_description/CMakeFiles/run_tests
 
 # fast build rule for target.
 run_tests_franka_description/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/run_tests_franka_description.dir/build.make franka_ros/franka_description/CMakeFiles/run_tests_franka_description.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/run_tests_franka_description.dir/build.make franka_ros/franka_description/CMakeFiles/run_tests_franka_description.dir/build
 .PHONY : run_tests_franka_description/fast
 
 # Convenience name for target.
 franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/rule
 .PHONY : franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/rule
 
 # Convenience name for target.
@@ -269,12 +269,12 @@ run_tests_franka_description_nosetests_test.franka_robot_urdf.py: franka_ros/fra
 
 # fast build rule for target.
 run_tests_franka_description_nosetests_test.franka_robot_urdf.py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/build.make franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/build.make franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.franka_robot_urdf.py.dir/build
 .PHONY : run_tests_franka_description_nosetests_test.franka_robot_urdf.py/fast
 
 # Convenience name for target.
 franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.hand_urdf.py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.hand_urdf.py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.hand_urdf.py.dir/rule
 .PHONY : franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.hand_urdf.py.dir/rule
 
 # Convenience name for target.
@@ -284,12 +284,12 @@ run_tests_franka_description_nosetests_test.hand_urdf.py: franka_ros/franka_desc
 
 # fast build rule for target.
 run_tests_franka_description_nosetests_test.hand_urdf.py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.hand_urdf.py.dir/build.make franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.hand_urdf.py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.hand_urdf.py.dir/build.make franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.hand_urdf.py.dir/build
 .PHONY : run_tests_franka_description_nosetests_test.hand_urdf.py/fast
 
 # Convenience name for target.
 franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/rule
 .PHONY : franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/rule
 
 # Convenience name for target.
@@ -299,12 +299,12 @@ run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py: franka_r
 
 # fast build rule for target.
 run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/build.make franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/build.make franka_ros/franka_description/CMakeFiles/run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/build
 .PHONY : run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py/fast
 
 # Convenience name for target.
 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.hand_urdf.py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.hand_urdf.py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.hand_urdf.py.dir/rule
 .PHONY : franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.hand_urdf.py.dir/rule
 
 # Convenience name for target.
@@ -314,12 +314,12 @@ _run_tests_franka_description_nosetests_test.hand_urdf.py: franka_ros/franka_des
 
 # fast build rule for target.
 _run_tests_franka_description_nosetests_test.hand_urdf.py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.hand_urdf.py.dir/build.make franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.hand_urdf.py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.hand_urdf.py.dir/build.make franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.hand_urdf.py.dir/build
 .PHONY : _run_tests_franka_description_nosetests_test.hand_urdf.py/fast
 
 # Convenience name for target.
 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/rule:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/rule
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f CMakeFiles/Makefile2 franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/rule
 .PHONY : franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/rule
 
 # Convenience name for target.
@@ -329,7 +329,7 @@ _run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py: franka_
 
 # fast build rule for target.
 _run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py/fast:
-	cd /home/franko/Scrivania/catkin_ws/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/build.make franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/build
+	cd /home/franko/Scrivania/thunder_optimal/build && $(MAKE) -f franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/build.make franka_ros/franka_description/CMakeFiles/_run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py.dir/build
 .PHONY : _run_tests_franka_description_nosetests_test.dual_panda_example_urdf.py/fast
 
 # Help Target
@@ -367,6 +367,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

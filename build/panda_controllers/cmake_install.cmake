@@ -1,8 +1,8 @@
-# Install script for directory: /home/franko/Scrivania/catkin_ws/src/panda_controllers
+# Install script for directory: /home/franko/Scrivania/thunder_optimal/src/panda_controllers
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/franko/Scrivania/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/franko/Scrivania/thunder_optimal/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,38 +38,38 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers/cmake" TYPE FILE FILES "/home/franko/Scrivania/catkin_ws/build/panda_controllers/catkin_generated/installspace/panda_controllers-msg-paths.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers/cmake" TYPE FILE FILES "/home/franko/Scrivania/thunder_optimal/build/panda_controllers/catkin_generated/installspace/panda_controllers-msg-paths.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/franko/Scrivania/catkin_ws/devel/share/roseus/ros/panda_controllers")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/franko/Scrivania/thunder_optimal/devel/share/roseus/ros/panda_controllers")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/franko/Scrivania/catkin_ws/devel/lib/python3/dist-packages/panda_controllers")
+  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/franko/Scrivania/thunder_optimal/devel/lib/python3/dist-packages/panda_controllers")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/franko/Scrivania/catkin_ws/devel/lib/python3/dist-packages/panda_controllers")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/franko/Scrivania/thunder_optimal/devel/lib/python3/dist-packages/panda_controllers")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/franko/Scrivania/catkin_ws/build/panda_controllers/catkin_generated/installspace/panda_controllers.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/franko/Scrivania/thunder_optimal/build/panda_controllers/catkin_generated/installspace/panda_controllers.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers/cmake" TYPE FILE FILES "/home/franko/Scrivania/catkin_ws/build/panda_controllers/catkin_generated/installspace/panda_controllers-msg-extras.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers/cmake" TYPE FILE FILES "/home/franko/Scrivania/thunder_optimal/build/panda_controllers/catkin_generated/installspace/panda_controllers-msg-extras.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers/cmake" TYPE FILE FILES
-    "/home/franko/Scrivania/catkin_ws/build/panda_controllers/catkin_generated/installspace/panda_controllersConfig.cmake"
-    "/home/franko/Scrivania/catkin_ws/build/panda_controllers/catkin_generated/installspace/panda_controllersConfig-version.cmake"
+    "/home/franko/Scrivania/thunder_optimal/build/panda_controllers/catkin_generated/installspace/panda_controllersConfig.cmake"
+    "/home/franko/Scrivania/thunder_optimal/build/panda_controllers/catkin_generated/installspace/panda_controllersConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers" TYPE FILE FILES "/home/franko/Scrivania/catkin_ws/src/panda_controllers/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers" TYPE FILE FILES "/home/franko/Scrivania/thunder_optimal/src/panda_controllers/package.xml")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -79,12 +79,12 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libpanda_controllers.so"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/franko/Scrivania/catkin_ws/devel/lib/libpanda_controllers.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libpanda_controllers.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libpanda_controllers.so")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libpanda_controllers.so"
-         OLD_RPATH "/opt/ros/noetic/lib/x86_64-linux-gnu:/home/franko/Scrivania/catkin_ws/devel/lib:/opt/ros/noetic/lib:"
+         OLD_RPATH "/opt/ros/noetic/lib/x86_64-linux-gnu:/home/franko/Scrivania/thunder_optimal/devel/lib:/opt/ros/noetic/lib:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libpanda_controllers.so")
@@ -96,14 +96,14 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers" TYPE DIRECTORY FILES "/home/franko/Scrivania/catkin_ws/src/panda_controllers/launch")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers" TYPE DIRECTORY FILES "/home/franko/Scrivania/thunder_optimal/src/panda_controllers/launch")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers" TYPE DIRECTORY FILES "/home/franko/Scrivania/catkin_ws/src/panda_controllers/config")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers" TYPE DIRECTORY FILES "/home/franko/Scrivania/thunder_optimal/src/panda_controllers/config")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers" TYPE FILE FILES "/home/franko/Scrivania/catkin_ws/src/panda_controllers/panda_controllers_plugin.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers" TYPE FILE FILES "/home/franko/Scrivania/thunder_optimal/src/panda_controllers/panda_controllers_plugin.xml")
 endif()
 

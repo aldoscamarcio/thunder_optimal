@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/franka_gen.cpp" "/home/franko/Scrivania/catkin_ws/build/panda_controllers/CMakeFiles/menu.dir/src/franka_gen.cpp.o"
-  "/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/menu.cpp" "/home/franko/Scrivania/catkin_ws/build/panda_controllers/CMakeFiles/menu.dir/src/menu.cpp.o"
-  "/home/franko/Scrivania/catkin_ws/src/panda_controllers/src/thunder_franka.cpp" "/home/franko/Scrivania/catkin_ws/build/panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.o"
+  "/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/franka_gen.cpp" "/home/franko/Scrivania/thunder_optimal/build/panda_controllers/CMakeFiles/menu.dir/src/franka_gen.cpp.o"
+  "/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/menu.cpp" "/home/franko/Scrivania/thunder_optimal/build/panda_controllers/CMakeFiles/menu.dir/src/menu.cpp.o"
+  "/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp" "/home/franko/Scrivania/thunder_optimal/build/panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -20,18 +20,18 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include"
+  "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include"
   "/usr/include/eigen3"
-  "/home/franko/Scrivania/catkin_ws/src/panda_controllers/include"
-  "/home/franko/Scrivania/catkin_ws/devel/include"
+  "/home/franko/Scrivania/thunder_optimal/src/panda_controllers/include"
+  "/home/franko/Scrivania/thunder_optimal/devel/include"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/DependInfo.cmake"
-  "/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_hw/CMakeFiles/franka_control_services.dir/DependInfo.cmake"
+  "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/DependInfo.cmake"
+  "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_hw/CMakeFiles/franka_control_services.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

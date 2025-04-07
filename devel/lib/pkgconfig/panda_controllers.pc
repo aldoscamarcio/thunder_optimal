@@ -1,4 +1,4 @@
-prefix=/home/franko/Scrivania/thunder_optimal/panda_controllers/devel
+prefix=/home/franko/Scrivania/thunder_optimal/devel
 
 Name: panda_controllers
 Description: Description of panda_controllers

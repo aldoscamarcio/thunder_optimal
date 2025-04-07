@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 # Utility rule file for clean_test_results_franka_description.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
 include franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/progress.make
 
 franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description:
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_description && /usr/bin/python3 /opt/ros/noetic/share/catkin/cmake/test/remove_test_results.py /home/franko/Scrivania/catkin_ws/build/test_results/franka_description
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_description && /usr/bin/python3 /opt/ros/noetic/share/catkin/cmake/test/remove_test_results.py /home/franko/Scrivania/thunder_optimal/build/test_results/franka_description
 
 clean_test_results_franka_description: franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description
 clean_test_results_franka_description: franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/build.make
@@ -67,10 +67,10 @@ franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.d
 .PHONY : franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/build
 
 franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/clean:
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_description && $(CMAKE_COMMAND) -P CMakeFiles/clean_test_results_franka_description.dir/cmake_clean.cmake
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_description && $(CMAKE_COMMAND) -P CMakeFiles/clean_test_results_franka_description.dir/cmake_clean.cmake
 .PHONY : franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/clean
 
 franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/catkin_ws/src /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_description /home/franko/Scrivania/catkin_ws/build /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_description /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/thunder_optimal/src /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_description /home/franko/Scrivania/thunder_optimal/build /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_description /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : franka_ros/franka_description/CMakeFiles/clean_test_results_franka_description.dir/depend
 

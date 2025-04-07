@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 # Include any dependencies generated for this target.
 include franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/depend.make
@@ -58,17 +58,17 @@ include franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/progress.make
 include franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/flags.make
 
 franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.o: franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/flags.make
-franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.o: /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gripper/src/franka_gripper.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/franko/Scrivania/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.o"
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.o -c /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gripper/src/franka_gripper.cpp
+franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.o: /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gripper/src/franka_gripper.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/franko/Scrivania/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.o"
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.o -c /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gripper/src/franka_gripper.cpp
 
 franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.i"
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gripper/src/franka_gripper.cpp > CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gripper/src/franka_gripper.cpp > CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.i
 
 franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.s"
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gripper/src/franka_gripper.cpp -o CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gripper/src/franka_gripper.cpp -o CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.s
 
 # Object files for target franka_gripper
 franka_gripper_OBJECTS = \
@@ -77,41 +77,41 @@ franka_gripper_OBJECTS = \
 # External object files for target franka_gripper
 franka_gripper_EXTERNAL_OBJECTS =
 
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.o
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build.make
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/libactionlib.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/libroscpp.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libpthread.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/librosconsole.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/librosconsole_log4cxx.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/librosconsole_backend_interface.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/libxmlrpcpp.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/libroscpp_serialization.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/librostime.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/libcpp_common.so
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
-/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so: franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/franko/Scrivania/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library /home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so"
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/franka_gripper.dir/link.txt --verbose=$(VERBOSE)
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.o
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build.make
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/libactionlib.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/libroscpp.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libpthread.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/librosconsole.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/librosconsole_log4cxx.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/librosconsole_backend_interface.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/libxmlrpcpp.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/libroscpp_serialization.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/librostime.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /opt/ros/noetic/lib/libcpp_common.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
+/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so: franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/franko/Scrivania/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library /home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so"
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/franka_gripper.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build: /home/franko/Scrivania/catkin_ws/devel/lib/libfranka_gripper.so
+franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build: /home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_gripper.so
 
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build
 
 franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/clean:
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper && $(CMAKE_COMMAND) -P CMakeFiles/franka_gripper.dir/cmake_clean.cmake
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper && $(CMAKE_COMMAND) -P CMakeFiles/franka_gripper.dir/cmake_clean.cmake
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/clean
 
 franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/catkin_ws/src /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gripper /home/franko/Scrivania/catkin_ws/build /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/thunder_optimal/src /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gripper /home/franko/Scrivania/thunder_optimal/build /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/depend
 

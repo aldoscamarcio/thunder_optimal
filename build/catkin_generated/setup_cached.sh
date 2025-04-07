@@ -7,10 +7,10 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/franko/Scrivania/thunder_optimal/panda_controllers/devel:$CMAKE_PREFIX_PATH"
-export LD_LIBRARY_PATH="/home/franko/Scrivania/thunder_optimal/panda_controllers/devel/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="/home/franko/Scrivania/thunder_optimal/panda_controllers/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PWD='/home/franko/Scrivania/thunder_optimal/panda_controllers/build'
-export PYTHONPATH="/home/franko/Scrivania/thunder_optimal/panda_controllers/devel/lib/python3/dist-packages:$PYTHONPATH"
-export ROSLISP_PACKAGE_DIRECTORIES="/home/franko/Scrivania/thunder_optimal/panda_controllers/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
-export ROS_PACKAGE_PATH="/home/franko/Scrivania/catkin_ws/src:/home/franko/Scrivania/thunder_optimal/panda_controllers/src:$ROS_PACKAGE_PATH"
+export CMAKE_PREFIX_PATH="/home/franko/Scrivania/thunder_optimal/devel:$CMAKE_PREFIX_PATH"
+export LD_LIBRARY_PATH="/home/franko/Scrivania/thunder_optimal/devel/lib:$LD_LIBRARY_PATH"
+export PKG_CONFIG_PATH="/home/franko/Scrivania/thunder_optimal/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PWD='/home/franko/Scrivania/thunder_optimal/build'
+export PYTHONPATH="/home/franko/Scrivania/thunder_optimal/devel/lib/python3/dist-packages:$PYTHONPATH"
+export ROSLISP_PACKAGE_DIRECTORIES="/home/franko/Scrivania/thunder_optimal/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROS_PACKAGE_PATH="/home/franko/Scrivania/catkin_ws/src:/home/franko/Scrivania/thunder_optimal/panda_controllers/src:/home/franko/Scrivania/thunder_optimal/src:$ROS_PACKAGE_PATH"

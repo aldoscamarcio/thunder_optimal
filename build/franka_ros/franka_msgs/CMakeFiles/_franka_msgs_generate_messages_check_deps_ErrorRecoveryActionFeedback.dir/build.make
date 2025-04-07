@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 # Utility rule file for _franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
 include franka_ros/franka_msgs/CMakeFiles/_franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback.dir/progress.make
 
 franka_ros/franka_msgs/CMakeFiles/_franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback:
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py franka_msgs /home/franko/Scrivania/catkin_ws/devel/share/franka_msgs/msg/ErrorRecoveryActionFeedback.msg actionlib_msgs/GoalStatus:franka_msgs/ErrorRecoveryFeedback:std_msgs/Header:actionlib_msgs/GoalID
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py franka_msgs /home/franko/Scrivania/thunder_optimal/devel/share/franka_msgs/msg/ErrorRecoveryActionFeedback.msg franka_msgs/ErrorRecoveryFeedback:actionlib_msgs/GoalStatus:std_msgs/Header:actionlib_msgs/GoalID
 
 _franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback: franka_ros/franka_msgs/CMakeFiles/_franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback
 _franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback: franka_ros/franka_msgs/CMakeFiles/_franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback.dir/build.make
@@ -67,10 +67,10 @@ franka_ros/franka_msgs/CMakeFiles/_franka_msgs_generate_messages_check_deps_Erro
 .PHONY : franka_ros/franka_msgs/CMakeFiles/_franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback.dir/build
 
 franka_ros/franka_msgs/CMakeFiles/_franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback.dir/clean:
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_msgs && $(CMAKE_COMMAND) -P CMakeFiles/_franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback.dir/cmake_clean.cmake
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_msgs && $(CMAKE_COMMAND) -P CMakeFiles/_franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback.dir/cmake_clean.cmake
 .PHONY : franka_ros/franka_msgs/CMakeFiles/_franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback.dir/clean
 
 franka_ros/franka_msgs/CMakeFiles/_franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback.dir/depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/catkin_ws/src /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_msgs /home/franko/Scrivania/catkin_ws/build /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_msgs /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_msgs/CMakeFiles/_franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/thunder_optimal/src /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_msgs /home/franko/Scrivania/thunder_optimal/build /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_msgs /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_msgs/CMakeFiles/_franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : franka_ros/franka_msgs/CMakeFiles/_franka_msgs_generate_messages_check_deps_ErrorRecoveryActionFeedback.dir/depend
 

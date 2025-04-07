@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_visualization/src/gripper_joint_state_publisher.cpp
+/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_visualization/src/gripper_joint_state_publisher.cpp
 franka/exception.h
 -
 franka/gripper.h

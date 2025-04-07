@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 # Utility rule file for trajectory_msgs_generate_messages_cpp.
 
@@ -63,10 +63,10 @@ franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/b
 .PHONY : franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build
 
 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/clean:
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper && $(CMAKE_COMMAND) -P CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/cmake_clean.cmake
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper && $(CMAKE_COMMAND) -P CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/cmake_clean.cmake
 .PHONY : franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/clean
 
 franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/catkin_ws/src /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gripper /home/franko/Scrivania/catkin_ws/build /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/thunder_optimal/src /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gripper /home/franko/Scrivania/thunder_optimal/build /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : franka_ros/franka_gripper/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/depend
 

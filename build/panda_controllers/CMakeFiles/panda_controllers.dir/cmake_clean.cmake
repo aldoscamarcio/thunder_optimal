@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/franko/Scrivania/catkin_ws/devel/lib/libpanda_controllers.pdb"
-  "/home/franko/Scrivania/catkin_ws/devel/lib/libpanda_controllers.so"
+  "/home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.pdb"
+  "/home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so"
   "CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.o"
   "CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.o"
   "CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.o"

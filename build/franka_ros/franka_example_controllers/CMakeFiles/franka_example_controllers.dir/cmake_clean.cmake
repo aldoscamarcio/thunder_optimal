@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_example_controllers.pdb"
-  "/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_example_controllers.so"
+  "/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_example_controllers.pdb"
+  "/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_example_controllers.so"
   "CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o"
   "CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o"
   "CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o"

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_control_services.pdb"
-  "/home/franko/Scrivania/catkin_ws/devel/lib/libfranka_control_services.so"
+  "/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_control_services.pdb"
+  "/home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_control_services.so"
   "CMakeFiles/franka_control_services.dir/src/services.cpp.o"
 )
 

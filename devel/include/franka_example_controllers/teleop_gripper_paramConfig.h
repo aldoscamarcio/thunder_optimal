@@ -282,9 +282,9 @@ double move_speed;
 
 
 
-//#line 10 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
+//#line 10 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
       double grasp_force;
-//#line 13 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
+//#line 13 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
       double move_speed;
 //#line 231 "/opt/ros/noetic/share/dynamic_reconfigure/cmake/../templates/ConfigType.h.template"
 
@@ -425,25 +425,25 @@ double move_speed;
     {
 teleop_gripper_paramConfig::GroupDescription<teleop_gripper_paramConfig::DEFAULT, teleop_gripper_paramConfig> Default("Default", "", 0, 0, true, &teleop_gripper_paramConfig::groups);
 teleop_gripper_paramConfig::GroupDescription<teleop_gripper_paramConfig::DEFAULT::GRIPPERPARAMETER, teleop_gripper_paramConfig::DEFAULT> GripperParameter("GripperParameter", "apply", 0, 1, true, &teleop_gripper_paramConfig::DEFAULT::gripperparameter);
-//#line 10 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
+//#line 10 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
       __min__.grasp_force = 1.0;
-//#line 10 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
+//#line 10 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
       __max__.grasp_force = 60.0;
-//#line 10 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
+//#line 10 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
       __default__.grasp_force = 40.0;
-//#line 10 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
+//#line 10 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
       GripperParameter.abstract_parameters.push_back(teleop_gripper_paramConfig::AbstractParamDescriptionConstPtr(new teleop_gripper_paramConfig::ParamDescription<double>("grasp_force", "double", 0, "Grasping force to be applied on an object. [N]", "", &teleop_gripper_paramConfig::grasp_force)));
-//#line 10 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
+//#line 10 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
       __param_descriptions__.push_back(teleop_gripper_paramConfig::AbstractParamDescriptionConstPtr(new teleop_gripper_paramConfig::ParamDescription<double>("grasp_force", "double", 0, "Grasping force to be applied on an object. [N]", "", &teleop_gripper_paramConfig::grasp_force)));
-//#line 13 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
+//#line 13 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
       __min__.move_speed = 0.01;
-//#line 13 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
+//#line 13 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
       __max__.move_speed = 0.4;
-//#line 13 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
+//#line 13 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
       __default__.move_speed = 0.3;
-//#line 13 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
+//#line 13 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
       GripperParameter.abstract_parameters.push_back(teleop_gripper_paramConfig::AbstractParamDescriptionConstPtr(new teleop_gripper_paramConfig::ParamDescription<double>("move_speed", "double", 0, "Speed of the follower gripper when opening [m/s]", "", &teleop_gripper_paramConfig::move_speed)));
-//#line 13 "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
+//#line 13 "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_example_controllers/cfg/teleop_gripper_param.cfg"
       __param_descriptions__.push_back(teleop_gripper_paramConfig::AbstractParamDescriptionConstPtr(new teleop_gripper_paramConfig::ParamDescription<double>("move_speed", "double", 0, "Speed of the follower gripper when opening [m/s]", "", &teleop_gripper_paramConfig::move_speed)));
 //#line 124 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       GripperParameter.convertParams();

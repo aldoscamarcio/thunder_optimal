@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gripper/src/franka_gripper_node.cpp" "/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o"
+  "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gripper/src/franka_gripper_node.cpp" "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,15 +17,15 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/franko/Scrivania/catkin_ws/devel/include"
-  "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gripper/include"
+  "/home/franko/Scrivania/thunder_optimal/devel/include"
+  "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gripper/include"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/DependInfo.cmake"
+  "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 # Include any dependencies generated for this target.
 include panda_controllers/CMakeFiles/menu.dir/depend.make
@@ -58,43 +58,43 @@ include panda_controllers/CMakeFiles/menu.dir/progress.make
 include panda_controllers/CMakeFiles/menu.dir/flags.make
 
 panda_controllers/CMakeFiles/menu.dir/src/menu.cpp.o: panda_controllers/CMakeFiles/menu.dir/flags.make
-panda_controllers/CMakeFiles/menu.dir/src/menu.cpp.o: /home/franko/Scrivania/catkin_ws/src/panda_controllers/src/menu.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/franko/Scrivania/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object panda_controllers/CMakeFiles/menu.dir/src/menu.cpp.o"
-	cd /home/franko/Scrivania/catkin_ws/build/panda_controllers && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/menu.dir/src/menu.cpp.o -c /home/franko/Scrivania/catkin_ws/src/panda_controllers/src/menu.cpp
+panda_controllers/CMakeFiles/menu.dir/src/menu.cpp.o: /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/menu.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/franko/Scrivania/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object panda_controllers/CMakeFiles/menu.dir/src/menu.cpp.o"
+	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/menu.dir/src/menu.cpp.o -c /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/menu.cpp
 
 panda_controllers/CMakeFiles/menu.dir/src/menu.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/menu.dir/src/menu.cpp.i"
-	cd /home/franko/Scrivania/catkin_ws/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/franko/Scrivania/catkin_ws/src/panda_controllers/src/menu.cpp > CMakeFiles/menu.dir/src/menu.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/menu.cpp > CMakeFiles/menu.dir/src/menu.cpp.i
 
 panda_controllers/CMakeFiles/menu.dir/src/menu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/menu.dir/src/menu.cpp.s"
-	cd /home/franko/Scrivania/catkin_ws/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/franko/Scrivania/catkin_ws/src/panda_controllers/src/menu.cpp -o CMakeFiles/menu.dir/src/menu.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/menu.cpp -o CMakeFiles/menu.dir/src/menu.cpp.s
 
 panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.o: panda_controllers/CMakeFiles/menu.dir/flags.make
-panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.o: /home/franko/Scrivania/catkin_ws/src/panda_controllers/src/thunder_franka.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/franko/Scrivania/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.o"
-	cd /home/franko/Scrivania/catkin_ws/build/panda_controllers && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/menu.dir/src/thunder_franka.cpp.o -c /home/franko/Scrivania/catkin_ws/src/panda_controllers/src/thunder_franka.cpp
+panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.o: /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/franko/Scrivania/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.o"
+	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/menu.dir/src/thunder_franka.cpp.o -c /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp
 
 panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/menu.dir/src/thunder_franka.cpp.i"
-	cd /home/franko/Scrivania/catkin_ws/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/franko/Scrivania/catkin_ws/src/panda_controllers/src/thunder_franka.cpp > CMakeFiles/menu.dir/src/thunder_franka.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp > CMakeFiles/menu.dir/src/thunder_franka.cpp.i
 
 panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/menu.dir/src/thunder_franka.cpp.s"
-	cd /home/franko/Scrivania/catkin_ws/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/franko/Scrivania/catkin_ws/src/panda_controllers/src/thunder_franka.cpp -o CMakeFiles/menu.dir/src/thunder_franka.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp -o CMakeFiles/menu.dir/src/thunder_franka.cpp.s
 
 panda_controllers/CMakeFiles/menu.dir/src/franka_gen.cpp.o: panda_controllers/CMakeFiles/menu.dir/flags.make
-panda_controllers/CMakeFiles/menu.dir/src/franka_gen.cpp.o: /home/franko/Scrivania/catkin_ws/src/panda_controllers/src/franka_gen.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/franko/Scrivania/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object panda_controllers/CMakeFiles/menu.dir/src/franka_gen.cpp.o"
-	cd /home/franko/Scrivania/catkin_ws/build/panda_controllers && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/menu.dir/src/franka_gen.cpp.o -c /home/franko/Scrivania/catkin_ws/src/panda_controllers/src/franka_gen.cpp
+panda_controllers/CMakeFiles/menu.dir/src/franka_gen.cpp.o: /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/franka_gen.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/franko/Scrivania/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object panda_controllers/CMakeFiles/menu.dir/src/franka_gen.cpp.o"
+	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/menu.dir/src/franka_gen.cpp.o -c /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/franka_gen.cpp
 
 panda_controllers/CMakeFiles/menu.dir/src/franka_gen.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/menu.dir/src/franka_gen.cpp.i"
-	cd /home/franko/Scrivania/catkin_ws/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/franko/Scrivania/catkin_ws/src/panda_controllers/src/franka_gen.cpp > CMakeFiles/menu.dir/src/franka_gen.cpp.i
+	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/franka_gen.cpp > CMakeFiles/menu.dir/src/franka_gen.cpp.i
 
 panda_controllers/CMakeFiles/menu.dir/src/franka_gen.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/menu.dir/src/franka_gen.cpp.s"
-	cd /home/franko/Scrivania/catkin_ws/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/franko/Scrivania/catkin_ws/src/panda_controllers/src/franka_gen.cpp -o CMakeFiles/menu.dir/src/franka_gen.cpp.s
+	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/franka_gen.cpp -o CMakeFiles/menu.dir/src/franka_gen.cpp.s
 
 # Object files for target menu
 menu_OBJECTS = \
@@ -105,65 +105,65 @@ menu_OBJECTS = \
 # External object files for target menu
 menu_EXTERNAL_OBJECTS =
 
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: panda_controllers/CMakeFiles/menu.dir/src/menu.cpp.o
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.o
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: panda_controllers/CMakeFiles/menu.dir/src/franka_gen.cpp.o
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: panda_controllers/CMakeFiles/menu.dir/build.make
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libdynamic_reconfigure_config_init_mutex.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /home/franko/Scrivania/catkin_ws/devel/lib/libfranka_hw.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /home/franko/Scrivania/catkin_ws/devel/lib/libfranka_control_services.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libactionlib.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libcombined_robot_hw.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/liburdf.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/liburdfdom_sensor.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/liburdfdom_model_state.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/liburdfdom_model.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/liburdfdom_world.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libtinyxml.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/librosconsole_bridge.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libclass_loader.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libPocoFoundation.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libdl.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libroslib.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/librospack.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libpython3.8.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/librealtime_tools.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libroscpp.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libpthread.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/librosconsole.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/librosconsole_log4cxx.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/librosconsole_backend_interface.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libxmlrpcpp.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libroscpp_serialization.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/librostime.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libcpp_common.so
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libyaml-cpp.so.0.6.2
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
-/home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu: panda_controllers/CMakeFiles/menu.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/franko/Scrivania/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable /home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu"
-	cd /home/franko/Scrivania/catkin_ws/build/panda_controllers && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/menu.dir/link.txt --verbose=$(VERBOSE)
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: panda_controllers/CMakeFiles/menu.dir/src/menu.cpp.o
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.o
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: panda_controllers/CMakeFiles/menu.dir/src/franka_gen.cpp.o
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: panda_controllers/CMakeFiles/menu.dir/build.make
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libdynamic_reconfigure_config_init_mutex.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_hw.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_control_services.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libactionlib.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libcombined_robot_hw.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/liburdf.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/liburdfdom_sensor.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/liburdfdom_model_state.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/liburdfdom_model.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/liburdfdom_world.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libtinyxml.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/librosconsole_bridge.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libclass_loader.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libPocoFoundation.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libdl.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libroslib.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/librospack.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libpython3.8.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/librealtime_tools.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libroscpp.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libpthread.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/librosconsole.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/librosconsole_log4cxx.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/librosconsole_backend_interface.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libxmlrpcpp.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libroscpp_serialization.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/librostime.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/libcpp_common.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /usr/lib/x86_64-linux-gnu/libyaml-cpp.so.0.6.2
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
+/home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu: panda_controllers/CMakeFiles/menu.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/franko/Scrivania/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable /home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu"
+	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/menu.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-panda_controllers/CMakeFiles/menu.dir/build: /home/franko/Scrivania/catkin_ws/devel/lib/panda_controllers/menu
+panda_controllers/CMakeFiles/menu.dir/build: /home/franko/Scrivania/thunder_optimal/devel/lib/panda_controllers/menu
 
 .PHONY : panda_controllers/CMakeFiles/menu.dir/build
 
 panda_controllers/CMakeFiles/menu.dir/clean:
-	cd /home/franko/Scrivania/catkin_ws/build/panda_controllers && $(CMAKE_COMMAND) -P CMakeFiles/menu.dir/cmake_clean.cmake
+	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && $(CMAKE_COMMAND) -P CMakeFiles/menu.dir/cmake_clean.cmake
 .PHONY : panda_controllers/CMakeFiles/menu.dir/clean
 
 panda_controllers/CMakeFiles/menu.dir/depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/catkin_ws/src /home/franko/Scrivania/catkin_ws/src/panda_controllers /home/franko/Scrivania/catkin_ws/build /home/franko/Scrivania/catkin_ws/build/panda_controllers /home/franko/Scrivania/catkin_ws/build/panda_controllers/CMakeFiles/menu.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/thunder_optimal/src /home/franko/Scrivania/thunder_optimal/src/panda_controllers /home/franko/Scrivania/thunder_optimal/build /home/franko/Scrivania/thunder_optimal/build/panda_controllers /home/franko/Scrivania/thunder_optimal/build/panda_controllers/CMakeFiles/menu.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : panda_controllers/CMakeFiles/menu.dir/depend
 

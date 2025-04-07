@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/franko/Scrivania/catkin_ws/devel/lib/franka_visualization/robot_joint_state_publisher"
-  "/home/franko/Scrivania/catkin_ws/devel/lib/franka_visualization/robot_joint_state_publisher.pdb"
+  "/home/franko/Scrivania/thunder_optimal/devel/lib/franka_visualization/robot_joint_state_publisher"
+  "/home/franko/Scrivania/thunder_optimal/devel/lib/franka_visualization/robot_joint_state_publisher.pdb"
   "CMakeFiles/robot_joint_state_publisher.dir/src/robot_joint_state_publisher.cpp.o"
 )
 

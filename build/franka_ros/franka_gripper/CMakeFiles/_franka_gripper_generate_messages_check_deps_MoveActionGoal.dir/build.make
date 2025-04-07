@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/franko/Scrivania/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/franko/Scrivania/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
+CMAKE_BINARY_DIR = /home/franko/Scrivania/thunder_optimal/build
 
 # Utility rule file for _franka_gripper_generate_messages_check_deps_MoveActionGoal.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/franko/Scrivania/catkin_ws/build
 include franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/progress.make
 
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal:
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py franka_gripper /home/franko/Scrivania/catkin_ws/devel/share/franka_gripper/msg/MoveActionGoal.msg franka_gripper/MoveGoal:std_msgs/Header:actionlib_msgs/GoalID
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py franka_gripper /home/franko/Scrivania/thunder_optimal/devel/share/franka_gripper/msg/MoveActionGoal.msg franka_gripper/MoveGoal:actionlib_msgs/GoalID:std_msgs/Header
 
 _franka_gripper_generate_messages_check_deps_MoveActionGoal: franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal
 _franka_gripper_generate_messages_check_deps_MoveActionGoal: franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/build.make
@@ -67,10 +67,10 @@ franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_dep
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/build
 
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/clean:
-	cd /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper && $(CMAKE_COMMAND) -P CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/cmake_clean.cmake
+	cd /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper && $(CMAKE_COMMAND) -P CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/cmake_clean.cmake
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/clean
 
 franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/depend:
-	cd /home/franko/Scrivania/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/catkin_ws/src /home/franko/Scrivania/catkin_ws/src/franka_ros/franka_gripper /home/franko/Scrivania/catkin_ws/build /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper /home/franko/Scrivania/catkin_ws/build/franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/franko/Scrivania/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/franko/Scrivania/thunder_optimal/src /home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_gripper /home/franko/Scrivania/thunder_optimal/build /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper /home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : franka_ros/franka_gripper/CMakeFiles/_franka_gripper_generate_messages_check_deps_MoveActionGoal.dir/depend
 
