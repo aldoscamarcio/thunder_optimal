@@ -24,7 +24,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 find_package(Eigen3 REQUIRED)
 find_package(Franka 0.9.2 REQUIRED)
-# find_package(NLopt REQUIRED CONFIG)
+find_package(NLopt REQUIRED)
 find_package(yaml-cpp REQUIRED)
 
 # Stampa il percorso alle directory di inclusione della libreria Nlopt
@@ -61,7 +61,7 @@ include_directories(
 	include #
 	${catkin_INCLUDE_DIRS} 
 	${EIGEN3_INCLUDE_DIRS}
-	# ${NLOPT_INCLUDE_DIRS}
+	${NLOPT_INCLUDE_DIRS}
 	${YAML_CPP_INCLUDE_DIRS}  # Include yaml-cpp directories
 	# ${Boost_INCLUDE_DIRS}
 	# ${CasADi_INCLUDE_DIRS}
@@ -90,12 +90,15 @@ add_library(${PROJECT_NAME}
 	src/computed_torque.cpp 	
 	src/franka_gen.cpp
 	src/thunder_franka.cpp
+	# src/optimal_control.cpp
+	src/thunder_optimization.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
 	# ${Franka_LIBRARIES} #
 	${catkin_LIBRARIES}
 	yaml-cpp
+	nlopt
 	#${Boost_LIBRARIES}
 	#${CASADI_LIB}
 )
@@ -108,14 +111,14 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 
 add_executable(menu
  	src/menu.cpp
-	src/thunder_franka.cpp
-	src/franka_gen.cpp
+	# src/thunder_franka.cpp
+	# src/franka_gen.cpp
 )
 
 target_link_libraries(menu
 	${PROJECT_NAME}
 	${catkin_LIBRARIES}
-	# ${NLOPT_LIBRARIES}
+	${NLOPT_LIBRARIES}
 	yaml-cpp
 )
 

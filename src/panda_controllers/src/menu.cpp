@@ -6,13 +6,13 @@
 #include <signal.h>
 
 #include <geometry_msgs/PoseStamped.h>
-
 #include "ros/ros.h"
 #include "utils/thunder_franka.h"
+#include "utils/thunder_optimization.h"
 
 #include <sstream>
 // #include <eigen_conversions/eigen_msg.h>
-
+#include "nlopt.hpp"
 // ROS Service and Message Includes
 #include "std_msgs/Float64.h"
 #include "std_msgs/Bool.h"
@@ -20,7 +20,7 @@
 // #include "geometry_msgs/Pose.h"
 #include "sensor_msgs/JointState.h"
 
-const std::string conf_file = "../include/utils/franka_conf.yaml";
+const std::string conf_file = "/home/frankino/Tesi/catkin_ws/src/panda_controllers/config/franka_conf.yaml";
 
 using namespace std;
 using std::cout;
@@ -96,9 +96,10 @@ int main(int argc, char **argv)
 	ros::NodeHandle node_handle;
 	thunder_franka robot;
 	robot.load_conf(conf_file);
-	
 
+	int NJ = robot.get_numJoints();
 	Eigen::VectorXd q(NJ), dq(NJ), dqr(NJ), ddqr(NJ);
+	// cout << "grad " << robot.get_gradddq() << endl;
  
     /* Test */
     q = q.setOnes();
@@ -140,9 +141,6 @@ int main(int argc, char **argv)
 		if (yaml==1){
 			choice = 5;
 		}else{
-			cout << "numJoint " << robot.get_numJoints() << endl;
-			cout << "myM" << robot.get_M() << endl;
-			cout << "myM" << robot.get_graddq() << endl;
 			cout<<"choice:   (1: joints min-jerk,  2: go to init,  3: go to random  4: yaml) "<<endl;
 			cin>>choice;
 		}
@@ -192,6 +190,7 @@ int main(int argc, char **argv)
 		{
 			if (choice == 1){
 				interpolator_pos(q0, qf, tf, t);
+				calculateCoefficients(q0,qf,q0,qf,q0,qf,t,tf);
 			} else if (choice == 4){
 				break;
 			} else {

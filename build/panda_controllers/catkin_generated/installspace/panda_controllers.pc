@@ -1,8 +1,0 @@
-prefix=/home/franko/Scrivania/thunder_optimal/install
-
-Name: panda_controllers
-Description: Description of panda_controllers
-Version: 1.0.0
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib -lpanda_controllers
-Requires: controller_interface dynamic_reconfigure franka_hw geometry_msgs franka_msgs hardware_interface message_runtime pluginlib realtime_tools roscpp
