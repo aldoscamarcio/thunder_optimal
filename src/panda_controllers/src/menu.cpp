@@ -190,7 +190,7 @@ int main(int argc, char **argv)
 		{
 			if (choice == 1){
 				interpolator_pos(q0, qf, tf, t);
-				calculateCoefficients(q0,qf,q0,qf,q0,qf,t,tf);
+				// calculateCoefficients(q0,qf,q0,qf,q0,qf,t,tf);
 			} else if (choice == 4){
 				break;
 			} else {
