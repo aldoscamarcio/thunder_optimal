@@ -20,7 +20,7 @@
 // #include "geometry_msgs/Pose.h"
 #include "sensor_msgs/JointState.h"
 
-const std::string conf_file = "/home/frankino/Tesi/catkin_ws/src/panda_controllers/config/franka_conf.yaml";
+const std::string conf_file = "../config/franka_conf.yaml";
 
 using namespace std;
 using std::cout;
