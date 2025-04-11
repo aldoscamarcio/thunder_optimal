@@ -13,7 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
 	geometry_msgs
 	franka_msgs
 	hardware_interface
-	message_generation
+	# message_generation #
 	pluginlib
 	realtime_tools
 	roscpp
@@ -51,24 +51,26 @@ find_package(yaml-cpp REQUIRED)
 # 	impedanceGain.msg
 # )
 ## to create msg, specify dependecies
-generate_messages(
-  DEPENDENCIES
-  std_msgs
-  geometry_msgs
-)
+# generate_messages(
+#   DEPENDENCIES
+#   std_msgs
+#   geometry_msgs
+# )
 
 include_directories(
+	include #
 	${catkin_INCLUDE_DIRS} 
 	${EIGEN3_INCLUDE_DIRS}
 	# ${NLOPT_INCLUDE_DIRS}
 	${YAML_CPP_INCLUDE_DIRS}  # Include yaml-cpp directories
 	# ${Boost_INCLUDE_DIRS}
 	# ${CasADi_INCLUDE_DIRS}
-	${CMAKE_CURRENT_SOURCE_DIR}/include
+	# ${CMAKE_CURRENT_SOURCE_DIR}/include #
 )
 
 
 catkin_package(
+	INCLUDE_DIRS include
 	LIBRARIES ${PROJECT_NAME}
 	CATKIN_DEPENDS
 	controller_interface
@@ -81,7 +83,7 @@ catkin_package(
 	pluginlib
 	realtime_tools
 	roscpp
-	DEPENDS Franka
+	# DEPENDS Franka #
 )
 
 add_library(${PROJECT_NAME}   
@@ -90,10 +92,18 @@ add_library(${PROJECT_NAME}
 	src/thunder_franka.cpp
 )
 
-add_dependencies(${PROJECT_NAME}
-	${${PROJECT_NAME}_EXPORTED_TARGETS}
-	panda_controllers ${catkin_EXPORTED_TARGETS}
+target_link_libraries(${PROJECT_NAME} PUBLIC
+	# ${Franka_LIBRARIES} #
+	${catkin_LIBRARIES}
+	yaml-cpp
+	#${Boost_LIBRARIES}
+	#${CASADI_LIB}
 )
+
+# add_dependencies(${PROJECT_NAME}
+# 	${${PROJECT_NAME}_EXPORTED_TARGETS}
+# 	panda_controllers ${catkin_EXPORTED_TARGETS}
+# )
 
 
 add_executable(menu
@@ -102,48 +112,40 @@ add_executable(menu
 	src/franka_gen.cpp
 )
 
-target_link_libraries(menu 
+target_link_libraries(menu
+	${PROJECT_NAME}
 	${catkin_LIBRARIES}
 	# ${NLOPT_LIBRARIES}
 	yaml-cpp
 )
 
-add_dependencies(menu
-	${${PROJECT_NAME}_EXPORTED_TARGETS} 
-	${catkin_EXPORTED_TARGETS}
-)
+# add_dependencies(menu
+# 	${${PROJECT_NAME}_EXPORTED_TARGETS} 
+# 	${catkin_EXPORTED_TARGETS}
+# )
 
-
-target_link_libraries(${PROJECT_NAME} PUBLIC
-	${Franka_LIBRARIES}
-	${catkin_LIBRARIES}
-	yaml-cpp
-	#${Boost_LIBRARIES}
-	#${CASADI_LIB}
-)
-
-target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
-	${Franka_INCLUDE_DIRS}
-	${EIGEN3_INCLUDE_DIRS}
-	${catkin_INCLUDE_DIRS}
-	# ${nlopt_INCLUDE_DIRS}
-)
-target_include_directories(${PROJECT_NAME} PUBLIC
-	include
-)
+# target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
+# 	${Franka_INCLUDE_DIRS}
+# 	${EIGEN3_INCLUDE_DIRS}
+# 	${catkin_INCLUDE_DIRS}
+# 	# ${nlopt_INCLUDE_DIRS}
+# )
+# target_include_directories(${PROJECT_NAME} PUBLIC
+# 	include
+# )
 
 ## Installation
-install(TARGETS ${PROJECT_NAME}
-	ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-	LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-	RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-install(DIRECTORY launch
-	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-install(DIRECTORY config
-	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-install(FILES ${PROJECT_NAME}_plugin.xml
-	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
+# install(TARGETS ${PROJECT_NAME}
+# 	ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+# 	LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+# 	RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# )
+# install(DIRECTORY launch
+# 	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+# )
+# install(DIRECTORY config
+# 	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+# )
+# install(FILES ${PROJECT_NAME}_plugin.xml
+# 	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+# )

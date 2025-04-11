@@ -109,10 +109,9 @@ panda_controllers_EXTERNAL_OBJECTS =
 /home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.o
 /home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.o
 /home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/build.make
-/home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
 /home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libdynamic_reconfigure_config_init_mutex.so
-/home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: /home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_hw.so
-/home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: /home/franko/Scrivania/thunder_optimal/devel/lib/libfranka_control_services.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libfranka_hw.so
+/home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libfranka_control_services.so
 /home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
 /home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libactionlib.so
 /home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libcombined_robot_hw.so
@@ -150,7 +149,6 @@ panda_controllers_EXTERNAL_OBJECTS =
 /home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
 /home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
 /home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libyaml-cpp.so.0.6.2
-/home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
 /home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/franko/Scrivania/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX shared library /home/franko/Scrivania/thunder_optimal/devel/lib/libpanda_controllers.so"
 	cd /home/franko/Scrivania/thunder_optimal/build/panda_controllers && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/panda_controllers.dir/link.txt --verbose=$(VERBOSE)

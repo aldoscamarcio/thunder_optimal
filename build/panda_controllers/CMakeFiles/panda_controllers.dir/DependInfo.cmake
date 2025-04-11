@@ -12,7 +12,6 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
-  "ENABLE_BASE_ACCELERATION"
   "ROSCONSOLE_BACKEND_LOG4CXX"
   "ROS_BUILD_SHARED_LIBS=1"
   "ROS_PACKAGE_NAME=\"panda_controllers\""
@@ -22,8 +21,8 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/home/franko/Scrivania/thunder_optimal/src/panda_controllers/include"
-  "/home/franko/Scrivania/thunder_optimal/devel/include"
-  "/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include"
+  "/home/franko/Scrivania/catkin_ws/devel/include"
+  "/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/usr/include/eigen3"
@@ -31,8 +30,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_hw/CMakeFiles/franka_hw.dir/DependInfo.cmake"
-  "/home/franko/Scrivania/thunder_optimal/build/franka_ros/franka_hw/CMakeFiles/franka_control_services.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

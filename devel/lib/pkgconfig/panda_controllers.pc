@@ -3,6 +3,6 @@ prefix=/home/franko/Scrivania/thunder_optimal/devel
 Name: panda_controllers
 Description: Description of panda_controllers
 Version: 1.0.0
-Cflags: -I/opt/ros/noetic/include
-Libs: -L${prefix}/lib -lpanda_controllers /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
+Cflags: -I/home/franko/Scrivania/thunder_optimal/src/panda_controllers/include
+Libs: -L${prefix}/lib -lpanda_controllers
 Requires: controller_interface dynamic_reconfigure franka_hw geometry_msgs franka_msgs hardware_interface message_runtime pluginlib realtime_tools roscpp

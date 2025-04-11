@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(panda_controllers_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/opt/ros/noetic/include " STREQUAL " ")
+if(NOT "/home/franko/Scrivania/thunder_optimal/src/panda_controllers/include " STREQUAL " ")
   set(panda_controllers_INCLUDE_DIRS "")
-  set(_include_dirs "/opt/ros/noetic/include")
+  set(_include_dirs "/home/franko/Scrivania/thunder_optimal/src/panda_controllers/include")
   if(NOT "https://github.com/CentroEPiaggio/panda_controllers/issues " STREQUAL " ")
     set(_report "Check the issue tracker 'https://github.com/CentroEPiaggio/panda_controllers/issues' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -116,7 +116,7 @@ if(NOT "/opt/ros/noetic/include " STREQUAL " ")
   endforeach()
 endif()
 
-set(libraries "panda_controllers;/opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2")
+set(libraries "panda_controllers")
 foreach(library ${libraries})
   # keep build configuration keywords, target names and absolute libraries as-is
   if("${library}" MATCHES "^(debug|optimized|general)$")
@@ -177,7 +177,7 @@ foreach(library ${libraries})
   endif()
 endforeach()
 
-set(panda_controllers_EXPORTED_TARGETS "panda_controllers_generate_messages_cpp;panda_controllers_generate_messages_eus;panda_controllers_generate_messages_lisp;panda_controllers_generate_messages_nodejs;panda_controllers_generate_messages_py")
+set(panda_controllers_EXPORTED_TARGETS "")
 # create dummy targets for exported code generation targets to make life of users easier
 foreach(t ${panda_controllers_EXPORTED_TARGETS})
   if(NOT TARGET ${t})
@@ -214,7 +214,7 @@ foreach(depend ${depends})
   _list_append_deduplicate(panda_controllers_EXPORTED_TARGETS ${${panda_controllers_dep}_EXPORTED_TARGETS})
 endforeach()
 
-set(pkg_cfg_extras "panda_controllers-msg-extras.cmake")
+set(pkg_cfg_extras "")
 foreach(extra ${pkg_cfg_extras})
   if(NOT IS_ABSOLUTE ${extra})
     set(extra ${panda_controllers_DIR}/${extra})

@@ -1,5 +1,5 @@
-#include "thunder_franka.h"
-#include "franka_gen.h"
+#include "utils/thunder_franka.h"
+#include "utils/franka_gen.h"
 
 
 /*OPTIONAL PYBIND11 INCLUDE POINT*/

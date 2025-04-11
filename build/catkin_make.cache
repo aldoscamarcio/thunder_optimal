@@ -1,2 +1,2 @@
-franka_ros/franka_control:franka_ros/franka_description:franka_ros/franka_example_controllers:franka_ros/franka_gazebo:franka_ros/franka_gripper:franka_ros/franka_hw:franka_ros/franka_msgs:franka_ros/franka_ros:franka_ros/franka_visualization:panda_controllers
+panda_controllers
 -DCATKIN_DEVEL_PREFIX=/home/franko/Scrivania/thunder_optimal/devel -DCMAKE_INSTALL_PREFIX=/home/franko/Scrivania/thunder_optimal/install -G Unix Makefiles

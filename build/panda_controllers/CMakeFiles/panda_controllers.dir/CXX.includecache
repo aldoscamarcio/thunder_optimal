@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/franka_model_interface.h
+/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/franka_model_interface.h
 array
 -
 string
@@ -22,7 +22,7 @@ franka_hw/model_base.h
 hardware_interface/internal/hardware_resource_manager.h
 -
 
-/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
+/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
 string
 -
 franka/robot_state.h
@@ -30,7 +30,7 @@ franka/robot_state.h
 hardware_interface/internal/hardware_resource_manager.h
 -
 
-/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/model.h
+/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/model.h
 array
 -
 franka/model.h
@@ -38,7 +38,7 @@ franka/model.h
 franka_hw/model_base.h
 -
 
-/home/franko/Scrivania/thunder_optimal/src/franka_ros/franka_hw/include/franka_hw/model_base.h
+/home/franko/Scrivania/catkin_ws/src/franka_ros/franka_hw/include/franka_hw/model_base.h
 franka/model.h
 -
 franka/robot_state.h
@@ -76,25 +76,9 @@ franka/robot_state.h
 sensor_msgs/JointState.h
 -
 
-/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/computed_torque.cpp
-pluginlib/class_list_macros.h
--
-panda_controllers/computed_torque.h
--
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/include/utils/franka_gen.h
 
-/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/franka_gen.cpp
-math.h
--
-
-/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/franka_gen.h
-
-/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp
-thunder_franka.h
-/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.h
-franka_gen.h
-/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/franka_gen.h
-
-/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/include/utils/thunder_franka.h
 iostream
 -
 string
@@ -107,6 +91,22 @@ yaml-cpp/yaml.h
 -
 fstream
 -
+
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/computed_torque.cpp
+pluginlib/class_list_macros.h
+-
+panda_controllers/computed_torque.h
+-
+
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/franka_gen.cpp
+math.h
+-
+
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp
+utils/thunder_franka.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/utils/thunder_franka.h
+utils/franka_gen.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/utils/franka_gen.h
 
 /opt/ros/noetic/include/class_loader/class_loader.hpp
 boost/bind.hpp

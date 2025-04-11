@@ -20,7 +20,7 @@
 // #include "geometry_msgs/Pose.h"
 #include "sensor_msgs/JointState.h"
 
-const std::string conf_file = "/home/franko/Scrivania/catkin_ws/src/panda_controllers/include/utils/franka_conf.yaml";
+const std::string conf_file = "../include/utils/franka_conf.yaml";
 
 using namespace std;
 using std::cout;
@@ -96,6 +96,7 @@ int main(int argc, char **argv)
 	ros::NodeHandle node_handle;
 	thunder_franka robot;
 	robot.load_conf(conf_file);
+	
 
 
 	cout << "numJoint " << robot.get_numJoints() << endl;
@@ -145,6 +146,7 @@ int main(int argc, char **argv)
 		}else{
 			cout << "numJoint " << robot.get_numJoints() << endl;
 			cout << "myM" << robot.get_M() << endl;
+			cout << "myM" << robot.get_graddq() << endl;
 			cout<<"choice:   (1: joints min-jerk,  2: go to init,  3: go to random  4: yaml) "<<endl;
 			cin>>choice;
 		}

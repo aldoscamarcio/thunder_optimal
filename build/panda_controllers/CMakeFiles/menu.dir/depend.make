@@ -75,7 +75,7 @@ panda_controllers/CMakeFiles/menu.dir/src/menu.cpp.o: /opt/ros/noetic/include/st
 panda_controllers/CMakeFiles/menu.dir/src/menu.cpp.o: /opt/ros/noetic/include/xmlrpcpp/XmlRpcDecl.h
 panda_controllers/CMakeFiles/menu.dir/src/menu.cpp.o: /opt/ros/noetic/include/xmlrpcpp/XmlRpcValue.h
 
-panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.o: /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/franka_gen.h
+panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.o: /home/franko/Scrivania/thunder_optimal/src/panda_controllers/include/utils/franka_gen.h
+panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.o: /home/franko/Scrivania/thunder_optimal/src/panda_controllers/include/utils/thunder_franka.h
 panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.o: /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp
-panda_controllers/CMakeFiles/menu.dir/src/thunder_franka.cpp.o: /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.h
 
