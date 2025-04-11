@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/include/utils/franka_gen.h
+
 /home/franko/Scrivania/thunder_optimal/src/panda_controllers/include/utils/thunder_franka.h
 iostream
 -
@@ -18,6 +20,10 @@ eigen3/Eigen/Dense
 yaml-cpp/yaml.h
 -
 fstream
+-
+
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/franka_gen.cpp
+math.h
 -
 
 /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/menu.cpp
@@ -47,6 +53,12 @@ std_srvs/SetBool.h
 /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/std_srvs/SetBool.h
 sensor_msgs/JointState.h
 /home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/sensor_msgs/JointState.h
+
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp
+utils/thunder_franka.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/utils/thunder_franka.h
+utils/franka_gen.h
+/home/franko/Scrivania/thunder_optimal/src/panda_controllers/src/utils/franka_gen.h
 
 /opt/ros/noetic/include/geometry_msgs/Point.h
 string

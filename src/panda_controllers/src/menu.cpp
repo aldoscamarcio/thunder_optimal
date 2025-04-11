@@ -98,11 +98,7 @@ int main(int argc, char **argv)
 	robot.load_conf(conf_file);
 	
 
-
-	cout << "numJoint " << robot.get_numJoints() << endl;
-	int NJ = robot.get_numJoints();
 	Eigen::VectorXd q(NJ), dq(NJ), dqr(NJ), ddqr(NJ);
-	// cout << "grad " << robot.get_gradddq() << endl;
  
     /* Test */
     q = q.setOnes();
