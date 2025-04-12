@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/frankino/Tesi/Aldo_repository/thunder_optimal/src
+CMAKE_SOURCE_DIR = /home/frankino/Tesi/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/frankino/Tesi/Aldo_repository/thunder_optimal/build
+CMAKE_BINARY_DIR = /home/frankino/Tesi/thunder_optimal/build
 
 # Utility rule file for franka_msgs_generate_messages_py.
 
@@ -63,10 +63,10 @@ panda_controllers/CMakeFiles/franka_msgs_generate_messages_py.dir/build: franka_
 .PHONY : panda_controllers/CMakeFiles/franka_msgs_generate_messages_py.dir/build
 
 panda_controllers/CMakeFiles/franka_msgs_generate_messages_py.dir/clean:
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && $(CMAKE_COMMAND) -P CMakeFiles/franka_msgs_generate_messages_py.dir/cmake_clean.cmake
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && $(CMAKE_COMMAND) -P CMakeFiles/franka_msgs_generate_messages_py.dir/cmake_clean.cmake
 .PHONY : panda_controllers/CMakeFiles/franka_msgs_generate_messages_py.dir/clean
 
 panda_controllers/CMakeFiles/franka_msgs_generate_messages_py.dir/depend:
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/frankino/Tesi/Aldo_repository/thunder_optimal/src /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers /home/frankino/Tesi/Aldo_repository/thunder_optimal/build /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers/CMakeFiles/franka_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/frankino/Tesi/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/frankino/Tesi/thunder_optimal/src /home/frankino/Tesi/thunder_optimal/src/panda_controllers /home/frankino/Tesi/thunder_optimal/build /home/frankino/Tesi/thunder_optimal/build/panda_controllers /home/frankino/Tesi/thunder_optimal/build/panda_controllers/CMakeFiles/franka_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : panda_controllers/CMakeFiles/franka_msgs_generate_messages_py.dir/depend
 

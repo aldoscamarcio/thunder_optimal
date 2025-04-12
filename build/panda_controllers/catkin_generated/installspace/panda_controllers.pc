@@ -1,4 +1,4 @@
-prefix=/home/frankino/Tesi/Aldo_repository/thunder_optimal/install
+prefix=/home/frankino/Tesi/thunder_optimal/install
 
 Name: panda_controllers
 Description: Description of panda_controllers

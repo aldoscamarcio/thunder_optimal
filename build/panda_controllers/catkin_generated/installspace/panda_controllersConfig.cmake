@@ -67,14 +67,14 @@ set(panda_controllers_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(panda_controllers_SOURCE_PREFIX /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers)
-  set(panda_controllers_DEVEL_PREFIX /home/frankino/Tesi/Aldo_repository/thunder_optimal/devel)
+  set(panda_controllers_SOURCE_PREFIX /home/frankino/Tesi/thunder_optimal/src/panda_controllers)
+  set(panda_controllers_DEVEL_PREFIX /home/frankino/Tesi/thunder_optimal/devel)
   set(panda_controllers_INSTALL_PREFIX "")
   set(panda_controllers_PREFIX ${panda_controllers_DEVEL_PREFIX})
 else()
   set(panda_controllers_SOURCE_PREFIX "")
   set(panda_controllers_DEVEL_PREFIX "")
-  set(panda_controllers_INSTALL_PREFIX /home/frankino/Tesi/Aldo_repository/thunder_optimal/install)
+  set(panda_controllers_INSTALL_PREFIX /home/frankino/Tesi/thunder_optimal/install)
   set(panda_controllers_PREFIX ${panda_controllers_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/frankino/Tesi/Aldo_repository/thunder_optimal/install/lib;/home/frankino/Tesi/catkin_ws/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/frankino/Tesi/thunder_optimal/install/lib;/home/frankino/Tesi/catkin_ws/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

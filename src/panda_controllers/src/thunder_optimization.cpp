@@ -2,12 +2,13 @@
 #include <math.h>
 #include <nlopt.hpp>
 #include <stdio.h>
+#include "ros/ros.h"
 
 const std::string conf_file = "../robots/franka_conf.yaml";
 
 std::vector<double> calculateCoefficients(double q0, double qf, double v0, double vf, double a0, double af, double t0, double tf)
 {
-    double T = tf - t0;
+    double T = tf ;
 
     double c0 = q0;
     double c1 = v0;
@@ -21,7 +22,7 @@ std::vector<double> calculateCoefficients(double q0, double qf, double v0, doubl
 
 void calculateTrajectory(double t, double t0, const std::vector<double> &coeffs, double &pos, double &vel, double &acc)
 {
-    double dt = t - t0;
+    double dt = t ;
 
     pos = coeffs[0] + coeffs[1] * dt + coeffs[2] * pow(dt, 2) + coeffs[3] * pow(dt, 3) + coeffs[4] * pow(dt, 4) + coeffs[5] * pow(dt, 5);
     vel = coeffs[1] + 2 * coeffs[2] * dt + 3 * coeffs[3] * pow(dt, 2) + 4 * coeffs[4] * pow(dt, 3) + 5 * coeffs[5] * pow(dt, 4);

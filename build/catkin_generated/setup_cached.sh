@@ -7,7 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel:$CMAKE_PREFIX_PATH"
-export PWD='/home/frankino/Tesi/Aldo_repository/thunder_optimal/build'
-export ROSLISP_PACKAGE_DIRECTORIES="/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
-export ROS_PACKAGE_PATH="/home/frankino/Tesi/Aldo_repository/thunder_optimal/src:$ROS_PACKAGE_PATH"
+export CMAKE_PREFIX_PATH="/home/frankino/Tesi/thunder_optimal/devel:$CMAKE_PREFIX_PATH"
+export PWD='/home/frankino/Tesi/thunder_optimal/build'
+export ROSLISP_PACKAGE_DIRECTORIES="/home/frankino/Tesi/thunder_optimal/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROS_PACKAGE_PATH="/home/frankino/Tesi/thunder_optimal/src:$ROS_PACKAGE_PATH"

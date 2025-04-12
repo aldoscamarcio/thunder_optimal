@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/frankino/Tesi/Aldo_repository/thunder_optimal/src
+CMAKE_SOURCE_DIR = /home/frankino/Tesi/thunder_optimal/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/frankino/Tesi/Aldo_repository/thunder_optimal/build
+CMAKE_BINARY_DIR = /home/frankino/Tesi/thunder_optimal/build
 
 # Include any dependencies generated for this target.
 include panda_controllers/CMakeFiles/panda_controllers.dir/depend.make
@@ -58,56 +58,56 @@ include panda_controllers/CMakeFiles/panda_controllers.dir/progress.make
 include panda_controllers/CMakeFiles/panda_controllers.dir/flags.make
 
 panda_controllers/CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.o: panda_controllers/CMakeFiles/panda_controllers.dir/flags.make
-panda_controllers/CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.o: /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/computed_torque.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frankino/Tesi/Aldo_repository/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object panda_controllers/CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.o"
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.o -c /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/computed_torque.cpp
+panda_controllers/CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.o: /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/computed_torque.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frankino/Tesi/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object panda_controllers/CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.o"
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.o -c /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/computed_torque.cpp
 
 panda_controllers/CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.i"
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/computed_torque.cpp > CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.i
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/computed_torque.cpp > CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.i
 
 panda_controllers/CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.s"
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/computed_torque.cpp -o CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.s
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/computed_torque.cpp -o CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.s
 
 panda_controllers/CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.o: panda_controllers/CMakeFiles/panda_controllers.dir/flags.make
-panda_controllers/CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.o: /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/franka_gen.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frankino/Tesi/Aldo_repository/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object panda_controllers/CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.o"
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.o -c /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/franka_gen.cpp
+panda_controllers/CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.o: /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/franka_gen.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frankino/Tesi/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object panda_controllers/CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.o"
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.o -c /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/franka_gen.cpp
 
 panda_controllers/CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.i"
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/franka_gen.cpp > CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.i
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/franka_gen.cpp > CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.i
 
 panda_controllers/CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.s"
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/franka_gen.cpp -o CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.s
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/franka_gen.cpp -o CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.s
 
 panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.o: panda_controllers/CMakeFiles/panda_controllers.dir/flags.make
-panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.o: /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frankino/Tesi/Aldo_repository/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.o"
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.o -c /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp
+panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.o: /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frankino/Tesi/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.o"
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.o -c /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp
 
 panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.i"
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp > CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.i
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp > CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.i
 
 panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.s"
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp -o CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.s
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp -o CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.s
 
 panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.o: panda_controllers/CMakeFiles/panda_controllers.dir/flags.make
-panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.o: /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/thunder_optimization.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frankino/Tesi/Aldo_repository/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.o"
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.o -c /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/thunder_optimization.cpp
+panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.o: /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/thunder_optimization.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frankino/Tesi/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.o"
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.o -c /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/thunder_optimization.cpp
 
 panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.i"
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/thunder_optimization.cpp > CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.i
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/thunder_optimization.cpp > CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.i
 
 panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.s"
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/thunder_optimization.cpp -o CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.s
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/thunder_optimization.cpp -o CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.s
 
 # Object files for target panda_controllers
 panda_controllers_OBJECTS = \
@@ -119,65 +119,65 @@ panda_controllers_OBJECTS = \
 # External object files for target panda_controllers
 panda_controllers_EXTERNAL_OBJECTS =
 
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.o
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.o
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.o
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.o
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/build.make
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libdynamic_reconfigure_config_init_mutex.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libfranka_hw.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libfranka_control_services.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libactionlib.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libcombined_robot_hw.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/liburdf.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/liburdfdom_sensor.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/liburdfdom_model_state.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/liburdfdom_model.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/liburdfdom_world.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libtinyxml.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/librosconsole_bridge.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libclass_loader.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libPocoFoundation.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libdl.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libroslib.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/librospack.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libpython3.8.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/librealtime_tools.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libroscpp.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libpthread.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/librosconsole.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/librosconsole_log4cxx.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/librosconsole_backend_interface.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libxmlrpcpp.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libroscpp_serialization.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/librostime.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libcpp_common.so
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libyaml-cpp.so.0.6.2
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/frankino/Tesi/Aldo_repository/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX shared library /home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so"
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/panda_controllers.dir/link.txt --verbose=$(VERBOSE)
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.o
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.o
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.o
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.o
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/build.make
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libdynamic_reconfigure_config_init_mutex.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libfranka_hw.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libfranka_control_services.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libactionlib.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libcombined_robot_hw.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/liburdf.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/liburdfdom_sensor.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/liburdfdom_model_state.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/liburdfdom_model.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/liburdfdom_world.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libtinyxml.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/librosconsole_bridge.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libclass_loader.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libPocoFoundation.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libdl.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libroslib.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/librospack.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libpython3.8.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/librealtime_tools.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libroscpp.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libpthread.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/librosconsole.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/librosconsole_log4cxx.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/librosconsole_backend_interface.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libxmlrpcpp.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libroscpp_serialization.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/librostime.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /opt/ros/noetic/lib/libcpp_common.so
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: /usr/lib/x86_64-linux-gnu/libyaml-cpp.so.0.6.2
+/home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so: panda_controllers/CMakeFiles/panda_controllers.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/frankino/Tesi/thunder_optimal/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX shared library /home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so"
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/panda_controllers.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-panda_controllers/CMakeFiles/panda_controllers.dir/build: /home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/libpanda_controllers.so
+panda_controllers/CMakeFiles/panda_controllers.dir/build: /home/frankino/Tesi/thunder_optimal/devel/lib/libpanda_controllers.so
 
 .PHONY : panda_controllers/CMakeFiles/panda_controllers.dir/build
 
 panda_controllers/CMakeFiles/panda_controllers.dir/clean:
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers && $(CMAKE_COMMAND) -P CMakeFiles/panda_controllers.dir/cmake_clean.cmake
+	cd /home/frankino/Tesi/thunder_optimal/build/panda_controllers && $(CMAKE_COMMAND) -P CMakeFiles/panda_controllers.dir/cmake_clean.cmake
 .PHONY : panda_controllers/CMakeFiles/panda_controllers.dir/clean
 
 panda_controllers/CMakeFiles/panda_controllers.dir/depend:
-	cd /home/frankino/Tesi/Aldo_repository/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/frankino/Tesi/Aldo_repository/thunder_optimal/src /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers /home/frankino/Tesi/Aldo_repository/thunder_optimal/build /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers /home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers/CMakeFiles/panda_controllers.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/frankino/Tesi/thunder_optimal/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/frankino/Tesi/thunder_optimal/src /home/frankino/Tesi/thunder_optimal/src/panda_controllers /home/frankino/Tesi/thunder_optimal/build /home/frankino/Tesi/thunder_optimal/build/panda_controllers /home/frankino/Tesi/thunder_optimal/build/panda_controllers/CMakeFiles/panda_controllers.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : panda_controllers/CMakeFiles/panda_controllers.dir/depend
 

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/panda_controllers/menu"
-  "/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel/lib/panda_controllers/menu.pdb"
+  "/home/frankino/Tesi/thunder_optimal/devel/lib/panda_controllers/menu"
+  "/home/frankino/Tesi/thunder_optimal/devel/lib/panda_controllers/menu.pdb"
   "CMakeFiles/menu.dir/src/menu.cpp.o"
 )
 

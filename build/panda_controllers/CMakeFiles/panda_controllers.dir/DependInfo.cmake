@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/computed_torque.cpp" "/home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers/CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.o"
-  "/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/franka_gen.cpp" "/home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers/CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.o"
-  "/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp" "/home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.o"
-  "/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/thunder_optimization.cpp" "/home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.o"
+  "/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/computed_torque.cpp" "/home/frankino/Tesi/thunder_optimal/build/panda_controllers/CMakeFiles/panda_controllers.dir/src/computed_torque.cpp.o"
+  "/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/franka_gen.cpp" "/home/frankino/Tesi/thunder_optimal/build/panda_controllers/CMakeFiles/panda_controllers.dir/src/franka_gen.cpp.o"
+  "/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/thunder_franka.cpp" "/home/frankino/Tesi/thunder_optimal/build/panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_franka.cpp.o"
+  "/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/thunder_optimization.cpp" "/home/frankino/Tesi/thunder_optimal/build/panda_controllers/CMakeFiles/panda_controllers.dir/src/thunder_optimization.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -21,7 +21,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/include"
+  "/home/frankino/Tesi/thunder_optimal/src/panda_controllers/include"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/usr/include/eigen3"

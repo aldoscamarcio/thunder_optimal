@@ -1,8 +1,8 @@
-prefix=/home/frankino/Tesi/Aldo_repository/thunder_optimal/devel
+prefix=/home/frankino/Tesi/thunder_optimal/devel
 
 Name: panda_controllers
 Description: Description of panda_controllers
 Version: 1.0.0
-Cflags: -I/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/include
+Cflags: -I/home/frankino/Tesi/thunder_optimal/src/panda_controllers/include
 Libs: -L${prefix}/lib -lpanda_controllers
 Requires: controller_interface dynamic_reconfigure franka_hw geometry_msgs franka_msgs hardware_interface message_runtime pluginlib realtime_tools roscpp

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/include/utils/thunder_franka.h
+/home/frankino/Tesi/thunder_optimal/src/panda_controllers/include/utils/thunder_franka.h
 iostream
 -
 string
@@ -20,15 +20,15 @@ yaml-cpp/yaml.h
 fstream
 -
 
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/include/utils/thunder_optimization.h
+/home/frankino/Tesi/thunder_optimal/src/panda_controllers/include/utils/thunder_optimization.h
 vector
 -
 eigen3/Eigen/Dense
 -
 thunder_franka.h
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/include/utils/thunder_franka.h
+/home/frankino/Tesi/thunder_optimal/src/panda_controllers/include/utils/thunder_franka.h
 
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/menu.cpp
+/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/menu.cpp
 iostream
 -
 eigen3/Eigen/Dense
@@ -39,26 +39,30 @@ cstdlib
 -
 signal.h
 -
+math.h
+-
+vector
+-
 geometry_msgs/PoseStamped.h
 -
 ros/ros.h
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/ros/ros.h
+/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/ros/ros.h
 utils/thunder_franka.h
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/utils/thunder_franka.h
+/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/utils/thunder_franka.h
 utils/thunder_optimization.h
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/utils/thunder_optimization.h
+/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/utils/thunder_optimization.h
 sstream
 -
 nlopt.hpp
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/nlopt.hpp
+/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/nlopt.hpp
 std_msgs/Float64.h
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/std_msgs/Float64.h
+/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/std_msgs/Float64.h
 std_msgs/Bool.h
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/std_msgs/Bool.h
+/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/std_msgs/Bool.h
 std_srvs/SetBool.h
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/std_srvs/SetBool.h
+/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/std_srvs/SetBool.h
 sensor_msgs/JointState.h
-/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/src/sensor_msgs/JointState.h
+/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/sensor_msgs/JointState.h
 
 /opt/ros/noetic/include/geometry_msgs/Point.h
 string

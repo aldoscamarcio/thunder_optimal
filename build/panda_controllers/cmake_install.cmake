@@ -1,8 +1,8 @@
-# Install script for directory: /home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers
+# Install script for directory: /home/frankino/Tesi/thunder_optimal/src/panda_controllers
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/frankino/Tesi/Aldo_repository/thunder_optimal/install")
+  set(CMAKE_INSTALL_PREFIX "/home/frankino/Tesi/thunder_optimal/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers/catkin_generated/installspace/panda_controllers.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/frankino/Tesi/thunder_optimal/build/panda_controllers/catkin_generated/installspace/panda_controllers.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers/cmake" TYPE FILE FILES
-    "/home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers/catkin_generated/installspace/panda_controllersConfig.cmake"
-    "/home/frankino/Tesi/Aldo_repository/thunder_optimal/build/panda_controllers/catkin_generated/installspace/panda_controllersConfig-version.cmake"
+    "/home/frankino/Tesi/thunder_optimal/build/panda_controllers/catkin_generated/installspace/panda_controllersConfig.cmake"
+    "/home/frankino/Tesi/thunder_optimal/build/panda_controllers/catkin_generated/installspace/panda_controllersConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers" TYPE FILE FILES "/home/frankino/Tesi/Aldo_repository/thunder_optimal/src/panda_controllers/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/panda_controllers" TYPE FILE FILES "/home/frankino/Tesi/thunder_optimal/src/panda_controllers/package.xml")
 endif()
 
