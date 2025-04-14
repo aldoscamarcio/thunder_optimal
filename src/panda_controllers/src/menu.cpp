@@ -134,9 +134,11 @@ int main(int argc, char **argv)
 	v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
 
 	a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+
 	int campioni = 101;
-	//Eigen::VectorXd POS_INIT(NJ * campioni), VEL_INIT(NJ * campioni), ACC_INIT(NJ * campioni);
-	Eigen::VectorXd POS_INIT(NJ), VEL_INIT(NJ), ACC_INIT(NJ);
+	int size_q = NJ * campioni; // Dimensione di q
+	Eigen::VectorXd POS_INIT(NJ * campioni), VEL_INIT(NJ * campioni), ACC_INIT(NJ * campioni);
+	// Eigen::VectorXd POS_INIT(NJ), VEL_INIT(NJ), ACC_INIT(NJ);
 	int time_step = 0;
 	XmlRpc::XmlRpcValue menu_par;
 
@@ -288,12 +290,11 @@ int main(int argc, char **argv)
 		{
 			// Calcolo dei coefficienti per ciascun giunto
 			std::vector<std::vector<double>> joint_coeffs(NJ);
+			cout << q_int << endl;
 			for (int i = 0; i < NJ; ++i)
 			{
 				joint_coeffs[i] = calculateCoefficients(q_int[i], qf[i], v0[i], vf[i], a0[i], af[i], t_init.toSec(), tf);
-				std::cout << "coeffs: " << joint_coeffs[i][0] << ", " << joint_coeffs[i][1] << ", " << joint_coeffs[i][2] << ", " << joint_coeffs[i][3] << ", " << joint_coeffs[i][4] << ", " << joint_coeffs[i][5] << std::endl;
-
-
+				//std::cout << "coeffs: " << joint_coeffs[i][0] << ", " << joint_coeffs[i][1] << ", " << joint_coeffs[i][2] << ", " << joint_coeffs[i][3] << ", " << joint_coeffs[i][4] << ", " << joint_coeffs[i][5] << std::endl;
 			}
 			while (t <= tf)
 			{
@@ -301,36 +302,150 @@ int main(int argc, char **argv)
 				// Generazione della traiettoria
 				for (int i = 0; i < NJ; i++)
 				{
-					double pos, vel, acc, tau;
+					double pos, vel, acc;
 					calculateTrajectory(t, t_init.toSec(), joint_coeffs[i], pos, vel, acc);
 					std::cout << "  Joint " << i << ": Pos = " << pos << ", Vel = " << vel << ", Acc = " << acc << std::endl;
+					// // In riga tutti i giunti e colonn i vari step
 					// POS(i, time_step) = pos;
 					// VEL(i, time_step) = vel;
 					// ACC(i, time_step) = acc;
 
+					// Incolonna e colleziona tutte le varibili di giunto per ogni step
+					POS_INIT(time_step * NJ + i) = pos;
+					VEL_INIT(time_step * NJ + i) = vel;
+					ACC_INIT(time_step * NJ + i) = acc;
+
 					// // Incolonna tutte le varibili di giunto ad ogni step
-					// POS_INIT(time_step * NJ + i) = pos;
-					// VEL_INIT(time_step * NJ + i) = vel;
-					// ACC_INIT(time_step * NJ + i) = acc;
-					POS_INIT(i)=pos;
-					VEL_INIT(i)=vel;
-					ACC_INIT(i)=acc;
+					// POS_INIT(i) = pos;
+					// VEL_INIT(i) = vel;
+					// ACC_INIT(i) = acc;
 				}
 
 				time_step++;
-				std::vector<double> pos_des{POS_INIT[0],POS_INIT[1],POS_INIT[2],POS_INIT[3],POS_INIT[4],POS_INIT[5],POS_INIT[6]};
-				traj_msg.position = pos_des;
-				std::vector<double> vel_des{VEL_INIT[0],VEL_INIT[1],VEL_INIT[2],VEL_INIT[3],VEL_INIT[4],VEL_INIT[5],VEL_INIT[6]};
-				traj_msg.velocity = vel_des;
-				std::vector<double> acc_des{ACC_INIT[0],ACC_INIT[1],ACC_INIT[2],ACC_INIT[3],ACC_INIT[4],ACC_INIT[5],ACC_INIT[6]};
-				traj_msg.effort = acc_des;
-				pub_cmd.publish(traj_msg);
+				// std::vector<double> pos_des{POS_INIT[0], POS_INIT[1], POS_INIT[2], POS_INIT[3], POS_INIT[4], POS_INIT[5], POS_INIT[6]};
+				// traj_msg.position = pos_des;
+				// std::vector<double> vel_des{VEL_INIT[0], VEL_INIT[1], VEL_INIT[2], VEL_INIT[3], VEL_INIT[4], VEL_INIT[5], VEL_INIT[6]};
+				// traj_msg.velocity = vel_des;
+				// std::vector<double> acc_des{ACC_INIT[0], ACC_INIT[1], ACC_INIT[2], ACC_INIT[3], ACC_INIT[4], ACC_INIT[5], ACC_INIT[6]};
+				// traj_msg.effort = acc_des;
+				// pub_cmd.publish(traj_msg);
 
 				loop_rate.sleep();
 
 				t = (ros::Time::now() - t_init).toSec();
 
-				// cout<<POS_INIT<<endl;
+				//cout<<POS_INIT<<endl;
+			}
+
+			OptimizationData optData;
+			optData.robot; // Inizializza l'oggetto robot
+			optData.q0 = q_int;
+			optData.v0 = v0;
+			optData.a0 = a0;
+			optData.qf = qf;
+			optData.vf = vf;
+			optData.af = af;
+			optData.size_q = size_q;
+			optData.dt = 0.1; // Passo temporale
+			optData.campioni = campioni;
+
+			// define the optimization problem
+			nlopt::opt opt(nlopt::LD_MMA, 3 * NJ * campioni);
+			opt.set_min_objective(objective, &optData);
+			opt.set_xtol_rel(1e-4);
+
+			std::vector<double> ub(3 * NJ * campioni), lb(3 * NJ * campioni), ubq(NJ), lbq(NJ), ubdq(NJ), lbdq(NJ), ubddq(NJ), lbddq(NJ);
+			lbq = {-2.8973, -1.7628, -2.8973, -3.0718, -2.8973, -0.0175, -2.8973};
+			ubq = {2.8973, 1.7628, 2.8973, -0.0698, 2.8973, 3.7525, 2.8973};
+			lbdq = {-2.175, -2.175, -2.175, -2.175, -2.61, -2.61, -2.61};
+			ubdq = {2.175, 2.175, 2.175, 2.175, 2.61, 2.61, 2.61};
+			lbddq = {-15, -7.5, -10, -12.5, -15, -20, -20};
+			ubddq = {15, 7.5, 10, 12.5, 15, 20, 20};
+
+			float tol = 1e-4;
+
+			// Vincoli sulle condizioni iniziali
+				{
+			for (int j = 0; j < 1; j++)
+			{
+				for (int i = 0; i < NJ; i++)
+					lb[j * NJ + i] = q_int[i] - tol;
+					ub[j * NJ + i] = q_int[i] + tol;
+					lb[j * NJ + size_q + i] = v0[i] - tol;
+					ub[j * NJ + size_q + i] = v0[i] + tol;
+					lb[j * NJ + 2 * size_q + i] = a0[i] - tol;
+					ub[j * NJ + 2 * size_q + i] = a0[i] + tol;
+				}
+			}
+
+			// Vincoli sulle condizioni intermedie
+
+			for (int j = 1; j < campioni; j++)
+			{
+				for (int i = 0; i < NJ; i++)
+				{
+					lb[j * NJ + i] = lbq[i];
+					ub[j * NJ + i] = ubq[i];
+					lb[j * NJ + size_q + i] = lbdq[i];
+					ub[j * NJ + size_q + i] = ubdq[i];
+					lb[j * NJ + 2 * size_q + i] = lbddq[i];
+					ub[j * NJ + 2 * size_q + i] = ubddq[i];
+				}
+			}
+
+			// Vincoli sulle condizioni finali
+
+			for (int j = campioni; j < campioni+1; j++)
+			{
+				for (int i = 0; i < NJ; i++)
+				{
+					lb[j * NJ + i] = qf[i] - tol;
+					//std::cout << "lb " << j * NJ + i << ":" << lb[j * NJ + i] << std::endl;
+					ub[j * NJ + i] = qf[i] + tol;
+					//std::cout << "ub " << j * NJ + i << ":" << ub[j * NJ + i] << std::endl;
+					lb[j * NJ + size_q + i] = vf[i] - tol;
+					//std::cout << "lb " << j * NJ + size_q + i << ":" << lb[j * NJ + size_q + i] << std::endl;
+					ub[j * NJ + size_q + i] = vf[i] + tol;
+					//std::cout << "ub " << j * NJ + size_q + i << ":" << ub[j * NJ + size_q + i] << std::endl;
+					lb[j * NJ + 2 * size_q + i] = af[i] - tol;
+					//std::cout << "lb " << j * NJ + 2 * size_q + i << ":" << lb[j * NJ + 2 * size_q + i] << std::endl;
+					ub[j * NJ + 2 * size_q + i] = af[i] + tol;
+					//std::cout << "ub " << j * NJ + 2 * size_q + i << ":" << ub[j * NJ + 2 * size_q + i] << std::endl;
+				}
+			}
+			opt.set_upper_bounds(ub);
+			opt.set_lower_bounds(lb);
+
+			// std::vector<double> tol_constraint(NJ * 3 * 2);
+			// for (int i = 0; i < tol_constraint.size(); i++)
+			// {
+			// 	tol_constraint[i] = 1e-4;
+			// }
+
+			// opt.add_inequality_mconstraint(constraints, &optData, tol_constraint);
+
+			// opt.set_maxtime(100);
+
+			// define the initial guess
+			std::vector<double> vettore(3 * NJ * campioni); // Inizializza il vettore x
+			for (int i = 0; i < POS_INIT.size(); i++)
+			{
+				vettore[i] = POS_INIT[i];
+				vettore[i + POS_INIT.size()] = VEL_INIT[i];
+				vettore[i + POS_INIT.size() + VEL_INIT.size()] = ACC_INIT[i];
+			}
+
+			double minf;
+			nlopt::result result = opt.optimize(vettore, minf);
+
+			// Print the optimized values
+			printf("Optimized values:\n");
+			printf(",\n");
+			printf("q_opt:\n");
+			for (int i = 0; i < POS_INIT.size(); i++)
+			{
+				printf("%g ", vettore[i]);
+				printf(",\n");
 			}
 
 			std::cout << "time_step:" << time_step << std::endl;
