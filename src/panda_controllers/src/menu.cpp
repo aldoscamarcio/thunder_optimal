@@ -298,13 +298,13 @@ int main(int argc, char **argv)
 			}
 			while (t <= tf)
 			{
-				std::cout << "Time: " << t << std::endl;
+				//std::cout << "Time: " << t << std::endl;
 				// Generazione della traiettoria
 				for (int i = 0; i < NJ; i++)
 				{
 					double pos, vel, acc;
 					calculateTrajectory(t, t_init.toSec(), joint_coeffs[i], pos, vel, acc);
-					std::cout << "  Joint " << i << ": Pos = " << pos << ", Vel = " << vel << ", Acc = " << acc << std::endl;
+					//std::cout << "  Joint " << i << ": Pos = " << pos << ", Vel = " << vel << ", Acc = " << acc << std::endl;
 					// // In riga tutti i giunti e colonn i vari step
 					// POS(i, time_step) = pos;
 					// VEL(i, time_step) = vel;
@@ -352,7 +352,7 @@ int main(int argc, char **argv)
 			// define the optimization problem
 			nlopt::opt opt(nlopt::LD_MMA, 3 * NJ * campioni);
 			opt.set_min_objective(objective, &optData);
-			opt.set_xtol_rel(1e-4);
+			opt.set_xtol_rel(1e-3);
 
 			std::vector<double> ub(3 * NJ * campioni), lb(3 * NJ * campioni), ubq(NJ), lbq(NJ), ubdq(NJ), lbdq(NJ), ubddq(NJ), lbddq(NJ);
 			lbq = {-2.8973, -1.7628, -2.8973, -3.0718, -2.8973, -0.0175, -2.8973};
@@ -362,13 +362,13 @@ int main(int argc, char **argv)
 			lbddq = {-15, -7.5, -10, -12.5, -15, -20, -20};
 			ubddq = {15, 7.5, 10, 12.5, 15, 20, 20};
 
-			float tol = 1e-4;
+			float tol = 4e-2;
 
 			// Vincoli sulle condizioni iniziali
-				{
 			for (int j = 0; j < 1; j++)
 			{
 				for (int i = 0; i < NJ; i++)
+				{
 					lb[j * NJ + i] = q_int[i] - tol;
 					ub[j * NJ + i] = q_int[i] + tol;
 					lb[j * NJ + size_q + i] = v0[i] - tol;
@@ -380,7 +380,7 @@ int main(int argc, char **argv)
 
 			// Vincoli sulle condizioni intermedie
 
-			for (int j = 1; j < campioni; j++)
+			for (int j = 1; j < campioni-1; j++)
 			{
 				for (int i = 0; i < NJ; i++)
 				{
@@ -395,7 +395,7 @@ int main(int argc, char **argv)
 
 			// Vincoli sulle condizioni finali
 
-			for (int j = campioni; j < campioni+1; j++)
+			for (int j = campioni-1; j < campioni; j++)
 			{
 				for (int i = 0; i < NJ; i++)
 				{
@@ -413,8 +413,13 @@ int main(int argc, char **argv)
 					//std::cout << "ub " << j * NJ + 2 * size_q + i << ":" << ub[j * NJ + 2 * size_q + i] << std::endl;
 				}
 			}
+			for (int i = 0; i < lb.size(); i++)
+			{
+				std::cout << "lb" << i << ": " << lb[i]<<" ---- " << "ub" << i <<": " << ub[i] << std::endl;
+			}
 			opt.set_upper_bounds(ub);
 			opt.set_lower_bounds(lb);
+			
 
 			// std::vector<double> tol_constraint(NJ * 3 * 2);
 			// for (int i = 0; i < tol_constraint.size(); i++)
@@ -440,7 +445,6 @@ int main(int argc, char **argv)
 
 			// Print the optimized values
 			printf("Optimized values:\n");
-			printf(",\n");
 			printf("q_opt:\n");
 			for (int i = 0; i < POS_INIT.size(); i++)
 			{
