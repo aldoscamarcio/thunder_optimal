@@ -154,6 +154,7 @@ int main(int argc, char **argv)
 
 	while (ros::ok())
 	{
+		int time_step = 0;
 		demo = -1;
 		if (yaml == 1)
 		{
