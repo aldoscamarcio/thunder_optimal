@@ -1,2 +1,0 @@
-panda_controllers
--DCATKIN_DEVEL_PREFIX=/home/frankino/Tesi/thunder_optimal/devel -DCMAKE_INSTALL_PREFIX=/home/frankino/Tesi/thunder_optimal/install -G Unix Makefiles
