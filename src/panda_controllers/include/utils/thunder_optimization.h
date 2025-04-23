@@ -21,10 +21,20 @@ struct OptimizationData
     int campioni;
 };
 
+
+struct ConsistencyConstraintIneq {
+    int k;
+    int NJ;
+    int size_q;
+    double dt;
+    int type; // 0 = posizione, 1 = velocità 2 = accelerazione
+    int sign; // +1 o -1 per la forma della disuguaglianza
+};
+
 // Funzione obiettivo per l'ottimizzazione
 double objective(const std::vector<double> &x, std::vector<double> &grad, void *data);
 
 // Funzione per i vincoli
-void constraints(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data);
+double consistency_ineq(unsigned n, const double *x, double *grad, void *data) ;
 
 #endif // THUNDER_OPTIMIZATION_H

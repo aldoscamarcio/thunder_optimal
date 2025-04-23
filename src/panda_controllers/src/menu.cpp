@@ -120,7 +120,8 @@ int main(int argc, char **argv)
 	sensor_msgs::JointState traj_msg;
 
 	// SET SLEEP TIME 1000 ---> 1 kHz
-	ros::Rate loop_rate(10);
+	int frequenza=10;
+	ros::Rate loop_rate(frequenza);
 
 	srand(time(NULL));
 	double tf;
@@ -131,15 +132,6 @@ int main(int argc, char **argv)
 	Eigen::Matrix<double, 7, 1> a0;
 	Eigen::Matrix<double, 7, 1> af;
 
-	v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
-
-	a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
-
-	int campioni = 101;
-	int size_q = NJ * campioni; // Dimensione di q
-	Eigen::VectorXd POS_INIT(NJ * campioni), VEL_INIT(NJ * campioni), ACC_INIT(NJ * campioni);
-	// Eigen::VectorXd POS_INIT(NJ), VEL_INIT(NJ), ACC_INIT(NJ);
-	int time_step = 0;
 	XmlRpc::XmlRpcValue menu_par;
 
 	// Initialize Ctrl-C
@@ -206,9 +198,13 @@ int main(int argc, char **argv)
 		{
 			tf = 10;
 
-			q_int << -1.25962, -0.663669, -0.692637, -2.17138, -0.264125, 1.50759, 0.0630972; // Posizioni iniziali
+			q_int=q0;
 
-			qf << 0.0, 0.0, 0.0, -0.2, 2.0, 1.0, 0.0; // Posizioni finali
+			cout << q0 << endl;
+
+			//q_int << -1.25962, -0.663669, -0.692637, -2.17138, -0.264125, 1.50759, 0.0630972; // Posizioni iniziali
+
+			qf << -1.25962, -0.663669, -0.692637, -2.17138, -0.264125, 1.50759, 0.0630972; // Posizioni finali
 
 			v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
 
@@ -251,6 +247,10 @@ int main(int argc, char **argv)
 			init_flag = true;
 		}
 
+		int campioni = tf*frequenza+1; // Numero di campioni
+		int size_q = NJ * campioni; // Dimensione di q
+		Eigen::VectorXd POS_INIT(NJ * campioni), VEL_INIT(NJ * campioni), ACC_INIT(NJ * campioni);
+		// Eigen::VectorXd POS_INIT(NJ), VEL_INIT(NJ), ACC_INIT(NJ);
 		ros::spinOnce();
 
 		t_init = ros::Time::now();
@@ -291,7 +291,6 @@ int main(int argc, char **argv)
 		{
 			// Calcolo dei coefficienti per ciascun giunto
 			std::vector<std::vector<double>> joint_coeffs(NJ);
-			cout << q_int << endl;
 			for (int i = 0; i < NJ; ++i)
 			{
 				joint_coeffs[i] = calculateCoefficients(q_int[i], qf[i], v0[i], vf[i], a0[i], af[i], t_init.toSec(), tf);
@@ -322,6 +321,16 @@ int main(int argc, char **argv)
 					// ACC_INIT(i) = acc;
 				}
 
+				
+
+				std::vector<double> pos_des{POS_INIT[time_step * NJ + 0], POS_INIT[time_step * NJ +1], POS_INIT[time_step * NJ +2], POS_INIT[time_step * NJ +3], POS_INIT[time_step * NJ +4], POS_INIT[time_step * NJ +5], POS_INIT[time_step * NJ +6]};
+				traj_msg.position = pos_des;
+				std::vector<double> vel_des{VEL_INIT[time_step * NJ +0], VEL_INIT[time_step * NJ +1], VEL_INIT[time_step * NJ +2], VEL_INIT[time_step * NJ +3], VEL_INIT[time_step * NJ +4], VEL_INIT[time_step * NJ +5], VEL_INIT[time_step * NJ +6]};
+				traj_msg.velocity = vel_des;
+				std::vector<double> acc_des{ACC_INIT[time_step * NJ +0], ACC_INIT[time_step * NJ +1], ACC_INIT[time_step * NJ +2], ACC_INIT[time_step * NJ +3], ACC_INIT[time_step * NJ +4], ACC_INIT[time_step * NJ +5], ACC_INIT[time_step * NJ +6]};
+				traj_msg.effort = acc_des;
+				pub_cmd.publish(traj_msg);
+				
 				time_step++;
 				// std::vector<double> pos_des{POS_INIT[0], POS_INIT[1], POS_INIT[2], POS_INIT[3], POS_INIT[4], POS_INIT[5], POS_INIT[6]};
 				// traj_msg.position = pos_des;
@@ -414,23 +423,42 @@ int main(int argc, char **argv)
 					//std::cout << "ub " << j * NJ + 2 * size_q + i << ":" << ub[j * NJ + 2 * size_q + i] << std::endl;
 				}
 			}
-			for (int i = 0; i < lb.size(); i++)
-			{
-				std::cout << "lb" << i << ": " << lb[i]<<" ---- " << "ub" << i <<": " << ub[i] << std::endl;
-			}
+
+			// for (int i = 0; i < lb.size(); i++)
+			// {
+			// 	std::cout << "lb" << i << ": " << lb[i]<<" ---- " << "ub" << i <<": " << ub[i] << std::endl;
+			// }
+			
 			opt.set_upper_bounds(ub);
 			opt.set_lower_bounds(lb);
 			
+			std::vector<ConsistencyConstraintIneq> constraints;
+			double dt=1/frequenza;
+			const double eps = 1e-4;
 
-			// std::vector<double> tol_constraint(NJ * 3 * 2);
-			// for (int i = 0; i < tol_constraint.size(); i++)
-			// {
-			// 	tol_constraint[i] = 1e-4;
-			// }
-
-			// opt.add_inequality_mconstraint(constraints, &optData, tol_constraint);
-
-			// opt.set_maxtime(100);
+			for (int k = 0; k < campioni-1; k++) {
+				// Posizione
+				constraints.push_back({k, NJ, size_q, dt, 0, +1});
+				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
+			
+				constraints.push_back({k, NJ, size_q, dt, 0, -1});
+				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
+			
+				// Velocità
+				constraints.push_back({k, NJ, size_q, dt, 1, +1});
+				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
+			
+				constraints.push_back({k, NJ, size_q, dt, 1, -1});
+				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
+			
+				// Accelerazione
+				constraints.push_back({k, NJ, size_q, dt, 2, +1});
+				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
+			
+				constraints.push_back({k, NJ, size_q, dt, 2, -1});
+				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
+			}
+			
 
 			// define the initial guess
 			std::vector<double> vettore(3 * NJ * campioni); // Inizializza il vettore x

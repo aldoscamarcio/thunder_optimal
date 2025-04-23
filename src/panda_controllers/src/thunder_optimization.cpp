@@ -97,101 +97,39 @@ double objective(const std::vector<double> &x, std::vector<double> &grad, void *
 }
 
 // Funzione per i vincoli
-void constraints(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data)
-{
-    OptimizationData *optData = static_cast<OptimizationData *>(data);
-    int NJ = optData->robot.get_numJoints();
-    int campioni = optData->campioni;
-    int size_q = optData->size_q;
-    int z = 0;
+double consistency_ineq(unsigned n, const double *x, double *grad, void *data) {
+    ConsistencyConstraintIneq *c = reinterpret_cast<ConsistencyConstraintIneq *>(data);
+    int k = c->k;
+    int NJ = c->NJ;
+    int size_q = c->size_q;
+    double dt = c->dt;
+    int type = c->type;
+    int sgn = c->sign;
 
-    // std::cout << "Sono dentro i constarints:\n"<< optData->qf << std::endl;
-
-    // Vincoli sulle condizioni iniziali
-    for (int k = 0; k < NJ; k++)
-    {
-        result[z++] = x[k] - optData->q0[k];              // Posizione iniziale
-        result[z++] = x[size_q + k] - optData->v0[k];     // Velocità iniziale
-        result[z++] = x[2 * size_q + k] - optData->a0[k]; // Accelerazione iniziale
-    }
-
-    // Vincoli sulle condizioni finali
-    for (int k = 0; k < NJ; k++)
-    {
-        result[z++] = x[(campioni - 1) * NJ + k] - optData->qf[k];
-        result[z++] = x[size_q + (campioni - 1) * NJ + k] - optData->vf[k];
-        result[z++] = x[2 * size_q + (campioni - 1) * NJ + k] - optData->af[k];
-    }
-    // for (int p=0; p <z ; p++)
-    // {
-    //     std::cout <<"result  "<< p << " - " << result[p]<< std::endl;
-    // }
-    // // Calcola tutti i vincoli
-    // result[0] = x[7] - optData->qf[0];
-    // result[1] = x[8] - optData->qf[1];
-    // result[2] = x[9] - optData->qf[2];
-    // result[3] = x[10] - optData->qf[3];
-    // result[4] = x[11] - optData->qf[4];
-    // result[5] = x[12] - optData->qf[5];
-    // result[6] = x[13] - optData->qf[6];
-    // result[7] = x[21] - optData->vf[0];
-    // result[8] = x[22] - optData->vf[1];
-    // result[9] = x[23] - optData->vf[2];
-    // result[10] = x[24] - optData->vf[3];
-    // result[11] = x[25] - optData->vf[4];
-    // result[12] = x[26] - optData->vf[5];
-    // result[13] = x[27] - optData->vf[6];
-    // result[14] = x[35] - optData->af[0];
-    // result[15] = x[36] - optData->af[1];
-    // result[16] = x[37] - optData->af[2];
-    // result[17] = x[38] - optData->af[3];
-    // result[18] = x[39] - optData->af[4];
-    // result[19] = x[40] - optData->af[5];
-    // result[20] = x[41] - optData->af[6];
-
-    if (grad != nullptr)
-    {
-        int z_vincolo = 0;
-        std::fill_n(grad, m * n, 0.0);
-
-        // Vincoli sulla condizione iniziale
-        for (int k = 0; k < NJ; k++)
-        {
-            int index_q = k;
-            grad[z_vincolo * n + index_q] = 1.0;
-            z_vincolo++;
-        }
-        for (int k = 0; k < NJ; k++)
-        {
-            int index_dq = size_q + k;
-            grad[z_vincolo * n + index_dq] = 1.0;
-            z_vincolo++;
-        }
-        for (int k = 0; k < NJ; k++)
-        {
-            int index_ddq = 2 * size_q + k;
-            grad[z_vincolo * n + index_ddq] = 1.0;
-            z_vincolo++;
-        }
-
-        // Vincoli sulla condizione finale
-        for (int k = 0; k < NJ; k++)
-        {
-            int index_q = (campioni - 1) * NJ + k;
-            grad[z_vincolo * n + index_q] = 1.0;
-            z_vincolo++;
-        }
-        for (int k = 0; k < NJ; k++)
-        {
-            int index_dq = size_q + (campioni - 1) * NJ + k;
-            grad[z_vincolo * n + index_dq] = 1.0;
-            z_vincolo++;
-        }
-        for (int k = 0; k < NJ; k++)
-        {
-            int index_ddq = 2 * size_q + (campioni - 1) * NJ + k;
-            grad[z_vincolo * n + index_ddq] = 1.0;
-            z_vincolo++;
+    double val = 0.0;
+    for (int j = 0; j < NJ; ++j) {
+        if (type == 0) {
+            // Posizione: q_{k+1} - q_k - dq_k * dt
+            std::cout <<"sono nel ciclo dei vincoli: "<< k << " type: "<< type << std::endl;
+            int qk   = k * NJ + j;
+            int qkp  = (k + 1) * NJ + j;
+            int dqk  = size_q + k * NJ + j;
+            val += sgn * (x[qkp] - x[qk] - x[dqk] * dt);
+        } else if (type == 1) {
+            // Velocità: dq_{k+1} - dq_k - ddq_k * dt
+            std::cout <<"sono nel ciclo dei vincoli:  "<< k << " type: "<< type << std::endl;
+            int dqk   = size_q + k * NJ + j;
+            int dqkp  = size_q + (k + 1) * NJ + j;
+            int ddqk  = 2 * size_q + k * NJ + j;
+            val += sgn * (x[dqkp] - x[dqk] - x[ddqk] * dt);
+        } else if (type == 2) {
+            // Accelerazione: ddq_{k+1} - ddq_k
+            std::cout <<"sono nel ciclo dei vincoli:  "<< k << " type: "<< type << std::endl;
+            int ddqk   = 2 * size_q + k * NJ + j;
+            int ddqkp  = 2 * size_q + (k + 1) * NJ + j;
+            val += sgn * (x[ddqkp] - x[ddqk]);
         }
     }
+
+    return val;
 }
