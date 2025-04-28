@@ -1,3 +1,10 @@
+# Build artifacts
 /build/
 /devel/
+
+# Catkin workspace marker
+.catkin_workspace
+
+
+# VSCode settings
 .vscode/

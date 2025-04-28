@@ -104,14 +104,6 @@ int main(int argc, char **argv)
 	cout << "NJ" << NJ << endl;
 	Eigen::VectorXd q(NJ), dq(NJ), dqr(NJ), ddqr(NJ);
 
-	/* Test */
-	q = q.setOnes();
-	dq = dq.setOnes();
-	dqr = dqr.setOnes();
-	ddqr = ddqr.setOnes();
-
-	robot.setArguments(q, dq, dqr, ddqr);
-
 	ros::Publisher pub_cmd = node_handle.advertise<sensor_msgs::JointState>("/computed_torque_controller/command", 1000);
 	ros::Subscriber sub_joints = node_handle.subscribe<sensor_msgs::JointState>("/franka_state_controller/joint_states", 1, &jointsCallback);
 	// ros::Subscriber sub_pose =  node_handle.subscribe("/franka_state_controller/franka_ee_pose", 1, &poseCallback);
@@ -250,7 +242,7 @@ int main(int argc, char **argv)
 		int campioni = tf*frequenza+1; // Numero di campioni
 		int size_q = NJ * campioni; // Dimensione di q
 		Eigen::VectorXd POS_INIT(NJ * campioni), VEL_INIT(NJ * campioni), ACC_INIT(NJ * campioni);
-		// Eigen::VectorXd POS_INIT(NJ), VEL_INIT(NJ), ACC_INIT(NJ);
+
 		ros::spinOnce();
 
 		t_init = ros::Time::now();
@@ -356,7 +348,7 @@ int main(int argc, char **argv)
 			optData.vf = vf;
 			optData.af = af;
 			optData.size_q = size_q;
-			optData.dt = 0.1; // Passo temporale
+			optData.dt = 1/frequenza; // Passo temporale
 			optData.campioni = campioni;
 
 			// define the optimization problem
@@ -434,7 +426,13 @@ int main(int argc, char **argv)
 			
 			std::vector<ConsistencyConstraintIneq> constraints;
 			double dt=1/frequenza;
-			const double eps = 1e-4;
+			const double eps = 4e-2;
+
+			int numero_totale_vincoli = (campioni - 1) * 6; // <-- Calcola il numero totale
+
+			if (numero_totale_vincoli > 0) { // Buona pratica: evita di chiamare reserve(0)
+				constraints.reserve(numero_totale_vincoli);
+			}
 
 			for (int k = 0; k < campioni-1; k++) {
 				// Posizione
