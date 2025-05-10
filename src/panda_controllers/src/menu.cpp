@@ -326,13 +326,6 @@ int main(int argc, char **argv)
 				// pub_cmd.publish(traj_msg);
 				
 				time_step++;
-				// std::vector<double> pos_des{POS_INIT[0], POS_INIT[1], POS_INIT[2], POS_INIT[3], POS_INIT[4], POS_INIT[5], POS_INIT[6]};
-				// traj_msg.position = pos_des;
-				// std::vector<double> vel_des{VEL_INIT[0], VEL_INIT[1], VEL_INIT[2], VEL_INIT[3], VEL_INIT[4], VEL_INIT[5], VEL_INIT[6]};
-				// traj_msg.velocity = vel_des;
-				// std::vector<double> acc_des{ACC_INIT[0], ACC_INIT[1], ACC_INIT[2], ACC_INIT[3], ACC_INIT[4], ACC_INIT[5], ACC_INIT[6]};
-				// traj_msg.effort = acc_des;
-				// pub_cmd.publish(traj_msg);
 
 				loop_rate.sleep();
 
@@ -478,17 +471,28 @@ int main(int argc, char **argv)
 			// Print the optimized values
 			printf("Optimized values:\n");
 			printf("q_opt:\n");
-			for (int i = 0; i < POS_INIT.size(); i++)
-			{
+			for (int i = 0; i < 3*POS_INIT.size(); i++)
+			{	
+				if(i== POS_INIT.size())
+				{
+					printf("\n dq_opt:\n");
+				}
+				if(i== 2*POS_INIT.size())
+				{
+					printf("\nddq_opt:\n");
+				}
 				printf("%g ", vettore[i]);
 				printf(",\n");
+
 			}
+
 
 			std::cout << "time_step:" << time_step << std::endl;
 			// for (int i = 0; i < NJ * campioni; i++)
 			// {
 			// 	std::cout << "POS_INIT: " << i << ": " << POS_INIT[i] << endl;
 			// }
+
 			time_step = 0;
 		while (time_step < campioni)
 		{
@@ -500,6 +504,7 @@ int main(int argc, char **argv)
 				traj_msg.effort = acc_des;
 				pub_cmd.publish(traj_msg);
 			time_step++;
+
 		}
 		}
 		

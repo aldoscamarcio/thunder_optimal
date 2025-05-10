@@ -130,7 +130,6 @@ double consistency_ineq(unsigned n, const double *x, double *grad, void *data) {
             val += sgn * (x[ddqkp] - x[ddqk]);
         }
     }
-    std::cout << "val: " << val << std::endl;
 
     return val;
 }
