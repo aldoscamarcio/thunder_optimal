@@ -101,7 +101,7 @@ int main(int argc, char **argv)
 	thunder_franka robot;
 	robot.load_conf(conf_file);
 	int NJ = robot.get_numJoints();
-	cout << "NJ" << NJ << endl;
+	//cout << "NJ" << NJ << endl;
 	Eigen::VectorXd q(NJ), dq(NJ), dqr(NJ), ddqr(NJ);
 
 	ros::Publisher pub_cmd = node_handle.advertise<sensor_msgs::JointState>("/computed_torque_controller/command", 1000);
@@ -112,7 +112,7 @@ int main(int argc, char **argv)
 	sensor_msgs::JointState traj_msg;
 
 	// SET SLEEP TIME 1000 ---> 1 kHz
-	int frequenza=10;
+	int frequenza=10; // Hz
 	ros::Rate loop_rate(frequenza);
 
 	srand(time(NULL));
@@ -189,10 +189,6 @@ int main(int argc, char **argv)
 		else if (choice == 6)
 		{
 			tf = 10;
-
-			q_int=q0;
-
-			cout << q0 << endl;
 
 			//q_int << -1.25962, -0.663669, -0.692637, -2.17138, -0.264125, 1.50759, 0.0630972; // Posizioni iniziali
 
@@ -279,8 +275,13 @@ int main(int argc, char **argv)
 			t = (ros::Time::now() - t_init).toSec();
 		}
 
-		if (choice == 6)
+		if (choice == 6 && init_q0)
 		{
+			q_int=q0;
+
+			// cout << "q0 "<< q0 << endl;
+			// cout << "q_int " << q_int << endl;
+
 			// Calcolo dei coefficienti per ciascun giunto
 			std::vector<std::vector<double>> joint_coeffs(NJ);
 			for (int i = 0; i < NJ; ++i)
@@ -290,10 +291,11 @@ int main(int argc, char **argv)
 			}
 			while (t <= tf)
 			{
-				//std::cout << "Time: " << t << std::endl;
+				// std::cout << "Time: " << t << std::endl;
 				// Generazione della traiettoria
 				for (int i = 0; i < NJ; i++)
 				{
+
 					double pos, vel, acc;
 					calculateTrajectory(t, t_init.toSec(), joint_coeffs[i], pos, vel, acc);
 					//std::cout << "  Joint " << i << ": Pos = " << pos << ", Vel = " << vel << ", Acc = " << acc << std::endl;
@@ -315,13 +317,13 @@ int main(int argc, char **argv)
 
 				
 
-				std::vector<double> pos_des{POS_INIT[time_step * NJ + 0], POS_INIT[time_step * NJ +1], POS_INIT[time_step * NJ +2], POS_INIT[time_step * NJ +3], POS_INIT[time_step * NJ +4], POS_INIT[time_step * NJ +5], POS_INIT[time_step * NJ +6]};
-				traj_msg.position = pos_des;
-				std::vector<double> vel_des{VEL_INIT[time_step * NJ +0], VEL_INIT[time_step * NJ +1], VEL_INIT[time_step * NJ +2], VEL_INIT[time_step * NJ +3], VEL_INIT[time_step * NJ +4], VEL_INIT[time_step * NJ +5], VEL_INIT[time_step * NJ +6]};
-				traj_msg.velocity = vel_des;
-				std::vector<double> acc_des{ACC_INIT[time_step * NJ +0], ACC_INIT[time_step * NJ +1], ACC_INIT[time_step * NJ +2], ACC_INIT[time_step * NJ +3], ACC_INIT[time_step * NJ +4], ACC_INIT[time_step * NJ +5], ACC_INIT[time_step * NJ +6]};
-				traj_msg.effort = acc_des;
-				pub_cmd.publish(traj_msg);
+				// std::vector<double> pos_des{POS_INIT[time_step * NJ + 0], POS_INIT[time_step * NJ +1], POS_INIT[time_step * NJ +2], POS_INIT[time_step * NJ +3], POS_INIT[time_step * NJ +4], POS_INIT[time_step * NJ +5], POS_INIT[time_step * NJ +6]};
+				// traj_msg.position = pos_des;
+				// std::vector<double> vel_des{VEL_INIT[time_step * NJ +0], VEL_INIT[time_step * NJ +1], VEL_INIT[time_step * NJ +2], VEL_INIT[time_step * NJ +3], VEL_INIT[time_step * NJ +4], VEL_INIT[time_step * NJ +5], VEL_INIT[time_step * NJ +6]};
+				// traj_msg.velocity = vel_des;
+				// std::vector<double> acc_des{ACC_INIT[time_step * NJ +0], ACC_INIT[time_step * NJ +1], ACC_INIT[time_step * NJ +2], ACC_INIT[time_step * NJ +3], ACC_INIT[time_step * NJ +4], ACC_INIT[time_step * NJ +5], ACC_INIT[time_step * NJ +6]};
+				// traj_msg.effort = acc_des;
+				// pub_cmd.publish(traj_msg);
 				
 				time_step++;
 				// std::vector<double> pos_des{POS_INIT[0], POS_INIT[1], POS_INIT[2], POS_INIT[3], POS_INIT[4], POS_INIT[5], POS_INIT[6]};
@@ -336,8 +338,9 @@ int main(int argc, char **argv)
 
 				t = (ros::Time::now() - t_init).toSec();
 
-				//cout<<POS_INIT<<endl;
+				
 			}
+
 
 			OptimizationData optData;
 			optData.robot; // Inizializza l'oggetto robot
@@ -348,7 +351,7 @@ int main(int argc, char **argv)
 			optData.vf = vf;
 			optData.af = af;
 			optData.size_q = size_q;
-			optData.dt = 1/frequenza; // Passo temporale
+			optData.dt = 1.0/frequenza; // Passo temporale
 			optData.campioni = campioni;
 
 			// define the optimization problem
@@ -365,9 +368,9 @@ int main(int argc, char **argv)
 			ubddq = {15, 7.5, 10, 12.5, 15, 20, 20};
 
 			float tol = 4e-2;
-
+			int j=0;
 			// Vincoli sulle condizioni iniziali
-			for (int j = 0; j < 1; j++)
+			if (j == 0)
 			{
 				for (int i = 0; i < NJ; i++)
 				{
@@ -395,9 +398,11 @@ int main(int argc, char **argv)
 				}
 			}
 
+			j=campioni-1;
+
 			// Vincoli sulle condizioni finali
 
-			for (int j = campioni-1; j < campioni; j++)
+			if(j==campioni-1)
 			{
 				for (int i = 0; i < NJ; i++)
 				{
@@ -425,12 +430,12 @@ int main(int argc, char **argv)
 			opt.set_lower_bounds(lb);
 			
 			std::vector<ConsistencyConstraintIneq> constraints;
-			double dt=1/frequenza;
+			double dt=1.0/frequenza;
 			const double eps = 4e-2;
 
 			int numero_totale_vincoli = (campioni - 1) * 6; // <-- Calcola il numero totale
 
-			if (numero_totale_vincoli > 0) { // Buona pratica: evita di chiamare reserve(0)
+			if (numero_totale_vincoli > 0) { //evita di chiamare reserve(0)
 				constraints.reserve(numero_totale_vincoli);
 			}
 
@@ -484,7 +489,20 @@ int main(int argc, char **argv)
 			// {
 			// 	std::cout << "POS_INIT: " << i << ": " << POS_INIT[i] << endl;
 			// }
+			time_step = 0;
+		while (time_step < campioni)
+		{
+			std::vector<double> pos_des{vettore[time_step * NJ + 0], vettore[time_step * NJ +1], vettore[time_step * NJ +2], vettore[time_step * NJ +3], vettore[time_step * NJ +4], vettore[time_step * NJ +5], vettore[time_step * NJ +6]};
+				traj_msg.position = pos_des;
+				std::vector<double> vel_des{vettore[NJ*campioni+time_step * NJ +0], vettore[NJ*campioni+time_step * NJ +1], vettore[NJ*campioni+time_step * NJ +2],vettore[NJ*campioni+time_step * NJ +3], vettore[NJ*campioni+time_step * NJ +4], vettore[NJ*campioni+time_step * NJ +5], vettore[NJ*campioni+time_step * NJ +6]};
+				traj_msg.velocity = vel_des;
+				std::vector<double> acc_des{vettore[2*NJ*campioni+time_step * NJ +0], vettore[2*NJ*campioni+time_step * NJ +1], vettore[2*NJ*campioni+time_step * NJ +2],vettore[2*NJ*campioni+time_step * NJ +3], vettore[2*NJ*campioni+time_step * NJ +4], vettore[2*NJ*campioni+time_step * NJ +5], vettore[2*NJ*campioni+time_step * NJ +6]};
+				traj_msg.effort = acc_des;
+				pub_cmd.publish(traj_msg);
+			time_step++;
 		}
+		}
+		
 	}
 	return 0;
 }

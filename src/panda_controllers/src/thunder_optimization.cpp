@@ -110,26 +110,27 @@ double consistency_ineq(unsigned n, const double *x, double *grad, void *data) {
     for (int j = 0; j < NJ; ++j) {
         if (type == 0) {
             // Posizione: q_{k+1} - q_k - dq_k * dt
-            std::cout <<"sono nel ciclo dei vincoli: "<< k << " type: "<< type << std::endl;
+            // std::cout <<"sono nel ciclo dei vincoli: "<< k << " type: "<< type << std::endl;
             int qk   = k * NJ + j;
             int qkp  = (k + 1) * NJ + j;
             int dqk  = size_q + k * NJ + j;
             val += sgn * (x[qkp] - x[qk] - x[dqk] * dt);
         } else if (type == 1) {
             // Velocità: dq_{k+1} - dq_k - ddq_k * dt
-            std::cout <<"sono nel ciclo dei vincoli:  "<< k << " type: "<< type << std::endl;
+            // std::cout <<"sono nel ciclo dei vincoli:  "<< k << " type: "<< type << std::endl;
             int dqk   = size_q + k * NJ + j;
             int dqkp  = size_q + (k + 1) * NJ + j;
             int ddqk  = 2 * size_q + k * NJ + j;
             val += sgn * (x[dqkp] - x[dqk] - x[ddqk] * dt);
         } else if (type == 2) {
             // Accelerazione: ddq_{k+1} - ddq_k
-            std::cout <<"sono nel ciclo dei vincoli:  "<< k << " type: "<< type << std::endl;
+            // std::cout <<"sono nel ciclo dei vincoli:  "<< k << " type: "<< type << std::endl;
             int ddqk   = 2 * size_q + k * NJ + j;
             int ddqkp  = 2 * size_q + (k + 1) * NJ + j;
             val += sgn * (x[ddqkp] - x[ddqk]);
         }
     }
+    std::cout << "val: " << val << std::endl;
 
     return val;
 }
