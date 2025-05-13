@@ -20,6 +20,100 @@
 #include "std_srvs/SetBool.h"
 // #include "geometry_msgs/Pose.h"
 #include "sensor_msgs/JointState.h"
+#include <eigen3/Eigen/Geometry> // Per AngleAxisd, Quaterniond
+
+// Funzione helper per calcolare l'errore di orientamento
+Eigen::Vector3d getOrientationError(const Eigen::Quaterniond &q_desired, const Eigen::Quaterniond &q_current)
+{
+	Eigen::Quaterniond q_err_conj = q_current.conjugate(); // q_current.inverse() se normalizzato
+	Eigen::Quaterniond q_error = q_desired * q_err_conj;
+	q_error.normalize(); // quaternione unitario
+
+	Eigen::AngleAxisd angle_axis_error(q_error);
+	// L'errore è spesso rappresentato come angle * axis.
+	// Se l'angolo è piccolo, questo approssima 2 * q_error.vec() (parte vettoriale del quaternione)
+	return angle_axis_error.angle() * angle_axis_error.axis();
+}
+
+// Solutore IK iterativo (Damped Least Squares)
+bool solveIK_DLS(
+	thunder_franka &robot, // Passa per riferimento per poter chiamare set_q
+	const Eigen::Vector3d &target_pos,
+	const Eigen::Quaterniond &target_orient,
+	const Eigen::Matrix<double, 7, 1> &q_initial_guess,
+	Eigen::Matrix<double, 7, 1> &q_solution,
+	const double q_lim_low[], // Passa i limiti
+	const double q_lim_upp[], // Passa i limiti
+	int max_iterations = 150,
+	double position_tolerance = 1e-4,	 // 0.1 mm
+	double orientation_tolerance = 1e-3, // ~0.05 gradi (rad)
+	double lambda_damping = 0.1,		 // Fattore di smorzamento
+	double alpha_step = 0.5)			 // Dimensione del passo
+{
+	q_solution = q_initial_guess;
+	int NJ = robot.get_numJoints(); // Ottieni il numero di giunti
+
+	Eigen::Matrix<double, 6, 1> error_vector;
+	Eigen::Matrix<double, 6, Eigen::Dynamic> J_ee(6, NJ);
+	Eigen::Matrix<double, Eigen::Dynamic, 1> delta_q(NJ, 1), delta_q_giosto(NJ, 1);
+
+	ROS_INFO("Starting IK. Initial q: [%.3f, %.3f, %.3f, %.3f, %.3f, %.3f, %.3f]",
+			 q_solution(0), q_solution(1), q_solution(2), q_solution(3), q_solution(4), q_solution(5), q_solution(6));
+
+	for (int iter = 0; iter < max_iterations; ++iter)
+	{
+		// 1. Imposta lo stato cinematico corrente nel robot per FK e Jacobiana
+		robot.set_q(q_solution); // metodo setter!
+
+		// 2. Calcola la posa corrente dell'EE (FK)
+		Eigen::MatrixXd T_0_ee_mat = robot.get_T_0_ee(); // Chiama dopo set_q
+		Eigen::Isometry3d current_transform = Eigen::Isometry3d::Identity();
+		current_transform.matrix() = T_0_ee_mat; // Converte MatrixXd in Isometry3d
+
+		Eigen::Vector3d current_pos = current_transform.translation();
+		Eigen::Quaterniond current_orient(current_transform.rotation());
+		current_orient.normalize();
+
+		// 3. Calcola l'errore (posizione e orientamento)
+		error_vector.head(3) = target_pos - current_pos;
+		error_vector.tail(3) = getOrientationError(target_orient, current_orient);
+
+		// 4. Controlla la convergenza
+		if (error_vector.head(3).norm() < position_tolerance &&
+			error_vector.tail(3).norm() < orientation_tolerance)
+		{
+			ROS_INFO("IK converged in %d iterations.", iter + 1);
+			ROS_INFO("Final q: [%.3f, %.3f, %.3f, %.3f, %.3f, %.3f, %.3f]",
+					 q_solution(0), q_solution(1), q_solution(2), q_solution(3), q_solution(4), q_solution(5), q_solution(6));
+			ROS_INFO("Final Pos Error: %.5f m, Orient Error: %.5f rad", error_vector.head(3).norm(), error_vector.tail(3).norm());
+			return true;
+		}
+
+		// 5. Ottieni la Jacobiana
+		J_ee = robot.get_J_ee(); // Chiama dopo set_q
+
+		// 6. Calcola il passo dei giunti (DLS: J_pinv_dls = J^T * (J * J^T + lambda^2 * I)^-1 )
+		// Eigen::MatrixXd I_6x6 = Eigen::MatrixXd::Identity(6, 6);
+		// Eigen::MatrixXd JJT_lambdaI = J_ee * J_ee.transpose() + lambda_damping * lambda_damping * I_6x6;
+		// delta_q = J_ee.transpose() * JJT_lambdaI.inverse() * error_vector;
+		delta_q = robot.get_J_ee_pinv() * error_vector;
+
+		// 7. Aggiorna gli angoli di giunto
+		q_solution += alpha_step * delta_q;
+
+		// 8. Applica i limiti di giunto
+		for (int j = 0; j < NJ; ++j)
+		{
+			q_solution(j) = std::max(q_lim_low[j], std::min(q_solution(j), q_lim_upp[j]));
+		}
+	}
+
+	ROS_ERROR("IK failed to converge after %d iterations.", max_iterations);
+	ROS_INFO("Last q: [%.3f, %.3f, %.3f, %.3f, %.3f, %.3f, %.3f]",
+			 q_solution(0), q_solution(1), q_solution(2), q_solution(3), q_solution(4), q_solution(5), q_solution(6));
+	ROS_INFO("Last Pos Error: %.5f m, Orient Error: %.5f rad", error_vector.head(3).norm(), error_vector.tail(3).norm());
+	return false;
+}
 
 const std::string conf_file = "../config/franka_conf.yaml";
 
@@ -101,7 +195,7 @@ int main(int argc, char **argv)
 	thunder_franka robot;
 	robot.load_conf(conf_file);
 	int NJ = robot.get_numJoints();
-	//cout << "NJ" << NJ << endl;
+	// cout << "NJ" << NJ << endl;
 	Eigen::VectorXd q(NJ), dq(NJ), dqr(NJ), ddqr(NJ);
 
 	ros::Publisher pub_cmd = node_handle.advertise<sensor_msgs::JointState>("/computed_torque_controller/command", 1000);
@@ -112,8 +206,9 @@ int main(int argc, char **argv)
 	sensor_msgs::JointState traj_msg;
 
 	// SET SLEEP TIME 1000 ---> 1 kHz
-	int frequenza=10; // Hz
+	int frequenza = 10; // Hz
 	ros::Rate loop_rate(frequenza);
+	ros::Rate loop_rate_controller(200);
 
 	srand(time(NULL));
 	double tf;
@@ -186,13 +281,14 @@ int main(int argc, char **argv)
 		{
 			cout << "-not implemented yet-" << endl;
 		}
+
 		else if (choice == 6)
 		{
 			tf = 10;
 
-			//q_int << -1.25962, -0.663669, -0.692637, -2.17138, -0.264125, 1.50759, 0.0630972; // Posizioni iniziali
+			// q_int << -1.25962, -0.663669, -0.692637, -2.17138, -0.264125, 1.50759, 0.0630972; // Posizioni iniziali
 
-			qf << -1.25962, -0.663669, -0.692637, -2.17138, -0.264125, 1.50759, 0.0630972; // Posizioni finali
+			qf << -0.688, -0.596, 1.379, -0.411, 1.210, 0.546, 2.614; // Posizioni finali
 
 			v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
 
@@ -227,6 +323,78 @@ int main(int argc, char **argv)
 			// cin >> af(5);
 			// cin >> af(6);
 		}
+		else if (choice == 7) // NUOVA OPZIONE PER POSA EE
+		{
+			Eigen::Vector3d target_ee_pos_input;
+			Eigen::Quaterniond target_ee_orient_input;
+			// Per semplicità, chiediamo angoli RPY (in gradi) e li convertiamo
+			double roll_deg, pitch_deg, yaw_deg;
+
+			cout << "Enter desired EE position (x y z) in meters: ";
+			cin >> target_ee_pos_input.x() >> target_ee_pos_input.y() >> target_ee_pos_input.z();
+
+			cout << "Enter desired EE orientation RPY (roll pitch yaw) in degrees: ";
+			cin >> roll_deg >> pitch_deg >> yaw_deg;
+
+			// Converti gradi in radianti
+			double roll_rad = roll_deg * M_PI / 180.0;
+			double pitch_rad = pitch_deg * M_PI / 180.0;
+			double yaw_rad = yaw_deg * M_PI / 180.0;
+
+			// Converti RPY in Quaternione (convenzione ZYX per RPY)
+			Eigen::AngleAxisd rollAngle(roll_rad, Eigen::Vector3d::UnitX());
+			Eigen::AngleAxisd pitchAngle(pitch_rad, Eigen::Vector3d::UnitY());
+			Eigen::AngleAxisd yawAngle(yaw_rad, Eigen::Vector3d::UnitZ());
+			target_ee_orient_input = yawAngle * pitchAngle * rollAngle;
+			target_ee_orient_input.normalize();
+
+			cout << "Target EE Position: " << target_ee_pos_input.transpose() << endl;
+			cout << "Target EE Orientation (Quaternion w,x,y,z): "
+				 << target_ee_orient_input.w() << ", "
+				 << target_ee_orient_input.x() << ", "
+				 << target_ee_orient_input.y() << ", "
+				 << target_ee_orient_input.z() << endl;
+
+			cout << "Enter duration (tf) for the movement: ";
+			cin >> tf;
+
+			ros::spinOnce(); //  q0 (stato attuale dei giunti) aggiornato
+			if (!init_q0)
+			{
+				ROS_ERROR("Initial joint states not received yet. Cannot solve IK.");
+				continue;
+			}
+
+			Eigen::Matrix<double, 7, 1> q_target_ik;
+			bool ik_solved = false;
+
+			// Chiama il solutore IK
+			// 'robot' è l'istanza della tua classe thunder_franka
+			ik_solved = solveIK_DLS(robot, // L'oggetto robot
+									target_ee_pos_input,
+									target_ee_orient_input,
+									q0,			 // Stima iniziale (configurazione corrente)
+									q_target_ik, // Output: soluzione q
+									q_lim_low,	 // Limiti inferiori dei giunti
+									q_lim_upp);	 // Limiti superiori dei giunti
+
+			if (ik_solved)
+			{
+				qf = q_target_ik; // Imposta la configurazione finale dei giunti
+				ROS_INFO_STREAM("IK successful. Target joint configuration: " << qf.transpose());
+				// Ora la logica di interpolazione esistente prenderà qf come target
+			}
+			else
+			{
+				ROS_ERROR("Failed to find IK solution for the desired pose. Skipping movement.");
+				// Stampa l'ultima configurazione q0 e la posa target per debugging
+				ROS_INFO_STREAM("Current q0 for IK: " << q0.transpose());
+				ROS_INFO_STREAM("Target EE Pos: " << target_ee_pos_input.transpose());
+				ROS_INFO_STREAM("Target EE Orient (quat w,x,y,z): " << target_ee_orient_input.w() << ", " << target_ee_orient_input.vec().transpose());
+				continue; // Torna al menu
+			}
+		}
+
 		if (!init_flag)
 		{
 			// cout << "frankino" << endl;
@@ -235,8 +403,8 @@ int main(int argc, char **argv)
 			init_flag = true;
 		}
 
-		int campioni = tf*frequenza+1; // Numero di campioni
-		int size_q = NJ * campioni; // Dimensione di q
+		int campioni = tf * frequenza + 1; // Numero di campioni
+		int size_q = NJ * campioni;		   // Dimensione di q
 		Eigen::VectorXd POS_INIT(NJ * campioni), VEL_INIT(NJ * campioni), ACC_INIT(NJ * campioni);
 
 		ros::spinOnce();
@@ -277,7 +445,7 @@ int main(int argc, char **argv)
 
 		if (choice == 6 && init_q0)
 		{
-			q_int=q0;
+			q_int = q0;
 
 			// cout << "q0 "<< q0 << endl;
 			// cout << "q_int " << q_int << endl;
@@ -287,7 +455,7 @@ int main(int argc, char **argv)
 			for (int i = 0; i < NJ; ++i)
 			{
 				joint_coeffs[i] = calculateCoefficients(q_int[i], qf[i], v0[i], vf[i], a0[i], af[i], t_init.toSec(), tf);
-				//std::cout << "coeffs: " << joint_coeffs[i][0] << ", " << joint_coeffs[i][1] << ", " << joint_coeffs[i][2] << ", " << joint_coeffs[i][3] << ", " << joint_coeffs[i][4] << ", " << joint_coeffs[i][5] << std::endl;
+				// std::cout << "coeffs: " << joint_coeffs[i][0] << ", " << joint_coeffs[i][1] << ", " << joint_coeffs[i][2] << ", " << joint_coeffs[i][3] << ", " << joint_coeffs[i][4] << ", " << joint_coeffs[i][5] << std::endl;
 			}
 			while (t <= tf)
 			{
@@ -298,11 +466,11 @@ int main(int argc, char **argv)
 
 					double pos, vel, acc;
 					calculateTrajectory(t, t_init.toSec(), joint_coeffs[i], pos, vel, acc);
-					//std::cout << "  Joint " << i << ": Pos = " << pos << ", Vel = " << vel << ", Acc = " << acc << std::endl;
-					// // In riga tutti i giunti e colonn i vari step
-					// POS(i, time_step) = pos;
-					// VEL(i, time_step) = vel;
-					// ACC(i, time_step) = acc;
+					// std::cout << "  Joint " << i << ": Pos = " << pos << ", Vel = " << vel << ", Acc = " << acc << std::endl;
+					//  // In riga tutti i giunti e colonn i vari step
+					//  POS(i, time_step) = pos;
+					//  VEL(i, time_step) = vel;
+					//  ACC(i, time_step) = acc;
 
 					// Incolonna e colleziona tutte le varibili di giunto per ogni step
 					POS_INIT(time_step * NJ + i) = pos;
@@ -315,8 +483,6 @@ int main(int argc, char **argv)
 					// ACC_INIT(i) = acc;
 				}
 
-				
-
 				// std::vector<double> pos_des{POS_INIT[time_step * NJ + 0], POS_INIT[time_step * NJ +1], POS_INIT[time_step * NJ +2], POS_INIT[time_step * NJ +3], POS_INIT[time_step * NJ +4], POS_INIT[time_step * NJ +5], POS_INIT[time_step * NJ +6]};
 				// traj_msg.position = pos_des;
 				// std::vector<double> vel_des{VEL_INIT[time_step * NJ +0], VEL_INIT[time_step * NJ +1], VEL_INIT[time_step * NJ +2], VEL_INIT[time_step * NJ +3], VEL_INIT[time_step * NJ +4], VEL_INIT[time_step * NJ +5], VEL_INIT[time_step * NJ +6]};
@@ -324,16 +490,13 @@ int main(int argc, char **argv)
 				// std::vector<double> acc_des{ACC_INIT[time_step * NJ +0], ACC_INIT[time_step * NJ +1], ACC_INIT[time_step * NJ +2], ACC_INIT[time_step * NJ +3], ACC_INIT[time_step * NJ +4], ACC_INIT[time_step * NJ +5], ACC_INIT[time_step * NJ +6]};
 				// traj_msg.effort = acc_des;
 				// pub_cmd.publish(traj_msg);
-				
+
 				time_step++;
 
 				loop_rate.sleep();
 
 				t = (ros::Time::now() - t_init).toSec();
-
-				
 			}
-
 
 			OptimizationData optData;
 			optData.robot; // Inizializza l'oggetto robot
@@ -344,7 +507,7 @@ int main(int argc, char **argv)
 			optData.vf = vf;
 			optData.af = af;
 			optData.size_q = size_q;
-			optData.dt = 1.0/frequenza; // Passo temporale
+			optData.dt = 1.0 / frequenza; // Passo temporale
 			optData.campioni = campioni;
 
 			// define the optimization problem
@@ -361,24 +524,21 @@ int main(int argc, char **argv)
 			ubddq = {15, 7.5, 10, 12.5, 15, 20, 20};
 
 			float tol = 4e-2;
-			int j=0;
 			// Vincoli sulle condizioni iniziali
-			if (j == 0)
+
+			for (int i = 0; i < NJ; i++)
 			{
-				for (int i = 0; i < NJ; i++)
-				{
-					lb[j * NJ + i] = q_int[i] - tol;
-					ub[j * NJ + i] = q_int[i] + tol;
-					lb[j * NJ + size_q + i] = v0[i] - tol;
-					ub[j * NJ + size_q + i] = v0[i] + tol;
-					lb[j * NJ + 2 * size_q + i] = a0[i] - tol;
-					ub[j * NJ + 2 * size_q + i] = a0[i] + tol;
-				}
+				lb[i] = q_int[i] - tol;
+				ub[i] = q_int[i] + tol;
+				lb[size_q + i] = v0[i] - tol;
+				ub[size_q + i] = v0[i] + tol;
+				lb[2 * size_q + i] = a0[i] - tol;
+				ub[2 * size_q + i] = a0[i] + tol;
 			}
 
 			// Vincoli sulle condizioni intermedie
 
-			for (int j = 1; j < campioni-1; j++)
+			for (int j = 1; j < campioni - 1; j++)
 			{
 				for (int i = 0; i < NJ; i++)
 				{
@@ -391,70 +551,66 @@ int main(int argc, char **argv)
 				}
 			}
 
-			j=campioni-1;
-
 			// Vincoli sulle condizioni finali
 
-			if(j==campioni-1)
+			for (int i = 0; i < NJ; i++)
 			{
-				for (int i = 0; i < NJ; i++)
-				{
-					lb[j * NJ + i] = qf[i] - tol;
-					//std::cout << "lb " << j * NJ + i << ":" << lb[j * NJ + i] << std::endl;
-					ub[j * NJ + i] = qf[i] + tol;
-					//std::cout << "ub " << j * NJ + i << ":" << ub[j * NJ + i] << std::endl;
-					lb[j * NJ + size_q + i] = vf[i] - tol;
-					//std::cout << "lb " << j * NJ + size_q + i << ":" << lb[j * NJ + size_q + i] << std::endl;
-					ub[j * NJ + size_q + i] = vf[i] + tol;
-					//std::cout << "ub " << j * NJ + size_q + i << ":" << ub[j * NJ + size_q + i] << std::endl;
-					lb[j * NJ + 2 * size_q + i] = af[i] - tol;
-					//std::cout << "lb " << j * NJ + 2 * size_q + i << ":" << lb[j * NJ + 2 * size_q + i] << std::endl;
-					ub[j * NJ + 2 * size_q + i] = af[i] + tol;
-					//std::cout << "ub " << j * NJ + 2 * size_q + i << ":" << ub[j * NJ + 2 * size_q + i] << std::endl;
-				}
+				lb[(campioni - 1) * NJ + i] = qf[i] - tol;
+				// std::cout << "lb " << j * NJ + i << ":" << lb[j * NJ + i] << std::endl;
+				ub[(campioni - 1) * NJ + i] = qf[i] + tol;
+				// std::cout << "ub " << j * NJ + i << ":" << ub[j * NJ + i] << std::endl;
+				lb[(campioni - 1) * NJ + size_q + i] = vf[i] - tol;
+				// std::cout << "lb " << j * NJ + size_q + i << ":" << lb[j * NJ + size_q + i] << std::endl;
+				ub[(campioni - 1) * NJ + size_q + i] = vf[i] + tol;
+				// std::cout << "ub " << j * NJ + size_q + i << ":" << ub[j * NJ + size_q + i] << std::endl;
+				lb[(campioni - 1) * NJ + 2 * size_q + i] = af[i] - tol;
+				// std::cout << "lb " << j * NJ + 2 * size_q + i << ":" << lb[j * NJ + 2 * size_q + i] << std::endl;
+				ub[(campioni - 1) * NJ + 2 * size_q + i] = af[i] + tol;
+				// std::cout << "ub " << j * NJ + 2 * size_q + i << ":" << ub[j * NJ + 2 * size_q + i] << std::endl;
 			}
 
 			// for (int i = 0; i < lb.size(); i++)
 			// {
 			// 	std::cout << "lb" << i << ": " << lb[i]<<" ---- " << "ub" << i <<": " << ub[i] << std::endl;
 			// }
-			
+
 			opt.set_upper_bounds(ub);
 			opt.set_lower_bounds(lb);
-			
+
 			std::vector<ConsistencyConstraintIneq> constraints;
-			double dt=1.0/frequenza;
+			double dt = 1.0 / frequenza;
 			const double eps = 4e-2;
 
 			int numero_totale_vincoli = (campioni - 1) * 6; // <-- Calcola il numero totale
 
-			if (numero_totale_vincoli > 0) { //evita di chiamare reserve(0)
+			if (numero_totale_vincoli > 0)
+			{ // evita di chiamare reserve(0)
 				constraints.reserve(numero_totale_vincoli);
 			}
 
-			for (int k = 0; k < campioni-1; k++) {
+			for (int k = 0; k < campioni - 1; k++)
+			{
 				// Posizione
 				constraints.push_back({k, NJ, size_q, dt, 0, +1});
 				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
-			
+
 				constraints.push_back({k, NJ, size_q, dt, 0, -1});
 				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
-			
+
 				// Velocità
 				constraints.push_back({k, NJ, size_q, dt, 1, +1});
 				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
-			
+
 				constraints.push_back({k, NJ, size_q, dt, 1, -1});
 				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
-			
+
 				// Accelerazione
 				constraints.push_back({k, NJ, size_q, dt, 2, +1});
 				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
-			
+
 				constraints.push_back({k, NJ, size_q, dt, 2, -1});
 				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 			}
-			
 
 			// define the initial guess
 			std::vector<double> vettore(3 * NJ * campioni); // Inizializza il vettore x
@@ -468,46 +624,110 @@ int main(int argc, char **argv)
 			double minf;
 			nlopt::result result = opt.optimize(vettore, minf);
 
-			// Print the optimized values
-			printf("Optimized values:\n");
-			printf("q_opt:\n");
-			for (int i = 0; i < 3*POS_INIT.size(); i++)
-			{	
-				if(i== POS_INIT.size())
-				{
-					printf("\n dq_opt:\n");
-				}
-				if(i== 2*POS_INIT.size())
-				{
-					printf("\nddq_opt:\n");
-				}
-				printf("%g ", vettore[i]);
-				printf(",\n");
 
+
+
+
+			
+			// Traiettoria fianale smussata
+
+			for (int j = 0; j < campioni - 1; j++)
+			{
+				double t_start = ros::Time::now().toSec();
+				// Calcolo dei coefficienti per ciascun giunto
+				std::vector<std::vector<double>> joint_coeffs(NJ);
+				for (int i = 0; i < NJ; ++i)
+				{
+					q_int(i) = vettore[j * NJ + i];
+					qf(i) = vettore[(j + 1) * NJ + i];
+					v0(i) = vettore[j * NJ + size_q + i];
+					vf(i) = vettore[(j + 1) * NJ + size_q + i];
+					a0(i) = vettore[j * NJ + 2 * size_q + i];
+					af(i) = vettore[(j + 1) * NJ + 2 * size_q + i];
+					tf = t_start + 1.0 / frequenza;
+					joint_coeffs[i] = calculateCoefficients(q_int[i], qf[i], v0[i], vf[i], a0[i], af[i], t_start, tf);
+					// std::cout << "coeffs: " << joint_coeffs[i][0] << ", " << joint_coeffs[i][1] << ", " << joint_coeffs[i][2] << ", " << joint_coeffs[i][3] << ", " << joint_coeffs[i][4] << ", " << joint_coeffs[i][5] << std::endl;
+				}
+
+				t = (ros::Time::now().toSec() - t_start);
+
+				while (t <= t_start + 1.0 / frequenza)
+				{
+
+					for (int i = 0; i < NJ; i++)
+					{
+
+						double pos, vel, acc;
+						calculateTrajectory(t, t_init.toSec(), joint_coeffs[i], pos, vel, acc);
+						// std::cout << "  Joint " << i << ": Pos = " << pos << ", Vel = " << vel << ", Acc = " << acc << std::endl;
+						//  // In riga tutti i giunti e colonn i vari step
+						//  POS(i, time_step) = pos;
+						//  VEL(i, time_step) = vel;
+						//  ACC(i, time_step) = acc;
+
+						// Incolonna e colleziona tutte le varibili di giunto per ogni step
+						POS_INIT(j * NJ + i) = pos;
+						VEL_INIT(j * NJ + i) = vel;
+						ACC_INIT(j * NJ + i) = acc;
+
+						// // Incolonna tutte le varibili di giunto ad ogni step
+						// POS_INIT(i) = pos;
+						// VEL_INIT(i) = vel;
+						// ACC_INIT(i) = acc;
+					}
+					std::vector<double> pos_des{POS_INIT[j * NJ + 0], POS_INIT[j * NJ + 1], POS_INIT[j * NJ + 2], POS_INIT[j * NJ + 3], POS_INIT[j * NJ + 4], POS_INIT[j * NJ + 5], POS_INIT[j * NJ + 6]};
+					traj_msg.position = pos_des;
+					std::vector<double> vel_des{VEL_INIT[j * NJ + 0], VEL_INIT[j * NJ + 1], VEL_INIT[j * NJ + 2], VEL_INIT[j * NJ + 3], VEL_INIT[j * NJ + 4], VEL_INIT[j * NJ + 5], VEL_INIT[j * NJ + 6]};
+					traj_msg.velocity = vel_des;
+					std::vector<double> acc_des{ACC_INIT[j * NJ + 0], ACC_INIT[j * NJ + 1], ACC_INIT[j * NJ + 2], ACC_INIT[j * NJ + 3], ACC_INIT[j * NJ + 4], ACC_INIT[j * NJ + 5], ACC_INIT[j * NJ + 6]};
+					traj_msg.effort = acc_des;
+					pub_cmd.publish(traj_msg);
+
+					loop_rate_controller.sleep();
+
+					t = (ros::Time::now().toSec() - t_start);
+					 std::cout << "Time: " << t << std::endl;
+				}
 			}
 
-
-			std::cout << "time_step:" << time_step << std::endl;
-			// for (int i = 0; i < NJ * campioni; i++)
+			// // Print the optimized values
+			// printf("Optimized values:\n");
+			// printf("q_opt:\n");
+			// for (int i = 0; i < 3 * POS_INIT.size(); i++)
 			// {
-			// 	std::cout << "POS_INIT: " << i << ": " << POS_INIT[i] << endl;
+			// 	if (i == POS_INIT.size())
+			// 	{
+			// 		printf("\n dq_opt:\n");
+			// 	}
+			// 	if (i == 2 * POS_INIT.size())
+			// 	{
+			// 		printf("\nddq_opt:\n");
+			// 	}
+			// 	printf("%g ", vettore[i]);
+			// 	printf(",\n");
 			// }
 
-			time_step = 0;
-		while (time_step < campioni)
-		{
-			std::vector<double> pos_des{vettore[time_step * NJ + 0], vettore[time_step * NJ +1], vettore[time_step * NJ +2], vettore[time_step * NJ +3], vettore[time_step * NJ +4], vettore[time_step * NJ +5], vettore[time_step * NJ +6]};
-				traj_msg.position = pos_des;
-				std::vector<double> vel_des{vettore[NJ*campioni+time_step * NJ +0], vettore[NJ*campioni+time_step * NJ +1], vettore[NJ*campioni+time_step * NJ +2],vettore[NJ*campioni+time_step * NJ +3], vettore[NJ*campioni+time_step * NJ +4], vettore[NJ*campioni+time_step * NJ +5], vettore[NJ*campioni+time_step * NJ +6]};
-				traj_msg.velocity = vel_des;
-				std::vector<double> acc_des{vettore[2*NJ*campioni+time_step * NJ +0], vettore[2*NJ*campioni+time_step * NJ +1], vettore[2*NJ*campioni+time_step * NJ +2],vettore[2*NJ*campioni+time_step * NJ +3], vettore[2*NJ*campioni+time_step * NJ +4], vettore[2*NJ*campioni+time_step * NJ +5], vettore[2*NJ*campioni+time_step * NJ +6]};
-				traj_msg.effort = acc_des;
-				pub_cmd.publish(traj_msg);
-			time_step++;
+			// std::cout << "time_step:" << time_step << std::endl;
+			// // for (int i = 0; i < NJ * campioni; i++)
+			// // {
+			// // 	std::cout << "POS_INIT: " << i << ": " << POS_INIT[i] << endl;
+			// // }
 
+			// time_step = 0;
+			// while (time_step < campioni)
+			// {
+			// 	std::vector<double> pos_des{vettore[time_step * NJ + 0], vettore[time_step * NJ + 1], vettore[time_step * NJ + 2], vettore[time_step * NJ + 3], vettore[time_step * NJ + 4], vettore[time_step * NJ + 5], vettore[time_step * NJ + 6]};
+			// 	traj_msg.position = pos_des;
+			// 	std::vector<double> vel_des{vettore[NJ * campioni + time_step * NJ + 0], vettore[NJ * campioni + time_step * NJ + 1], vettore[NJ * campioni + time_step * NJ + 2], vettore[NJ * campioni + time_step * NJ + 3], vettore[NJ * campioni + time_step * NJ + 4], vettore[NJ * campioni + time_step * NJ + 5], vettore[NJ * campioni + time_step * NJ + 6]};
+			// 	traj_msg.velocity = vel_des;
+			// 	std::vector<double> acc_des{vettore[2 * NJ * campioni + time_step * NJ + 0], vettore[2 * NJ * campioni + time_step * NJ + 1], vettore[2 * NJ * campioni + time_step * NJ + 2], vettore[2 * NJ * campioni + time_step * NJ + 3], vettore[2 * NJ * campioni + time_step * NJ + 4], vettore[2 * NJ * campioni + time_step * NJ + 5], vettore[2 * NJ * campioni + time_step * NJ + 6]};
+			// 	traj_msg.effort = acc_des;
+			// 	pub_cmd.publish(traj_msg);
+			// 	time_step++;
+			// 	loop_rate.sleep();
+			// 	// aggiungendo il loop_rate.sleep() si hanno accelerazioni più basse o più alte se lo si toglie
+			// }
 		}
-		}
-		
 	}
 	return 0;
 }
