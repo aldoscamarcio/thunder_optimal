@@ -8,7 +8,7 @@ const std::string conf_file = "../robots/franka_conf.yaml";
 
 std::vector<double> calculateCoefficients(double q0, double qf, double v0, double vf, double a0, double af, double t0, double tf)
 {
-    double T = tf ;
+    double T = tf;
 
     double c0 = q0;
     double c1 = v0;
@@ -22,7 +22,7 @@ std::vector<double> calculateCoefficients(double q0, double qf, double v0, doubl
 
 void calculateTrajectory(double t, double t0, const std::vector<double> &coeffs, double &pos, double &vel, double &acc)
 {
-    double dt = t ;
+    double dt = t;
 
     pos = coeffs[0] + coeffs[1] * dt + coeffs[2] * pow(dt, 2) + coeffs[3] * pow(dt, 3) + coeffs[4] * pow(dt, 4) + coeffs[5] * pow(dt, 5);
     vel = coeffs[1] + 2 * coeffs[2] * dt + 3 * coeffs[3] * pow(dt, 2) + 4 * coeffs[4] * pow(dt, 3) + 5 * coeffs[5] * pow(dt, 4);
@@ -97,7 +97,8 @@ double objective(const std::vector<double> &x, std::vector<double> &grad, void *
 }
 
 // Funzione per i vincoli
-double consistency_ineq(unsigned n, const double *x, double *grad, void *data) {
+double consistency_ineq(unsigned n, const double *x, double *grad, void *data)
+{
     ConsistencyConstraintIneq *c = reinterpret_cast<ConsistencyConstraintIneq *>(data);
     int k = c->k;
     int NJ = c->NJ;
@@ -107,29 +108,79 @@ double consistency_ineq(unsigned n, const double *x, double *grad, void *data) {
     int sgn = c->sign;
 
     double val = 0.0;
-    for (int j = 0; j < NJ; ++j) {
-        if (type == 0) {
+    for (int j = 0; j < NJ; ++j)
+    {
+        if (type == 0)
+        {
             // Posizione: q_{k+1} - q_k - dq_k * dt
             // std::cout <<"sono nel ciclo dei vincoli: "<< k << " type: "<< type << std::endl;
-            int qk   = k * NJ + j;
-            int qkp  = (k + 1) * NJ + j;
-            int dqk  = size_q + k * NJ + j;
+            int qk = k * NJ + j;
+            int qkp = (k + 1) * NJ + j;
+            int dqk = size_q + k * NJ + j;
             val += sgn * (x[qkp] - x[qk] - x[dqk] * dt);
-        } else if (type == 1) {
+        }
+        else if (type == 1)
+        {
             // Velocità: dq_{k+1} - dq_k - ddq_k * dt
             // std::cout <<"sono nel ciclo dei vincoli:  "<< k << " type: "<< type << std::endl;
-            int dqk   = size_q + k * NJ + j;
-            int dqkp  = size_q + (k + 1) * NJ + j;
-            int ddqk  = 2 * size_q + k * NJ + j;
+            int dqk = size_q + k * NJ + j;
+            int dqkp = size_q + (k + 1) * NJ + j;
+            int ddqk = 2 * size_q + k * NJ + j;
             val += sgn * (x[dqkp] - x[dqk] - x[ddqk] * dt);
-        } else if (type == 2) {
+        }
+        else if (type == 2)
+        {
             // Accelerazione: ddq_{k+1} - ddq_k
             // std::cout <<"sono nel ciclo dei vincoli:  "<< k << " type: "<< type << std::endl;
-            int ddqk   = 2 * size_q + k * NJ + j;
-            int ddqkp  = 2 * size_q + (k + 1) * NJ + j;
+            int ddqk = 2 * size_q + k * NJ + j;
+            int ddqkp = 2 * size_q + (k + 1) * NJ + j;
             val += sgn * (x[ddqkp] - x[ddqk]);
         }
     }
 
     return val;
+}
+
+// Vincolo per evitare la sfera
+
+double avoid_sphere(const std::vector<double> &x, std::vector<double> &grad, void *data)
+{
+    ObstacleConstraintIneq *c = reinterpret_cast<ObstacleConstraintIneq *>(data);
+
+    int k = c->k;
+    int NJ = c->NJ;
+    double r_s = c->r_s;
+    double d_safe = c->d_safe;
+    Eigen::Vector3d p_obs = c->p_obs;
+
+    std::cout << "k: " << k << std::endl;
+    std::cout << "NJ: " << NJ << std::endl;
+    std::cout << "r_s: " << r_s << std::endl;
+    std::cout << "d_safe: " << d_safe << std::endl;
+    std::cout << "p_obs: " << p_obs.transpose() << std::endl;
+
+    int offset_q = 0; // inizio del blocco posizioni
+    int index = offset_q + k * NJ;
+
+    Eigen::VectorXd q(NJ);
+    for (int i = 0; i < NJ; i++)
+    {
+        q[i] = x[index + i];
+    }
+
+    // // std::cout<<"q: " << q << std::endl;
+
+    // // Usa la funzione del tuo robot per ottenere la posizione dell’end-effector
+    // std::cout << "Trying to set q of size: " << q.size() << std::endl;
+    // std::cout << "Expected n_joints: " << c->NJ<< std::endl;
+
+    c->robot.set_q(q);
+    Eigen::MatrixXd T = c->robot.get_T_0_ee();
+    Eigen::Vector3d p_robot = T.block<3, 1>(0, 3);
+
+    double distance = (p_robot - c->p_obs).norm();
+
+    std::cout << "distance: " << (c->r_s + c->d_safe) - distance << std::endl;
+
+    return (c->r_s + c->d_safe) - distance;
 }

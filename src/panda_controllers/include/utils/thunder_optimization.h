@@ -21,8 +21,22 @@ struct OptimizationData
     int campioni;
 };
 
+struct ObstacleConstraintIneq {
+    int k;
+    int NJ;
+    double r_s;
+    double d_safe;
+    Eigen::Vector3d p_obs;
+    thunder_franka robot;
 
-struct ConsistencyConstraintIneq {
+    ObstacleConstraintIneq(int k_, int NJ_, double r_s_, double d_safe_,
+                           const Eigen::Vector3d& p_obs_, thunder_franka robot_)
+        : k(k_), NJ(NJ_), r_s(r_s_), d_safe(d_safe_), p_obs(p_obs_), robot(robot_) {}
+};
+
+
+struct ConsistencyConstraintIneq
+{
     int k;
     int NJ;
     int size_q;
@@ -35,6 +49,9 @@ struct ConsistencyConstraintIneq {
 double objective(const std::vector<double> &x, std::vector<double> &grad, void *data);
 
 // Funzione per i vincoli
-double consistency_ineq(unsigned n, const double *x, double *grad, void *data) ;
+double consistency_ineq(unsigned n, const double *x, double *grad, void *data);
+
+// Funzione per evitare ostacoli sferici
+double avoid_sphere(const std::vector<double> &x, std::vector<double> &grad, void *data);
 
 #endif // THUNDER_OPTIMIZATION_H
