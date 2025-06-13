@@ -10,7 +10,9 @@ find_package(catkin REQUIRED COMPONENTS
 	controller_interface
 	dynamic_reconfigure
 	franka_hw
+	tf2_ros
 	geometry_msgs
+	nav_msgs
 	franka_msgs
 	hardware_interface
 	# message_generation #
@@ -95,7 +97,6 @@ add_library(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
-	# ${Franka_LIBRARIES} #
 	${catkin_LIBRARIES}
 	yaml-cpp
 	nlopt
@@ -121,6 +122,14 @@ target_link_libraries(menu
 	${NLOPT_LIBRARIES}
 	yaml-cpp
 )
+
+add_executable(traj_pub src/traj_pub.cpp)
+target_link_libraries(traj_pub ${PROJECT_NAME}
+	${catkin_LIBRARIES}
+	${NLOPT_LIBRARIES}
+	yaml-cpp
+)
+
 
 # add_dependencies(menu
 # 	${${PROJECT_NAME}_EXPORTED_TARGETS} 

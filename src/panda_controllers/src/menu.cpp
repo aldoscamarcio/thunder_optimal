@@ -49,10 +49,10 @@ bool solveIK_DLS(
 	Eigen::Matrix<double, 7, 1> &q_solution,
 	const double q_lim_low[],			 // Passa i limiti
 	const double q_lim_upp[],			 // Passa i limiti
-	int max_iterations = 200,			 // Numero massimo di iterazioni
-	double position_tolerance = 1e-4,	 // 0.1 mm
-	double orientation_tolerance = 1e-3, // ~0.05 gradi (rad)
-	double lambda_damping = 0.1,		 // Fattore di smorzamento
+	int max_iterations = 1000,			 // Numero massimo di iterazioni
+	double position_tolerance = 1e-3,	 // 0.1 mm
+	double orientation_tolerance = 1e-2, // ~0.05 gradi (rad)
+	double lambda_damping = 0.5,		 // Fattore di smorzamento
 	double alpha_step = 0.5)			 // Dimensione del passo
 {
 	q_solution = q_initial_guess;
@@ -200,11 +200,12 @@ int main(int argc, char **argv)
 	thunder_franka robot;
 	robot.load_conf(conf_file);
 	int NJ = robot.get_numJoints();
-	// cout << "NJ" << NJ << endl;
 	Eigen::VectorXd q(NJ), dq(NJ), dqr(NJ), ddqr(NJ);
 
 	ros::Publisher pub_cmd = node_handle.advertise<sensor_msgs::JointState>("/computed_torque_controller/command", 1000);
 	ros::Subscriber sub_joints = node_handle.subscribe<sensor_msgs::JointState>("/franka_state_controller/joint_states", 1, &jointsCallback);
+	// ros::Publisher path_pub = node_handle.advertise<nav_msgs::Path>("/end_effector_path", 1);
+
 	// ros::Subscriber sub_pose =  node_handle.subscribe("/franka_state_controller/franka_ee_pose", 1, &poseCallback);
 
 	// creating trajectory message
@@ -247,7 +248,7 @@ int main(int argc, char **argv)
 		}
 		else
 		{
-			cout << "choice:   (1: joints min-jerk,  2: go toDouble() init,  3: go toDouble() random  4: yaml 6: optimal_min-jerk 7:go to (x y z r p y) " << endl;
+			cout << "choice:   (1: joints min-jerk,  2: go to init,  3: go to random  4: yaml 6: optimal_min-jerk 7: go to (x y z r p y)" << endl;
 			cin >> choice;
 		}
 		if (choice == 1)
@@ -401,7 +402,7 @@ int main(int argc, char **argv)
 				// Ora la logica di interpolazione esistente prenderà qf come target
 				choice = 6; // Imposta choice a 6 per usare l'interpolazione min-jerk
 
-				ROS_INFO_STREAM("TF for movement: " << tf << " seconds");
+				ROS_INFO_STREAM("Tf for movement: " << tf << " seconds");
 
 				v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
 
@@ -418,7 +419,21 @@ int main(int argc, char **argv)
 				ROS_INFO_STREAM("Current q0 for IK: " << q0.transpose());
 				ROS_INFO_STREAM("Target EE Pos: " << target_ee_pos_input.transpose());
 				ROS_INFO_STREAM("Target EE Orient (quat w,x,y,z): " << target_ee_orient_input.w() << ", " << target_ee_orient_input.vec().transpose());
-				continue; // Torna al menu
+				
+				ROS_INFO_STREAM("Force IK with error. Target joint configuration: " << qf.transpose());
+				ROS_INFO_STREAM("Tf for movement: " << tf << " seconds");
+				qf = q_target_ik; 
+				choice = 6; // Imposta choice a 6 comunque per usare l'interpolazione min-jerk
+
+				v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
+
+				vf << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità finali
+
+				a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
+
+				af << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni finali
+
+				// continue; // Torna al menu
 			}
 		}
 
@@ -559,8 +574,9 @@ int main(int argc, char **argv)
 
 			// define the optimization problem
 			nlopt::opt opt(nlopt::LD_MMA, 3 * NJ * campioni);
+			opt.set_maxtime(15.0);  // Tempo in secondi
 			opt.set_min_objective(objective, &optData);
-			opt.set_xtol_rel(1e-4);
+			opt.set_xtol_rel(1e-3); // Tolleranza di convergenza
 
 			float tol = 4e-2;
 			// Vincoli sulle condizioni iniziali
@@ -619,10 +635,10 @@ int main(int argc, char **argv)
 
 			const double r_s = 0.05;	   // raggio ostacolo
 			const double d_safe = 0.1; // margine sicurezza
-			Eigen::Vector3d p_ostacolo(0.25, 0.25, 0.8);
+			Eigen::Vector3d p_ostacolo(0.11, -0.31, 0.45);
 
 			if (numero_totale_vincoli > 0)
-			{ // evita di chiamare reserve(0)
+			{ 
 				constraints.reserve(numero_totale_vincoli);
 			}
 
@@ -649,7 +665,7 @@ int main(int argc, char **argv)
 				constraints.push_back({k, NJ, size_q, optData.dt, 2, -1});
 				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 
-				// --- Vincolo di evitamento ostacolo (sfera) ---
+				//  Vincolo di evitamento ostacolo (sfera)
 				auto c = std::make_shared<ObstacleConstraintIneq>(k, NJ, r_s, d_safe, p_ostacolo, robot);
 				sphere_constraints.push_back(c);
 				opt.add_inequality_constraint(avoid_sphere, c.get(), eps);
@@ -668,9 +684,21 @@ int main(int argc, char **argv)
 			}
 
 			double minf;
+			try {
 			nlopt::result result = opt.optimize(vettore, minf);
+			std::cout << "Ottimizzazione eseguita" << std::endl;
+			std::cout << "Costo minimo: " << minf << std::endl;
 
-			// Traiettoria fianale smussata
+			if (result == nlopt::MAXTIME_REACHED) {
+            std::cout << "Timeout raggiunto! Soluzione subottima" << std::endl;
+        	} else {
+            std::cout << "Convergenza raggiunta. Soluzione ottimale" << std::endl;
+        	}
+			} catch (std::exception& e) {
+        std::cerr << "Errore: " << e.what() << std::endl;
+    		}
+
+			// Traiettoria finale smussata
 			int count = 1;
 			for (int j = 0; j < campioni - 1; j++)
 			{
@@ -687,12 +715,9 @@ int main(int argc, char **argv)
 					af(i) = vettore[(j + 1) * NJ + 2 * size_q + i];
 					tf = t_start + 1.0 / frequenza;
 					joint_coeffs[i] = calculateCoefficients(q_int[i], qf[i], v0[i], vf[i], a0[i], af[i], t_start, tf);
-					// std::cout << "coeffs: " << joint_coeffs[i][0] << ", " << joint_coeffs[i][1] << ", " << joint_coeffs[i][2] << ", " << joint_coeffs[i][3] << ", " << joint_coeffs[i][4] << ", " << joint_coeffs[i][5] << std::endl;
 				}
 
 				t = t_start;
-				// std::cout << "tempo_inizio" << t_start << std::endl;
-				// std::cout << "tempo_fine" << tf << std::endl;
 
 				while (t <= tf)
 				{

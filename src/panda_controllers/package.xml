@@ -28,12 +28,15 @@
 	<depend>pluginlib</depend>
 	<depend>realtime_tools</depend>
 	<depend>roscpp</depend>
+	<depend>visualization_msgs</depend>
+
 
 	<exec_depend>franka_control</exec_depend>
 	<exec_depend>franka_description</exec_depend>
 	<exec_depend>message_runtime</exec_depend>
 	<exec_depend>panda_moveit_config</exec_depend>
 	<exec_depend>rospy</exec_depend>
+
 
 	<export>
 		<controller_interface plugin="${prefix}/panda_controllers_plugin.xml"/>
