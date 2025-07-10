@@ -11,7 +11,7 @@
     </include>
 
     <model name="palla">
-      <pose>0.11 -0.31 0.45 0 0 0</pose> <link name="link">
+      <pose>0.11 -0.31 0.56 0 0 0</pose> <link name="link">
       <gravity>0</gravity>
         <visual name="visual">
           <geometry>
@@ -27,7 +27,7 @@
         <collision name="collision">
           <geometry>
             <sphere>
-              <radius>0.01</radius>
+              <radius>0.05</radius>
             </sphere>
           </geometry>
         </collision>

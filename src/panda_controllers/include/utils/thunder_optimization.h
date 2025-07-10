@@ -28,12 +28,12 @@ struct ObstacleConstraintIneq {
     double d_safe;
     Eigen::Vector3d p_obs;
     thunder_franka robot;
+    
 
     ObstacleConstraintIneq(int k_, int NJ_, double r_s_, double d_safe_,
                            const Eigen::Vector3d& p_obs_, thunder_franka robot_)
         : k(k_), NJ(NJ_), r_s(r_s_), d_safe(d_safe_), p_obs(p_obs_), robot(robot_) {}
 };
-
 
 struct ConsistencyConstraintIneq
 {
@@ -43,7 +43,15 @@ struct ConsistencyConstraintIneq
     double dt;
     int type; // 0 = posizione, 1 = velocità 2 = accelerazione
     int sign; // +1 o -1 per la forma della disuguaglianza
+    int campioni; // Numero di campioni per la traiettoria
 };
+
+struct LinkDistanceResult {
+    std::vector<double> distances;
+    int closest_link_index;
+    double min_distance;
+};
+
 
 // Funzione obiettivo per l'ottimizzazione
 double objective(const std::vector<double> &x, std::vector<double> &grad, void *data);
@@ -53,5 +61,19 @@ double consistency_ineq(unsigned n, const double *x, double *grad, void *data);
 
 // Funzione per evitare ostacoli sferici
 double avoid_sphere(const std::vector<double> &x, std::vector<double> &grad, void *data);
+
+// Funzione per evitare ostacoli sferici con gradiente
+double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<double> &grad, void *data);
+
+// Funzione per calcolare le distanze dei link da un punto (ostacolo)
+LinkDistanceResult compute_link_distances_to_point(
+    const Eigen::VectorXd& q,
+    const Eigen::VectorXd& dq,
+    const Eigen::VectorXd& ddq,
+    const Eigen::Vector3d& p_obs,
+    thunder_franka& robot
+);
+
+
 
 #endif // THUNDER_OPTIMIZATION_H

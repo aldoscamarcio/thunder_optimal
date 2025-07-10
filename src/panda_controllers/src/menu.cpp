@@ -168,30 +168,6 @@ void interpolator_pos(Eigen::Matrix<double, 7, 1> pos_i, Eigen::Matrix<double, 7
 	traj.acc_des << (pos_i - pos_f) * (180 * (pow(t, 2) / pow(tf, 4)) - 120 * (pow(t, 3) / pow(tf, 5)) - 60 * (t / pow(tf, 3)));
 }
 
-// void demo_inf_XY(Eigen::Vector3d pos_i, double t){
-// 	Eigen::Vector3d tmp;
-// 	tmp << sin(t)/8, sin(t/2)/4, 0;
-// 	traj.pos_des << pos_i + tmp;
-// 	traj.vel_des << cos(t)/8, cos(t/2)/8, 0;
-// 	traj.acc_des << -sin(t)/8, -sin(t/2)/16, 0;
-// }
-
-// void demo_inf_XYZ(Eigen::Vector3d pos_i, double t,double zf,double tf){
-// 	Eigen::Vector3d tmp;
-// 	tmp << sin(t)/8, sin(t/2)/4, ((zf-pos_i(2))/tf)*t;
-// 	traj.pos_des << pos_i + tmp;
-// 	traj.vel_des << cos(t)/8, cos(t/2)/8, (zf-pos_i(2))/tf;
-// 	traj.acc_des << -sin(t)/8, -sin(t/2)/16, 0;
-// }
-
-// void demo_circle_xy(Eigen::Vector3d pos_i, double t,double zf,double tf){
-//   Eigen::Vector3d tmp;
-//   tmp << 0.1*cos(t), 0.1*sin(t), ((zf-pos_i(2))/tf)*t;
-//   traj.pos_des << pos_i + tmp;
-//   traj.vel_des << -0.1*sin(t), 0.1*cos(t), (zf-pos_i(2))/tf;
-//   traj.acc_des << -0.1*cos(t), -0.1*sin(t), 0;
-// }
-
 int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "menu");
@@ -214,7 +190,8 @@ int main(int argc, char **argv)
 	// SET SLEEP TIME 1000 ---> 1 kHz
 	double frequenza = 10; // Hz
 	ros::Rate loop_rate(frequenza);
-	ros::Rate loop_rate_controller(200); // Hz
+	double frequenza_controller = 200; // Hz
+	ros::Rate loop_rate_controller(frequenza_controller); // Hz
 
 	srand(time(NULL));
 	double tf;
@@ -346,11 +323,19 @@ int main(int argc, char **argv)
 			// Per semplicità, chiediamo angoli RPY (in gradi) e li convertiamo
 			double roll_deg, pitch_deg, yaw_deg;
 
-			cout << "Enter desired EE position (x y z) in meters: ";
-			cin >> target_ee_pos_input.x() >> target_ee_pos_input.y() >> target_ee_pos_input.z();
+			target_ee_pos_input.x()=0.31; // Posizione EE desiderata in metri	
+			target_ee_pos_input.y()=-0.21;
+			target_ee_pos_input.z()=0.56;
 
-			cout << "Enter desired EE orientation RPY (roll pitch yaw) in degrees: ";
-			cin >> roll_deg >> pitch_deg >> yaw_deg;
+			roll_deg = -169.0; // Angolo roll in gradi
+			pitch_deg = 0.3; // Angolo pitch in gradi
+			yaw_deg = 62.6; // Angolo yaw in gradi
+
+			// cout << "Enter desired EE position (x y z) in meters: ";
+			// cin >> target_ee_pos_input.x() >> target_ee_pos_input.y() >> target_ee_pos_input.z();
+
+			// cout << "Enter desired EE orientation RPY (roll pitch yaw) in degrees: ";
+			// cin >> roll_deg >> pitch_deg >> yaw_deg;
 
 			// Converti gradi in radianti
 			double roll_rad = roll_deg * M_PI / 180.0;
@@ -399,7 +384,7 @@ int main(int argc, char **argv)
 				qf = q_target_ik; // Imposta la configurazione finale dei giunti
 				ROS_INFO_STREAM("IK successful. Target joint configuration: " << qf.transpose());
 
-				// Ora la logica di interpolazione esistente prenderà qf come target
+				// Ora la logica di ottimizzazione esistente prenderà qf come target
 				choice = 6; // Imposta choice a 6 per usare l'interpolazione min-jerk
 
 				ROS_INFO_STREAM("Tf for movement: " << tf << " seconds");
@@ -415,6 +400,7 @@ int main(int argc, char **argv)
 			else
 			{
 				ROS_ERROR("Failed to find IK solution for the desired pose. Skipping movement.");
+
 				// Stampa l'ultima configurazione q0 e la posa target per debugging
 				ROS_INFO_STREAM("Current q0 for IK: " << q0.transpose());
 				ROS_INFO_STREAM("Target EE Pos: " << target_ee_pos_input.transpose());
@@ -423,6 +409,7 @@ int main(int argc, char **argv)
 				ROS_INFO_STREAM("Force IK with error. Target joint configuration: " << qf.transpose());
 				ROS_INFO_STREAM("Tf for movement: " << tf << " seconds");
 				qf = q_target_ik; 
+				
 				choice = 6; // Imposta choice a 6 comunque per usare l'interpolazione min-jerk
 
 				v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
@@ -563,7 +550,7 @@ int main(int argc, char **argv)
 			optData.dt = 1.0 / frequenza; // Passo temporale
 			optData.campioni = campioni;
 
-			// define q0,dq, ddq as 7x1 matrix
+			// Imposto vettori limiti superiori e inferiori per i vincoli
 			std::vector<double> ub(3 * NJ * campioni), lb(3 * NJ * campioni), ubq(NJ), lbq(NJ), ubdq(NJ), lbdq(NJ), ubddq(NJ), lbddq(NJ);
 			lbq = {-2.8973, -1.7628, -2.8973, -3.0718, -2.8973, -0.0175, -2.8973};
 			ubq = {2.8973, 1.7628, 2.8973, -0.0698, 2.8973, 3.7525, 2.8973};
@@ -574,12 +561,14 @@ int main(int argc, char **argv)
 
 			// define the optimization problem
 			nlopt::opt opt(nlopt::LD_MMA, 3 * NJ * campioni);
-			opt.set_maxtime(15.0);  // Tempo in secondi
+			opt.set_maxtime(30.0);  // Tempo in secondi
 			opt.set_min_objective(objective, &optData);
 			opt.set_xtol_rel(1e-3); // Tolleranza di convergenza
+			opt.set_param("verbosity", 1); // Verbose output
 
 			float tol = 4e-2;
-			// Vincoli sulle condizioni iniziali
+
+			// Vincoli sulle condizioni iniziali, imponiamo all'ottimizzatore che le condizioni iniziali siano rispettate
 
 			for (int i = 0; i < NJ; i++)
 			{
@@ -591,7 +580,7 @@ int main(int argc, char **argv)
 				ub[2 * size_q + i] = a0[i] + tol;
 			}
 
-			// Vincoli sulle condizioni intermedie
+			// Vincoli sulle condizioni intermedie, solo limiti di giunto 
 
 			for (int j = 1; j < campioni - 1; j++)
 			{
@@ -606,7 +595,7 @@ int main(int argc, char **argv)
 				}
 			}
 
-			// Vincoli sulle condizioni finali
+			// Vincoli sulle condizioni finali, imponiamo all'ottimizzatore che le condizioni finali siano rispettate
 
 			for (int i = 0; i < NJ; i++)
 			{
@@ -626,15 +615,20 @@ int main(int argc, char **argv)
 
 			opt.set_upper_bounds(ub);
 			opt.set_lower_bounds(lb);
-
+			
+			// Vincoli di consistenza + evitamento ostacolo
 			std::vector<ConsistencyConstraintIneq> constraints;
 			std::vector<std::shared_ptr<ObstacleConstraintIneq>> sphere_constraints;
-			const double eps = 4e-2;
+
+			const double eps = 0.0; // Tolleranza per i vincoli di consistenza
+			const double eps_sphere = 0.0; // Tolleranza per i vincoli di evitamento ostacolo
 
 			int numero_totale_vincoli = (campioni - 1) * 7; // <-- Calcola il numero totale
 
-			const double r_s = 0.05;	   // raggio ostacolo
-			const double d_safe = 0.1; // margine sicurezza
+			const double r_s = 0.05;	   	// raggio ostacolo
+			const double d_safe = 0.1; 		// margine sicurezza
+			
+			// Posizione dell'ostacolo (sfera) in coordinate del robot
 			Eigen::Vector3d p_ostacolo(0.11, -0.31, 0.45);
 
 			if (numero_totale_vincoli > 0)
@@ -645,33 +639,30 @@ int main(int argc, char **argv)
 			for (int k = 0; k < campioni - 1; k++)
 			{
 				// Posizione
-				constraints.push_back({k, NJ, size_q, optData.dt, 0, +1});
+				constraints.push_back({k, NJ, size_q, optData.dt, 0, +1, campioni});
 				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 
-				constraints.push_back({k, NJ, size_q, optData.dt, 0, -1});
+				constraints.push_back({k, NJ, size_q, optData.dt, 0, -1, campioni});
 				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 
 				// Velocità
-				constraints.push_back({k, NJ, size_q, optData.dt, 1, +1});
+				constraints.push_back({k, NJ, size_q, optData.dt, 1, +1, campioni});
 				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 
-				constraints.push_back({k, NJ, size_q, optData.dt, 1, -1});
+				constraints.push_back({k, NJ, size_q, optData.dt, 1, -1, campioni});
 				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 
 				// Accelerazione
-				constraints.push_back({k, NJ, size_q, optData.dt, 2, +1});
+				constraints.push_back({k, NJ, size_q, optData.dt, 2, +1, campioni});
 				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 
-				constraints.push_back({k, NJ, size_q, optData.dt, 2, -1});
+				constraints.push_back({k, NJ, size_q, optData.dt, 2, -1, campioni});
 				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 
 				//  Vincolo di evitamento ostacolo (sfera)
 				auto c = std::make_shared<ObstacleConstraintIneq>(k, NJ, r_s, d_safe, p_ostacolo, robot);
 				sphere_constraints.push_back(c);
-				opt.add_inequality_constraint(avoid_sphere, c.get(), eps);
-
-				// sphere_constraints.push_back({k, NJ, r_s, d_safe, p_ostacolo, robot});
-				// opt.add_inequality_constraint(avoid_sphere, &sphere_constraints.back(), eps);
+				opt.add_inequality_constraint(avoid_sphere_with_gradient,c.get(), eps_sphere);
 			}
 
 			// define the initial guess

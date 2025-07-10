@@ -1,8 +1,18 @@
-#include "utils/thunder_optimization.h"
-#include <math.h>
-#include <nlopt.hpp>
-#include <stdio.h>
+// Prima gli header standard C++
+#include <string>
+#include <vector>
+#include <iostream>
+#include <cmath>
+
+// Poi gli header di sistema/ROS
 #include "ros/ros.h"
+
+// Poi le librerie di terze parti
+#include <eigen3/Eigen/Dense>
+#include <nlopt.hpp>
+
+// Infine i tuoi header locali
+#include "utils/thunder_optimization.h"
 
 const std::string conf_file = "../robots/franka_conf.yaml";
 
@@ -106,6 +116,12 @@ double consistency_ineq(unsigned n, const double *x, double *grad, void *data)
     double dt = c->dt;
     int type = c->type;
     int sgn = c->sign;
+    int campioni = c->campioni;
+
+    for (int w = 0; w < 3 * NJ * campioni; w++)
+    {
+        grad[w] = 0.0; // Inizializzo il gradiente a zero
+    }
 
     double val = 0.0;
     for (int j = 0; j < NJ; ++j)
@@ -117,7 +133,13 @@ double consistency_ineq(unsigned n, const double *x, double *grad, void *data)
             int qk = k * NJ + j;
             int qkp = (k + 1) * NJ + j;
             int dqk = size_q + k * NJ + j;
-            val += sgn * (x[qkp] - x[qk] - x[dqk] * dt);
+            int ddqk = 2 * size_q + k * NJ + j;
+          
+            grad[qk] = -sgn * 1.0;
+            grad[qkp] = sgn * 1.0;
+            grad[dqk] = -sgn * dt;
+            grad[ddqk] = -sgn * 0.5 * dt * dt;
+            val += sgn * (x[qkp] - x[qk] - x[dqk] * dt -0.5*x[ddqk] * dt*dt);
         }
         else if (type == 1)
         {
@@ -126,6 +148,11 @@ double consistency_ineq(unsigned n, const double *x, double *grad, void *data)
             int dqk = size_q + k * NJ + j;
             int dqkp = size_q + (k + 1) * NJ + j;
             int ddqk = 2 * size_q + k * NJ + j;
+            
+            grad[dqk] = -sgn * 1.0;
+            grad[dqkp] = sgn * 1.0;
+            grad[ddqk] = -sgn * dt;
+            // std::cout << "dqkp: " << dqkp << " dqk: " << dqk << " ddqk: " << ddqk << std::endl;
             val += sgn * (x[dqkp] - x[dqk] - x[ddqk] * dt);
         }
         else if (type == 2)
@@ -134,16 +161,19 @@ double consistency_ineq(unsigned n, const double *x, double *grad, void *data)
             // std::cout <<"sono nel ciclo dei vincoli:  "<< k << " type: "<< type << std::endl;
             int ddqk = 2 * size_q + k * NJ + j;
             int ddqkp = 2 * size_q + (k + 1) * NJ + j;
+            grad[ddqk] = -sgn * 1.0;
+            grad[ddqkp] = sgn * 1.0;
+            // grad[ddqk] =  1.0;
+            // std::cout << "ddqkp: " << ddqkp << " ddqk: " << ddqk << std::endl;
             val += sgn * (x[ddqkp] - x[ddqk]);
+            // val += sgn * x[ddqk]-100;
         }
     }
-
+    // std::cout << "valore vincolo: " << val << std::endl;
     return val;
 }
 
-// Vincolo per evitare la sfera
-
-double avoid_sphere(const std::vector<double> &x, std::vector<double> &grad, void *data)
+double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<double> &grad, void *data) 
 {
     ObstacleConstraintIneq *c = reinterpret_cast<ObstacleConstraintIneq *>(data);
 
@@ -153,34 +183,120 @@ double avoid_sphere(const std::vector<double> &x, std::vector<double> &grad, voi
     double d_safe = c->d_safe;
     Eigen::Vector3d p_obs = c->p_obs;
 
-    std::cout << "k: " << k << std::endl;
-    std::cout << "NJ: " << NJ << std::endl;
-    std::cout << "r_s: " << r_s << std::endl;
-    std::cout << "d_safe: " << d_safe << std::endl;
-    std::cout << "p_obs: " << p_obs.transpose() << std::endl;
+    // // Inizializza gradiente a zero
+    // if (!grad.empty()) {
+    //     std::fill(grad.begin(), grad.end(), 0.0);
+    // }
 
-    int offset_q = 0; // inizio del blocco posizioni
-    int index = offset_q + k * NJ;
-
+    // Estrai q al tempo k
+    int q_offset = k * NJ;
     Eigen::VectorXd q(NJ);
-    for (int i = 0; i < NJ; i++)
-    {
-        q[i] = x[index + i];
+    for (int i = 0; i < NJ; i++) {
+        q[i] = x[q_offset + i];
     }
 
-    // // std::cout<<"q: " << q << std::endl;
-
-    // // Usa la funzione del tuo robot per ottenere la posizione dell’end-effector
-    // std::cout << "Trying to set q of size: " << q.size() << std::endl;
-    // std::cout << "Expected n_joints: " << c->NJ<< std::endl;
-
     c->robot.set_q(q);
-    Eigen::MatrixXd T = c->robot.get_T_0_ee();
-    Eigen::Vector3d p_robot = T.block<3, 1>(0, 3);
 
-    double distance = (p_robot - c->p_obs).norm();
+    // Calcola le posizioni dei link
+    std::vector<Eigen::Vector3d> p_links = {
+        c->robot.get_T_0_1().block<3,1>(0,3),
+        c->robot.get_T_0_2().block<3,1>(0,3),
+        c->robot.get_T_0_3().block<3,1>(0,3),
+        c->robot.get_T_0_4().block<3,1>(0,3),
+        c->robot.get_T_0_5().block<3,1>(0,3),
+        c->robot.get_T_0_6().block<3,1>(0,3),
+        c->robot.get_T_0_7().block<3,1>(0,3)
+        //c->robot.get_T_0_ee().block<3,1>(0,3)   senza gripper
+    };
 
-    std::cout << "distance: " << (c->r_s + c->d_safe) - distance << std::endl;
+    // Trova il link più vicino
+    double min_distance = 1e6;
+    int closest_link = -1;
+    Eigen::Vector3d closest_point;
 
-    return (c->r_s + c->d_safe) - distance;
+    for (int i = 0; i < p_links.size(); ++i) {
+        double distance = (p_links[i] - p_obs).norm();
+        if (distance < min_distance) {
+            min_distance = distance;
+            closest_link = i;
+            closest_point = p_links[i];
+        }
+    }
+
+    std::cout << "Link più vicino: " << closest_link + 1 << std::endl;
+    std::cout << "Distanza minima: " << min_distance << std::endl;
+
+    // Vincolo di disuguaglianza: deve essere <= 0
+    double constraint_value = (r_s + d_safe) - min_distance;
+    std::cout << "constraint value: " << constraint_value << std::endl;
+
+        Eigen::Vector3d direction = (closest_point - p_obs).normalized();
+
+        // Recupera lo Jacobiano giusto
+        Eigen::MatrixXd J_closest(3, NJ);
+        switch (closest_link) {
+            case 0: J_closest = c->robot.get_J_1(); break;
+            case 1: J_closest = c->robot.get_J_2(); break;
+            case 2: J_closest = c->robot.get_J_3(); break;
+            case 3: J_closest = c->robot.get_J_4(); break;
+            case 4: J_closest = c->robot.get_J_5(); break;
+            case 5: J_closest = c->robot.get_J_6(); break;
+            case 6: J_closest = c->robot.get_J_7(); break;
+            case 7: J_closest = c->robot.get_J_ee(); break;
+            default:
+                std::cerr << "Link non valido per Jacobiano!" << std::endl;
+                return constraint_value;
+        }
+
+        // Calcolo derivata della distanza rispetto a q
+        Eigen::VectorXd ddist_dq = direction.transpose() * J_closest;
+
+        // Inserisco nel vettore grad
+        for (int i = 0; i < NJ; i++) {
+            grad[q_offset + i] = -ddist_dq[i];  // -ddist_dq perché constraint = (r_s + d_safe) - dist
+        }
+
+
+    return constraint_value;
+}
+
+//funzione per calcolare le distanze dei link da un punto (ostacolo)
+LinkDistanceResult compute_link_distances_to_point(
+    const Eigen::VectorXd& q,
+    const Eigen::VectorXd& dq,
+    const Eigen::VectorXd& ddq,
+    const Eigen::Vector3d& p_obs,
+    thunder_franka& robot
+) {
+    robot.set_q(q);
+    robot.set_dq(dq);
+    robot.set_ddq(ddq);
+
+    std::vector<Eigen::Vector3d> p_links = {
+        robot.get_T_0_1().block<3,1>(0,3),
+        robot.get_T_0_2().block<3,1>(0,3),
+        robot.get_T_0_3().block<3,1>(0,3),
+        robot.get_T_0_4().block<3,1>(0,3),
+        robot.get_T_0_5().block<3,1>(0,3),
+        robot.get_T_0_6().block<3,1>(0,3),
+        robot.get_T_0_7().block<3,1>(0,3)
+        // robot.get_T_0_ee().block<3,1>(0,3)
+    };
+
+    std::vector<double> distances;
+    distances.reserve(p_links.size());
+
+    double min_distance = std::numeric_limits<double>::max();
+    int closest_index = -1;
+
+    for (size_t i = 0; i < p_links.size(); ++i) {
+        double d = (p_links[i] - p_obs).norm();
+        distances.push_back(d);
+        if (d < min_distance) {
+            min_distance = d;
+            closest_index = static_cast<int>(i);
+        }
+    }
+
+    return {distances, closest_index, min_distance};
 }

@@ -161,3 +161,9 @@ target_link_libraries(traj_pub ${PROJECT_NAME}
 # install(FILES ${PROJECT_NAME}_plugin.xml
 # 	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
+
+catkin_install_python(PROGRAMS
+  scripts/ee_trajectory_visualizer.py
+  scripts/ball_marker_publisher.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
