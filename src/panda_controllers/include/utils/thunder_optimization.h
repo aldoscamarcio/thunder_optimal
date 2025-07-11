@@ -21,18 +21,21 @@ struct OptimizationData
     int campioni;
 };
 
-struct ObstacleConstraintIneq {
-    int k;
+struct ObstacleConstraintIneq
+{
+    int k; // istante di tempo in cui valutare il vincolo
     int NJ;
     double r_s;
     double d_safe;
     Eigen::Vector3d p_obs;
     thunder_franka robot;
-    
+    Eigen::VectorXd q0;
+    Eigen::VectorXd dq0;
+    double dt;
 
     ObstacleConstraintIneq(int k_, int NJ_, double r_s_, double d_safe_,
-                           const Eigen::Vector3d& p_obs_, thunder_franka robot_)
-        : k(k_), NJ(NJ_), r_s(r_s_), d_safe(d_safe_), p_obs(p_obs_), robot(robot_) {}
+                           const Eigen::Vector3d &p_obs_, thunder_franka robot_, Eigen::VectorXd q0_, Eigen::VectorXd dq0_, double dt_, Eigen::VectorXd qf_)
+        : k(k_), NJ(NJ_), r_s(r_s_), d_safe(d_safe_), p_obs(p_obs_), robot(robot_), q0(q0_), dq0(dq0_), dt(dt_) {}
 };
 
 struct ConsistencyConstraintIneq
@@ -41,17 +44,21 @@ struct ConsistencyConstraintIneq
     int NJ;
     int size_q;
     double dt;
-    int type; // 0 = posizione, 1 = velocità 2 = accelerazione
-    int sign; // +1 o -1 per la forma della disuguaglianza
+    int type;     // 0 = posizione, 1 = velocità 2 = accelerazione
+    int sign;     // +1 o -1 per la forma della disuguaglianza
     int campioni; // Numero di campioni per la traiettoria
+    Eigen::VectorXd q0;
+    Eigen::VectorXd v0;
+    Eigen::VectorXd qf;
+    int i; // indice del giunto su cui applicare il vincolo
 };
 
-struct LinkDistanceResult {
+struct LinkDistanceResult
+{
     std::vector<double> distances;
     int closest_link_index;
     double min_distance;
 };
-
 
 // Funzione obiettivo per l'ottimizzazione
 double objective(const std::vector<double> &x, std::vector<double> &grad, void *data);
@@ -67,13 +74,10 @@ double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<doub
 
 // Funzione per calcolare le distanze dei link da un punto (ostacolo)
 LinkDistanceResult compute_link_distances_to_point(
-    const Eigen::VectorXd& q,
-    const Eigen::VectorXd& dq,
-    const Eigen::VectorXd& ddq,
-    const Eigen::Vector3d& p_obs,
-    thunder_franka& robot
-);
-
-
+    const Eigen::VectorXd &q,
+    const Eigen::VectorXd &dq,
+    const Eigen::VectorXd &ddq,
+    const Eigen::Vector3d &p_obs,
+    thunder_franka &robot);
 
 #endif // THUNDER_OPTIMIZATION_H

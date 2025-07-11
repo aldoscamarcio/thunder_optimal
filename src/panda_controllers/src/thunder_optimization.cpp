@@ -41,28 +41,39 @@ void calculateTrajectory(double t, double t0, const std::vector<double> &coeffs,
 
 double objective(const std::vector<double> &x, std::vector<double> &grad, void *data)
 {
-    double cost = 0;
     OptimizationData *optData = static_cast<OptimizationData *>(data);
     optData->robot.load_conf(conf_file);
+
     int NJ = optData->robot.get_numJoints();
     int campioni = optData->campioni;
-    int size_q = optData->size_q;
+    double dt = optData->dt;
 
-    Eigen::VectorXd tau_dyn(NJ), tau(NJ * campioni);
-    Eigen::VectorXd q = Eigen::VectorXd::Zero(NJ);
-    Eigen::VectorXd dq = Eigen::VectorXd::Zero(NJ);
-    Eigen::VectorXd ddq = Eigen::VectorXd::Zero(NJ);
-    Eigen::VectorXd grad_q(NJ), grad_dq(NJ), grad_ddq(NJ), grade = Eigen::VectorXd::Zero(3 * NJ * campioni);
+    Eigen::VectorXd q = optData->q0;  // Inizializza q con q0
+    Eigen::VectorXd dq = optData->v0; // Inizializza dq con v0
+    Eigen::VectorXd ddq(NJ), tau_dyn(NJ);
+    Eigen::VectorXd tau_tot(NJ * campioni); // salva tutte le tau
 
-    for (int j = 0; j < optData->campioni; j++)
+    double cost = 0.0;
+
+    // Se gradiente richiesto, inizializza
+    if (!grad.empty())
     {
+        grad.assign(NJ * campioni, 0.0);
+    }
+
+    for (int k = 0; k < campioni; k++)
+    {
+        // estrai le ddq per il campione k
         for (int i = 0; i < NJ; i++)
         {
-            q[i] = x[j * NJ + i];
-            dq[i] = x[j * NJ + size_q + i];
-            ddq[i] = x[j * NJ + 2 * size_q + i];
+            ddq[i] = x[k * NJ + i];
+            dq[i] += ddq[i] * dt;
+            q[i] += dq[i] * dt;
         }
 
+        std::cout << "Campione: " << k << " q: " << q.transpose() << " dq: " << dq.transpose() << " ddq: " << ddq.transpose() << std::endl;
+
+        // aggiorna stato robot
         optData->robot.set_q(q);
         optData->robot.set_dq(dq);
         optData->robot.set_ddq(ddq);
@@ -73,107 +84,75 @@ double objective(const std::vector<double> &x, std::vector<double> &grad, void *
 
         tau_dyn = M * ddq + C * dq + G;
 
+        // salva tau per cost finale
         for (int i = 0; i < NJ; i++)
         {
-            tau[j * NJ + i] = tau_dyn[i];
+            tau_tot[k * NJ + i] = tau_dyn[i];
+            cost += tau_dyn[i] * tau_dyn[i]; // somma al costo
         }
 
-        grad_q = (2 * tau_dyn.transpose() * optData->robot.get_gradq());
-        grad_dq = (2 * tau_dyn.transpose() * optData->robot.get_graddq());
-        grad_ddq = (2 * tau_dyn.transpose() * optData->robot.get_gradddq());
-
-        for (int k = 0; k < NJ; k++)
-        {
-            grade[j * NJ + k] = grad_q[k];
-            grade[j * NJ + size_q + k] = grad_dq[k];
-            grade[j * NJ + 2 * size_q + k] = grad_ddq[k];
-        }
-
+        // calcola gradiente rispetto a ddq_k
         if (!grad.empty())
         {
-            for (int i = 0; i < 3 * NJ * campioni; i++)
+            Eigen::VectorXd grad_ddq = 2.0 * M.transpose() * tau_dyn;
+            for (int i = 0; i < NJ; i++)
             {
-                grad[i] = grade[i];
+                grad[k * NJ + i] = grad_ddq[i];
             }
         }
-    }
-
-    for (int i = 0; i < NJ * campioni; i++)
-    {
-        cost += tau[i] * tau[i];
     }
 
     return cost;
 }
 
-// Funzione per i vincoli
+// // Funzione per i vincoli
 double consistency_ineq(unsigned n, const double *x, double *grad, void *data)
 {
     ConsistencyConstraintIneq *c = reinterpret_cast<ConsistencyConstraintIneq *>(data);
-    int k = c->k;
+
     int NJ = c->NJ;
-    int size_q = c->size_q;
+    int k = c->k;
     double dt = c->dt;
-    int type = c->type;
-    int sgn = c->sign;
-    int campioni = c->campioni;
+    int i_th = c->i; // giunto su cui vincolare q_k[i] ≈ qf[i]
 
-    for (int w = 0; w < 3 * NJ * campioni; w++)
+    Eigen::VectorXd q_k = c->q0;
+    Eigen::VectorXd dq_k = c->v0;
+    Eigen::VectorXd qf= c->qf;
+
+    // Integrazione fino a step finale
+    for (int j = 0; j < k; j++)
     {
-        grad[w] = 0.0; // Inizializzo il gradiente a zero
+        for (int i = 0; i < NJ; i++)
+        {
+            double ddq = x[j * NJ + i];
+            dq_k[i] += ddq * dt;
+            q_k[i] += dq_k[i] * dt + 0.5 * ddq * dt * dt;
+        }
     }
 
-    double val = 0.0;
-    for (int j = 0; j < NJ; ++j)
+    // Calcola errore quadratico su giunto i_th
+    double err = q_k[i_th] - c->qf[i_th];
+    double val = err * err;
+
+    if (grad)
     {
-        if (type == 0)
+        std::fill(grad, grad + n, 0.0);
+
+        // Per ogni accelerazione che influenza q_k[i_th]
+        for (int j = 0; j < k; j++)
         {
-            // Posizione: q_{k+1} - q_k - dq_k * dt
-            // std::cout <<"sono nel ciclo dei vincoli: "<< k << " type: "<< type << std::endl;
-            int qk = k * NJ + j;
-            int qkp = (k + 1) * NJ + j;
-            int dqk = size_q + k * NJ + j;
-            int ddqk = 2 * size_q + k * NJ + j;
-          
-            grad[qk] = -sgn * 1.0;
-            grad[qkp] = sgn * 1.0;
-            grad[dqk] = -sgn * dt;
-            grad[ddqk] = -sgn * 0.5 * dt * dt;
-            val += sgn * (x[qkp] - x[qk] - x[dqk] * dt -0.5*x[ddqk] * dt*dt);
-        }
-        else if (type == 1)
-        {
-            // Velocità: dq_{k+1} - dq_k - ddq_k * dt
-            // std::cout <<"sono nel ciclo dei vincoli:  "<< k << " type: "<< type << std::endl;
-            int dqk = size_q + k * NJ + j;
-            int dqkp = size_q + (k + 1) * NJ + j;
-            int ddqk = 2 * size_q + k * NJ + j;
-            
-            grad[dqk] = -sgn * 1.0;
-            grad[dqkp] = sgn * 1.0;
-            grad[ddqk] = -sgn * dt;
-            // std::cout << "dqkp: " << dqkp << " dqk: " << dqk << " ddqk: " << ddqk << std::endl;
-            val += sgn * (x[dqkp] - x[dqk] - x[ddqk] * dt);
-        }
-        else if (type == 2)
-        {
-            // Accelerazione: ddq_{k+1} - ddq_k
-            // std::cout <<"sono nel ciclo dei vincoli:  "<< k << " type: "<< type << std::endl;
-            int ddqk = 2 * size_q + k * NJ + j;
-            int ddqkp = 2 * size_q + (k + 1) * NJ + j;
-            grad[ddqk] = -sgn * 1.0;
-            grad[ddqkp] = sgn * 1.0;
-            // grad[ddqk] =  1.0;
-            // std::cout << "ddqkp: " << ddqkp << " ddqk: " << ddqk << std::endl;
-            val += sgn * (x[ddqkp] - x[ddqk]);
-            // val += sgn * x[ddqk]-100;
+            double coeff = (k - j) * dt * dt + 0.5 * dt * dt;
+            int idx = j * NJ + i_th;
+            grad[idx] = 2.0 * err * coeff;
         }
     }
-    // std::cout << "valore vincolo: " << val << std::endl;
+
     return val;
 }
 
-double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<double> &grad, void *data) 
+
+
+double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<double> &grad, void *data)
 {
     ObstacleConstraintIneq *c = reinterpret_cast<ObstacleConstraintIneq *>(data);
 
@@ -182,121 +161,123 @@ double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<doub
     double r_s = c->r_s;
     double d_safe = c->d_safe;
     Eigen::Vector3d p_obs = c->p_obs;
+    thunder_franka robot;
+    // Ricostruzione di q_k e dq_k tramite integrazione (Eulero esplicito)
+    Eigen::VectorXd q_k = c->q0;
+    Eigen::VectorXd dq_k = c->dq0;
+    double dt = c->dt;
 
-    // // Inizializza gradiente a zero
-    // if (!grad.empty()) {
-    //     std::fill(grad.begin(), grad.end(), 0.0);
-    // }
-
-    // Estrai q al tempo k
-    int q_offset = k * NJ;
-    Eigen::VectorXd q(NJ);
-    for (int i = 0; i < NJ; i++) {
-        q[i] = x[q_offset + i];
+    for (int j = 0; j < k; j++)
+    {
+        Eigen::VectorXd ddq_k(NJ);
+        for (int i = 0; i < NJ; i++)
+        {
+            ddq_k[i] = x[j * NJ + i];
+            dq_k[i] += ddq_k[i] * dt;                          // Aggiorna dq_k con la derivata
+            q_k[i] += dq_k[i] * dt + 0.5 * ddq_k[i] * dt * dt; // Aggiorna q_k
+        }
     }
 
-    c->robot.set_q(q);
+    // Imposta configurazione del robot
+    c->robot.set_q(q_k);
 
     // Calcola le posizioni dei link
     std::vector<Eigen::Vector3d> p_links = {
-        c->robot.get_T_0_1().block<3,1>(0,3),
-        c->robot.get_T_0_2().block<3,1>(0,3),
-        c->robot.get_T_0_3().block<3,1>(0,3),
-        c->robot.get_T_0_4().block<3,1>(0,3),
-        c->robot.get_T_0_5().block<3,1>(0,3),
-        c->robot.get_T_0_6().block<3,1>(0,3),
-        c->robot.get_T_0_7().block<3,1>(0,3)
-        //c->robot.get_T_0_ee().block<3,1>(0,3)   senza gripper
-    };
+        c->robot.get_T_0_1().block<3, 1>(0, 3),
+        c->robot.get_T_0_2().block<3, 1>(0, 3),
+        c->robot.get_T_0_3().block<3, 1>(0, 3),
+        c->robot.get_T_0_4().block<3, 1>(0, 3),
+        c->robot.get_T_0_5().block<3, 1>(0, 3),
+        c->robot.get_T_0_6().block<3, 1>(0, 3),
+        c->robot.get_T_0_7().block<3, 1>(0, 3)};
 
-    // Trova il link più vicino
+    // Trova il link più vicino all'ostacolo
     double min_distance = 1e6;
     int closest_link = -1;
     Eigen::Vector3d closest_point;
 
-    for (int i = 0; i < p_links.size(); ++i) {
+    for (int i = 0; i < p_links.size(); ++i)
+    {
         double distance = (p_links[i] - p_obs).norm();
-        if (distance < min_distance) {
+        if (distance < min_distance)
+        {
             min_distance = distance;
             closest_link = i;
             closest_point = p_links[i];
         }
     }
 
-    std::cout << "Link più vicino: " << closest_link + 1 << std::endl;
-    std::cout << "Distanza minima: " << min_distance << std::endl;
+    std::cout << "Link più vicino: " << closest_link + 1 << " con distanza: " << min_distance << std::endl;
 
-    // Vincolo di disuguaglianza: deve essere <= 0
+    // Calcola il valore del vincolo: deve essere <= 0
     double constraint_value = (r_s + d_safe) - min_distance;
-    std::cout << "constraint value: " << constraint_value << std::endl;
+    if (constraint_value < 0)
+    {
+        std::cout << "Vincolo soddisfatto: distanza sufficiente." << std::endl;
+    }
+    else
+    {
+        std::cout << "Vincolo non soddisfatto: distanza insufficiente." << std::endl;
+    }
 
-        Eigen::Vector3d direction = (closest_point - p_obs).normalized();
+    std::cout << "Valore vincolo: " << constraint_value << std::endl;
 
-        // Recupera lo Jacobiano giusto
-        Eigen::MatrixXd J_closest(3, NJ);
-        switch (closest_link) {
-            case 0: J_closest = c->robot.get_J_1(); break;
-            case 1: J_closest = c->robot.get_J_2(); break;
-            case 2: J_closest = c->robot.get_J_3(); break;
-            case 3: J_closest = c->robot.get_J_4(); break;
-            case 4: J_closest = c->robot.get_J_5(); break;
-            case 5: J_closest = c->robot.get_J_6(); break;
-            case 6: J_closest = c->robot.get_J_7(); break;
-            case 7: J_closest = c->robot.get_J_ee(); break;
-            default:
-                std::cerr << "Link non valido per Jacobiano!" << std::endl;
-                return constraint_value;
-        }
+    // Direzione di derivazione
+    Eigen::Vector3d direction = (closest_point - p_obs).normalized();
 
-        // Calcolo derivata della distanza rispetto a q
-        Eigen::VectorXd ddist_dq = direction.transpose() * J_closest;
+    // Jacobiano del punto più vicino
+    Eigen::MatrixXd J_closest(3, NJ);
+    switch (closest_link)
+    {
+    case 0:
+        J_closest = c->robot.get_J_1();
+        break;
+    case 1:
+        J_closest = c->robot.get_J_2();
+        break;
+    case 2:
+        J_closest = c->robot.get_J_3();
+        break;
+    case 3:
+        J_closest = c->robot.get_J_4();
+        break;
+    case 4:
+        J_closest = c->robot.get_J_5();
+        break;
+    case 5:
+        J_closest = c->robot.get_J_6();
+        break;
+    case 6:
+        J_closest = c->robot.get_J_7();
+        break;
+    case 7:
+        J_closest = c->robot.get_J_ee();
+        break;
+    default:
+        std::cerr << "Link non valido!" << std::endl;
+        return constraint_value;
+    }
 
-        // Inserisco nel vettore grad
-        for (int i = 0; i < NJ; i++) {
-            grad[q_offset + i] = -ddist_dq[i];  // -ddist_dq perché constraint = (r_s + d_safe) - dist
-        }
+    // Calcola derivata della distanza rispetto a q_k
+    Eigen::RowVectorXd ddist_dq = direction.transpose() * J_closest;
 
+    // Calcola derivata di q_k rispetto a tutte le ddq_j (j=0..k-1)
+    // dq_k = dq_0 + ∑ ddq_j * dt  => d(dq_k)/d(ddq_j) = I * dt (per j < k)
+    // q_k  = q_0  + ∑ dq_j * dt   => d(q_k)/d(ddq_j) = dt^2 * (k - j)
 
-    return constraint_value;
-}
+    // Reset gradiente
+    if (!grad.empty())
+        std::fill(grad.begin(), grad.end(), 0.0);
 
-//funzione per calcolare le distanze dei link da un punto (ostacolo)
-LinkDistanceResult compute_link_distances_to_point(
-    const Eigen::VectorXd& q,
-    const Eigen::VectorXd& dq,
-    const Eigen::VectorXd& ddq,
-    const Eigen::Vector3d& p_obs,
-    thunder_franka& robot
-) {
-    robot.set_q(q);
-    robot.set_dq(dq);
-    robot.set_ddq(ddq);
-
-    std::vector<Eigen::Vector3d> p_links = {
-        robot.get_T_0_1().block<3,1>(0,3),
-        robot.get_T_0_2().block<3,1>(0,3),
-        robot.get_T_0_3().block<3,1>(0,3),
-        robot.get_T_0_4().block<3,1>(0,3),
-        robot.get_T_0_5().block<3,1>(0,3),
-        robot.get_T_0_6().block<3,1>(0,3),
-        robot.get_T_0_7().block<3,1>(0,3)
-        // robot.get_T_0_ee().block<3,1>(0,3)
-    };
-
-    std::vector<double> distances;
-    distances.reserve(p_links.size());
-
-    double min_distance = std::numeric_limits<double>::max();
-    int closest_index = -1;
-
-    for (size_t i = 0; i < p_links.size(); ++i) {
-        double d = (p_links[i] - p_obs).norm();
-        distances.push_back(d);
-        if (d < min_distance) {
-            min_distance = d;
-            closest_index = static_cast<int>(i);
+    for (int j = 0; j < k; ++j)
+    {
+        for (int i = 0; i < NJ; ++i)
+        {
+            int idx = j * NJ + i;
+            double d_qk_i__d_ddqji = dt * dt * (k - j);
+            grad[idx] = -ddist_dq[i] * d_qk_i__d_ddqji;
         }
     }
 
-    return {distances, closest_index, min_distance};
+    return constraint_value;
 }

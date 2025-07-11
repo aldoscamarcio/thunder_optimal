@@ -32,9 +32,9 @@ Eigen::Vector3d getOrientationError(const Eigen::Quaterniond &q_desired, const E
 	q_error.normalize();
 
 	Eigen::AngleAxisd angle_axis_error(q_error);
-	  // Protezione numerica su angoli molto piccoli
-    if (angle_axis_error.angle() < 1e-8)
-        return Eigen::Vector3d::Zero();
+	// Protezione numerica su angoli molto piccoli
+	if (angle_axis_error.angle() < 1e-8)
+		return Eigen::Vector3d::Zero();
 	// L'errore è spesso rappresentato come angle * axis.
 	// Se l'angolo è piccolo, questo approssima 2 * q_error.vec() (parte vettoriale del quaternione)
 	return angle_axis_error.angle() * angle_axis_error.axis();
@@ -190,7 +190,7 @@ int main(int argc, char **argv)
 	// SET SLEEP TIME 1000 ---> 1 kHz
 	double frequenza = 10; // Hz
 	ros::Rate loop_rate(frequenza);
-	double frequenza_controller = 200; // Hz
+	double frequenza_controller = 200;					  // Hz
 	ros::Rate loop_rate_controller(frequenza_controller); // Hz
 
 	srand(time(NULL));
@@ -323,13 +323,13 @@ int main(int argc, char **argv)
 			// Per semplicità, chiediamo angoli RPY (in gradi) e li convertiamo
 			double roll_deg, pitch_deg, yaw_deg;
 
-			target_ee_pos_input.x()=0.31; // Posizione EE desiderata in metri	
-			target_ee_pos_input.y()=-0.21;
-			target_ee_pos_input.z()=0.56;
+			target_ee_pos_input.x() = 0.25; // Posizione EE desiderata in metri
+			target_ee_pos_input.y() = -0.33;
+			target_ee_pos_input.z() = 0.56;
 
 			roll_deg = -169.0; // Angolo roll in gradi
-			pitch_deg = 0.3; // Angolo pitch in gradi
-			yaw_deg = 62.6; // Angolo yaw in gradi
+			pitch_deg = 0.3;   // Angolo pitch in gradi
+			yaw_deg = 62.6;	   // Angolo yaw in gradi
 
 			// cout << "Enter desired EE position (x y z) in meters: ";
 			// cin >> target_ee_pos_input.x() >> target_ee_pos_input.y() >> target_ee_pos_input.z();
@@ -405,11 +405,11 @@ int main(int argc, char **argv)
 				ROS_INFO_STREAM("Current q0 for IK: " << q0.transpose());
 				ROS_INFO_STREAM("Target EE Pos: " << target_ee_pos_input.transpose());
 				ROS_INFO_STREAM("Target EE Orient (quat w,x,y,z): " << target_ee_orient_input.w() << ", " << target_ee_orient_input.vec().transpose());
-				
+
 				ROS_INFO_STREAM("Force IK with error. Target joint configuration: " << qf.transpose());
 				ROS_INFO_STREAM("Tf for movement: " << tf << " seconds");
-				qf = q_target_ik; 
-				
+				qf = q_target_ik;
+
 				choice = 6; // Imposta choice a 6 comunque per usare l'interpolazione min-jerk
 
 				v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
@@ -434,7 +434,7 @@ int main(int argc, char **argv)
 
 		int size_q = NJ * campioni; // Dimensione di q
 
-		Eigen::VectorXd POS_INIT(NJ * campioni), VEL_INIT(NJ * campioni), ACC_INIT(NJ * campioni);
+		Eigen::VectorXd POS_INIT(NJ * campioni), VEL_INIT(NJ * campioni), ACC_INIT(NJ * campioni), VEL(NJ * campioni), POS(NJ * campioni), ACC(NJ * campioni);
 
 		ros::spinOnce();
 
@@ -551,7 +551,7 @@ int main(int argc, char **argv)
 			optData.campioni = campioni;
 
 			// Imposto vettori limiti superiori e inferiori per i vincoli
-			std::vector<double> ub(3 * NJ * campioni), lb(3 * NJ * campioni), ubq(NJ), lbq(NJ), ubdq(NJ), lbdq(NJ), ubddq(NJ), lbddq(NJ);
+			std::vector<double> ub(NJ * campioni), lb(NJ * campioni), ubq(NJ), lbq(NJ), ubdq(NJ), lbdq(NJ), ubddq(NJ), lbddq(NJ);
 			lbq = {-2.8973, -1.7628, -2.8973, -3.0718, -2.8973, -0.0175, -2.8973};
 			ubq = {2.8973, 1.7628, 2.8973, -0.0698, 2.8973, 3.7525, 2.8973};
 			lbdq = {-2.175, -2.175, -2.175, -2.175, -2.61, -2.61, -2.61};
@@ -560,38 +560,32 @@ int main(int argc, char **argv)
 			ubddq = {15, 7.5, 10, 12.5, 15, 20, 20};
 
 			// define the optimization problem
-			nlopt::opt opt(nlopt::LD_MMA, 3 * NJ * campioni);
-			opt.set_maxtime(30.0);  // Tempo in secondi
+			nlopt::opt opt(nlopt::LD_MMA, NJ * campioni);
+			// opt.set_maxtime(30.0); // Tempo in secondi
 			opt.set_min_objective(objective, &optData);
-			opt.set_xtol_rel(1e-3); // Tolleranza di convergenza
+			opt.set_xtol_rel(1e-3);		   // Tolleranza di convergenza
 			opt.set_param("verbosity", 1); // Verbose output
 
-			float tol = 4e-2;
+			float tol = 1e-3; // Tolleranza per i vincoli
 
 			// Vincoli sulle condizioni iniziali, imponiamo all'ottimizzatore che le condizioni iniziali siano rispettate
 
 			for (int i = 0; i < NJ; i++)
 			{
-				lb[i] = q_int[i] - tol;
-				ub[i] = q_int[i] + tol;
-				lb[size_q + i] = v0[i] - tol;
-				ub[size_q + i] = v0[i] + tol;
-				lb[2 * size_q + i] = a0[i] - tol;
-				ub[2 * size_q + i] = a0[i] + tol;
+
+				lb[i] = a0[i] - tol;
+				ub[i] = a0[i] + tol;
 			}
 
-			// Vincoli sulle condizioni intermedie, solo limiti di giunto 
+			// Vincoli sulle condizioni intermedie, solo limiti di giunto
 
 			for (int j = 1; j < campioni - 1; j++)
 			{
 				for (int i = 0; i < NJ; i++)
 				{
-					lb[j * NJ + i] = lbq[i];
-					ub[j * NJ + i] = ubq[i];
-					lb[j * NJ + size_q + i] = lbdq[i];
-					ub[j * NJ + size_q + i] = ubdq[i];
-					lb[j * NJ + 2 * size_q + i] = lbddq[i];
-					ub[j * NJ + 2 * size_q + i] = ubddq[i];
+
+					lb[j * NJ + i] = lbddq[i];
+					ub[j * NJ + i] = ubddq[i];
 				}
 			}
 
@@ -599,98 +593,122 @@ int main(int argc, char **argv)
 
 			for (int i = 0; i < NJ; i++)
 			{
-				lb[(campioni - 1) * NJ + i] = qf[i] - tol;
-				// std::cout << "lb " << campioni-1 * NJ + i << ":" << lb[campioni-1 * NJ + i] << std::endl;
-				ub[(campioni - 1) * NJ + i] = qf[i] + tol;
-				// std::cout << "ub " << campioni-1 * NJ + i << ":" << ub[campioni-1 * NJ + i] << std::endl;
-				lb[(campioni - 1) * NJ + size_q + i] = vf[i] - tol;
-				// std::cout << "lb " << campioni-1 * NJ + size_q + i << ":" << lb[campioni-1 * NJ + size_q + i] << std::endl;
-				ub[(campioni - 1) * NJ + size_q + i] = vf[i] + tol;
-				// std::cout << "ub " << campioni-1 * NJ + size_q + i << ":" << ub[campioni-1 * NJ + size_q + i] << std::endl;
-				lb[(campioni - 1) * NJ + 2 * size_q + i] = af[i] - tol;
+				lb[(campioni - 1) * NJ + i] = af[i] - tol;
 				// std::cout << "lb " << campioni-1 * NJ + 2 * size_q + i << ":" << lb[campioni-1 * NJ + 2 * size_q + i] << std::endl;
-				ub[(campioni - 1) * NJ + 2 * size_q + i] = af[i] + tol;
+				ub[(campioni - 1) * NJ + i] = af[i] + tol;
 				// std::cout << "ub " << campioni-1 * NJ + 2 * size_q + i << ":" << ub[campioni-1 * NJ + 2 * size_q + i] << std::endl;
 			}
 
 			opt.set_upper_bounds(ub);
 			opt.set_lower_bounds(lb);
-			
+
 			// Vincoli di consistenza + evitamento ostacolo
 			std::vector<ConsistencyConstraintIneq> constraints;
 			std::vector<std::shared_ptr<ObstacleConstraintIneq>> sphere_constraints;
 
-			const double eps = 0.0; // Tolleranza per i vincoli di consistenza
-			const double eps_sphere = 0.0; // Tolleranza per i vincoli di evitamento ostacolo
+			const double eps = 1e-6;		// Tolleranza per i vincoli di consistenza
+			const double eps_sphere = 1e-6; // Tolleranza per i vincoli di evitamento ostacolo
 
-			int numero_totale_vincoli = (campioni - 1) * 7; // <-- Calcola il numero totale
+			int numero_totale_vincoli = (campioni - 1) * 2; // <-- Calcola il numero totale
 
-			const double r_s = 0.05;	   	// raggio ostacolo
-			const double d_safe = 0.1; 		// margine sicurezza
-			
+			const double r_s = 0.05;   // raggio ostacolo
+			const double d_safe = 0.1; // margine sicurezza
+
 			// Posizione dell'ostacolo (sfera) in coordinate del robot
 			Eigen::Vector3d p_ostacolo(0.11, -0.31, 0.45);
 
 			if (numero_totale_vincoli > 0)
-			{ 
+			{
 				constraints.reserve(numero_totale_vincoli);
 			}
 
 			for (int k = 0; k < campioni - 1; k++)
 			{
-				// Posizione
-				constraints.push_back({k, NJ, size_q, optData.dt, 0, +1, campioni});
-				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 
-				constraints.push_back({k, NJ, size_q, optData.dt, 0, -1, campioni});
-				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
+				// constraints.push_back({k, NJ, size_q, optData.dt, 0, -1, campioni});
+				// opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 
-				// Velocità
-				constraints.push_back({k, NJ, size_q, optData.dt, 1, +1, campioni});
-				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
+				// // Velocità
+				// constraints.push_back({k, NJ, size_q, optData.dt, 1, +1, campioni});
+				// opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 
-				constraints.push_back({k, NJ, size_q, optData.dt, 1, -1, campioni});
-				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
+				// constraints.push_back({k, NJ, size_q, optData.dt, 1, -1, campioni});
+				// opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 
 				// Accelerazione
-				constraints.push_back({k, NJ, size_q, optData.dt, 2, +1, campioni});
-				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
+				// constraints.push_back({k, NJ, size_q, optData.dt, 2, +1, campioni});
+				// opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 
-				constraints.push_back({k, NJ, size_q, optData.dt, 2, -1, campioni});
-				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
+				// constraints.push_back({k, NJ, size_q, optData.dt, 2, -1, campioni});
+				// opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 
 				//  Vincolo di evitamento ostacolo (sfera)
-				auto c = std::make_shared<ObstacleConstraintIneq>(k, NJ, r_s, d_safe, p_ostacolo, robot);
+				auto c = std::make_shared<ObstacleConstraintIneq>(ObstacleConstraintIneq{
+					k, NJ, r_s, d_safe, p_ostacolo, robot, optData.q0, optData.v0, optData.dt, optData.qf});
 				sphere_constraints.push_back(c);
-				opt.add_inequality_constraint(avoid_sphere_with_gradient,c.get(), eps_sphere);
+				opt.add_inequality_constraint(avoid_sphere_with_gradient, c.get(), eps_sphere);
+			}
+
+			// Posizione
+			for (int i = 0; i < NJ; i++)
+			{
+				constraints.push_back({campioni, NJ, size_q, optData.dt, 0, +1, campioni, q0, v0, qf, i});
+				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
 			}
 
 			// define the initial guess
-			std::vector<double> vettore(3 * NJ * campioni); // Inizializza il vettore x
-			for (int i = 0; i < POS_INIT.size(); i++)
+			std::vector<double> vettore(NJ * campioni); // Inizializza il vettore x
+			for (int i = 0; i < ACC_INIT.size(); i++)
 			{
-				vettore[i] = POS_INIT[i];
-				vettore[i + POS_INIT.size()] = VEL_INIT[i];
-				vettore[i + POS_INIT.size() + VEL_INIT.size()] = ACC_INIT[i];
+				vettore[i] = ACC_INIT[i];
+				std::cout << "vettore[" << i << "] = " << vettore[i] << std::endl;
 			}
 
 			double minf;
-			try {
-			nlopt::result result = opt.optimize(vettore, minf);
-			std::cout << "Ottimizzazione eseguita" << std::endl;
-			std::cout << "Costo minimo: " << minf << std::endl;
 
-			if (result == nlopt::MAXTIME_REACHED) {
-            std::cout << "Timeout raggiunto! Soluzione subottima" << std::endl;
-        	} else {
-            std::cout << "Convergenza raggiunta. Soluzione ottimale" << std::endl;
-        	}
-			} catch (std::exception& e) {
-        std::cerr << "Errore: " << e.what() << std::endl;
-    		}
+			try
+			{
+				nlopt::result result = opt.optimize(vettore, minf);
+				std::cout << "Ottimizzazione eseguita" << std::endl;
+				std::cout << "Costo minimo: " << minf << std::endl;
 
+				if (result == nlopt::MAXTIME_REACHED)
+				{
+					std::cout << "Timeout raggiunto! Soluzione subottima" << std::endl;
+				}
+				else
+				{
+					std::cout << "Convergenza raggiunta. Soluzione ottimale" << std::endl;
+				}
+			}
+			catch (std::exception &e)
+			{
+				std::cerr << "Errore: " << e.what() << std::endl;
+			}
+
+			
+			// Inizializzo le posizioni, velocità e accelerazioni
+			for (int j = 0; j < NJ; ++j)
+			{
+				POS[j] = q0[j]; // posizione iniziale
+				VEL[j] = v0[j]; // velocità iniziale
+				// ACC[j] = vettore[j]; // accelerazione iniziale
+			}
+
+			for (int k = 0; k < campioni-1; k++)
+			{
+				
+				for (int j = 0; j < NJ; ++j)
+				{
+					ACC[k * NJ + j] = vettore[k * NJ + j]; // prendi la ddq del giunto j al tempo k
+					VEL[(k + 1) * NJ + j] = VEL[k * NJ + j] + ACC[k * NJ + j] * optData.dt;
+					POS[(k + 1) * NJ + j] = POS[k * NJ + j] + VEL[k * NJ + j] * optData.dt + 0.5 * ACC[k * NJ + j] * std::pow(optData.dt, 2);
+				}
+			}
+
+			
 			// Traiettoria finale smussata
-			int count = 1;
+			
 			for (int j = 0; j < campioni - 1; j++)
 			{
 				double t_start = ros::Time::now().toSec();
@@ -698,14 +716,14 @@ int main(int argc, char **argv)
 				std::vector<std::vector<double>> joint_coeffs(NJ);
 				for (int i = 0; i < NJ; ++i)
 				{
-					q_int(i) = vettore[j * NJ + i];
-					qf(i) = vettore[(j + 1) * NJ + i];
-					v0(i) = vettore[j * NJ + size_q + i];
-					vf(i) = vettore[(j + 1) * NJ + size_q + i];
-					a0(i) = vettore[j * NJ + 2 * size_q + i];
-					af(i) = vettore[(j + 1) * NJ + 2 * size_q + i];
+					q_int(i) = POS[j * NJ + i];
+					qf(i) = POS[(j + 1) * NJ + i];
+					v0(i) = VEL[j * NJ + i];
+					vf(i) = VEL[(j + 1) * NJ + i];
+					a0(i) = ACC[j * NJ + i];
+					af(i) = ACC[(j + 1) * NJ + i];
 					tf = t_start + 1.0 / frequenza;
-					joint_coeffs[i] = calculateCoefficients(q_int[i], qf[i], v0[i], vf[i], a0[i], af[i], t_start, tf);
+					joint_coeffs[i] = calculateCoefficients(q_int[i], qf[i], v0[i], vf(i), a0(i), af(i), t_start, tf);
 				}
 
 				t = t_start;
@@ -747,11 +765,7 @@ int main(int argc, char **argv)
 					t = ros::Time::now().toSec();
 					// std::cout << "Time: " << t << std::endl;
 
-					if (t > tf)
-					{
-						// std::cout << "fine cicl:  " << count << std::endl;
-						count++;
-					}
+				
 				}
 			}
 
