@@ -123,14 +123,6 @@ target_link_libraries(menu
 	yaml-cpp
 )
 
-add_executable(traj_pub src/traj_pub.cpp)
-target_link_libraries(traj_pub ${PROJECT_NAME}
-	${catkin_LIBRARIES}
-	${NLOPT_LIBRARIES}
-	yaml-cpp
-)
-
-
 # add_dependencies(menu
 # 	${${PROJECT_NAME}_EXPORTED_TARGETS} 
 # 	${catkin_EXPORTED_TARGETS}

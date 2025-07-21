@@ -71,7 +71,7 @@ double objective(const std::vector<double> &x, std::vector<double> &grad, void *
             q[i] += dq[i] * dt;
         }
 
-        std::cout << "Campione: " << k << " q: " << q.transpose() << " dq: " << dq.transpose() << " ddq: " << ddq.transpose() << std::endl;
+        //std::cout << "Campione: " << k << " q: " << q.transpose() << " dq: " << dq.transpose() << " ddq: " << ddq.transpose() << std::endl;
 
         // aggiorna stato robot
         optData->robot.set_q(q);
@@ -110,47 +110,32 @@ double consistency_ineq(unsigned n, const double *x, double *grad, void *data)
 {
     ConsistencyConstraintIneq *c = reinterpret_cast<ConsistencyConstraintIneq *>(data);
 
-    int NJ = c->NJ;
-    int k = c->k;
-    double dt = c->dt;
-    int i_th = c->i; // giunto su cui vincolare q_k[i] ≈ qf[i]
+    double dq = c->v0[c->i];
+    double q = c->q0[c->i];
 
-    Eigen::VectorXd q_k = c->q0;
-    Eigen::VectorXd dq_k = c->v0;
-    Eigen::VectorXd qf= c->qf;
-
-    // Integrazione fino a step finale
-    for (int j = 0; j < k; j++)
+    for (int j = 0; j < c->k; ++j)
     {
-        for (int i = 0; i < NJ; i++)
-        {
-            double ddq = x[j * NJ + i];
-            dq_k[i] += ddq * dt;
-            q_k[i] += dq_k[i] * dt + 0.5 * ddq * dt * dt;
-        }
+        double ddq = x[j * c->NJ + c->i];
+        dq += ddq * c->dt;
+        q += dq * c->dt + 0.5 * ddq * std::pow(c->dt, 2);
     }
 
-    // Calcola errore quadratico su giunto i_th
-    double err = q_k[i_th] - c->qf[i_th];
+    double err = q - c->qf[c->i];
     double val = err * err;
 
     if (grad)
     {
         std::fill(grad, grad + n, 0.0);
-
-        // Per ogni accelerazione che influenza q_k[i_th]
-        for (int j = 0; j < k; j++)
+        for (int j = 0; j < c->k; ++j)
         {
-            double coeff = (k - j) * dt * dt + 0.5 * dt * dt;
-            int idx = j * NJ + i_th;
+            double coeff = (c->k - j) * c->dt * c->dt + 0.5 * c->dt * c->dt;
+            int idx = j * c->NJ + c->i;
             grad[idx] = 2.0 * err * coeff;
         }
     }
 
     return val;
 }
-
-
 
 double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<double> &grad, void *data)
 {
@@ -189,7 +174,9 @@ double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<doub
         c->robot.get_T_0_4().block<3, 1>(0, 3),
         c->robot.get_T_0_5().block<3, 1>(0, 3),
         c->robot.get_T_0_6().block<3, 1>(0, 3),
-        c->robot.get_T_0_7().block<3, 1>(0, 3)};
+        c->robot.get_T_0_7().block<3, 1>(0, 3),
+        c->robot.get_T_0_ee().block<3, 1>(0, 3) // End Effector
+    };
 
     // Trova il link più vicino all'ostacolo
     double min_distance = 1e6;

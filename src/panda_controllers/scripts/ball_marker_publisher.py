@@ -14,8 +14,8 @@ def ball_publisher():
     marker.type = Marker.SPHERE
     marker.action = Marker.ADD
     marker.pose.position.x = 0.11  # Cambia con le tue coordinate
-    marker.pose.position.y = -0.3
-    marker.pose.position.z = 0.45
+    marker.pose.position.y = -0.35
+    marker.pose.position.z = 0.53
     marker.pose.orientation.w = 1.0
     marker.scale.x = 0.1  # diametro della sfera
     marker.scale.y = 0.1
@@ -25,7 +25,7 @@ def ball_publisher():
     marker.color.b = 0.0
     marker.color.a = 0.8
 
-    rate = rospy.Rate(1)  # Pubblica ogni secondo (puoi anche metterlo più basso, è statico)
+    rate = rospy.Rate(1)  # Pubblica ogni secondo
     while not rospy.is_shutdown():
         marker.header.stamp = rospy.Time.now()
         pub.publish(marker)

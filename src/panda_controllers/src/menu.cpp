@@ -356,6 +356,13 @@ int main(int argc, char **argv)
 				 << target_ee_orient_input.y() << ", "
 				 << target_ee_orient_input.z() << endl;
 
+			// Chiedi se vuole ottimizzare il movimento
+
+			cout << "Do you want to optimize the movement? (1: Yes, 0: No): ";
+			int optimize_movement;
+			cin >> optimize_movement;
+
+			// Chiedi durata del movimento
 			cout << "Enter duration (tf) for the movement: ";
 			cin >> tf;
 
@@ -385,17 +392,26 @@ int main(int argc, char **argv)
 				ROS_INFO_STREAM("IK successful. Target joint configuration: " << qf.transpose());
 
 				// Ora la logica di ottimizzazione esistente prenderà qf come target
-				choice = 6; // Imposta choice a 6 per usare l'interpolazione min-jerk
+				if (optimize_movement == 1)
+				{
+					choice = 6; // Imposta choice a 6 comunque per usare l'interpolazione min-jerk
 
-				ROS_INFO_STREAM("Tf for movement: " << tf << " seconds");
+					v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
 
-				v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
+					vf << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità finali
 
-				vf << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità finali
+					a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
 
-				a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
-
-				af << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni finali
+					af << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni finali
+				}
+				else if (optimize_movement == 0)
+				{
+					choice = 1; // Torna al menu principale
+				}
+				else
+				{
+					continue; // Torna al menu principale
+				}
 			}
 			else
 			{
@@ -410,17 +426,26 @@ int main(int argc, char **argv)
 				ROS_INFO_STREAM("Tf for movement: " << tf << " seconds");
 				qf = q_target_ik;
 
-				choice = 6; // Imposta choice a 6 comunque per usare l'interpolazione min-jerk
+				if (optimize_movement == 1)
+				{
+					choice = 6; // Imposta choice a 6 comunque per usare l'interpolazione min-jerk
 
-				v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
+					v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
 
-				vf << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità finali
+					vf << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità finali
 
-				a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
+					a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
 
-				af << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni finali
-
-				// continue; // Torna al menu
+					af << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni finali
+				}
+				else if (optimize_movement == 0)
+				{
+					choice = 1; // Torna al menu principale
+				}
+				else
+				{
+					continue; // Torna al menu principale
+				}
 			}
 		}
 
@@ -609,13 +634,13 @@ int main(int argc, char **argv)
 			const double eps = 1e-6;		// Tolleranza per i vincoli di consistenza
 			const double eps_sphere = 1e-6; // Tolleranza per i vincoli di evitamento ostacolo
 
-			int numero_totale_vincoli = (campioni - 1) * 2; // <-- Calcola il numero totale
+			int numero_totale_vincoli = (campioni - 1) * 8; // <-- Calcola il numero totale
 
 			const double r_s = 0.05;   // raggio ostacolo
-			const double d_safe = 0.1; // margine sicurezza
+			const double d_safe = 0.05; // margine sicurezza
 
 			// Posizione dell'ostacolo (sfera) in coordinate del robot
-			Eigen::Vector3d p_ostacolo(0.11, -0.31, 0.45);
+			Eigen::Vector3d p_ostacolo(0.11, -0.35, 0.53);
 
 			if (numero_totale_vincoli > 0)
 			{
@@ -661,7 +686,7 @@ int main(int argc, char **argv)
 			for (int i = 0; i < ACC_INIT.size(); i++)
 			{
 				vettore[i] = ACC_INIT[i];
-				std::cout << "vettore[" << i << "] = " << vettore[i] << std::endl;
+				// std::cout << "vettore[" << i << "] = " << vettore[i] << std::endl;
 			}
 
 			double minf;
@@ -686,18 +711,17 @@ int main(int argc, char **argv)
 				std::cerr << "Errore: " << e.what() << std::endl;
 			}
 
-			
 			// Inizializzo le posizioni, velocità e accelerazioni
 			for (int j = 0; j < NJ; ++j)
 			{
 				POS[j] = q0[j]; // posizione iniziale
 				VEL[j] = v0[j]; // velocità iniziale
-				// ACC[j] = vettore[j]; // accelerazione iniziale
+								// ACC[j] = vettore[j]; // accelerazione iniziale
 			}
 
-			for (int k = 0; k < campioni-1; k++)
+			for (int k = 0; k < campioni - 1; k++)
 			{
-				
+
 				for (int j = 0; j < NJ; ++j)
 				{
 					ACC[k * NJ + j] = vettore[k * NJ + j]; // prendi la ddq del giunto j al tempo k
@@ -706,9 +730,8 @@ int main(int argc, char **argv)
 				}
 			}
 
-			
 			// Traiettoria finale smussata
-			
+
 			for (int j = 0; j < campioni - 1; j++)
 			{
 				double t_start = ros::Time::now().toSec();
@@ -764,8 +787,6 @@ int main(int argc, char **argv)
 
 					t = ros::Time::now().toSec();
 					// std::cout << "Time: " << t << std::endl;
-
-				
 				}
 			}
 
