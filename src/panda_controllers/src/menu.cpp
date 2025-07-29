@@ -325,7 +325,7 @@ int main(int argc, char **argv)
 
 			target_ee_pos_input.x() = 0.25; // Posizione EE desiderata in metri
 			target_ee_pos_input.y() = -0.33;
-			target_ee_pos_input.z() = 0.56;
+			target_ee_pos_input.z() = 0.54;
 
 			roll_deg = -169.0; // Angolo roll in gradi
 			pitch_deg = 0.3;   // Angolo pitch in gradi
@@ -591,7 +591,7 @@ int main(int argc, char **argv)
 			opt.set_xtol_rel(1e-3);		   // Tolleranza di convergenza
 			opt.set_param("verbosity", 1); // Verbose output
 
-			float tol = 1e-3; // Tolleranza per i vincoli
+			float tol = 1e-4; // Tolleranza per i vincoli
 
 			// Vincoli sulle condizioni iniziali, imponiamo all'ottimizzatore che le condizioni iniziali siano rispettate
 
@@ -630,14 +630,15 @@ int main(int argc, char **argv)
 			// Vincoli di consistenza + evitamento ostacolo
 			std::vector<ConsistencyConstraintIneq> constraints;
 			std::vector<std::shared_ptr<ObstacleConstraintIneq>> sphere_constraints;
+			std::vector<std::shared_ptr<JointLimitConstraint>> constraints_pos, constraints_vel;
 
-			const double eps = 1e-6;		// Tolleranza per i vincoli di consistenza
-			const double eps_sphere = 1e-6; // Tolleranza per i vincoli di evitamento ostacolo
+			const double eps = 1e-4;		// Tolleranza per i vincoli di consistenza
+			const double eps_sphere = 1e-4; // Tolleranza per i vincoli di evitamento ostacolo
 
-			int numero_totale_vincoli = (campioni - 1) * 8; // <-- Calcola il numero totale
+			int numero_totale_vincoli = (campioni - 1) * 7; // <-- Calcola il numero totale
 
 			const double r_s = 0.05;   // raggio ostacolo
-			const double d_safe = 0.05; // margine sicurezza
+			const double d_safe = 0.1; // margine sicurezza
 
 			// Posizione dell'ostacolo (sfera) in coordinate del robot
 			Eigen::Vector3d p_ostacolo(0.11, -0.35, 0.53);
@@ -649,24 +650,6 @@ int main(int argc, char **argv)
 
 			for (int k = 0; k < campioni - 1; k++)
 			{
-
-				// constraints.push_back({k, NJ, size_q, optData.dt, 0, -1, campioni});
-				// opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
-
-				// // Velocità
-				// constraints.push_back({k, NJ, size_q, optData.dt, 1, +1, campioni});
-				// opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
-
-				// constraints.push_back({k, NJ, size_q, optData.dt, 1, -1, campioni});
-				// opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
-
-				// Accelerazione
-				// constraints.push_back({k, NJ, size_q, optData.dt, 2, +1, campioni});
-				// opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
-
-				// constraints.push_back({k, NJ, size_q, optData.dt, 2, -1, campioni});
-				// opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
-
 				//  Vincolo di evitamento ostacolo (sfera)
 				auto c = std::make_shared<ObstacleConstraintIneq>(ObstacleConstraintIneq{
 					k, NJ, r_s, d_safe, p_ostacolo, robot, optData.q0, optData.v0, optData.dt, optData.qf});
@@ -674,11 +657,46 @@ int main(int argc, char **argv)
 				opt.add_inequality_constraint(avoid_sphere_with_gradient, c.get(), eps_sphere);
 			}
 
-			// Posizione
+			constraints_pos.reserve(NJ * 4);
+
+			// Upper and lower joint limits
 			for (int i = 0; i < NJ; i++)
 			{
-				constraints.push_back({campioni, NJ, size_q, optData.dt, 0, +1, campioni, q0, v0, qf, i});
-				opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
+				// Vincoli di posizione
+				{
+					// Posizione upper
+					auto c_up = std::make_unique<JointLimitConstraint>(
+						JointLimitConstraint{NJ, campioni, i, optData.dt, q0, v0, ubq[i], true});
+					constraints_pos.push_back(std::move(c_up));
+					opt.add_inequality_constraint(joint_position_limit, constraints_pos.back().get(), eps);
+
+					// Posizione lower
+					auto c_low = std::make_unique<JointLimitConstraint>(
+						JointLimitConstraint{NJ, campioni, i, optData.dt, q0, v0, lbq[i], false});
+					constraints_pos.push_back(std::move(c_low));
+					opt.add_inequality_constraint(joint_position_limit, constraints_pos.back().get(), eps);
+				}
+
+				// Vincoli di velocità
+				{
+					// Velocità upper
+					auto c_up = std::make_unique<JointLimitConstraint>(
+						JointLimitConstraint{NJ, campioni, i, optData.dt, q0, v0, ubdq[i], true});
+					constraints_vel.push_back(std::move(c_up));
+					opt.add_inequality_constraint(joint_velocity_limit, constraints_vel.back().get(), eps);
+
+					// Velocità lower
+					auto c_low = std::make_unique<JointLimitConstraint>(
+						JointLimitConstraint{NJ, campioni, i, optData.dt, q0, v0, lbdq[i], false});
+					constraints_vel.push_back(std::move(c_low));
+					opt.add_inequality_constraint(joint_velocity_limit, constraints_vel.back().get(), eps);
+				}
+
+				{
+					// Vincoli di consistenza per le posizioni
+					constraints.push_back({campioni, NJ, size_q, optData.dt, 0, +1, campioni, q0, v0, qf, i});
+					opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
+				}
 			}
 
 			// define the initial guess

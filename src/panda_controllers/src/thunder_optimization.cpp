@@ -71,7 +71,7 @@ double objective(const std::vector<double> &x, std::vector<double> &grad, void *
             q[i] += dq[i] * dt;
         }
 
-        //std::cout << "Campione: " << k << " q: " << q.transpose() << " dq: " << dq.transpose() << " ddq: " << ddq.transpose() << std::endl;
+        // std::cout << "Campione: " << k << " q: " << q.transpose() << " dq: " << dq.transpose() << " ddq: " << ddq.transpose() << std::endl;
 
         // aggiorna stato robot
         optData->robot.set_q(q);
@@ -103,6 +103,73 @@ double objective(const std::vector<double> &x, std::vector<double> &grad, void *
     }
 
     return cost;
+}
+
+// Vincolo per i limiti di posizione dei giunti
+
+double joint_position_limit(unsigned n, const double *x, double *grad, void *data)
+{
+    JointLimitConstraint *c = reinterpret_cast<JointLimitConstraint *>(data);
+    double dq = c->v0[c->i];
+    double q = c->q0[c->i];
+
+      // Se gradiente richiesto, inizializza
+    if (grad)
+    {
+        std::fill(grad, grad + n, 0.0);
+    }
+
+
+    for (int j = 0; j < c->k; j++)
+    {
+        double ddq = x[j * c->NJ + c->i];
+        dq += ddq * c->dt;
+        q += dq * c->dt + 0.5 * ddq * c->dt * c->dt;
+    }
+
+    double val = c->is_upper ? (q - c->limit) : (c->limit - q);
+
+    for (int j = 0; j < c->k; j++)
+    {
+        int idx = j * c->NJ + c->i;
+        double coeff = (c->k - j) * c->dt * c->dt + 0.5 * c->dt * c->dt;
+        grad[idx] = c->is_upper ? coeff : -coeff;
+    }
+
+    std::cout << "Valore vincolo posizione giunto " << c->i << ": " << val << std::endl;
+
+    return val;
+}
+
+// Vincolo per i limiti di velocità dei giunti
+double joint_velocity_limit(unsigned n, const double *x, double *grad, void *data)
+{
+    JointLimitConstraint *c = reinterpret_cast<JointLimitConstraint *>(data);
+    double dq = c->v0[c->i];
+
+    // Se gradiente richiesto, inizializza
+    if (grad)
+    {
+        std::fill(grad, grad + n, 0.0);
+    }
+
+    for (int j = 0; j < c->k; j++)
+    {
+        double ddq = x[j * c->NJ + c->i];
+        dq += ddq * c->dt;
+    }
+
+    double val = c->is_upper ? (dq - c->limit) : (c->limit - dq);
+
+    for (int j = 0; j < c->k; j++)
+    {
+        int idx = j * c->NJ + c->i;
+        grad[idx] = c->is_upper ? c->dt : -c->dt;
+    }
+
+    std::cout << "Valore vincolo velocità giunto " << c->i << ": " << val << std::endl;
+
+    return val;
 }
 
 // // Funzione per i vincoli

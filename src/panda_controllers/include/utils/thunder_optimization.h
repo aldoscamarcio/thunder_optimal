@@ -60,6 +60,18 @@ struct LinkDistanceResult
     double min_distance;
 };
 
+struct JointLimitConstraint
+{
+    int NJ; // numero giunti
+    int k;  // numero step di integrazione
+    int i;  // indice giunto
+    double dt;
+    Eigen::VectorXd q0;
+    Eigen::VectorXd v0;
+    double limit;  // upper o lower limit
+    bool is_upper; // true se è un upper bound, false se è un lower bound
+};
+
 // Funzione obiettivo per l'ottimizzazione
 double objective(const std::vector<double> &x, std::vector<double> &grad, void *data);
 
@@ -79,5 +91,11 @@ LinkDistanceResult compute_link_distances_to_point(
     const Eigen::VectorXd &ddq,
     const Eigen::Vector3d &p_obs,
     thunder_franka &robot);
+
+// Vincolo per i limiti di posizione dei giunti
+double joint_position_limit(unsigned n, const double *x, double *grad, void *data);
+
+// Vincolo per i limiti di velocità dei giunti
+double joint_velocity_limit(unsigned n, const double *x, double *grad, void *data);
 
 #endif // THUNDER_OPTIMIZATION_H
