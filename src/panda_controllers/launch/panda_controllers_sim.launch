@@ -7,7 +7,7 @@
   <!-- Avvia il robot e gazebo insieme -->
   <include file="$(find franka_gazebo)/launch/panda.launch">
     <arg name="gazebo" value="true" />
-    <arg name="rviz" value="false" />
+    <arg name="rviz" value="true" />
     <arg name="world" value="$(arg world_file)" />
     <arg name="controller" value="computed_torque_controller" />
     <arg name="use_gripper" value="false" />

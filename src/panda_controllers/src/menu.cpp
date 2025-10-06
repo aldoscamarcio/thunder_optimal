@@ -403,9 +403,27 @@ int main(int argc, char **argv)
 					a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
 
 					af << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni finali
+
+					// choice = 6; // Imposta choice a 6 comunque per usare l'interpolazione min-jerk
+
+					// v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
+
+					// vf << 0.0, 0.0, 0.0, 0.0, 0.0, -2.0, 0.0; // Velocità finali
+
+					// a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
+
+					// af << 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0; // Accelerazioni finali
+
 				}
 				else if (optimize_movement == 0)
 				{
+					qf << -0.14724,
+					   -0.526,
+					   -0.565,
+					   -2.1099,
+					   -0.312,
+					   1.557,
+					   -1.733;
 					choice = 1; // Torna al menu principale
 				}
 				else
@@ -440,7 +458,14 @@ int main(int argc, char **argv)
 				}
 				else if (optimize_movement == 0)
 				{
-					choice = 1; // Torna al menu principale
+					qf << -0.14724,
+					   -0.526,
+					   -0.565,
+					   -2.1099,
+					   -0.312,
+					   1.557,
+					   -1.733;
+					choice = 1; // movimento senza ottimizzazione (semplice interpolazione)
 				}
 				else
 				{
@@ -471,6 +496,7 @@ int main(int argc, char **argv)
 		{
 			if (choice == 1)
 			{
+				
 				interpolator_pos(q0, qf, tf, t);
 			}
 			else if (choice == 4)
@@ -628,7 +654,7 @@ int main(int argc, char **argv)
 			opt.set_lower_bounds(lb);
 
 			// Vincoli di consistenza + evitamento ostacolo
-			std::vector<ConsistencyConstraintIneq> constraints;
+			std::vector<ConsistencyConstraintIneq> constraints, constraints_vel_f;
 			std::vector<std::shared_ptr<ObstacleConstraintIneq>> sphere_constraints;
 			std::vector<std::shared_ptr<JointLimitConstraint>> constraints_pos, constraints_vel;
 
@@ -646,65 +672,75 @@ int main(int argc, char **argv)
 			if (numero_totale_vincoli > 0)
 			{
 				constraints.reserve(numero_totale_vincoli);
+				constraints_vel_f.reserve(numero_totale_vincoli);
+				constraints_pos.reserve(NJ * 4);
 			}
 
+			//  Vincolo di evitamento ostacolo (sfera)
 			for (int k = 0; k < campioni - 1; k++)
 			{
-				//  Vincolo di evitamento ostacolo (sfera)
 				auto c = std::make_shared<ObstacleConstraintIneq>(ObstacleConstraintIneq{
 					k, NJ, r_s, d_safe, p_ostacolo, robot, optData.q0, optData.v0, optData.dt, optData.qf});
 				sphere_constraints.push_back(c);
 				opt.add_inequality_constraint(avoid_sphere_with_gradient, c.get(), eps_sphere);
+
+				// Upper and lower joint limits
+				for (int i = 0; i < NJ; i++)
+				{
+					// Vincoli di posizione
+					{
+						// Posizione upper
+						auto c_up = std::make_unique<JointLimitConstraint>(
+							JointLimitConstraint{NJ, k, i, optData.dt, q0, v0, ubq[i], true});
+						constraints_pos.push_back(std::move(c_up));
+						opt.add_inequality_constraint(joint_position_limit, constraints_pos.back().get(), eps);
+
+						// Posizione lower
+						auto c_low = std::make_unique<JointLimitConstraint>(
+							JointLimitConstraint{NJ, k, i, optData.dt, q0, v0, lbq[i], false});
+						constraints_pos.push_back(std::move(c_low));
+						opt.add_inequality_constraint(joint_position_limit, constraints_pos.back().get(), eps);
+					}
+
+					// Vincoli di velocità
+
+					{
+						// Velocità upper
+						auto c_up = std::make_unique<JointLimitConstraint>(
+							JointLimitConstraint{NJ, k, i, optData.dt, q0, v0, ubdq[i], true});
+						constraints_vel.push_back(std::move(c_up));
+						opt.add_inequality_constraint(joint_velocity_limit, constraints_vel.back().get(), eps);
+
+						// Velocità lower
+						auto c_low = std::make_unique<JointLimitConstraint>(
+							JointLimitConstraint{NJ, k, i, optData.dt, q0, v0, lbdq[i], false});
+						constraints_vel.push_back(std::move(c_low));
+						opt.add_inequality_constraint(joint_velocity_limit, constraints_vel.back().get(), eps);
+					}
+				}
 			}
 
-			constraints_pos.reserve(NJ * 4);
-
-			// Upper and lower joint limits
 			for (int i = 0; i < NJ; i++)
 			{
-				// Vincoli di posizione
-				{
-					// Posizione upper
-					auto c_up = std::make_unique<JointLimitConstraint>(
-						JointLimitConstraint{NJ, campioni, i, optData.dt, q0, v0, ubq[i], true});
-					constraints_pos.push_back(std::move(c_up));
-					opt.add_inequality_constraint(joint_position_limit, constraints_pos.back().get(), eps);
 
-					// Posizione lower
-					auto c_low = std::make_unique<JointLimitConstraint>(
-						JointLimitConstraint{NJ, campioni, i, optData.dt, q0, v0, lbq[i], false});
-					constraints_pos.push_back(std::move(c_low));
-					opt.add_inequality_constraint(joint_position_limit, constraints_pos.back().get(), eps);
+				// Vincoli di posizione finale
+				{
+					constraints.push_back({campioni, NJ, size_q, optData.dt, 0, +1, campioni, q0, v0, qf, vf, i});
+					opt.add_inequality_constraint(final_position_constraint, &constraints.back(), eps);
 				}
 
-				// Vincoli di velocità
+				// Vincoli di velocità finale
 				{
-					// Velocità upper
-					auto c_up = std::make_unique<JointLimitConstraint>(
-						JointLimitConstraint{NJ, campioni, i, optData.dt, q0, v0, ubdq[i], true});
-					constraints_vel.push_back(std::move(c_up));
-					opt.add_inequality_constraint(joint_velocity_limit, constraints_vel.back().get(), eps);
-
-					// Velocità lower
-					auto c_low = std::make_unique<JointLimitConstraint>(
-						JointLimitConstraint{NJ, campioni, i, optData.dt, q0, v0, lbdq[i], false});
-					constraints_vel.push_back(std::move(c_low));
-					opt.add_inequality_constraint(joint_velocity_limit, constraints_vel.back().get(), eps);
-				}
-
-				{
-					// Vincoli di consistenza per le posizioni
-					constraints.push_back({campioni, NJ, size_q, optData.dt, 0, +1, campioni, q0, v0, qf, i});
-					opt.add_inequality_constraint(consistency_ineq, &constraints.back(), eps);
+					constraints_vel_f.push_back({campioni, NJ, size_q, optData.dt, 0, +1, campioni, q0, v0, qf, vf, i});
+					opt.add_inequality_constraint(final_velocity_constraint, &constraints_vel_f.back(), eps);
 				}
 			}
 
-			// define the initial guess
+			// Define the initial guess
 			std::vector<double> vettore(NJ * campioni); // Inizializza il vettore x
 			for (int i = 0; i < ACC_INIT.size(); i++)
 			{
 				vettore[i] = ACC_INIT[i];
-				// std::cout << "vettore[" << i << "] = " << vettore[i] << std::endl;
 			}
 
 			double minf;
@@ -761,6 +797,7 @@ int main(int argc, char **argv)
 					qf(i) = POS[(j + 1) * NJ + i];
 					v0(i) = VEL[j * NJ + i];
 					vf(i) = VEL[(j + 1) * NJ + i];
+					std::cout << "vf(" << i << ") = " << vf(i) << std::endl;
 					a0(i) = ACC[j * NJ + i];
 					af(i) = ACC[(j + 1) * NJ + i];
 					tf = t_start + 1.0 / frequenza;

@@ -50,6 +50,7 @@ struct ConsistencyConstraintIneq
     Eigen::VectorXd q0;
     Eigen::VectorXd v0;
     Eigen::VectorXd qf;
+    Eigen::VectorXd vf;
     int i; // indice del giunto su cui applicare il vincolo
 };
 
@@ -76,7 +77,10 @@ struct JointLimitConstraint
 double objective(const std::vector<double> &x, std::vector<double> &grad, void *data);
 
 // Funzione per i vincoli
-double consistency_ineq(unsigned n, const double *x, double *grad, void *data);
+double final_position_constraint(unsigned n, const double *x, double *grad, void *data);
+
+// Vincolo sulla velocità finale del giunto i
+double final_velocity_constraint(unsigned n, const double *x, double *grad, void *data);
 
 // Funzione per evitare ostacoli sferici
 double avoid_sphere(const std::vector<double> &x, std::vector<double> &grad, void *data);

@@ -10,9 +10,11 @@
       <uri>model://sun</uri>
     </include>
 
+    <!-- La tua palla -->
     <model name="palla">
-      <pose>0.11 -0.35 0.53 0 0 0</pose> <link name="link">
-      <gravity>0</gravity>
+      <pose>0.11 -0.35 0.53 0 0 0</pose>
+      <link name="link">
+        <gravity>0</gravity>
         <visual name="visual">
           <geometry>
             <sphere>
@@ -32,7 +34,8 @@
           </geometry>
         </collision>
         <inertial>
-          <mass>10.0</mass> <inertia>
+          <mass>10.0</mass>
+          <inertia>
             <ixx>0.004</ixx>
             <iyy>0.004</iyy>
             <izz>0.004</izz>
@@ -43,6 +46,5 @@
         </inertial>
       </link>
     </model>
-
   </world>
 </sdf>

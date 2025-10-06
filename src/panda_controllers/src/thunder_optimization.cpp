@@ -172,10 +172,12 @@ double joint_velocity_limit(unsigned n, const double *x, double *grad, void *dat
     return val;
 }
 
-// // Funzione per i vincoli
-double consistency_ineq(unsigned n, const double *x, double *grad, void *data)
+// Vincolo sulla posizione finale del giunto i
+double final_position_constraint(unsigned n, const double *x, double *grad, void *data)
 {
     ConsistencyConstraintIneq *c = reinterpret_cast<ConsistencyConstraintIneq *>(data);
+
+    //ATTENZIONE! k = campioni = cost; quindi lui ogni volta che ottimizza integra fino alla qf e la confronta con la qf settata 
 
     double dq = c->v0[c->i];
     double q = c->q0[c->i];
@@ -185,7 +187,9 @@ double consistency_ineq(unsigned n, const double *x, double *grad, void *data)
         double ddq = x[j * c->NJ + c->i];
         dq += ddq * c->dt;
         q += dq * c->dt + 0.5 * ddq * std::pow(c->dt, 2);
+     
     }
+       std::cout << "i: " << c->i << " q: " << q << std::endl;
 
     double err = q - c->qf[c->i];
     double val = err * err;
@@ -198,6 +202,37 @@ double consistency_ineq(unsigned n, const double *x, double *grad, void *data)
             double coeff = (c->k - j) * c->dt * c->dt + 0.5 * c->dt * c->dt;
             int idx = j * c->NJ + c->i;
             grad[idx] = 2.0 * err * coeff;
+        }
+    }
+
+    return val;
+}
+
+// Vincolo "soft" sulla velocità finale del giunto i
+double final_velocity_constraint(unsigned n, const double *x, double *grad, void *data) {
+    ConsistencyConstraintIneq *c = reinterpret_cast<ConsistencyConstraintIneq *>(data);
+
+    double dq = c->v0[c->i]; // velocità iniziale
+
+    // Ricostruzione della velocità finale tramite integrazione delle accelerazioni
+    for (int j = 0; j < c->k; ++j) {
+        double ddq = x[j * c->NJ + c->i];
+        dq += ddq * c->dt;
+    }
+    std::cout << "i: " << c->i << " dq: " << dq << std::endl;
+
+    // Valore del vincolo quadratico (soft constraint)
+    double err = dq - c->vf[c->i]; // differenza tra velocità finale e target
+    double val = err * err;
+
+
+    // Gradiente
+    if (grad) {
+        std::fill(grad, grad + n, 0.0);
+        for (int j = 0; j < c->k; ++j) 
+        {
+            int idx = j * c->NJ + c->i;
+            grad[idx] = 2.0 * err * c->dt; // derivata del quadrato rispetto a ddq_j
         }
     }
 
