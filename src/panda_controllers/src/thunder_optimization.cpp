@@ -6,6 +6,8 @@
 
 // Poi gli header di sistema/ROS
 #include "ros/ros.h"
+#include <visualization_msgs/MarkerArray.h>
+#include <visualization_msgs/Marker.h>
 
 // Poi le librerie di terze parti
 #include <eigen3/Eigen/Dense>
@@ -113,12 +115,11 @@ double joint_position_limit(unsigned n, const double *x, double *grad, void *dat
     double dq = c->v0[c->i];
     double q = c->q0[c->i];
 
-      // Se gradiente richiesto, inizializza
+    // Se gradiente richiesto, inizializza
     if (grad)
     {
         std::fill(grad, grad + n, 0.0);
     }
-
 
     for (int j = 0; j < c->k; j++)
     {
@@ -136,7 +137,7 @@ double joint_position_limit(unsigned n, const double *x, double *grad, void *dat
         grad[idx] = c->is_upper ? coeff : -coeff;
     }
 
-    std::cout << "Valore vincolo posizione giunto " << c->i << ": " << val << std::endl;
+    // std::cout << "Valore vincolo posizione giunto " << c->i << ": " << val << std::endl;
 
     return val;
 }
@@ -167,7 +168,7 @@ double joint_velocity_limit(unsigned n, const double *x, double *grad, void *dat
         grad[idx] = c->is_upper ? c->dt : -c->dt;
     }
 
-    std::cout << "Valore vincolo velocità giunto " << c->i << ": " << val << std::endl;
+    // std::cout << "Valore vincolo velocità giunto " << c->i << ": " << val << std::endl;
 
     return val;
 }
@@ -177,7 +178,7 @@ double final_position_constraint(unsigned n, const double *x, double *grad, void
 {
     ConsistencyConstraintIneq *c = reinterpret_cast<ConsistencyConstraintIneq *>(data);
 
-    //ATTENZIONE! k = campioni = cost; quindi lui ogni volta che ottimizza integra fino alla qf e la confronta con la qf settata 
+    // ATTENZIONE! k = campioni = cost; quindi lui ogni volta che ottimizza integra fino alla qf e la confronta con la qf settata
 
     double dq = c->v0[c->i];
     double q = c->q0[c->i];
@@ -187,9 +188,8 @@ double final_position_constraint(unsigned n, const double *x, double *grad, void
         double ddq = x[j * c->NJ + c->i];
         dq += ddq * c->dt;
         q += dq * c->dt + 0.5 * ddq * std::pow(c->dt, 2);
-     
     }
-       std::cout << "i: " << c->i << " q: " << q << std::endl;
+    // std::cout << "i: " << c->i << " q: " << q << std::endl;
 
     double err = q - c->qf[c->i];
     double val = err * err;
@@ -209,27 +209,29 @@ double final_position_constraint(unsigned n, const double *x, double *grad, void
 }
 
 // Vincolo "soft" sulla velocità finale del giunto i
-double final_velocity_constraint(unsigned n, const double *x, double *grad, void *data) {
+double final_velocity_constraint(unsigned n, const double *x, double *grad, void *data)
+{
     ConsistencyConstraintIneq *c = reinterpret_cast<ConsistencyConstraintIneq *>(data);
 
     double dq = c->v0[c->i]; // velocità iniziale
 
     // Ricostruzione della velocità finale tramite integrazione delle accelerazioni
-    for (int j = 0; j < c->k; ++j) {
+    for (int j = 0; j < c->k; ++j)
+    {
         double ddq = x[j * c->NJ + c->i];
         dq += ddq * c->dt;
     }
-    std::cout << "i: " << c->i << " dq: " << dq << std::endl;
+    // std::cout << "i: " << c->i << " dq: " << dq << std::endl;
 
     // Valore del vincolo quadratico (soft constraint)
     double err = dq - c->vf[c->i]; // differenza tra velocità finale e target
     double val = err * err;
 
-
     // Gradiente
-    if (grad) {
+    if (grad)
+    {
         std::fill(grad, grad + n, 0.0);
-        for (int j = 0; j < c->k; ++j) 
+        for (int j = 0; j < c->k; ++j)
         {
             int idx = j * c->NJ + c->i;
             grad[idx] = 2.0 * err * c->dt; // derivata del quadrato rispetto a ddq_j
@@ -239,6 +241,104 @@ double final_velocity_constraint(unsigned n, const double *x, double *grad, void
     return val;
 }
 
+void publish_capsule_markers(
+    thunder_franka &robot,                // Robot con q impostato
+    ros::Publisher &marker_pub,           // Publisher (passato per riferimento)
+    const std::vector<Capsule> &capsules, // Definizioni delle capsule
+    int closest_capsule_index)            // per colorare la più vicina
+{
+    // 1. Ottieni le pose (basate sullo stato 'q' già impostato nel robot)
+    std::vector<Eigen::Matrix4d> link_poses = {
+        robot.get_T_0_0(), // Indice 0
+        robot.get_T_0_1(), // Indice 1
+        robot.get_T_0_2(), // Indice 2
+        robot.get_T_0_3(), // Indice 3
+        robot.get_T_0_4(), // Indice 4
+        robot.get_T_0_5(), // Indice 5
+        robot.get_T_0_5(), // Indice 5
+        robot.get_T_0_6(), // Indice 6
+        robot.get_T_0_7()  // Indice 7
+    };
+
+    // 2. Crea l'array di marker
+    visualization_msgs::MarkerArray marker_array;
+
+    for (size_t i = 0; i < capsules.size(); ++i)
+    {
+        const auto &cap = capsules[i];
+
+        if (cap.link_index < 0 || cap.link_index >= link_poses.size())
+            continue;
+
+        const Eigen::Matrix4d &T_world_link = link_poses[cap.link_index];
+        Eigen::Matrix4d T_world_capsule = T_world_link * cap.T_offset;
+
+        Eigen::Vector3d center = T_world_capsule.block<3, 1>(0, 3);
+        Eigen::Vector3d z_axis = T_world_capsule.block<3, 1>(0, 2);
+        Eigen::Vector3d half_axis = z_axis * (cap.length / 2.0);
+        Eigen::Vector3d a = center - half_axis;
+        Eigen::Vector3d b = center + half_axis;
+
+        // 3. Crea il Marker
+        visualization_msgs::Marker marker;
+        marker.header.frame_id = "panda_link0";
+        marker.header.stamp = ros::Time::now();
+        marker.ns = "collision_capsules";
+        marker.id = static_cast<int>(i);
+        marker.type = visualization_msgs::Marker::CYLINDER;
+        marker.action = visualization_msgs::Marker::ADD;
+
+        // 4. Posa (Centro + Orientamento)
+        Eigen::Vector3d marker_center = (a + b) / 2.0;
+        Eigen::Vector3d axis_vector = (b - a).normalized();
+        Eigen::Quaterniond q = Eigen::Quaterniond::FromTwoVectors(Eigen::Vector3d::UnitZ(), axis_vector);
+
+        marker.pose.position.x = marker_center.x();
+        marker.pose.position.y = marker_center.y();
+        marker.pose.position.z = marker_center.z();
+        marker.pose.orientation.x = q.x();
+        marker.pose.orientation.y = q.y();
+        marker.pose.orientation.z = q.z();
+        marker.pose.orientation.w = q.w();
+
+        // 5. Scala
+        marker.scale.x = cap.radius * 2.0;
+        marker.scale.y = cap.radius * 2.0;
+        marker.scale.z = cap.length;
+
+        // 6. Colore
+        marker.color.r = 0.0f;
+        marker.color.g = 1.0f;
+        marker.color.b = 0.0f;
+        marker.color.a = 0.4f;
+        if (static_cast<int>(i) == closest_capsule_index)
+        {
+            marker.color.r = 1.0f;
+            marker.color.g = 0.0f;
+            marker.color.a = 0.8f;
+        }
+        marker.lifetime = ros::Duration(2.0);
+
+        marker_array.markers.push_back(marker);
+    }
+
+    // 4. Pubblica
+    marker_pub.publish(marker_array);
+}
+
+// Funzione per distanza punto-capsula
+double point_to_capsule_distance(const Eigen::Vector3d &p, const Eigen::Vector3d &a, const Eigen::Vector3d &b, double radius)
+{
+    Eigen::Vector3d ab = b - a;
+    Eigen::Vector3d ap = p - a;
+    double t = ap.dot(ab) / ab.squaredNorm(); // semplificazione
+    t = std::min(std::max(t, 0.0), 1.0);
+    Eigen::Vector3d closest = a + t * ab;
+    // std::cout << "Distance: " << (p - closest).norm() - radius << std::endl;
+    return (p - closest).norm() - radius;
+}
+
+// Funzione di vincolo con gradiente
 double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<double> &grad, void *data)
 {
     ObstacleConstraintIneq *c = reinterpret_cast<ObstacleConstraintIneq *>(data);
@@ -248,116 +348,129 @@ double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<doub
     double r_s = c->r_s;
     double d_safe = c->d_safe;
     Eigen::Vector3d p_obs = c->p_obs;
-    thunder_franka robot;
-    // Ricostruzione di q_k e dq_k tramite integrazione (Eulero esplicito)
-    Eigen::VectorXd q_k = c->q0;
-    Eigen::VectorXd dq_k = c->dq0;
     double dt = c->dt;
 
+    Eigen::VectorXd q_k = c->q0;
+    Eigen::VectorXd dq_k = c->dq0;
     for (int j = 0; j < k; j++)
     {
-        Eigen::VectorXd ddq_k(NJ);
         for (int i = 0; i < NJ; i++)
         {
-            ddq_k[i] = x[j * NJ + i];
-            dq_k[i] += ddq_k[i] * dt;                          // Aggiorna dq_k con la derivata
-            q_k[i] += dq_k[i] * dt + 0.5 * ddq_k[i] * dt * dt; // Aggiorna q_k
+            double ddq = x[j * NJ + i];
+            dq_k[i] += ddq * dt;
+            q_k[i] += dq_k[i] * dt;
         }
     }
 
-    // Imposta configurazione del robot
+    // Aggiorna configurazione robot
     c->robot.set_q(q_k);
 
-    // Calcola le posizioni dei link
-    std::vector<Eigen::Vector3d> p_links = {
-        c->robot.get_T_0_1().block<3, 1>(0, 3),
-        c->robot.get_T_0_2().block<3, 1>(0, 3),
-        c->robot.get_T_0_3().block<3, 1>(0, 3),
-        c->robot.get_T_0_4().block<3, 1>(0, 3),
-        c->robot.get_T_0_5().block<3, 1>(0, 3),
-        c->robot.get_T_0_6().block<3, 1>(0, 3),
-        c->robot.get_T_0_7().block<3, 1>(0, 3),
-        c->robot.get_T_0_ee().block<3, 1>(0, 3) // End Effector
-    };
+    // Costruisce pose e Jacobiani di tutti i link
+    std::vector<Eigen::Matrix4d> link_poses = {
+        c->robot.get_T_0_0(),
+        c->robot.get_T_0_1(),
+        c->robot.get_T_0_2(),
+        c->robot.get_T_0_3(),
+        c->robot.get_T_0_4(),
+        c->robot.get_T_0_5(),
+        c->robot.get_T_0_5(),
+        c->robot.get_T_0_6(),
+        c->robot.get_T_0_7()};
 
-    // Trova il link più vicino all'ostacolo
+    std::vector<Eigen::MatrixXd> J_links = {
+        Eigen::MatrixXd::Zero(6, 7),
+        c->robot.get_J_1(),
+        c->robot.get_J_2(),
+        c->robot.get_J_3(),
+        c->robot.get_J_4(),
+        c->robot.get_J_5(),
+        c->robot.get_J_5(),
+        c->robot.get_J_6(),
+        c->robot.get_J_7()};
+
+    // Trova la capsula più vicina all'ostacolo
     double min_distance = 1e6;
-    int closest_link = -1;
     Eigen::Vector3d closest_point;
+    Eigen::MatrixXd J_closest(3, NJ);
+    J_closest.setZero();
 
-    for (int i = 0; i < p_links.size(); ++i)
+    int closest_capsule_index = -1;
+    for (size_t idx = 0; idx < c->capsules.size(); idx++)
     {
-        double distance = (p_links[i] - p_obs).norm();
-        if (distance < min_distance)
+        auto &cap = c->capsules[idx];
+        std::cout << "numero capsule"<< c->capsules.size()<< std::endl;
+        Eigen::Matrix4d T = link_poses[cap.link_index] * cap.T_offset;
+        Eigen::Vector3d a = T.block<3, 1>(0, 3);
+        Eigen::Vector3d b = a + T.block<3, 1>(0, 2) * cap.length;
+        std::cout << "Lunghezza Capsula " << cap.length << std::endl;
+        double dist = point_to_capsule_distance(p_obs, a, b, cap.radius);
+
+        if (dist < min_distance)
         {
-            min_distance = distance;
-            closest_link = i;
-            closest_point = p_links[i];
+            min_distance = dist;
+            Eigen::Vector3d ab = b - a;
+            double t = ((p_obs - a).dot(ab)) / ab.squaredNorm();
+            t = std::min(std::max(t, 0.0), 1.0);
+            closest_point = a + t * ab;
+            closest_capsule_index = idx; // Salva indice
+
+            // 1. Prendi Jacobiani del LINK
+            Eigen::MatrixXd J_link_trans = J_links[cap.link_index].block(0, 0, 3, NJ);
+            Eigen::MatrixXd J_link_rot = J_links[cap.link_index].block(3, 0, 3, NJ);
+
+            // 2. Posizione del frame del link
+            Eigen::Vector3d p_link = link_poses[cap.link_index].block<3, 1>(0, 3);
+
+            // 3. Vettori offset (in coordinate globali)
+            Eigen::Vector3d r_link_to_a = a - p_link;
+            Eigen::Vector3d r_link_to_b = b - p_link;
+
+            // 4. Calcola J_a e J_b
+            Eigen::MatrixXd J_a(3, NJ);
+            Eigen::MatrixXd J_b(3, NJ);
+            for (int col = 0; col < NJ; ++col)
+            {
+                Eigen::Vector3d omega = J_link_rot.col(col);
+
+                // omega per il prodotto vettoriale
+                J_a.col(col) = J_link_trans.col(col) + omega.cross(r_link_to_a);
+                J_b.col(col) = J_link_trans.col(col) + omega.cross(r_link_to_b);
+            }
+
+            // 5. Interpola per trovare J_closest
+            J_closest = (1.0 - t) * J_a + t * J_b;
         }
     }
 
-    std::cout << "Link più vicino: " << closest_link + 1 << " con distanza: " << min_distance << std::endl;
+    if (closest_capsule_index == -1)
+    {
+        return 0.0; // O Houston, abbiamo un problema
+    }
 
-    // Calcola il valore del vincolo: deve essere <= 0
+    std::cout << "Capsula più vicina: " << closest_capsule_index << std::endl;
+
+    // Vincolo = distanza minima - sicurezza
     double constraint_value = (r_s + d_safe) - min_distance;
+    std::cout << "Distanza minima: " << constraint_value << std::endl;
     if (constraint_value < 0)
     {
-        std::cout << "Vincolo soddisfatto: distanza sufficiente." << std::endl;
+        std::cout << "Nessun rischio di collisione." << std::endl;
     }
-    else
+
+    // Visualizzazione
+    if (c->marker_pub)
     {
-        std::cout << "Vincolo non soddisfatto: distanza insufficiente." << std::endl;
+        publish_capsule_markers(c->robot, c->marker_pub, c->capsules, closest_capsule_index);
     }
 
-    std::cout << "Valore vincolo: " << constraint_value << std::endl;
-
-    // Direzione di derivazione
+    // Gradiente
     Eigen::Vector3d direction = (closest_point - p_obs).normalized();
-
-    // Jacobiano del punto più vicino
-    Eigen::MatrixXd J_closest(3, NJ);
-    switch (closest_link)
-    {
-    case 0:
-        J_closest = c->robot.get_J_1();
-        break;
-    case 1:
-        J_closest = c->robot.get_J_2();
-        break;
-    case 2:
-        J_closest = c->robot.get_J_3();
-        break;
-    case 3:
-        J_closest = c->robot.get_J_4();
-        break;
-    case 4:
-        J_closest = c->robot.get_J_5();
-        break;
-    case 5:
-        J_closest = c->robot.get_J_6();
-        break;
-    case 6:
-        J_closest = c->robot.get_J_7();
-        break;
-    case 7:
-        J_closest = c->robot.get_J_ee();
-        break;
-    default:
-        std::cerr << "Link non valido!" << std::endl;
-        return constraint_value;
-    }
-
-    // Calcola derivata della distanza rispetto a q_k
     Eigen::RowVectorXd ddist_dq = direction.transpose() * J_closest;
 
-    // Calcola derivata di q_k rispetto a tutte le ddq_j (j=0..k-1)
-    // dq_k = dq_0 + ∑ ddq_j * dt  => d(dq_k)/d(ddq_j) = I * dt (per j < k)
-    // q_k  = q_0  + ∑ dq_j * dt   => d(q_k)/d(ddq_j) = dt^2 * (k - j)
-
-    // Reset gradiente
     if (!grad.empty())
         std::fill(grad.begin(), grad.end(), 0.0);
 
+    // Loop del gradiente
     for (int j = 0; j < k; ++j)
     {
         for (int i = 0; i < NJ; ++i)

@@ -10,7 +10,8 @@
 #include "ros/ros.h"
 #include "utils/thunder_franka.h"
 #include "utils/thunder_optimization.h"
-
+#include <visualization_msgs/MarkerArray.h>
+#include <visualization_msgs/Marker.h>
 #include <sstream>
 // #include <eigen_conversions/eigen_msg.h>
 #include "nlopt.hpp"
@@ -180,6 +181,8 @@ int main(int argc, char **argv)
 
 	ros::Publisher pub_cmd = node_handle.advertise<sensor_msgs::JointState>("/computed_torque_controller/command", 1000);
 	ros::Subscriber sub_joints = node_handle.subscribe<sensor_msgs::JointState>("/franka_state_controller/joint_states", 1, &jointsCallback);
+	ros::NodeHandle nh;
+	ros::Publisher capsule_viz_pub_ = nh.advertise<visualization_msgs::MarkerArray>("robot_capsules_viz", 10);
 	// ros::Publisher path_pub = node_handle.advertise<nav_msgs::Path>("/end_effector_path", 1);
 
 	// ros::Subscriber sub_pose =  node_handle.subscribe("/franka_state_controller/franka_ee_pose", 1, &poseCallback);
@@ -214,6 +217,165 @@ int main(int argc, char **argv)
 	int choice;
 	int demo = -1;
 	int yaml = 0;
+	
+// ===========================================
+// CAPSULE GENERATE DA fr3_franka_hand.urdf
+// ===========================================
+std::vector<Capsule> capsule_definitions;
+capsule_definitions.clear();
+
+// --- fr3_link0 (Index 0) ---
+{
+    Capsule cap;
+    cap.link_index = 0;
+    cap.radius = 0.090000;
+    cap.length = 0.030000;
+    cap.T_offset << 0.0000, 0.0000, 1.0000, -0.0750,
+                    0.0000, 1.0000, 0.0000, 0.0000,
+                    -1.0000, 0.0000, 0.0000, 0.0600,
+                    0.0000, 0.0000, 0.0000, 1.0000;
+    capsule_definitions.push_back(cap);
+}
+
+// --- fr3_link1 (Index 1) ---
+{
+    Capsule cap;
+    cap.link_index = 1;
+    cap.radius = 0.090000;
+    cap.length = 0.283000;
+    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+                    0.0000, 1.0000, 0.0000, 0.0000,
+                    0.0000, 0.0000, 1.0000, -0.1915,
+                    0.0000, 0.0000, 0.0000, 1.0000;
+    capsule_definitions.push_back(cap);
+}
+
+// --- fr3_link2 (Index 2) ---
+{
+    Capsule cap;
+    cap.link_index = 2;
+    cap.radius = 0.090000;
+    cap.length = 0.120000;
+    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+                    0.0000, 1.0000, 0.0000, 0.0000,
+                    0.0000, 0.0000, 1.0000, 0.0000,
+                    0.0000, 0.0000, 0.0000, 1.0000;
+    capsule_definitions.push_back(cap);
+}
+
+// --- fr3_link3 (Index 3) ---
+{
+    Capsule cap;
+    cap.link_index = 3;
+    cap.radius = 0.090000;
+    cap.length = 0.150000;
+    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+                    0.0000, 1.0000, 0.0000, 0.0000,
+                    0.0000, 0.0000, 1.0000, -0.1450,
+                    0.0000, 0.0000, 0.0000, 1.0000;
+    capsule_definitions.push_back(cap);
+}
+
+// --- fr3_link4 (Index 4) ---
+{
+    Capsule cap;
+    cap.link_index = 4;
+    cap.radius = 0.090000;
+    cap.length = 0.120000;
+    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+                    0.0000, 1.0000, 0.0000, 0.0000,
+                    0.0000, 0.0000, 1.0000, 0.0000,
+                    0.0000, 0.0000, 0.0000, 1.0000;
+    capsule_definitions.push_back(cap);
+}
+
+// --- fr3_link5 (Index 5) ---
+{
+    Capsule cap;
+    cap.link_index = 5;
+    cap.radius = 0.090000;
+    cap.length = 0.100000;
+    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+                    0.0000, 1.0000, 0.0000, 0.0000,
+                    0.0000, 0.0000, 1.0000, -0.2600,
+                    0.0000, 0.0000, 0.0000, 1.0000;
+    capsule_definitions.push_back(cap);
+}
+
+{
+    Capsule cap;
+    cap.link_index = 5;
+    cap.radius = 0.055000;
+    cap.length = 0.140000;
+    cap.T_offset << 0.9968, -0.0799, 0.0000, 0.0000,
+                    0.0799, 0.9968, 0.0000, 0.0800,
+                    0.0000, 0.0000, 1.0000, -0.1300,
+                    0.0000, 0.0000, 0.0000, 1.0000;
+    capsule_definitions.push_back(cap);
+}
+
+// --- fr3_link6 (Index 6) ---
+{
+    Capsule cap;
+    cap.link_index = 6;
+    cap.radius = 0.080000;
+    cap.length = 0.080000;
+    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+                    0.0000, 1.0000, 0.0000, 0.0000,
+                    0.0000, 0.0000, 1.0000, -0.0300,
+                    0.0000, 0.0000, 0.0000, 1.0000;
+    capsule_definitions.push_back(cap);
+}
+
+// --- fr3_link7 (Index 7) ---
+{
+    Capsule cap;
+    cap.link_index = 7;
+    cap.radius = 0.070000;
+    cap.length = 0.140000;
+    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+                    0.0000, 1.0000, 0.0000, 0.0000,
+                    0.0000, 0.0000, 1.0000, 0.0100,
+                    0.0000, 0.0000, 0.0000, 1.0000;
+    capsule_definitions.push_back(cap);
+}
+
+// {
+//     Capsule cap;
+//     cap.link_index = 7;
+//     cap.radius = 0.060000;
+//     cap.length = 0.010000;
+//     cap.T_offset << 0.0000, 0.0000, 1.0000, 0.0600,
+//                     0.0000, 1.0000, 0.0000, 0.0000,
+//                     -1.0000, 0.0000, 0.0000, 0.0820,
+//                     0.0000, 0.0000, 0.0000, 1.0000;
+//     capsule_definitions.push_back(cap);
+// }
+
+// // --- fr3_hand (Index 8) ---
+// {
+//     Capsule cap;
+//     cap.link_index = 8;
+//     cap.radius = 0.070000;
+//     cap.length = 0.100000;
+//     cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+//                     0.0000, 0.0000, -1.0000, 0.0000,
+//                     0.0000, 1.0000, 0.0000, 0.0400,
+//                     0.0000, 0.0000, 0.0000, 1.0000;
+//     capsule_definitions.push_back(cap);
+// }
+
+// {
+//     Capsule cap;
+//     cap.link_index = 8;
+//     cap.radius = 0.050000;
+//     cap.length = 0.100000;
+//     cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+//                     0.0000, 0.0000, -1.0000, 0.0000,
+//                     0.0000, 1.0000, 0.0000, 0.1000,
+//                     0.0000, 0.0000, 0.0000, 1.0000;
+//     capsule_definitions.push_back(cap);
+// }
 
 	while (ros::ok())
 	{
@@ -389,6 +551,9 @@ int main(int argc, char **argv)
 			if (ik_solved)
 			{
 				qf = q_target_ik; // Imposta la configurazione finale dei giunti
+
+				//qf << 0.0, 0.0, 0.0, -0.1, 0.0, 3.14, 3.14/4;  //posizione estesa
+				
 				ROS_INFO_STREAM("IK successful. Target joint configuration: " << qf.transpose());
 
 				// Ora la logica di ottimizzazione esistente prenderà qf come target
@@ -413,17 +578,16 @@ int main(int argc, char **argv)
 					// a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
 
 					// af << 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0; // Accelerazioni finali
-
 				}
 				else if (optimize_movement == 0)
 				{
 					qf << -0.14724,
-					   -0.526,
-					   -0.565,
-					   -2.1099,
-					   -0.312,
-					   1.557,
-					   -1.733;
+						-0.526,
+						-0.565,
+						-2.1099,
+						-0.312,
+						1.557,
+						-1.733;
 					choice = 1; // Torna al menu principale
 				}
 				else
@@ -459,12 +623,12 @@ int main(int argc, char **argv)
 				else if (optimize_movement == 0)
 				{
 					qf << -0.14724,
-					   -0.526,
-					   -0.565,
-					   -2.1099,
-					   -0.312,
-					   1.557,
-					   -1.733;
+						-0.526,
+						-0.565,
+						-2.1099,
+						-0.312,
+						1.557,
+						-1.733;
 					choice = 1; // movimento senza ottimizzazione (semplice interpolazione)
 				}
 				else
@@ -496,7 +660,7 @@ int main(int argc, char **argv)
 		{
 			if (choice == 1)
 			{
-				
+
 				interpolator_pos(q0, qf, tf, t);
 			}
 			else if (choice == 4)
@@ -612,12 +776,12 @@ int main(int argc, char **argv)
 
 			// define the optimization problem
 			nlopt::opt opt(nlopt::LD_MMA, NJ * campioni);
-			// opt.set_maxtime(30.0); // Tempo in secondi
+			// opt.set_maxtime(100.0); // Tempo in secondi
 			opt.set_min_objective(objective, &optData);
-			opt.set_xtol_rel(1e-3);		   // Tolleranza di convergenza
+			opt.set_xtol_rel(1e-2);		   // Tolleranza di convergenza
 			opt.set_param("verbosity", 1); // Verbose output
 
-			float tol = 1e-4; // Tolleranza per i vincoli
+			float tol = 1e-2; // Tolleranza per i vincoli
 
 			// Vincoli sulle condizioni iniziali, imponiamo all'ottimizzatore che le condizioni iniziali siano rispettate
 
@@ -661,7 +825,7 @@ int main(int argc, char **argv)
 			const double eps = 1e-4;		// Tolleranza per i vincoli di consistenza
 			const double eps_sphere = 1e-4; // Tolleranza per i vincoli di evitamento ostacolo
 
-			int numero_totale_vincoli = (campioni - 1) * 7; // <-- Calcola il numero totale
+			int numero_totale_vincoli = (campioni - 1) * 9; // <-- Calcola il numero totale
 
 			const double r_s = 0.05;   // raggio ostacolo
 			const double d_safe = 0.1; // margine sicurezza
@@ -679,8 +843,12 @@ int main(int argc, char **argv)
 			//  Vincolo di evitamento ostacolo (sfera)
 			for (int k = 0; k < campioni - 1; k++)
 			{
-				auto c = std::make_shared<ObstacleConstraintIneq>(ObstacleConstraintIneq{
-					k, NJ, r_s, d_safe, p_ostacolo, robot, optData.q0, optData.v0, optData.dt, optData.qf});
+				auto c = std::make_shared<ObstacleConstraintIneq>(
+					k, NJ, r_s, d_safe, p_ostacolo, robot, optData.q0, optData.v0, optData.dt,
+					capsule_viz_pub_ // <-- Passa il publisher ROS 1
+				);
+				c->capsules = capsule_definitions;
+
 				sphere_constraints.push_back(c);
 				opt.add_inequality_constraint(avoid_sphere_with_gradient, c.get(), eps_sphere);
 
@@ -797,7 +965,7 @@ int main(int argc, char **argv)
 					qf(i) = POS[(j + 1) * NJ + i];
 					v0(i) = VEL[j * NJ + i];
 					vf(i) = VEL[(j + 1) * NJ + i];
-					std::cout << "vf(" << i << ") = " << vf(i) << std::endl;
+					// std::cout << "vf(" << i << ") = " << vf(i) << std::endl;
 					a0(i) = ACC[j * NJ + i];
 					af(i) = ACC[(j + 1) * NJ + i];
 					tf = t_start + 1.0 / frequenza;
@@ -832,11 +1000,15 @@ int main(int argc, char **argv)
 					}
 					std::vector<double> pos_des{POS_INIT[j * NJ + 0], POS_INIT[j * NJ + 1], POS_INIT[j * NJ + 2], POS_INIT[j * NJ + 3], POS_INIT[j * NJ + 4], POS_INIT[j * NJ + 5], POS_INIT[j * NJ + 6]};
 					traj_msg.position = pos_des;
+					robot.set_q(Eigen::Map<Eigen::VectorXd>(pos_des.data(), pos_des.size()));
 					std::vector<double> vel_des{VEL_INIT[j * NJ + 0], VEL_INIT[j * NJ + 1], VEL_INIT[j * NJ + 2], VEL_INIT[j * NJ + 3], VEL_INIT[j * NJ + 4], VEL_INIT[j * NJ + 5], VEL_INIT[j * NJ + 6]};
 					traj_msg.velocity = vel_des;
+					robot.set_dq(Eigen::Map<Eigen::VectorXd>(vel_des.data(), vel_des.size()));
 					std::vector<double> acc_des{ACC_INIT[j * NJ + 0], ACC_INIT[j * NJ + 1], ACC_INIT[j * NJ + 2], ACC_INIT[j * NJ + 3], ACC_INIT[j * NJ + 4], ACC_INIT[j * NJ + 5], ACC_INIT[j * NJ + 6]};
 					traj_msg.effort = acc_des;
+					robot.set_ddq(Eigen::Map<Eigen::VectorXd>(acc_des.data(), acc_des.size()));
 					pub_cmd.publish(traj_msg);
+					publish_capsule_markers(robot, capsule_viz_pub_, capsule_definitions, -1);
 
 					loop_rate_controller.sleep();
 

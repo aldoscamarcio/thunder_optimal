@@ -4,7 +4,9 @@
 #include <vector>
 #include <eigen3/Eigen/Dense>
 #include "thunder_franka.h"
-
+#include <ros/ros.h>
+#include <visualization_msgs/MarkerArray.h>
+#include <visualization_msgs/Marker.h>
 // Dichiarazione della funzione per calcolare i coefficienti del polinomio di quinto grado
 std::vector<double> calculateCoefficients(double q0, double qf, double v0, double vf, double a0, double af, double t0, double tf);
 
@@ -21,9 +23,25 @@ struct OptimizationData
     int campioni;
 };
 
+struct Capsule
+{
+    int link_index;           // indice del link a cui appartiene la capsula
+    Eigen::Matrix4d T_offset; // trasformazione locale della capsula rispetto al link
+    double radius;            // raggio
+    double length;            // lunghezza
+
+    Capsule()
+    {
+        link_index = -1;
+        radius = 0.0;
+        length = 0.0;
+        T_offset.setIdentity();
+    }
+};
+
 struct ObstacleConstraintIneq
 {
-    int k; // istante di tempo in cui valutare il vincolo
+    int k;
     int NJ;
     double r_s;
     double d_safe;
@@ -33,9 +51,21 @@ struct ObstacleConstraintIneq
     Eigen::VectorXd dq0;
     double dt;
 
-    ObstacleConstraintIneq(int k_, int NJ_, double r_s_, double d_safe_,
-                           const Eigen::Vector3d &p_obs_, thunder_franka robot_, Eigen::VectorXd q0_, Eigen::VectorXd dq0_, double dt_, Eigen::VectorXd qf_)
-        : k(k_), NJ(NJ_), r_s(r_s_), d_safe(d_safe_), p_obs(p_obs_), robot(robot_), q0(q0_), dq0(dq0_), dt(dt_) {}
+    std::vector<Capsule> capsules;
+
+    // Membri per la visualizzazione
+   ros::Publisher marker_pub; 
+    
+ ObstacleConstraintIneq(int k_, int NJ_, double r_s_, double d_safe_,
+                           const Eigen::Vector3d &p_obs_, thunder_franka robot_,
+                           Eigen::VectorXd q0_, Eigen::VectorXd dq0_, double dt_,
+                           ros::Publisher pub_) // Accetta un Publisher
+        : k(k_), NJ(NJ_), r_s(r_s_), d_safe(d_safe_), p_obs(p_obs_),
+          robot(robot_), q0(q0_), dq0(dq0_), dt(dt_),
+          marker_pub(pub_) // <-- Inizializza il publisher
+    {
+        // ...
+    }
 };
 
 struct ConsistencyConstraintIneq
@@ -84,6 +114,12 @@ double final_velocity_constraint(unsigned n, const double *x, double *grad, void
 
 // Funzione per evitare ostacoli sferici
 double avoid_sphere(const std::vector<double> &x, std::vector<double> &grad, void *data);
+
+void publish_capsule_markers(
+    thunder_franka& robot,                 // Robot con q impostato
+    ros::Publisher& marker_pub,            // Publisher (passato per riferimento)
+    const std::vector<Capsule>& capsules,  // Definizioni delle capsule
+    int closest_capsule_index = -1);       // Per colorare la più vicina
 
 // Funzione per evitare ostacoli sferici con gradiente
 double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<double> &grad, void *data);
