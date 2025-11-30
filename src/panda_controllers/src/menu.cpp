@@ -22,6 +22,7 @@
 // #include "geometry_msgs/Pose.h"
 #include "sensor_msgs/JointState.h"
 #include <eigen3/Eigen/Geometry> // Per AngleAxisd, Quaterniond
+#include "collision/CollisionEngine.hpp"
 
 // Funzione per calcolare l'errore di orientamento
 Eigen::Vector3d getOrientationError(const Eigen::Quaterniond &q_desired, const Eigen::Quaterniond &q_current)
@@ -217,165 +218,165 @@ int main(int argc, char **argv)
 	int choice;
 	int demo = -1;
 	int yaml = 0;
-	
-// ===========================================
-// CAPSULE GENERATE DA fr3_franka_hand.urdf
-// ===========================================
-std::vector<Capsule> capsule_definitions;
-capsule_definitions.clear();
 
-// --- fr3_link0 (Index 0) ---
-{
-    Capsule cap;
-    cap.link_index = 0;
-    cap.radius = 0.090000;
-    cap.length = 0.030000;
-    cap.T_offset << 0.0000, 0.0000, 1.0000, -0.0750,
-                    0.0000, 1.0000, 0.0000, 0.0000,
-                    -1.0000, 0.0000, 0.0000, 0.0600,
-                    0.0000, 0.0000, 0.0000, 1.0000;
-    capsule_definitions.push_back(cap);
-}
+	// ===========================================
+	// CAPSULE GENERATE DA fr3_franka_hand.urdf
+	// ===========================================
+	std::vector<Capsule> capsule_definitions;
+	capsule_definitions.clear();
 
-// --- fr3_link1 (Index 1) ---
-{
-    Capsule cap;
-    cap.link_index = 1;
-    cap.radius = 0.090000;
-    cap.length = 0.283000;
-    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-                    0.0000, 1.0000, 0.0000, 0.0000,
-                    0.0000, 0.0000, 1.0000, -0.1915,
-                    0.0000, 0.0000, 0.0000, 1.0000;
-    capsule_definitions.push_back(cap);
-}
+	// --- fr3_link0 (Index 0) ---
+	{
+		Capsule cap;
+		cap.link_index = 0;
+		cap.radius = 0.090000;
+		cap.length = 0.030000;
+		cap.T_offset << 0.0000, 0.0000, 1.0000, -0.0750,
+			0.0000, 1.0000, 0.0000, 0.0000,
+			-1.0000, 0.0000, 0.0000, 0.0600,
+			0.0000, 0.0000, 0.0000, 1.0000;
+		capsule_definitions.push_back(cap);
+	}
 
-// --- fr3_link2 (Index 2) ---
-{
-    Capsule cap;
-    cap.link_index = 2;
-    cap.radius = 0.090000;
-    cap.length = 0.120000;
-    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-                    0.0000, 1.0000, 0.0000, 0.0000,
-                    0.0000, 0.0000, 1.0000, 0.0000,
-                    0.0000, 0.0000, 0.0000, 1.0000;
-    capsule_definitions.push_back(cap);
-}
+	// --- fr3_link1 (Index 1) ---
+	{
+		Capsule cap;
+		cap.link_index = 1;
+		cap.radius = 0.090000;
+		cap.length = 0.283000;
+		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+			0.0000, 1.0000, 0.0000, 0.0000,
+			0.0000, 0.0000, 1.0000, -0.1915,
+			0.0000, 0.0000, 0.0000, 1.0000;
+		capsule_definitions.push_back(cap);
+	}
 
-// --- fr3_link3 (Index 3) ---
-{
-    Capsule cap;
-    cap.link_index = 3;
-    cap.radius = 0.090000;
-    cap.length = 0.150000;
-    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-                    0.0000, 1.0000, 0.0000, 0.0000,
-                    0.0000, 0.0000, 1.0000, -0.1450,
-                    0.0000, 0.0000, 0.0000, 1.0000;
-    capsule_definitions.push_back(cap);
-}
+	// --- fr3_link2 (Index 2) ---
+	{
+		Capsule cap;
+		cap.link_index = 2;
+		cap.radius = 0.090000;
+		cap.length = 0.120000;
+		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+			0.0000, 1.0000, 0.0000, 0.0000,
+			0.0000, 0.0000, 1.0000, 0.0000,
+			0.0000, 0.0000, 0.0000, 1.0000;
+		capsule_definitions.push_back(cap);
+	}
 
-// --- fr3_link4 (Index 4) ---
-{
-    Capsule cap;
-    cap.link_index = 4;
-    cap.radius = 0.090000;
-    cap.length = 0.120000;
-    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-                    0.0000, 1.0000, 0.0000, 0.0000,
-                    0.0000, 0.0000, 1.0000, 0.0000,
-                    0.0000, 0.0000, 0.0000, 1.0000;
-    capsule_definitions.push_back(cap);
-}
+	// --- fr3_link3 (Index 3) ---
+	{
+		Capsule cap;
+		cap.link_index = 3;
+		cap.radius = 0.090000;
+		cap.length = 0.150000;
+		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+			0.0000, 1.0000, 0.0000, 0.0000,
+			0.0000, 0.0000, 1.0000, -0.1450,
+			0.0000, 0.0000, 0.0000, 1.0000;
+		capsule_definitions.push_back(cap);
+	}
 
-// --- fr3_link5 (Index 5) ---
-{
-    Capsule cap;
-    cap.link_index = 5;
-    cap.radius = 0.090000;
-    cap.length = 0.100000;
-    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-                    0.0000, 1.0000, 0.0000, 0.0000,
-                    0.0000, 0.0000, 1.0000, -0.2600,
-                    0.0000, 0.0000, 0.0000, 1.0000;
-    capsule_definitions.push_back(cap);
-}
+	// --- fr3_link4 (Index 4) ---
+	{
+		Capsule cap;
+		cap.link_index = 4;
+		cap.radius = 0.090000;
+		cap.length = 0.120000;
+		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+			0.0000, 1.0000, 0.0000, 0.0000,
+			0.0000, 0.0000, 1.0000, 0.0000,
+			0.0000, 0.0000, 0.0000, 1.0000;
+		capsule_definitions.push_back(cap);
+	}
 
-{
-    Capsule cap;
-    cap.link_index = 5;
-    cap.radius = 0.055000;
-    cap.length = 0.140000;
-    cap.T_offset << 0.9968, -0.0799, 0.0000, 0.0000,
-                    0.0799, 0.9968, 0.0000, 0.0800,
-                    0.0000, 0.0000, 1.0000, -0.1300,
-                    0.0000, 0.0000, 0.0000, 1.0000;
-    capsule_definitions.push_back(cap);
-}
+	// --- fr3_link5 (Index 5) ---
+	{
+		Capsule cap;
+		cap.link_index = 5;
+		cap.radius = 0.090000;
+		cap.length = 0.100000;
+		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+			0.0000, 1.0000, 0.0000, 0.0000,
+			0.0000, 0.0000, 1.0000, -0.2600,
+			0.0000, 0.0000, 0.0000, 1.0000;
+		capsule_definitions.push_back(cap);
+	}
 
-// --- fr3_link6 (Index 6) ---
-{
-    Capsule cap;
-    cap.link_index = 6;
-    cap.radius = 0.080000;
-    cap.length = 0.080000;
-    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-                    0.0000, 1.0000, 0.0000, 0.0000,
-                    0.0000, 0.0000, 1.0000, -0.0300,
-                    0.0000, 0.0000, 0.0000, 1.0000;
-    capsule_definitions.push_back(cap);
-}
+	{
+		Capsule cap;
+		cap.link_index = 5;
+		cap.radius = 0.055000;
+		cap.length = 0.140000;
+		cap.T_offset << 0.9968, -0.0799, 0.0000, 0.0000,
+			0.0799, 0.9968, 0.0000, 0.0800,
+			0.0000, 0.0000, 1.0000, -0.1300,
+			0.0000, 0.0000, 0.0000, 1.0000;
+		capsule_definitions.push_back(cap);
+	}
 
-// --- fr3_link7 (Index 7) ---
-{
-    Capsule cap;
-    cap.link_index = 7;
-    cap.radius = 0.070000;
-    cap.length = 0.140000;
-    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-                    0.0000, 1.0000, 0.0000, 0.0000,
-                    0.0000, 0.0000, 1.0000, 0.0100,
-                    0.0000, 0.0000, 0.0000, 1.0000;
-    capsule_definitions.push_back(cap);
-}
+	// --- fr3_link6 (Index 6) ---
+	{
+		Capsule cap;
+		cap.link_index = 6;
+		cap.radius = 0.080000;
+		cap.length = 0.080000;
+		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+			0.0000, 1.0000, 0.0000, 0.0000,
+			0.0000, 0.0000, 1.0000, -0.0300,
+			0.0000, 0.0000, 0.0000, 1.0000;
+		capsule_definitions.push_back(cap);
+	}
 
-// {
-//     Capsule cap;
-//     cap.link_index = 7;
-//     cap.radius = 0.060000;
-//     cap.length = 0.010000;
-//     cap.T_offset << 0.0000, 0.0000, 1.0000, 0.0600,
-//                     0.0000, 1.0000, 0.0000, 0.0000,
-//                     -1.0000, 0.0000, 0.0000, 0.0820,
-//                     0.0000, 0.0000, 0.0000, 1.0000;
-//     capsule_definitions.push_back(cap);
-// }
+	// --- fr3_link7 (Index 7) ---
+	{
+		Capsule cap;
+		cap.link_index = 7;
+		cap.radius = 0.070000;
+		cap.length = 0.140000;
+		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+			0.0000, 1.0000, 0.0000, 0.0000,
+			0.0000, 0.0000, 1.0000, 0.0100,
+			0.0000, 0.0000, 0.0000, 1.0000;
+		capsule_definitions.push_back(cap);
+	}
 
-// // --- fr3_hand (Index 8) ---
-// {
-//     Capsule cap;
-//     cap.link_index = 8;
-//     cap.radius = 0.070000;
-//     cap.length = 0.100000;
-//     cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-//                     0.0000, 0.0000, -1.0000, 0.0000,
-//                     0.0000, 1.0000, 0.0000, 0.0400,
-//                     0.0000, 0.0000, 0.0000, 1.0000;
-//     capsule_definitions.push_back(cap);
-// }
+	{
+	    Capsule cap;
+	    cap.link_index = 7;
+	    cap.radius = 0.060000;
+	    cap.length = 0.010000;
+	    cap.T_offset << 0.0000, 0.0000, 1.0000, 0.0600,
+	                    0.0000, 1.0000, 0.0000, 0.0000,
+	                    -1.0000, 0.0000, 0.0000, 0.0820,
+	                    0.0000, 0.0000, 0.0000, 1.0000;
+	    capsule_definitions.push_back(cap);
+	}
 
-// {
-//     Capsule cap;
-//     cap.link_index = 8;
-//     cap.radius = 0.050000;
-//     cap.length = 0.100000;
-//     cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-//                     0.0000, 0.0000, -1.0000, 0.0000,
-//                     0.0000, 1.0000, 0.0000, 0.1000,
-//                     0.0000, 0.0000, 0.0000, 1.0000;
-//     capsule_definitions.push_back(cap);
-// }
+	// --- fr3_hand (Index 8) ---
+	{
+	    Capsule cap;
+	    cap.link_index = 8;
+	    cap.radius = 0.070000;
+	    cap.length = 0.100000;
+	    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+	                    0.0000, 0.0000, -1.0000, 0.0000,
+	                    0.0000, 1.0000, 0.0000, 0.0400,
+	                    0.0000, 0.0000, 0.0000, 1.0000;
+	    capsule_definitions.push_back(cap);
+	}
+
+	{
+	    Capsule cap;
+	    cap.link_index = 8;
+	    cap.radius = 0.050000;
+	    cap.length = 0.100000;
+	    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+	                    0.0000, 0.0000, -1.0000, 0.0000,
+	                    0.0000, 1.0000, 0.0000, 0.1000,
+	                    0.0000, 0.0000, 0.0000, 1.0000;
+	    capsule_definitions.push_back(cap);
+	}
 
 	while (ros::ok())
 	{
@@ -487,7 +488,7 @@ capsule_definitions.clear();
 
 			target_ee_pos_input.x() = 0.25; // Posizione EE desiderata in metri
 			target_ee_pos_input.y() = -0.33;
-			target_ee_pos_input.z() = 0.54;
+			target_ee_pos_input.z() = -0.10;
 
 			roll_deg = -169.0; // Angolo roll in gradi
 			pitch_deg = 0.3;   // Angolo pitch in gradi
@@ -552,8 +553,8 @@ capsule_definitions.clear();
 			{
 				qf = q_target_ik; // Imposta la configurazione finale dei giunti
 
-				//qf << 0.0, 0.0, 0.0, -0.1, 0.0, 3.14, 3.14/4;  //posizione estesa
-				
+				// qf << 0.0, 0.0, 0.0, -0.1, 0.0, 3.14, 3.14/4;  //posizione estesa
+
 				ROS_INFO_STREAM("IK successful. Target joint configuration: " << qf.transpose());
 
 				// Ora la logica di ottimizzazione esistente prenderà qf come target
@@ -819,7 +820,7 @@ capsule_definitions.clear();
 
 			// Vincoli di consistenza + evitamento ostacolo
 			std::vector<ConsistencyConstraintIneq> constraints, constraints_vel_f;
-			std::vector<std::shared_ptr<ObstacleConstraintIneq>> sphere_constraints;
+			std::vector<std::shared_ptr<ObstacleConstraintIneq>> sphere_constraints, plane_constraints;
 			std::vector<std::shared_ptr<JointLimitConstraint>> constraints_pos, constraints_vel;
 
 			const double eps = 1e-4;		// Tolleranza per i vincoli di consistenza
@@ -832,6 +833,18 @@ capsule_definitions.clear();
 
 			// Posizione dell'ostacolo (sfera) in coordinate del robot
 			Eigen::Vector3d p_ostacolo(0.11, -0.35, 0.53);
+			Eigen::Vector3d p_piano(0.0, 0.0, 0.0); // Punto sul piano
+
+			Obstacle obs_sphere;
+			obs_sphere.type = ObstacleType::CAPSULE;
+			obs_sphere.capsule.A = p_ostacolo; // Centro sfera
+			obs_sphere.capsule.B = p_ostacolo; // Stesso punto
+			obs_sphere.capsule.radius = r_s;   // Raggio sfera
+
+			Obstacle obs_plane;
+			obs_plane.type = ObstacleType::PLANE;
+			obs_plane.plane.P0 = p_piano;				   // Punto sul piano
+			obs_plane.plane.n = Eigen::Vector3d(0, 0, 1); // Normale del piano
 
 			if (numero_totale_vincoli > 0)
 			{
@@ -843,14 +856,30 @@ capsule_definitions.clear();
 			//  Vincolo di evitamento ostacolo (sfera)
 			for (int k = 0; k < campioni - 1; k++)
 			{
-				auto c = std::make_shared<ObstacleConstraintIneq>(
-					k, NJ, r_s, d_safe, p_ostacolo, robot, optData.q0, optData.v0, optData.dt,
-					capsule_viz_pub_ // <-- Passa il publisher ROS 1
-				);
-				c->capsules = capsule_definitions;
+				auto c_sphere = std::make_shared<ObstacleConstraintIneq>(
+					k, NJ, d_safe, obs_sphere, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
+				c_sphere->capsules_definitions = capsule_definitions;
+				sphere_constraints.push_back(c_sphere); // Magari rinomina il vettore in obstacle_constraints
 
-				sphere_constraints.push_back(c);
-				opt.add_inequality_constraint(avoid_sphere_with_gradient, c.get(), eps_sphere);
+				// NOTA: eps_sphere è la tolleranza
+				opt.add_inequality_constraint(avoid_obstacle_generic, c_sphere.get(), eps_sphere);
+
+				auto c_plane = std::make_shared<ObstacleConstraintIneq>(
+					k, NJ, d_safe, obs_plane, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
+				// Assegna le capsule del robot anche a questo vincolo
+				c_plane->capsules_definitions = capsule_definitions;
+				// Salva il puntatore per evitare che venga distrutto
+				plane_constraints.push_back(c_plane);
+				opt.add_inequality_constraint(avoid_obstacle_generic, c_plane.get(), eps_sphere);
+
+				// auto c = std::make_shared<ObstacleConstraintIneq>(
+				// 	k, NJ, r_s, d_safe, p_ostacolo, robot, optData.q0, optData.v0, optData.dt,
+				// 	capsule_viz_pub_ // <-- Passa il publisher ROS 1
+				// );
+				// c->capsules = capsule_definitions;
+
+				// sphere_constraints.push_back(c);
+				// opt.add_inequality_constraint(avoid_sphere_with_gradient, c.get(), eps_sphere);
 
 				// Upper and lower joint limits
 				for (int i = 0; i < NJ; i++)

@@ -7,6 +7,7 @@
 #include <ros/ros.h>
 #include <visualization_msgs/MarkerArray.h>
 #include <visualization_msgs/Marker.h>
+#include "/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/collision/DistanceFunctions.hpp" // Il file creato nel passaggio precedente
 // Dichiarazione della funzione per calcolare i coefficienti del polinomio di quinto grado
 std::vector<double> calculateCoefficients(double q0, double qf, double v0, double vf, double a0, double af, double t0, double tf);
 
@@ -39,33 +40,58 @@ struct Capsule
     }
 };
 
+// struct ObstacleConstraintIneq
+// {
+//     int k;
+//     int NJ;
+//     double r_s;
+//     double d_safe;
+//     Eigen::Vector3d p_obs;
+//     thunder_franka robot;
+//     Eigen::VectorXd q0;
+//     Eigen::VectorXd dq0;
+//     double dt;
+
+//     std::vector<Capsule> capsules;
+
+//     // Membri per la visualizzazione
+//    ros::Publisher marker_pub;
+
+//  ObstacleConstraintIneq(int k_, int NJ_, double r_s_, double d_safe_,
+//                            const Eigen::Vector3d &p_obs_, thunder_franka robot_,
+//                            Eigen::VectorXd q0_, Eigen::VectorXd dq0_, double dt_,
+//                            ros::Publisher pub_) // Accetta un Publisher
+//         : k(k_), NJ(NJ_), r_s(r_s_), d_safe(d_safe_), p_obs(p_obs_),
+//           robot(robot_), q0(q0_), dq0(dq0_), dt(dt_),
+//           marker_pub(pub_) // <-- Inizializza il publisher
+//     {
+//         // ...
+//     }
+// };
+
+// Struttura dati per il vincolo
 struct ObstacleConstraintIneq
 {
     int k;
     int NJ;
-    double r_s;
-    double d_safe;
-    Eigen::Vector3d p_obs;
+    double d_safe;     // Margine di sicurezza extra
+    Obstacle obstacle; // <--- NUOVO: L'ostacolo generico (Box, Sfera/Capsula, Piano)
+
+    // Dati robot e solver
     thunder_franka robot;
     Eigen::VectorXd q0;
     Eigen::VectorXd dq0;
     double dt;
 
-    std::vector<Capsule> capsules;
+    std::vector<Capsule> capsules_definitions; // Definizioni delle capsule del robot
 
-    // Membri per la visualizzazione
-   ros::Publisher marker_pub; 
-    
- ObstacleConstraintIneq(int k_, int NJ_, double r_s_, double d_safe_,
-                           const Eigen::Vector3d &p_obs_, thunder_franka robot_,
-                           Eigen::VectorXd q0_, Eigen::VectorXd dq0_, double dt_,
-                           ros::Publisher pub_) // Accetta un Publisher
-        : k(k_), NJ(NJ_), r_s(r_s_), d_safe(d_safe_), p_obs(p_obs_),
-          robot(robot_), q0(q0_), dq0(dq0_), dt(dt_),
-          marker_pub(pub_) // <-- Inizializza il publisher
-    {
-        // ...
-    }
+    // Visualizzazione(opzionale)
+        ros::Publisher marker_pub;
+
+    ObstacleConstraintIneq(int k_, int NJ_, double d_safe_, Obstacle obs_,
+                           thunder_franka robot_, const Eigen::VectorXd &q0_, const Eigen::VectorXd &dq0_, double dt_,ros::Publisher pub_)
+        : k(k_), NJ(NJ_), d_safe(d_safe_), obstacle(obs_),
+          robot(robot_), q0(q0_), dq0(dq0_), dt(dt_), marker_pub(pub_) {}
 };
 
 struct ConsistencyConstraintIneq
@@ -116,13 +142,16 @@ double final_velocity_constraint(unsigned n, const double *x, double *grad, void
 double avoid_sphere(const std::vector<double> &x, std::vector<double> &grad, void *data);
 
 void publish_capsule_markers(
-    thunder_franka& robot,                 // Robot con q impostato
-    ros::Publisher& marker_pub,            // Publisher (passato per riferimento)
-    const std::vector<Capsule>& capsules,  // Definizioni delle capsule
-    int closest_capsule_index = -1);       // Per colorare la più vicina
+    thunder_franka &robot,                // Robot con q impostato
+    ros::Publisher &marker_pub,           // Publisher (passato per riferimento)
+    const std::vector<Capsule> &capsules, // Definizioni delle capsule
+    int closest_capsule_index = -1);      // Per colorare la più vicina
 
 // Funzione per evitare ostacoli sferici con gradiente
-double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<double> &grad, void *data);
+// double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<double> &grad, void *data);
+
+// Funzione per evitare ostacoli generici con gradiente
+double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> &grad, void *data);
 
 // Funzione per calcolare le distanze dei link da un punto (ostacolo)
 LinkDistanceResult compute_link_distances_to_point(

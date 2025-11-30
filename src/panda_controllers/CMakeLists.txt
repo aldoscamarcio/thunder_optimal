@@ -60,11 +60,13 @@ find_package(yaml-cpp REQUIRED)
 # )
 
 include_directories(
-	include #
+	include
+	src              
+	src/collision    
 	${catkin_INCLUDE_DIRS} 
 	${EIGEN3_INCLUDE_DIRS}
 	${NLOPT_INCLUDE_DIRS}
-	${YAML_CPP_INCLUDE_DIRS}  # Include yaml-cpp directories
+	${YAML_CPP_INCLUDE_DIRS}
 	# ${Boost_INCLUDE_DIRS}
 	# ${CasADi_INCLUDE_DIRS}
 	# ${CMAKE_CURRENT_SOURCE_DIR}/include #
@@ -92,9 +94,16 @@ add_library(${PROJECT_NAME}
 	src/computed_torque.cpp 	
 	src/franka_gen.cpp
 	src/thunder_franka.cpp
-	# src/optimal_control.cpp
 	src/thunder_optimization.cpp
+	# src/optimal_control.cpp
+
+	# Collision framework
+	src/collision/DistanceFunctions.cpp
+	src/collision/CapsuleModels.cpp
+	src/collision/GradientFunctions.cpp
+	src/collision/CollisionEngine.cpp
 )
+
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
 	${catkin_LIBRARIES}
@@ -121,6 +130,17 @@ target_link_libraries(menu
 	${catkin_LIBRARIES}
 	${NLOPT_LIBRARIES}
 	yaml-cpp
+)
+
+# ====== TEST COLLISION FRAMEWORK ======
+add_executable(test_collision
+    src/tests/test_collision_framework.cpp
+)
+
+target_link_libraries(test_collision
+    ${PROJECT_NAME}
+    ${catkin_LIBRARIES}
+    yaml-cpp
 )
 
 # add_dependencies(menu

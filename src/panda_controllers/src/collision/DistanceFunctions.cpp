@@ -1,0 +1,470 @@
+// DistanceFunctions.cpp
+// Implementazioni ottimizzate per le funzioni di distanza capsula <-> primitiva
+// Basato su: Christer Ericson - Real-Time Collision Detection (capitoli su segment-segment, distances)
+
+#include "DistanceFunctions.hpp"
+#include "CollisionTypes.hpp"
+
+#include <cmath>
+#include <array>
+#include <limits>
+
+// Costanti e utility per la gestione numerica
+static constexpr double EPS_DBL = 1e-12;  // Tolleranza per confronti con zero
+static constexpr double INF_DBL = std::numeric_limits<double>::infinity();  // Valore infinito
+
+// Funzioni utility inline per ottimizzazione
+static inline double sqr(double x) { return x * x; }  // Calcola il quadrato di un numero
+static inline double clamp01(double v) { return (v < 0.0) ? 0.0 : ((v > 1.0) ? 1.0 : v); }  // Limita valore tra 0 e 1
+
+// -----------------------------
+// closestSegmentSegment (Ericson) - ottimizzata e robusta
+// Calcola i punti più vicini tra due segmenti 3D e restituisce i parametri e le coordinate
+// -----------------------------
+void closestSegmentSegment(
+    const Eigen::Vector3d &P0, const Eigen::Vector3d &P1,  // Endpoints primo segmento
+    const Eigen::Vector3d &Q0, const Eigen::Vector3d &Q1,  // Endpoints secondo segmento
+    double &s_out, double &t_out,                          // Parametri di output lungo i segmenti
+    Eigen::Vector3d &ptP, Eigen::Vector3d &ptQ)            // Punti più vicini di output
+{
+    // Basato sull'algoritmo di Ericson per punti più vicini tra segmenti
+    Eigen::Vector3d u = P1 - P0;  // Vettore direzione del segmento P
+    Eigen::Vector3d v = Q1 - Q0;  // Vettore direzione del segmento Q
+    Eigen::Vector3d w = P0 - Q0;  // Vettore che connette gli inizi dei segmenti
+    
+    // Calcolo dei prodotti scalari per il sistema lineare
+    double a = u.dot(u);      // Quadrato della lunghezza di u (sempre >= 0)
+    double b = u.dot(v);      // Proiezione di u su v (misura parallelismo tra segmenti)
+    double c = v.dot(v);      // Quadrato della lunghezza di v (sempre >= 0)
+    double d = u.dot(w);      // Proiezione di w su u
+    double e = v.dot(w);      // Proiezione di w su v
+    double D = a * c - b * b; // Determinante del sistema (denominatore)
+
+    // Variabili per il calcolo dei parametri lungo i segmenti
+    double sc, sN, sD = D; // Parametro s = sN / sD per segmento P
+    double tc, tN, tD = D; // Parametro t = tN / tD per segmento Q
+
+    // Calcolo dei parametri dei punti più vicini
+    if (D < EPS_DBL)
+    {             // Segmenti quasi paralleli
+        sN = 0.0; // Forza l'uso di s = 0 sul segmento P
+        sD = 1.0; // Evita divisione per zero
+        tN = e;   // Parametro per t basato solo sul segmento Q
+        tD = c;
+    }
+    else
+    {
+        // Calcolo dei numeratori usando la regola di Cramer
+        sN = (b * e - c * d);
+        tN = (a * e - b * d);
+
+        // Clamp di sN nell'intervallo [0, sD]
+        if (sN < 0.0)
+        {
+            sN = 0.0; // Forza al punto iniziale di P
+            tN = e;   // Ricalcola tN
+            tD = c;
+        }
+        else if (sN > sD)
+        {
+            sN = sD;    // Forza al punto finale di P
+            tN = e + b; // Ricalcola tN considerando P1
+            tD = c;
+        }
+    }
+
+    // Clamp di tN nell'intervallo [0, tD]
+    if (tN < 0.0)
+    {
+        tN = 0.0; // Forza al punto iniziale di Q
+        // Ricalcola sN per questo t
+        if (-d < 0.0)
+            sN = 0.0;
+        else if (-d > a)
+            sN = sD;
+        else
+        {
+            sN = -d;
+            sD = a;
+        }
+    }
+    else if (tN > tD)
+    {
+        tN = tD; // Forza al punto finale di Q
+        if ((-d + b) < 0.0)
+            sN = 0.0;
+        else if ((-d + b) > a)
+            sN = sD;
+        else
+        {
+            sN = (-d + b);
+            sD = a;
+        }
+    }
+
+    // Calcolo finale dei parametri con controllo di tolleranza numerica
+    sc = (std::abs(sN) < EPS_DBL ? 0.0 : sN / sD);
+    tc = (std::abs(tN) < EPS_DBL ? 0.0 : tN / tD);
+
+    // Assegnazione degli output
+    s_out = sc;
+    t_out = tc;
+
+    // Calcolo delle coordinate dei punti più vicini
+    ptP = P0 + u * sc;  // Punto più vicino sul segmento P
+    ptQ = Q0 + v * tc;  // Punto più vicino sul segmento Q
+}
+
+// -----------------------------
+// dist_capsule_capsule
+// Calcola la distanza signed tra due capsule usando l'algoritmo segmento-segmento
+// Distanza signed: >0 separate, <0 penetranti, =0 si toccano
+// -----------------------------
+double dist_capsule_capsule(
+    const CapsuleWorld &A,  // Prima capsula
+    const CapsuleWorld &B,  // Seconda capsula
+    CapsuleDistanceResult *out)  // Risultato opzionale dettagliato
+{
+    double s, t;  // Parametri lungo le capsule
+    Eigen::Vector3d pA, pB;  // Punti più vicini
+    // Trova i punti più vicini tra i segmenti centrali delle capsule
+    closestSegmentSegment(A.A, A.B, B.A, B.B, s, t, pA, pB);
+
+    // Calcolo della distanza tra i punti più vicini
+    Eigen::Vector3d diff = pA - pB;
+    double d = diff.norm();  // Distanza euclidea
+    double radii = A.radius + B.radius;  // Somma dei raggi
+    double signedDist = d - radii;  // Distanza signed
+
+    if (out)
+    {
+        // Popolazione della struttura di output
+        out->distance = signedDist;
+        out->p_capsule = pA;  // Punto sulla prima capsula
+        out->p_obstacle = pB; // Punto sulla seconda capsula
+        out->t_capsule = s;   // Parametro lungo la prima capsula
+        out->t_obstacle = t;  // Parametro lungo la seconda capsula
+        
+        // Calcolo della normale di collisione
+        if (d > 1e-12)
+            out->normal = diff / d;  // Normalizza il vettore differenza
+        else
+        {
+            // Caso degenere: punti coincidenti, calcola normale alternativa
+            Eigen::Vector3d u = A.B - A.A;  // Asse della capsula
+            Eigen::Vector3d alt = u.cross(Eigen::Vector3d::UnitX());  // Prova con asse X
+            if (alt.squaredNorm() < 1e-12)
+                alt = u.cross(Eigen::Vector3d::UnitY());  // Prova con asse Y
+            if (alt.squaredNorm() < 1e-12)
+                out->normal = Eigen::Vector3d::UnitZ();  // Fallback a asse Z
+            else
+                out->normal = alt.normalized();  // Usa vettore perpendicolare normalizzato
+        }
+    }
+    return signedDist;
+}
+
+// -----------------------------
+// dist_capsule_plane (esatta)
+// Calcola la distanza signed tra una capsula e un piano
+// Gestisce sia il caso di penetrazione che di separazione
+// -----------------------------
+double dist_capsule_plane(
+    const CapsuleWorld &cap,  // Capsula
+    const Plane &pl,          // Piano
+    CapsuleDistanceResult *out)  // Risultato opzionale
+{
+    // Calcolo distanze signed degli endpoints dal piano
+    double dA = pl.n.dot(cap.A - pl.P0);
+    double dB = pl.n.dot(cap.B - pl.P0);
+    
+    // CASO 1: La capsula INTERSECA il piano (dA e dB hanno segni opposti)
+    if (dA * dB <= 0.0) {
+        // La capsula attraversa il piano → penetrazione massima
+        double signedDist = -cap.radius;
+        
+        // Trova il punto di intersezione tra segmento e piano
+        double t = dA / (dA - dB);  // Parametro di intersezione
+        t = clamp01(t);  // Assicura che sia tra 0 e 1
+        Eigen::Vector3d P_intersect = cap.A + t * (cap.B - cap.A);  // Punto di intersezione
+        
+        if (out) {
+            out->distance = signedDist;
+            out->p_capsule = P_intersect;   // Punto sulla capsula
+            out->p_obstacle = P_intersect;  // Punto sul piano (stessa posizione)
+            out->t_capsule = t;             // Parametro di intersezione
+            out->t_obstacle = 0.0;
+            // Normale punta verso l'esterno rispetto alla capsula
+            out->normal = (dA >= 0.0) ? pl.n : -pl.n;
+        }
+        return signedDist;
+    }
+    // CASO 2: A e B della capsula sono dallo stesso lato del piano
+    else {
+        // Scegli l'endpoint geometricamente più vicino al piano
+        bool useA = std::abs(dA) <= std::abs(dB);
+        double d = useA ? dA : dB;           // Distanza signed
+        Eigen::Vector3d P = useA ? cap.A : cap.B;  // Punto più vicino
+        Eigen::Vector3d proj = P - pl.n * d; // Proiezione ortogonale sul piano
+        double signedDist = std::abs(d) - cap.radius;  // Distanza signed considerando il raggio
+        
+        if (out) {
+            out->distance = signedDist;
+            out->p_capsule = P;
+            out->p_obstacle = proj;
+            out->t_capsule = useA ? 0.0 : 1.0;  // 0 per A, 1 per B
+            out->t_obstacle = 0.0;
+            // Normale punta dal piano verso la capsula
+            out->normal = (d >= 0.0) ? pl.n : -pl.n;
+        }
+        return signedDist;
+    }
+}
+
+// -----------------------------
+// dist_capsule_rectangle
+// Calcola la distanza tra una capsula e un rettangolo 3D
+// Considera sia la faccia che i bordi del rettangolo
+// -----------------------------
+double dist_capsule_rectangle(
+    const CapsuleWorld &cap,  // Capsula
+    const Rectangle &R,       // Rettangolo
+    CapsuleDistanceResult *out)  // Risultato opzionale
+{
+    // 1. Calcolo della normale del rettangolo
+    Eigen::Vector3d n = R.Ux.cross(R.Uy).normalized();
+
+    // Calcola la distanza degli endpoints della capsula dal piano del rettangolo
+    double dA = n.dot(cap.A - R.P0);
+    double dB = n.dot(cap.B - R.P0);
+
+    // Trova l'endpoint della capsula più vicino al piano
+    bool useA = std::abs(dA) <= std::abs(dB);
+    double d_plane = useA ? dA : dB;
+    Eigen::Vector3d P_seg_closest = useA ? cap.A : cap.B;
+    // Proietta il punto sul piano del rettangolo
+    Eigen::Vector3d P_proj = P_seg_closest - n * d_plane;
+
+    // Verifica se la proiezione cade DENTRO i confini del rettangolo
+    Eigen::Vector3d v = P_proj - R.P0;
+    double x_proj = v.dot(R.Ux);  // Coordinata x nel sistema del rettangolo
+    double y_proj = v.dot(R.Uy);  // Coordinata y nel sistema del rettangolo
+
+    // Se la proiezione è dentro il rettangolo, collisione con la faccia
+    if (x_proj >= 0.0 && x_proj <= R.width && y_proj >= 0.0 && y_proj <= R.height)
+    {
+        // Collisione con la "faccia" del rettangolo
+        double signedDist = std::abs(d_plane) - cap.radius;
+        if (out)
+        {
+            out->distance = signedDist;
+            out->p_capsule = P_seg_closest;
+            out->p_obstacle = P_proj;
+            out->normal = (d_plane >= 0.0) ? n : -n;  // Normale orientata correttamente
+            out->t_capsule = useA ? 0.0 : 1.0;
+            out->t_obstacle = 0.0; // Irrilevante per collisione con faccia
+        }
+        return signedDist;
+    }
+
+    // 2. Se non siamo sulla faccia, la distanza minima è contro uno dei 4 BORDI
+    double minD2 = INF_DBL;  // Distanza minima al quadrato
+    double bestS = 0.0;      // Miglior parametro sulla capsula
+    double bestT = 0.0;      // Miglior parametro sul bordo
+    Eigen::Vector3d bestP_cap, bestP_rect;  // Migliori punti
+    Eigen::Vector3d bestNormal = n;         // Normale di fallback
+
+    // Calcolo dei vertici del rettangolo
+    Eigen::Vector3d p00 = R.P0;
+    Eigen::Vector3d p10 = R.P0 + R.Ux * R.width;
+    Eigen::Vector3d p01 = R.P0 + R.Uy * R.height;
+    Eigen::Vector3d p11 = p10 + R.Uy * R.height;
+
+    // Definizione dei 4 segmenti (bordi) del rettangolo
+    const Eigen::Vector3d *edges[4][2] = {
+        {&p00, &p10}, // Bordo inferiore
+        {&p10, &p11}, // Bordo destro
+        {&p11, &p01}, // Bordo superiore
+        {&p01, &p00}  // Bordo sinistro
+    };
+
+    // Per ogni bordo del rettangolo, trova il punto più vicino sulla capsula
+    for (int i = 0; i < 4; ++i)
+    {
+        double s, t;
+        Eigen::Vector3d pc, pr;
+        // Trova punti più vicini tra capsula e bordo corrente
+        closestSegmentSegment(cap.A, cap.B, *edges[i][0], *edges[i][1], s, t, pc, pr);
+
+        // Calcola distanza al quadrato (più efficiente)
+        double d2 = (pc - pr).squaredNorm();
+        if (d2 < minD2)
+        {
+            minD2 = d2;
+            bestP_cap = pc;   // Miglior punto sulla capsula
+            bestP_rect = pr;  // Miglior punto sul rettangolo
+            bestS = s;        // Miglior parametro capsula
+            bestT = t;        // Miglior parametro bordo
+        }
+    }
+
+    // Calcolo della distanza euclidea e distanza signed
+    double dist = std::sqrt(minD2);
+    double signedDist = dist - cap.radius;
+
+    if (out)
+    {
+        out->distance = signedDist;
+        out->p_capsule = bestP_cap;
+        out->p_obstacle = bestP_rect;
+        out->t_capsule = bestS;
+        out->t_obstacle = bestT; // Parametro locale al bordo vincente
+
+        // Calcolo della normale di collisione
+        if (dist > 1e-12)
+            out->normal = (bestP_cap - bestP_rect) / dist;  // Normalizza la differenza
+        else
+            out->normal = n;  // Fallback alla normale del piano
+    }
+
+    return signedDist;
+}
+
+// -----------------------------
+// dist_capsule_box (OBB) ottimizzata e robusta
+// Strategia:
+//  - Trasforma la capsula in coordinate locali della box
+//  - Test veloce: endpoints clammati alla box (punto->AABB)
+//  - Valuta segmento vs tutti i 12 bordi della box
+//  - Restituisce la migliore distanza
+// -----------------------------
+double dist_capsule_box(
+    const CapsuleWorld &cap,  // Capsula
+    const BoxOBB &box,        // Box orientata (OBB)
+    CapsuleDistanceResult *out)  // Risultato opzionale
+{
+    // Trasformazione: mondo -> coordinate locali della box
+    Eigen::Matrix3d R = box.axes.transpose();  // Rotazione mondo->locale
+    Eigen::Vector3d A_local = R * (cap.A - box.center);  // Trasforma endpoint A
+    Eigen::Vector3d B_local = R * (cap.B - box.center);  // Trasforma endpoint B
+
+    // Funzione helper per clammare punti all'interno della AABB locale
+    auto clampLocal = [&](const Eigen::Vector3d &p)
+    {
+        return Eigen::Vector3d(
+            std::clamp(p.x(), -box.half_ext.x(), box.half_ext.x()),  // Clamp X
+            std::clamp(p.y(), -box.half_ext.y(), box.half_ext.y()),  // Clamp Y
+            std::clamp(p.z(), -box.half_ext.z(), box.half_ext.z())); // Clamp Z
+    };
+
+    // Inizializzazione per la ricerca della distanza minima
+    double best = INF_DBL;  // Miglior distanza trovata
+    Eigen::Vector3d bestSegLocal = Eigen::Vector3d::Zero();  // Miglior punto sulla capsula (locale)
+    Eigen::Vector3d bestBoxLocal = Eigen::Vector3d::Zero();  // Miglior punto sulla box (locale)
+    double bestT = 0.0;  // Miglior parametro sulla capsula
+
+    // 1) Test sugli endpoints della capsula
+    {
+        Eigen::Vector3d pts[2] = {A_local, B_local};  // Endpoints in coordinate locali
+        for (int i = 0; i < 2; ++i)
+        {
+            const Eigen::Vector3d &P = pts[i];
+            Eigen::Vector3d Q = clampLocal(P);  // Punto più vicino sulla box
+            double dcur = (P - Q).norm();       // Distanza endpoint-box
+            if (dcur < best)
+            {
+                best = dcur;
+                bestSegLocal = P;
+                bestBoxLocal = Q;
+                bestT = (i == 0) ? 0.0 : 1.0;  // 0 per A, 1 per B
+            }
+        }
+    }
+
+    // 2) Test su tutti i bordi della box (12 bordi totali)
+    Eigen::Vector3d he = box.half_ext;  // Half-extents per comodità
+    
+    // Vertici locali della box (tutte le combinazioni di ±half-extents)
+    std::array<Eigen::Vector3d, 8> v;
+    v[0] = Eigen::Vector3d(-he.x(), -he.y(), -he.z());  // Vertice posteriore-inferiore-sinistro
+    v[1] = Eigen::Vector3d( he.x(), -he.y(), -he.z());  // Vertice posteriore-inferiore-destro
+    v[2] = Eigen::Vector3d( he.x(),  he.y(), -he.z());  // Vertice posteriore-superiore-destro
+    v[3] = Eigen::Vector3d(-he.x(),  he.y(), -he.z());  // Vertice posteriore-superiore-sinistro
+    v[4] = Eigen::Vector3d(-he.x(), -he.y(),  he.z());  // Vertice anteriore-inferiore-sinistro
+    v[5] = Eigen::Vector3d( he.x(), -he.y(),  he.z());  // Vertice anteriore-inferiore-destro
+    v[6] = Eigen::Vector3d( he.x(),  he.y(),  he.z());  // Vertice anteriore-superiore-destro
+    v[7] = Eigen::Vector3d(-he.x(),  he.y(),  he.z());  // Vertice anteriore-superiore-sinistro
+
+    // Definizione degli edge della box come coppie di vertici
+    const int E[12][2] = {
+        {0, 1}, {1, 2}, {2, 3}, {3, 0}, // Faccia posteriore (4 bordi)
+        {4, 5}, {5, 6}, {6, 7}, {7, 4}, // Faccia anteriore (4 bordi)
+        {0, 4}, {1, 5}, {2, 6}, {3, 7}  // Bordi verticali (4 bordi)
+    };
+
+    // Per ogni bordo della box, calcola la distanza minima dalla capsula
+    for (int ei = 0; ei < 12; ++ei)
+    {
+        Eigen::Vector3d e0 = v[E[ei][0]];  // Primo vertice del bordo
+        Eigen::Vector3d e1 = v[E[ei][1]];  // Secondo vertice del bordo
+        double s_local, t_local;
+        Eigen::Vector3d segPtLocal, edgePtLocal;
+        // Trova punti più vicini tra capsula e bordo corrente
+        closestSegmentSegment(A_local, B_local, e0, e1, s_local, t_local, segPtLocal, edgePtLocal);
+        double dcur = (segPtLocal - edgePtLocal).norm();  // Distanza calcolata
+        if (dcur < best)
+        {
+            best = dcur;
+            bestSegLocal = segPtLocal;
+            bestBoxLocal = edgePtLocal;
+            bestT = s_local;  // Parametro sulla capsula
+        }
+    }
+
+    // Trasformazione inversa: coordinate locali -> mondo
+    Eigen::Vector3d segPtWorld = box.axes * bestSegLocal + box.center;  // Punto capsula in mondo
+    Eigen::Vector3d boxPtWorld = box.axes * bestBoxLocal + box.center;  // Punto box in mondo
+
+    double signedDist = best - cap.radius;  // Distanza signed considerando il raggio
+
+    if (out) {
+        out->distance = signedDist;
+        out->t_capsule = bestT;
+        out->p_capsule = segPtWorld;
+        out->p_obstacle = boxPtWorld;
+        
+        // Calcolo della normale di collisione
+        Eigen::Vector3d diff = segPtWorld - boxPtWorld;
+        double dn = diff.norm();
+        if (dn > 1e-12) {
+            out->normal = diff / dn;  // Normalizza la differenza
+        } else {
+            out->normal = Eigen::Vector3d::UnitX();  // Fallback a asse X
+        }
+
+        out->t_obstacle = 0.0;  // Non utilizzato per le box
+    }
+
+    return signedDist;
+}
+
+// -----------------------------
+// Dispatcher principale
+// Instrada alla funzione di distanza appropriata in base al tipo di ostacolo
+// -----------------------------
+double capsule_distance(const CapsuleWorld &cap, const Obstacle &obs, CapsuleDistanceResult *out)
+{
+    switch (obs.type)
+    {
+    case ObstacleType::PLANE:
+        return dist_capsule_plane(cap, obs.plane, out);      // Capsula vs Piano
+    case ObstacleType::RECTANGLE:
+        return dist_capsule_rectangle(cap, obs.rect, out);   // Capsula vs Rettangolo
+    case ObstacleType::BOX:
+        return dist_capsule_box(cap, obs.box, out);          // Capsula vs Box
+    case ObstacleType::CAPSULE:
+        return dist_capsule_capsule(cap, obs.capsule, out);  // Capsula vs Capsula
+    default:
+        return INF_DBL;  // Tipo di ostacolo sconosciuto
+    }
+}
