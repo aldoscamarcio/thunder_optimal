@@ -112,8 +112,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 
 add_executable(menu
  	src/menu.cpp
-	# src/thunder_franka.cpp
-	# src/franka_gen.cpp
 )
 
 target_link_libraries(menu

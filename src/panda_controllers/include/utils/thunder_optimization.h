@@ -7,6 +7,7 @@
 #include <ros/ros.h>
 #include <visualization_msgs/MarkerArray.h>
 #include <visualization_msgs/Marker.h>
+#include "utils/Fr3CollisionModel.h"
 // Dichiarazione della funzione per calcolare i coefficienti del polinomio di quinto grado
 std::vector<double> calculateCoefficients(double q0, double qf, double v0, double vf, double a0, double af, double t0, double tf);
 
@@ -21,22 +22,6 @@ struct OptimizationData
     int size_q;
     double dt;
     int campioni;
-};
-
-struct Capsule
-{
-    int link_index;           // indice del link a cui appartiene la capsula
-    Eigen::Matrix4d T_offset; // trasformazione locale della capsula rispetto al link
-    double radius;            // raggio
-    double length;            // lunghezza
-
-    Capsule()
-    {
-        link_index = -1;
-        radius = 0.0;
-        length = 0.0;
-        T_offset.setIdentity();
-    }
 };
 
 struct ObstacleConstraintIneq
@@ -123,6 +108,8 @@ void publish_capsule_markers(
 
 // Funzione per evitare ostacoli sferici con gradiente
 double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<double> &grad, void *data);
+
+double avoid_self_collision_with_gradient(const std::vector<double> &x, std::vector<double> &grad, void *data);
 
 // Funzione per calcolare le distanze dei link da un punto (ostacolo)
 LinkDistanceResult compute_link_distances_to_point(

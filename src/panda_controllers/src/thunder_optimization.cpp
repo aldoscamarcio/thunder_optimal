@@ -13,8 +13,8 @@
 #include <eigen3/Eigen/Dense>
 #include <nlopt.hpp>
 
-// Infine i tuoi header locali
 #include "utils/thunder_optimization.h"
+#include "utils/Fr3CollisionModel.h"
 
 const std::string conf_file = "../robots/franka_conf.yaml";
 
@@ -257,7 +257,8 @@ void publish_capsule_markers(
         robot.get_T_0_5(), // Indice 5
         robot.get_T_0_5(), // Indice 5
         robot.get_T_0_6(), // Indice 6
-        robot.get_T_0_7()  // Indice 7
+        robot.get_T_0_7(),  // Indice 7
+        robot.get_T_0_7(),  // Indice 8
     };
 
     // 2. Crea l'array di marker
@@ -317,7 +318,7 @@ void publish_capsule_markers(
             marker.color.g = 0.0f;
             marker.color.a = 0.8f;
         }
-        marker.lifetime = ros::Duration(2.0);
+        marker.lifetime = ros::Duration(3.0);
 
         marker_array.markers.push_back(marker);
     }
@@ -340,8 +341,10 @@ double point_to_capsule_distance(const Eigen::Vector3d &p, const Eigen::Vector3d
 
 // Funzione di vincolo con gradiente
 double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<double> &grad, void *data)
+
 {
     ObstacleConstraintIneq *c = reinterpret_cast<ObstacleConstraintIneq *>(data);
+    std::vector<Capsule> capsule_definitions = Fr3CollisionModel::get_definitions();
 
     int k = c->k;
     int NJ = c->NJ;
@@ -398,11 +401,9 @@ double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<doub
     for (size_t idx = 0; idx < c->capsules.size(); idx++)
     {
         auto &cap = c->capsules[idx];
-        std::cout << "numero capsule"<< c->capsules.size()<< std::endl;
         Eigen::Matrix4d T = link_poses[cap.link_index] * cap.T_offset;
         Eigen::Vector3d a = T.block<3, 1>(0, 3);
         Eigen::Vector3d b = a + T.block<3, 1>(0, 2) * cap.length;
-        std::cout << "Lunghezza Capsula " << cap.length << std::endl;
         double dist = point_to_capsule_distance(p_obs, a, b, cap.radius);
 
         if (dist < min_distance)
