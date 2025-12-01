@@ -342,40 +342,40 @@ int main(int argc, char **argv)
 	}
 
 	{
-	    Capsule cap;
-	    cap.link_index = 7;
-	    cap.radius = 0.060000;
-	    cap.length = 0.010000;
-	    cap.T_offset << 0.0000, 0.0000, 1.0000, 0.0600,
-	                    0.0000, 1.0000, 0.0000, 0.0000,
-	                    -1.0000, 0.0000, 0.0000, 0.0820,
-	                    0.0000, 0.0000, 0.0000, 1.0000;
-	    capsule_definitions.push_back(cap);
+		Capsule cap;
+		cap.link_index = 7;
+		cap.radius = 0.060000;
+		cap.length = 0.010000;
+		cap.T_offset << 0.0000, 0.0000, 1.0000, 0.0600,
+			0.0000, 1.0000, 0.0000, 0.0000,
+			-1.0000, 0.0000, 0.0000, 0.0820,
+			0.0000, 0.0000, 0.0000, 1.0000;
+		capsule_definitions.push_back(cap);
 	}
 
 	// --- fr3_hand (Index 8) ---
 	{
-	    Capsule cap;
-	    cap.link_index = 8;
-	    cap.radius = 0.070000;
-	    cap.length = 0.100000;
-	    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-	                    0.0000, 0.0000, -1.0000, 0.0000,
-	                    0.0000, 1.0000, 0.0000, 0.0400,
-	                    0.0000, 0.0000, 0.0000, 1.0000;
-	    capsule_definitions.push_back(cap);
+		Capsule cap;
+		cap.link_index = 8;
+		cap.radius = 0.070000;
+		cap.length = 0.100000;
+		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+			0.0000, 0.0000, -1.0000, 0.0000,
+			0.0000, 1.0000, 0.0000, 0.0400,
+			0.0000, 0.0000, 0.0000, 1.0000;
+		capsule_definitions.push_back(cap);
 	}
 
 	{
-	    Capsule cap;
-	    cap.link_index = 8;
-	    cap.radius = 0.050000;
-	    cap.length = 0.100000;
-	    cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-	                    0.0000, 0.0000, -1.0000, 0.0000,
-	                    0.0000, 1.0000, 0.0000, 0.1000,
-	                    0.0000, 0.0000, 0.0000, 1.0000;
-	    capsule_definitions.push_back(cap);
+		Capsule cap;
+		cap.link_index = 8;
+		cap.radius = 0.050000;
+		cap.length = 0.100000;
+		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+			0.0000, 0.0000, -1.0000, 0.0000,
+			0.0000, 1.0000, 0.0000, 0.1000,
+			0.0000, 0.0000, 0.0000, 1.0000;
+		capsule_definitions.push_back(cap);
 	}
 
 	while (ros::ok())
@@ -826,8 +826,13 @@ int main(int argc, char **argv)
 			const double eps = 1e-4;		// Tolleranza per i vincoli di consistenza
 			const double eps_sphere = 1e-4; // Tolleranza per i vincoli di evitamento ostacolo
 
-			int numero_totale_vincoli = (campioni - 1) * 9; // <-- Calcola il numero totale
+			// Calcola il numero totale di vincoli correttamente
+			int vincoli_ostacolo_per_step = 2; // Sfera + piano
+			int vincoli_pos_per_step = 2 * NJ; // Upper + lower per ogni giunto
+			int vincoli_vel_per_step = 2 * NJ; // Upper + lower per ogni giunto
+			int vincoli_per_step = vincoli_ostacolo_per_step + vincoli_pos_per_step + vincoli_vel_per_step;
 
+			int numero_totale_vincoli = (campioni - 1) * vincoli_per_step + 2 * NJ;
 			const double r_s = 0.05;   // raggio ostacolo
 			const double d_safe = 0.1; // margine sicurezza
 
@@ -843,7 +848,7 @@ int main(int argc, char **argv)
 
 			Obstacle obs_plane;
 			obs_plane.type = ObstacleType::PLANE;
-			obs_plane.plane.P0 = p_piano;				   // Punto sul piano
+			obs_plane.plane.P0 = p_piano;				  // Punto sul piano
 			obs_plane.plane.n = Eigen::Vector3d(0, 0, 1); // Normale del piano
 
 			if (numero_totale_vincoli > 0)
@@ -864,13 +869,13 @@ int main(int argc, char **argv)
 				// NOTA: eps_sphere è la tolleranza
 				opt.add_inequality_constraint(avoid_obstacle_generic, c_sphere.get(), eps_sphere);
 
-				// auto c_plane = std::make_shared<ObstacleConstraintIneq>(
-				// 	k, NJ, d_safe, obs_plane, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
-				// // Assegna le capsule del robot anche a questo vincolo
-				// c_plane->capsules_definitions = capsule_definitions;
-				// // Salva il puntatore per evitare che venga distrutto
-				// plane_constraints.push_back(c_plane);
-				// opt.add_inequality_constraint(avoid_obstacle_generic, c_plane.get(), eps_sphere);
+				auto c_plane = std::make_shared<ObstacleConstraintIneq>(
+					k, NJ, d_safe, obs_plane, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
+				// Assegniamo le capsule del robot anche a questo vincolo
+				c_plane->capsules_definitions = capsule_definitions;
+				// Salva il puntatore per evitare che venga distrutto
+				plane_constraints.push_back(c_plane);
+				opt.add_inequality_constraint(avoid_obstacle_generic, c_plane.get(), eps_sphere);
 
 				// auto c = std::make_shared<ObstacleConstraintIneq>(
 				// 	k, NJ, r_s, d_safe, p_ostacolo, robot, optData.q0, optData.v0, optData.dt,

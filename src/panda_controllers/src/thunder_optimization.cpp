@@ -584,11 +584,11 @@ double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> 
         }
     }
 
-    if (closest_cap_idx != -1 && k > 90)
-    {
-        std::cout << "[Step " << k << "] Closest Capsule ID: " << closest_cap_idx
-                  << " | Dist: " << min_signed_dist << std::endl;
-    }
+    // if (closest_cap_idx != -1 && k > 90)
+    // {
+    //     std::cout << "[Step " << k << "] Closest Capsule ID: " << closest_cap_idx
+    //               << " | Dist: " << min_signed_dist << std::endl;
+    // }
 
     if (closest_cap_idx == -1)
         return -1.0; // Fallback

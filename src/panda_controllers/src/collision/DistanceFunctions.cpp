@@ -169,11 +169,6 @@ double dist_capsule_capsule(
 }
 
 // -----------------------------
-// dist_capsule_plane (esatta)
-// Calcola la distanza signed tra una capsula e un piano
-// Gestisce sia il caso di penetrazione che di separazione
-// -----------------------------
-// -----------------------------
 // dist_capsule_plane 
 // Calcola la distanza signed tra una capsula e un piano
 // Gestisce sia il caso di penetrazione che di separazione
@@ -275,17 +270,33 @@ double dist_capsule_rectangle(
 {
     // 1. Calcolo della normale del rettangolo
     Eigen::Vector3d n = R.Ux.cross(R.Uy).normalized();
-
-    // Calcola la distanza degli endpoints della capsula dal piano del rettangolo
-    double dA = n.dot(cap.A - R.P0);
-    double dB = n.dot(cap.B - R.P0);
-
-    // Trova l'endpoint della capsula più vicino al piano
-    bool useA = std::abs(dA) <= std::abs(dB);
-    double d_plane = useA ? dA : dB;
-    Eigen::Vector3d P_seg_closest = useA ? cap.A : cap.B;
+    
+    // CORREZIONE: Trova il punto più vicino sull'ASSE della capsula, non solo gli endpoints
+    Eigen::Vector3d u = cap.B - cap.A; // Direzione dell'asse capsula
+    double u_dot_n = u.dot(n);
+    
+    double t_cap = 0.0; // Parametro lungo l'asse capsula per il punto più vicino
+    
+    if (std::abs(u_dot_n) > EPS_DBL) {
+        // Capsula non parallela al piano: trova punto di minima distanza
+        // Formula: t = -n·(A - P0) / (n·u)
+        t_cap = -n.dot(cap.A - R.P0) / u_dot_n;
+        // Clamp per assicurarsi che il punto sia sul segmento
+        t_cap = std::max(0.0, std::min(1.0, t_cap));
+    } else {
+        // Capsula parallela al piano: tutti i punti hanno stessa distanza
+        // Usiamo il punto centrale (t = 0.5)
+        t_cap = 0.5;
+    }
+    
+    // Punto sulla capsula più vicino al piano (corretto)
+    Eigen::Vector3d P_cap = cap.A + t_cap * u;
+    
+    // Calcola la distanza del punto dalla capsula al piano
+    double d_plane = n.dot(P_cap - R.P0);
+    
     // Proietta il punto sul piano del rettangolo
-    Eigen::Vector3d P_proj = P_seg_closest - n * d_plane;
+    Eigen::Vector3d P_proj = P_cap - n * d_plane;
 
     // Verifica se la proiezione cade DENTRO i confini del rettangolo
     Eigen::Vector3d v = P_proj - R.P0;
@@ -300,10 +311,10 @@ double dist_capsule_rectangle(
         if (out)
         {
             out->distance = signedDist;
-            out->p_capsule = P_seg_closest;
+            out->p_capsule = P_cap;          // CORRETTO: usa il punto vero sulla capsula
             out->p_obstacle = P_proj;
             out->normal = (d_plane >= 0.0) ? n : -n;  // Normale orientata correttamente
-            out->t_capsule = useA ? 0.0 : 1.0;
+            out->t_capsule = t_cap;          // CORRETTO: parametro lungo capsula
             out->t_obstacle = 0.0; // Irrilevante per collisione con faccia
         }
         return signedDist;
@@ -349,6 +360,30 @@ double dist_capsule_rectangle(
             bestT = t;        // Miglior parametro bordo
         }
     }
+    
+    // CORREZIONE: Considera anche i 4 vertici come possibili punti più vicini
+    std::vector<Eigen::Vector3d> vertices = {p00, p10, p11, p01};
+    for (int i = 0; i < 4; ++i) {
+        // Calcola punto più vicino sulla capsula a questo vertice
+        Eigen::Vector3d w = vertices[i] - cap.A;
+        double len_u_sq = u.squaredNorm();
+        
+        double s_vert = 0.0;
+        if (len_u_sq > EPS_DBL) {
+            s_vert = clamp01(w.dot(u) / len_u_sq);
+        }
+        
+        Eigen::Vector3d P_cap_vert = cap.A + s_vert * u;
+        double d2_vert = (P_cap_vert - vertices[i]).squaredNorm();
+        
+        if (d2_vert < minD2) {
+            minD2 = d2_vert;
+            bestP_cap = P_cap_vert;
+            bestP_rect = vertices[i];
+            bestS = s_vert;
+            bestT = (i % 2 == 0) ? 0.0 : 1.0; // Approssimazione per vertici
+        }
+    }
 
     // Calcolo della distanza euclidea e distanza signed
     double dist = std::sqrt(minD2);
@@ -363,10 +398,15 @@ double dist_capsule_rectangle(
         out->t_obstacle = bestT; // Parametro locale al bordo vincente
 
         // Calcolo della normale di collisione
-        if (dist > 1e-12)
+        if (dist > 1e-12) {
+            // CORREZIONE: Normale dal rettangolo alla capsula (direzione di separazione)
             out->normal = (bestP_cap - bestP_rect) / dist;  // Normalizza la differenza
-        else
-            out->normal = n;  // Fallback alla normale del piano
+        } else {
+            // Caso degenerato: punti coincidenti
+            // Per bordi: normale perpendicolare al bordo e al piano
+            // Per semplicità, usa la normale del piano
+            out->normal = n;
+        }
     }
 
     return signedDist;
