@@ -30,14 +30,14 @@ void closestSegmentSegment(
     // Basato sull'algoritmo di Ericson per punti più vicini tra segmenti
     Eigen::Vector3d u = P1 - P0;  // Vettore direzione del segmento P
     Eigen::Vector3d v = Q1 - Q0;  // Vettore direzione del segmento Q
-    Eigen::Vector3d w = P0 - Q0;  // Vettore che connette gli inizi dei segmenti
+    Eigen::Vector3d w = Q0 - P0;  // Vettore che connette l'inizio di P all'inizio di Q (standard)
     
     // Calcolo dei prodotti scalari per il sistema lineare
     double a = u.dot(u);      // Quadrato della lunghezza di u (sempre >= 0)
     double b = u.dot(v);      // Proiezione di u su v (misura parallelismo tra segmenti)
     double c = v.dot(v);      // Quadrato della lunghezza di v (sempre >= 0)
-    double d = u.dot(w);      // Proiezione di w su u
-    double e = v.dot(w);      // Proiezione di w su v
+    double d = u.dot(w);      // Proiezione di w su u (u·(Q0 - P0))
+    double e = v.dot(w);      // Proiezione di w su v (v·(Q0 - P0))
     double D = a * c - b * b; // Determinante del sistema (denominatore)
 
     // Variabili per il calcolo dei parametri lungo i segmenti
@@ -55,50 +55,54 @@ void closestSegmentSegment(
     else
     {
         // Calcolo dei numeratori usando la regola di Cramer
-        sN = (b * e - c * d);
-        tN = (a * e - b * d);
+        // Formule corrette con w = Q0 - P0:
+        sN = (c * d - b * e); // Numeratore per s: (c·d - b·e)
+        tN = (a * e - b * d); // Numeratore per t: (a·e - b·d)
 
-        // Clamp di sN nell'intervallo [0, sD]
+        // Clamp di sN nell'intervallo [0, sD] (assicura 0 ≤ s ≤ 1)
         if (sN < 0.0)
         {
-            sN = 0.0; // Forza al punto iniziale di P
-            tN = e;   // Ricalcola tN
+            sN = 0.0; // Forza al punto iniziale di P (s = 0)
+            tN = e;   // Ricalcola tN per s = 0
             tD = c;
         }
         else if (sN > sD)
         {
-            sN = sD;    // Forza al punto finale di P
-            tN = e + b; // Ricalcola tN considerando P1
+            sN = sD;    // Forza al punto finale di P (s = 1)
+            tN = e + b; // Ricalcola tN per s = 1: v·(Q0 - P1) = v·(w - u) = e - b
             tD = c;
         }
     }
 
-    // Clamp di tN nell'intervallo [0, tD]
+    // Clamp di tN nell'intervallo [0, tD] (assicura 0 ≤ t ≤ 1)
     if (tN < 0.0)
     {
-        tN = 0.0; // Forza al punto iniziale di Q
-        // Ricalcola sN per questo t
+        tN = 0.0; // Forza al punto iniziale di Q (t = 0)
+        // Ricalcola sN per questo t (trovare punto su P più vicino a Q0)
+        // Proiezione di (P0 - Q0) su u = -d (perché d = u·(Q0 - P0))
         if (-d < 0.0)
-            sN = 0.0;
+            sN = 0.0;           // Proiezione negativa → usa P0
         else if (-d > a)
-            sN = sD;
+            sN = sD;            // Proiezione > lunghezza → usa P1
         else
         {
-            sN = -d;
-            sD = a;
+            sN = -d;            // Proiezione tra 0 e a
+            sD = a;             // Normalizza per ‖u‖²
         }
     }
     else if (tN > tD)
     {
-        tN = tD; // Forza al punto finale di Q
-        if ((-d + b) < 0.0)
-            sN = 0.0;
-        else if ((-d + b) > a)
-            sN = sD;
+        tN = tD; // Forza al punto finale di Q (t = 1)
+        // Ricalcola sN per questo t (trovare punto su P più vicino a Q1)
+        // Proiezione di (P0 - Q1) su u = u·(P0 - Q0 - v) = -d - b
+        if ((-d - b) < 0.0)
+            sN = 0.0;           // Proiezione negativa → usa P0
+        else if ((-d - b) > a)
+            sN = sD;            // Proiezione > lunghezza → usa P1
         else
         {
-            sN = (-d + b);
-            sD = a;
+            sN = (-d - b);      // Proiezione tra 0 e a
+            sD = a;             // Normalizza per ‖u‖²
         }
     }
 
@@ -107,12 +111,12 @@ void closestSegmentSegment(
     tc = (std::abs(tN) < EPS_DBL ? 0.0 : tN / tD);
 
     // Assegnazione degli output
-    s_out = sc;
-    t_out = tc;
+    s_out = sc;  // Parametro s normalizzato (0 ≤ s ≤ 1)
+    t_out = tc;  // Parametro t normalizzato (0 ≤ t ≤ 1)
 
     // Calcolo delle coordinate dei punti più vicini
-    ptP = P0 + u * sc;  // Punto più vicino sul segmento P
-    ptQ = Q0 + v * tc;  // Punto più vicino sul segmento Q
+    ptP = P0 + u * sc;  // Punto più vicino sul segmento P: P(s) = P0 + s*(P1-P0)
+    ptQ = Q0 + v * tc;  // Punto più vicino sul segmento Q: Q(t) = Q0 + t*(Q1-Q0)
 }
 
 // -----------------------------
@@ -169,6 +173,11 @@ double dist_capsule_capsule(
 // Calcola la distanza signed tra una capsula e un piano
 // Gestisce sia il caso di penetrazione che di separazione
 // -----------------------------
+// -----------------------------
+// dist_capsule_plane 
+// Calcola la distanza signed tra una capsula e un piano
+// Gestisce sia il caso di penetrazione che di separazione
+// -----------------------------
 double dist_capsule_plane(
     const CapsuleWorld &cap,  // Capsula
     const Plane &pl,          // Piano
@@ -178,43 +187,76 @@ double dist_capsule_plane(
     double dA = pl.n.dot(cap.A - pl.P0);
     double dB = pl.n.dot(cap.B - pl.P0);
     
+    // CASO SPECIALE: Controlla se il segmento è parallelo al piano
+    // (per evitare divisione per zero e gestire caso speciale)
+    Eigen::Vector3d u = cap.B - cap.A;
+    double u_dot_n = u.dot(pl.n);
+    
+    if (std::abs(u_dot_n) < EPS_DBL) {
+        // Segmento parallelo al piano: tutti i punti hanno la stessa distanza
+        double d = dA;  // dA = dB per segmenti paralleli
+        double signedDist = std::abs(d) - cap.radius;  // Distanza signed
+        
+        if (out) {
+            // Usa il punto centrale come rappresentativo
+            Eigen::Vector3d center = (cap.A + cap.B) * 0.5;
+            Eigen::Vector3d proj = center - pl.n * d;  // Proiezione sul piano
+            
+            out->distance = signedDist;
+            out->p_capsule = center;     // Punto sulla capsula (centro)
+            out->p_obstacle = proj;      // Proiezione sul piano
+            out->t_capsule = 0.5;        // Parametro del centro
+            out->t_obstacle = 0.0;
+            // Normale punta dal piano verso la capsula
+            out->normal = (d >= 0.0) ? pl.n : -pl.n;
+        }
+        return signedDist;
+    }
+    
     // CASO 1: La capsula INTERSECA il piano (dA e dB hanno segni opposti)
     if (dA * dB <= 0.0) {
-        // La capsula attraversa il piano → penetrazione massima
-        double signedDist = -cap.radius;
+        // La capsula attraversa il piano → punto più vicino è l'intersezione
+        // La distanza minima tra asse e piano è 0, quindi considerando il raggio:
+        double signedDist = -cap.radius;  // Penetrazione minima = raggio
         
         // Trova il punto di intersezione tra segmento e piano
+        // t = distanza da A / lunghezza totale proiettata sulla normale
         double t = dA / (dA - dB);  // Parametro di intersezione
-        t = clamp01(t);  // Assicura che sia tra 0 e 1
+        t = clamp01(t);  // Assicura che sia tra 0 e 1 (per sicurezza numerica)
         Eigen::Vector3d P_intersect = cap.A + t * (cap.B - cap.A);  // Punto di intersezione
         
         if (out) {
             out->distance = signedDist;
-            out->p_capsule = P_intersect;   // Punto sulla capsula
+            out->p_capsule = P_intersect;   // Punto sulla capsula (intersezione)
             out->p_obstacle = P_intersect;  // Punto sul piano (stessa posizione)
-            out->t_capsule = t;             // Parametro di intersezione
+            out->t_capsule = t;             // Parametro di intersezione lungo capsula
             out->t_obstacle = 0.0;
             // Normale punta verso l'esterno rispetto alla capsula
+            // (verso il lato dove si trova l'endpoint con distanza positiva)
             out->normal = (dA >= 0.0) ? pl.n : -pl.n;
         }
         return signedDist;
     }
+    
     // CASO 2: A e B della capsula sono dallo stesso lato del piano
     else {
-        // Scegli l'endpoint geometricamente più vicino al piano
+        // Scegli l'endpoint geometricamente più vicino al piano (in valore assoluto)
         bool useA = std::abs(dA) <= std::abs(dB);
-        double d = useA ? dA : dB;           // Distanza signed
-        Eigen::Vector3d P = useA ? cap.A : cap.B;  // Punto più vicino
+        double d = useA ? dA : dB;           // Distanza signed del punto più vicino
+        Eigen::Vector3d P = useA ? cap.A : cap.B;  // Punto più vicino sulla capsula
         Eigen::Vector3d proj = P - pl.n * d; // Proiezione ortogonale sul piano
-        double signedDist = std::abs(d) - cap.radius;  // Distanza signed considerando il raggio
+        
+        // Distanza signed = distanza minima tra asse e piano, meno il raggio
+        double signedDist = std::abs(d) - cap.radius;
         
         if (out) {
             out->distance = signedDist;
-            out->p_capsule = P;
-            out->p_obstacle = proj;
+            out->p_capsule = P;             // Punto sulla capsula (estremo più vicino)
+            out->p_obstacle = proj;         // Sua proiezione ortogonale sul piano
             out->t_capsule = useA ? 0.0 : 1.0;  // 0 per A, 1 per B
             out->t_obstacle = 0.0;
             // Normale punta dal piano verso la capsula
+            // (se d positivo: capsula sul lato positivo della normale)
             out->normal = (d >= 0.0) ? pl.n : -pl.n;
         }
         return signedDist;

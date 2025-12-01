@@ -864,13 +864,13 @@ int main(int argc, char **argv)
 				// NOTA: eps_sphere è la tolleranza
 				opt.add_inequality_constraint(avoid_obstacle_generic, c_sphere.get(), eps_sphere);
 
-				auto c_plane = std::make_shared<ObstacleConstraintIneq>(
-					k, NJ, d_safe, obs_plane, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
-				// Assegna le capsule del robot anche a questo vincolo
-				c_plane->capsules_definitions = capsule_definitions;
-				// Salva il puntatore per evitare che venga distrutto
-				plane_constraints.push_back(c_plane);
-				opt.add_inequality_constraint(avoid_obstacle_generic, c_plane.get(), eps_sphere);
+				// auto c_plane = std::make_shared<ObstacleConstraintIneq>(
+				// 	k, NJ, d_safe, obs_plane, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
+				// // Assegna le capsule del robot anche a questo vincolo
+				// c_plane->capsules_definitions = capsule_definitions;
+				// // Salva il puntatore per evitare che venga distrutto
+				// plane_constraints.push_back(c_plane);
+				// opt.add_inequality_constraint(avoid_obstacle_generic, c_plane.get(), eps_sphere);
 
 				// auto c = std::make_shared<ObstacleConstraintIneq>(
 				// 	k, NJ, r_s, d_safe, p_ostacolo, robot, optData.q0, optData.v0, optData.dt,
