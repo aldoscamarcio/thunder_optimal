@@ -820,19 +820,30 @@ int main(int argc, char **argv)
 
 			// Vincoli di consistenza + evitamento ostacolo
 			std::vector<ConsistencyConstraintIneq> constraints, constraints_vel_f;
-			std::vector<std::shared_ptr<ObstacleConstraintIneq>> sphere_constraints, plane_constraints;
+			std::vector<std::shared_ptr<ObstacleConstraintIneq>> sphere_constraints, plane_constraints, rectangle_constraints;
 			std::vector<std::shared_ptr<JointLimitConstraint>> constraints_pos, constraints_vel;
 
 			const double eps = 1e-4;		// Tolleranza per i vincoli di consistenza
 			const double eps_sphere = 1e-4; // Tolleranza per i vincoli di evitamento ostacolo
 
-			// Calcola il numero totale di vincoli correttamente
-			int vincoli_ostacolo_per_step = 2; // Sfera + piano
-			int vincoli_pos_per_step = 2 * NJ; // Upper + lower per ogni giunto
-			int vincoli_vel_per_step = 2 * NJ; // Upper + lower per ogni giunto
-			int vincoli_per_step = vincoli_ostacolo_per_step + vincoli_pos_per_step + vincoli_vel_per_step;
+			// Calcolo corretto delle dimensioni dei vettori
+			int num_steps = campioni - 1; // Passi intermedi
 
-			int numero_totale_vincoli = (campioni - 1) * vincoli_per_step + 2 * NJ;
+			// Vincoli ostacoli: 3 per passo (sfera, piano, rettangolo)
+			int num_obstacle_constraints = num_steps * 3;
+
+			// Vincoli posizione: 2 (upper+lower) × NJ giunti × num_steps
+			int num_pos_constraints = num_steps * NJ * 2;
+
+			// Vincoli velocità: 2 (upper+lower) × NJ giunti × num_steps
+			int num_vel_constraints = num_steps * NJ * 2;
+
+			// Vincoli finali: 2 × NJ (posizione + velocità finale)
+			int num_final_constraints = 2 * NJ;
+
+			// Totale (per logging/debug)
+			int numero_totale_vincoli = num_obstacle_constraints + num_pos_constraints + num_vel_constraints + num_final_constraints;
+
 			const double r_s = 0.05;   // raggio ostacolo
 			const double d_safe = 0.1; // margine sicurezza
 
@@ -851,11 +862,29 @@ int main(int argc, char **argv)
 			obs_plane.plane.P0 = p_piano;				  // Punto sul piano
 			obs_plane.plane.n = Eigen::Vector3d(0, 0, 1); // Normale del piano
 
+			Obstacle obs_rectangle;
+			obs_rectangle.type = ObstacleType::RECTANGLE;
+			obs_rectangle.rect.P0 = p_ostacolo; // Centro del rettangolo
+			obs_rectangle.rect.Ux = Eigen::Vector3d(0, 1, 0);	 // Vettore direzione u
+			obs_rectangle.rect.Uy = Eigen::Vector3d(0, 0, 1);	 // Vettore direzione v
+			obs_rectangle.rect.width = 0.2;			 // Lunghezza lungo u
+			obs_rectangle.rect.height = 0.9;			 // Lunghezza lungo v
+			obs_rectangle.rect.normal = obs_rectangle.rect.Ux.cross(obs_rectangle.rect.Uy); // Normale del rettangolo
+
 			if (numero_totale_vincoli > 0)
 			{
-				constraints.reserve(numero_totale_vincoli);
-				constraints_vel_f.reserve(numero_totale_vincoli);
-				constraints_pos.reserve(NJ * 4);
+				// RISERVE CORRETTE:
+				sphere_constraints.reserve(num_steps);
+				plane_constraints.reserve(num_steps);
+				rectangle_constraints.reserve(num_steps);
+
+				// Per constraints_pos e constraints_vel: ogni step × ogni giunto × 2 (upper+lower)
+				constraints_pos.reserve(num_steps * NJ * 2);
+				constraints_vel.reserve(num_steps * NJ * 2);
+
+				// constraints e constraints_vel_f hanno solo vincoli finali (NJ ciascuno)
+				constraints.reserve(NJ);	   // Solo posizione finale
+				constraints_vel_f.reserve(NJ); // Solo velocità finale
 			}
 
 			//  Vincolo di evitamento ostacolo (sfera)
@@ -864,8 +893,7 @@ int main(int argc, char **argv)
 				auto c_sphere = std::make_shared<ObstacleConstraintIneq>(
 					k, NJ, d_safe, obs_sphere, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
 				c_sphere->capsules_definitions = capsule_definitions;
-				sphere_constraints.push_back(c_sphere); // Magari rinomina il vettore in obstacle_constraints
-
+				sphere_constraints.push_back(c_sphere); 
 				// NOTA: eps_sphere è la tolleranza
 				opt.add_inequality_constraint(avoid_obstacle_generic, c_sphere.get(), eps_sphere);
 
@@ -876,6 +904,14 @@ int main(int argc, char **argv)
 				// Salva il puntatore per evitare che venga distrutto
 				plane_constraints.push_back(c_plane);
 				opt.add_inequality_constraint(avoid_obstacle_generic, c_plane.get(), eps_sphere);
+
+				// auto c_rectangle = std::make_shared<ObstacleConstraintIneq>(
+				// 	k, NJ, d_safe, obs_rectangle, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
+				// // Assegniamo le capsule del robot anche a questo vincolo
+				// c_rectangle->capsules_definitions = capsule_definitions;
+				// // Salva il puntatore per evitare che venga distrutto
+				// rectangle_constraints.push_back(c_rectangle);
+				// opt.add_inequality_constraint(avoid_obstacle_generic, c_rectangle.get(), eps_sphere);
 
 				// auto c = std::make_shared<ObstacleConstraintIneq>(
 				// 	k, NJ, r_s, d_safe, p_ostacolo, robot, optData.q0, optData.v0, optData.dt,
