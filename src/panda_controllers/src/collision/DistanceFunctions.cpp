@@ -21,103 +21,89 @@ static inline double clamp01(double v) { return (v < 0.0) ? 0.0 : ((v > 1.0) ? 1
 // closestSegmentSegment (Ericson) - ottimizzata e robusta
 // Calcola i punti più vicini tra due segmenti 3D e restituisce i parametri e le coordinate
 // -----------------------------
+
 void closestSegmentSegment(
-    const Eigen::Vector3d &P0, const Eigen::Vector3d &P1,  // Endpoints primo segmento
-    const Eigen::Vector3d &Q0, const Eigen::Vector3d &Q1,  // Endpoints secondo segmento
-    double &s_out, double &t_out,                          // Parametri di output lungo i segmenti
-    Eigen::Vector3d &ptP, Eigen::Vector3d &ptQ)            // Punti più vicini di output
+    const Eigen::Vector3d &P0, const Eigen::Vector3d &P1,
+    const Eigen::Vector3d &Q0, const Eigen::Vector3d &Q1,
+    double &s_out, double &t_out,
+    Eigen::Vector3d &ptP, Eigen::Vector3d &ptQ)
 {
-    // Basato sull'algoritmo di Ericson per punti più vicini tra segmenti
-    Eigen::Vector3d u = P1 - P0;  // Vettore direzione del segmento P
-    Eigen::Vector3d v = Q1 - Q0;  // Vettore direzione del segmento Q
-    Eigen::Vector3d w = Q0 - P0;  // Vettore che connette l'inizio di P all'inizio di Q (standard)
+    Eigen::Vector3d u = P1 - P0;
+    Eigen::Vector3d v = Q1 - Q0;
+    Eigen::Vector3d w = P0 - Q0;  // ✅ ATTENZIONE: P0 - Q0, non Q0 - P0
     
-    // Calcolo dei prodotti scalari per il sistema lineare
-    double a = u.dot(u);      // Quadrato della lunghezza di u (sempre >= 0)
-    double b = u.dot(v);      // Proiezione di u su v (misura parallelismo tra segmenti)
-    double c = v.dot(v);      // Quadrato della lunghezza di v (sempre >= 0)
-    double d = u.dot(w);      // Proiezione di w su u (u·(Q0 - P0))
-    double e = v.dot(w);      // Proiezione di w su v (v·(Q0 - P0))
-    double D = a * c - b * b; // Determinante del sistema (denominatore)
+    double a = u.dot(u);
+    double b = u.dot(v);
+    double c = v.dot(v);
+    double d = u.dot(w);
+    double e = v.dot(w);
+    double D = a * c - b * b;
 
-    // Variabili per il calcolo dei parametri lungo i segmenti
-    double sc, sN, sD = D; // Parametro s = sN / sD per segmento P
-    double tc, tN, tD = D; // Parametro t = tN / tD per segmento Q
+    double sc, sN, sD = D;
+    double tc, tN, tD = D;
 
-    // Calcolo dei parametri dei punti più vicini
-    if (D < EPS_DBL)
-    {             // Segmenti quasi paralleli
-        sN = 0.0; // Forza l'uso di s = 0 sul segmento P
-        sD = 1.0; // Evita divisione per zero
-        tN = e;   // Parametro per t basato solo sul segmento Q
+    // Calcola i parametri non clampati
+    if (D < EPS_DBL) {
+        // Paralleli
+        sN = 0.0;
+        sD = 1.0;
+        tN = e;
         tD = c;
     }
-    else
-    {
-        // Calcolo dei numeratori usando la regola di Cramer
-        // Formule corrette con w = Q0 - P0:
-        sN = (c * d - b * e); // Numeratore per s: (c·d - b·e)
-        tN = (a * e - b * d); // Numeratore per t: (a·e - b·d)
+    else {
+        // Caso generale
+        sN = (b * e - c * d);
+        tN = (a * e - b * d);
 
-        // Clamp di sN nell'intervallo [0, sD] (assicura 0 ≤ s ≤ 1)
-        if (sN < 0.0)
-        {
-            sN = 0.0; // Forza al punto iniziale di P (s = 0)
-            tN = e;   // Ricalcola tN per s = 0
+        // Clamp s
+        if (sN < 0.0) {
+            sN = 0.0;
+            tN = e;
             tD = c;
         }
-        else if (sN > sD)
-        {
-            sN = sD;    // Forza al punto finale di P (s = 1)
-            tN = e + b; // Ricalcola tN per s = 1: v·(Q0 - P1) = v·(w - u) = e - b
+        else if (sN > sD) {
+            sN = sD;
+            tN = e + b;  // ✅ Con w = P0-Q0, questa è la formula corretta
             tD = c;
         }
     }
 
-    // Clamp di tN nell'intervallo [0, tD] (assicura 0 ≤ t ≤ 1)
-    if (tN < 0.0)
-    {
-        tN = 0.0; // Forza al punto iniziale di Q (t = 0)
-        // Ricalcola sN per questo t (trovare punto su P più vicino a Q0)
-        // Proiezione di (P0 - Q0) su u = -d (perché d = u·(Q0 - P0))
+    // Clamp t
+    if (tN < 0.0) {
+        tN = 0.0;
+        // Ricalcola s per t=0
         if (-d < 0.0)
-            sN = 0.0;           // Proiezione negativa → usa P0
+            sN = 0.0;
         else if (-d > a)
-            sN = sD;            // Proiezione > lunghezza → usa P1
-        else
-        {
-            sN = -d;            // Proiezione tra 0 e a
-            sD = a;             // Normalizza per ‖u‖²
+            sN = sD;
+        else {
+            sN = -d;
+            sD = a;
         }
     }
-    else if (tN > tD)
-    {
-        tN = tD; // Forza al punto finale di Q (t = 1)
-        // Ricalcola sN per questo t (trovare punto su P più vicino a Q1)
-        // Proiezione di (P0 - Q1) su u = u·(P0 - Q0 - v) = -d - b
+    else if (tN > tD) {
+        tN = tD;
+        // Ricalcola s per t=1
         if ((-d - b) < 0.0)
-            sN = 0.0;           // Proiezione negativa → usa P0
+            sN = 0.0;
         else if ((-d - b) > a)
-            sN = sD;            // Proiezione > lunghezza → usa P1
-        else
-        {
-            sN = (-d - b);      // Proiezione tra 0 e a
-            sD = a;             // Normalizza per ‖u‖²
+            sN = sD;
+        else {
+            sN = (-d - b);
+            sD = a;
         }
     }
 
-    // Calcolo finale dei parametri con controllo di tolleranza numerica
     sc = (std::abs(sN) < EPS_DBL ? 0.0 : sN / sD);
     tc = (std::abs(tN) < EPS_DBL ? 0.0 : tN / tD);
 
-    // Assegnazione degli output
-    s_out = sc;  // Parametro s normalizzato (0 ≤ s ≤ 1)
-    t_out = tc;  // Parametro t normalizzato (0 ≤ t ≤ 1)
+    s_out = sc;
+    t_out = tc;
 
-    // Calcolo delle coordinate dei punti più vicini
-    ptP = P0 + u * sc;  // Punto più vicino sul segmento P: P(s) = P0 + s*(P1-P0)
-    ptQ = Q0 + v * tc;  // Punto più vicino sul segmento Q: Q(t) = Q0 + t*(Q1-Q0)
+    ptP = P0 + u * sc;
+    ptQ = Q0 + v * tc;
 }
+
 
 // -----------------------------
 // dist_capsule_capsule

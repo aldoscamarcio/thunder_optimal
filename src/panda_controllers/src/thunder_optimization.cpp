@@ -9,12 +9,16 @@
 #include <visualization_msgs/MarkerArray.h>
 #include <visualization_msgs/Marker.h>
 
+#include <sstream> // ✅ Per std::stringstream
+#include <iomanip>
+
 // Poi le librerie di terze parti
 #include <eigen3/Eigen/Dense>
 #include <nlopt.hpp>
 
 // Infine i tuoi header locali
 #include "utils/thunder_optimization.h"
+#include <geometry_msgs/Point.h>
 
 const std::string conf_file = "../robots/franka_conf.yaml";
 
@@ -242,10 +246,10 @@ double final_velocity_constraint(unsigned n, const double *x, double *grad, void
 }
 
 void publish_capsule_markers(
-    thunder_franka &robot,                // Robot con q impostato
-    ros::Publisher &marker_pub,           // Publisher (passato per riferimento)
+    thunder_franka &robot,                            // Robot con q impostato
+    ros::Publisher &marker_pub,                       // Publisher (passato per riferimento)
     const std::vector<Capsule> &capsules_definitions, // Definizioni delle capsule
-    int closest_capsule_index)            // per colorare la più vicina
+    int closest_capsule_index)                        // per colorare la più vicina
 {
     // 1. Ottieni le pose (basate sullo stato 'q' già impostato nel robot)
     std::vector<Eigen::Matrix4d> link_poses = {
@@ -505,19 +509,19 @@ double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> 
     }
 
     // 2. Aggiorna cinematica robot
-    c->robot.set_q(q_k);
+    c->robot->set_q(q_k);
 
     // Recupera pose e Jacobiani (come nel tuo script originale)
     // Nota: Assumo che get_T... e get_J... siano metodi della tua classe Robot
     std::vector<Eigen::Matrix4d> link_poses = {
-        c->robot.get_T_0_0(), c->robot.get_T_0_1(), c->robot.get_T_0_2(), c->robot.get_T_0_3(),
-        c->robot.get_T_0_4(), c->robot.get_T_0_5(), c->robot.get_T_0_5(), /*link flange?*/
-        c->robot.get_T_0_6(), c->robot.get_T_0_7()};
+        c->robot->get_T_0_0(), c->robot->get_T_0_1(), c->robot->get_T_0_2(), c->robot->get_T_0_3(),
+        c->robot->get_T_0_4(), c->robot->get_T_0_5(), c->robot->get_T_0_5(), /*link flange?*/
+        c->robot->get_T_0_6(), c->robot->get_T_0_7()};
 
     std::vector<Eigen::MatrixXd> J_links = {
-        Eigen::MatrixXd::Zero(6, 7), c->robot.get_J_1(), c->robot.get_J_2(), c->robot.get_J_3(),
-        c->robot.get_J_4(), c->robot.get_J_5(), c->robot.get_J_5(),
-        c->robot.get_J_6(), c->robot.get_J_7()};
+        Eigen::MatrixXd::Zero(6, 7), c->robot->get_J_1(), c->robot->get_J_2(), c->robot->get_J_3(),
+        c->robot->get_J_4(), c->robot->get_J_5(), c->robot->get_J_5(),
+        c->robot->get_J_6(), c->robot->get_J_7()};
 
     // 3. Trova la distanza minima tra TUTTE le capsule del robot e l'OSTACOLO
     double min_signed_dist = 1e6;
@@ -607,7 +611,7 @@ double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> 
     // Visualizzazione
     if (c->marker_pub)
     {
-        publish_capsule_markers(c->robot, c->marker_pub, c->capsules_definitions, closest_cap_idx);
+        publish_capsule_markers(*c->robot, *c->marker_pub, c->capsules_definitions, closest_cap_idx);
     }
 
     // 5. Calcolo del Gradiente Analitico per NLopt
@@ -635,4 +639,321 @@ double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> 
     }
 
     return constraint_value;
+}
+
+double avoid_self_collision(const std::vector<double> &x, std::vector<double> &grad, void *data)
+{
+    SelfCollisionConstraint *c_self = reinterpret_cast<SelfCollisionConstraint *>(data);
+
+    int k = c_self->k;
+    int NJ = c_self->NJ;
+    double dt = c_self->dt;
+
+    // 1. Integrazione per ottenere q(k)
+    Eigen::VectorXd q_k = c_self->q0;
+    Eigen::VectorXd dq_k = c_self->dq0;
+
+    for (int j = 0; j < k; j++)
+    {
+        for (int i = 0; i < NJ; i++)
+        {
+            double ddq = x[j * NJ + i];
+
+            dq_k(i) += ddq * dt;                          // v(t+1) = v(t) + a*dt
+            q_k(i) += dq_k(i) * dt + 0.5 * ddq * dt * dt; // q(t+1) = q(t) + v*dt + 0.5*a*dt^2
+        }
+    }
+
+    // 2. Aggiorna cinematica
+    c_self->robot->set_q(q_k);
+
+    // 3. Recupera pose e Jacobiani per tutti i link
+    std::vector<Eigen::Matrix4d> link_poses = {
+        c_self->robot->get_T_0_0(), c_self->robot->get_T_0_0(), c_self->robot->get_T_0_1(), c_self->robot->get_T_0_2(),
+        c_self->robot->get_T_0_3(), c_self->robot->get_T_0_4(), c_self->robot->get_T_0_5(), c_self->robot->get_T_0_5(),
+        c_self->robot->get_T_0_6(), c_self->robot->get_T_0_7(), c_self->robot->get_T_0_7(), c_self->robot->get_T_0_8()};
+
+    std::vector<Eigen::MatrixXd> J_links = {
+        Eigen::MatrixXd::Zero(6, NJ), // Link 0 (base fissa)
+        c_self->robot->get_J_1(), c_self->robot->get_J_2(), c_self->robot->get_J_3(),
+        c_self->robot->get_J_4(), c_self->robot->get_J_5(), c_self->robot->get_J_6(),
+        c_self->robot->get_J_7(), c_self->robot->get_J_ee()};
+
+    // 4. Calcola posizioni world di tutte le capsule
+    std::vector<CapsuleWorld> capsules_world;
+    capsules_world.reserve(c_self->capsules_definitions.size());
+
+    for (const auto &cap_def : c_self->capsules_definitions)
+    {
+        Eigen::Matrix4d T = link_poses[cap_def.link_index] * cap_def.T_offset;
+
+        CapsuleWorld cap_world;
+        cap_world.A = T.block<3, 1>(0, 3);
+        cap_world.B = cap_world.A + T.block<3, 1>(0, 2) * cap_def.length;
+        cap_world.radius = cap_def.radius;
+
+        capsules_world.push_back(cap_world);
+    }
+
+    // 5. Trova distanza minima tra coppie di link configurate
+    double min_signed_dist = 1e6;
+    int closest_cap_i = -1;
+    int closest_cap_j = -1;
+    CapsuleDistanceResult best_result;
+
+    // Itera su tutte le coppie di collision configurate
+    for (const auto &pair : c_self->collision_pairs)
+    {
+        int link_i = pair.first;
+        int link_j = pair.second;
+
+        // Trova tutte le capsule appartenenti a link_i e link_j
+        for (size_t idx_i = 0; idx_i < c_self->capsules_definitions.size(); idx_i++)
+        {
+            if (c_self->capsules_definitions[idx_i].link_index != link_i)
+                continue;
+
+            for (size_t idx_j = 0; idx_j < c_self->capsules_definitions.size(); idx_j++)
+            {
+                if (c_self->capsules_definitions[idx_j].link_index != link_j)
+                    continue;
+
+                // Calcola distanza tra le due capsule
+                CapsuleDistanceResult res;
+                double dist = dist_capsule_capsule(capsules_world[idx_i],
+                                                   capsules_world[idx_j],
+                                                   &res);
+
+                if (dist < min_signed_dist)
+                {
+                    min_signed_dist = dist;
+                    closest_cap_i = idx_i;
+                    closest_cap_j = idx_j;
+                    best_result = res;
+                }
+            }
+        }
+    }
+
+    // Nessuna coppia trovata (non dovrebbe succedere)
+    if (closest_cap_i == -1 || closest_cap_j == -1)
+    {
+        if (!grad.empty())
+            std::fill(grad.begin(), grad.end(), 0.0);
+        return -1.0;
+    }
+
+    // 6. Definizione vincolo: dist > d_safe => d_safe - dist < 0
+    double constraint_value = c_self->d_safe - min_signed_dist;
+
+    static int debug_calls = 0;
+    debug_calls++;
+    if (debug_calls % 1 == 0)
+    {
+        std::cout << "[k=" << c_self->k << ", call #" << debug_calls << "]"
+                  << " dist=" << min_signed_dist
+                  << ", d_safe=" << c_self->d_safe
+                  << ", constraint=" << constraint_value
+                  << " | Caps " << closest_cap_i << " (Link "
+                  << c_self->capsules_definitions[closest_cap_i].link_index
+                  << ") <-> " << closest_cap_j << " (Link "
+                  << c_self->capsules_definitions[closest_cap_j].link_index << ")"
+                  << std::endl;
+    }
+
+    // Debug output (throttled)
+    if (k % 10 == 0 && constraint_value > -0.05)
+    {
+        ROS_DEBUG("Step %d: Self-collision dist=%.3f (caps %d<->%d, links %d<->%d)",
+                  k, min_signed_dist, closest_cap_i, closest_cap_j,
+                  c_self->capsules_definitions[closest_cap_i].link_index,
+                  c_self->capsules_definitions[closest_cap_j].link_index);
+    }
+
+    // 7. Calcolo Gradiente Analitico
+    if (!grad.empty())
+    {
+        std::fill(grad.begin(), grad.end(), 0.0);
+
+        // Normale di collisione: punta da capsula_j verso capsula_i
+        Eigen::Vector3d normal = best_result.normal;
+
+        // Parametri per interpolazione sui segmenti
+        double t_i = best_result.t_capsule;  // Parametro su capsula_i
+        double t_j = best_result.t_obstacle; // Parametro su capsula_j
+
+        // Recupera info delle due capsule
+        auto &cap_i_def = c_self->capsules_definitions[closest_cap_i];
+        auto &cap_j_def = c_self->capsules_definitions[closest_cap_j];
+
+        int link_i = cap_i_def.link_index;
+        int link_j = cap_j_def.link_index;
+
+        // Jacobiano per capsula i
+        Eigen::MatrixXd J_i = compute_capsule_jacobian(
+            link_poses[link_i], cap_i_def, J_links[link_i], t_i, NJ);
+
+        // Jacobiano per capsula j
+        Eigen::MatrixXd J_j = compute_capsule_jacobian(
+            link_poses[link_j], cap_j_def, J_links[link_j], t_j, NJ);
+
+        // Gradiente della distanza rispetto a q:
+        // d(dist)/dq = normal^T * (J_i - J_j)
+        Eigen::RowVectorXd ddist_dq = normal.transpose() * (J_i - J_j);
+
+        // Gradiente del vincolo: d(C)/dq = -d(dist)/dq
+        Eigen::RowVectorXd dConstraint_dq = -ddist_dq;
+
+        for (int j = 0; j < k; j++)
+        {
+            // Chain rule: dC/d(ddq_j) = dC/dq_k * dq_k/d(ddq_j)
+            // dq_k/d(ddq_j) = sum_{t=j}^{k-1} dt^2 * (1 + (t-j))
+
+            for (int i = 0; i < NJ; i++)
+            {
+                double dq_k_dddq = 0.0;
+
+                // Integra contributo da timestep j fino a k
+                for (int t = j; t < k; t++)
+                {
+                    dq_k_dddq += dt * dt * (0.5 + (t - j));
+                }
+
+                grad[j * NJ + i] = dConstraint_dq[i] * dq_k_dddq;
+            }
+        }
+    }
+
+    // 8. Visualizzazione (opzionale)
+    if (c_self->marker_pub && (c_self->k == 25 || constraint_value > -0.02))
+    {
+        publish_self_collision_markers(capsules_world[closest_cap_i],
+                                       capsules_world[closest_cap_j],
+                                       best_result, *c_self->marker_pub);
+    }
+
+    return constraint_value;
+}
+// ============================================================================
+// HELPER: CALCOLA JACOBIANO DI UN PUNTO SU UNA CAPSULA
+// ============================================================================
+
+Eigen::MatrixXd compute_capsule_jacobian(
+    const Eigen::Matrix4d &T_link,
+    const Capsule &cap_def,
+    const Eigen::MatrixXd &J_link,
+    double t_param,
+    int NJ)
+{
+    // Calcola posizioni A e B in world frame
+    Eigen::Matrix4d T = T_link * cap_def.T_offset;
+    Eigen::Vector3d A_world = T.block<3, 1>(0, 3);
+    Eigen::Vector3d B_world = A_world + T.block<3, 1>(0, 2) * cap_def.length;
+
+    // Origine del link
+    Eigen::Vector3d p_link = T_link.block<3, 1>(0, 3);
+
+    // Jacobiani traslativi e rotativi del link
+    Eigen::MatrixXd J_trans = J_link.block(0, 0, 3, NJ);
+    Eigen::MatrixXd J_rot = J_link.block(3, 0, 3, NJ);
+
+    // Bracci di leva
+    Eigen::Vector3d r_A = A_world - p_link;
+    Eigen::Vector3d r_B = B_world - p_link;
+
+    // Jacobiani geometrici per A e B
+    Eigen::MatrixXd J_A(3, NJ), J_B(3, NJ);
+    for (int col = 0; col < NJ; col++)
+    {
+        Eigen::Vector3d omega = J_rot.col(col);
+        J_A.col(col) = J_trans.col(col) + omega.cross(r_A);
+        J_B.col(col) = J_trans.col(col) + omega.cross(r_B);
+    }
+
+    // Interpolazione lineare basata su t_param
+    return (1.0 - t_param) * J_A + t_param * J_B;
+}
+
+// ============================================================================
+// HELPER: VISUALIZZAZIONE SELF-COLLISION IN RVIZ
+// ============================================================================
+
+void publish_self_collision_markers(
+    const CapsuleWorld &capA,
+    const CapsuleWorld &capB,
+    const CapsuleDistanceResult &result,
+    ros::Publisher pub)
+{
+    visualization_msgs::MarkerArray marker_array;
+
+    // Marker per capsula A (rossa)
+    visualization_msgs::Marker markerA;
+    markerA.header.frame_id = "panda_link0";
+    markerA.header.stamp = ros::Time::now();
+    markerA.ns = "self_collision_capsule_A";
+    markerA.id = 0;
+    markerA.type = visualization_msgs::Marker::CYLINDER;
+    markerA.action = visualization_msgs::Marker::ADD;
+
+    // Posizione: punto medio tra A e B della capsula
+    markerA.pose.position.x = (capA.A.x() + capA.B.x()) / 2.0;
+    markerA.pose.position.y = (capA.A.y() + capA.B.y()) / 2.0;
+    markerA.pose.position.z = (capA.A.z() + capA.B.z()) / 2.0;
+    markerA.pose.orientation.w = 1.0;
+
+    markerA.scale.x = capA.radius * 2.0;
+    markerA.scale.y = capA.radius * 2.0;
+    markerA.scale.z = (capA.B - capA.A).norm();
+
+    markerA.color.r = 1.0;
+    markerA.color.g = 0.0;
+    markerA.color.b = 0.0;
+    markerA.color.a = 0.5;
+
+    marker_array.markers.push_back(markerA);
+
+    // Marker per capsula B (blu)
+    visualization_msgs::Marker markerB = markerA;
+    markerB.ns = "self_collision_capsule_B";
+    markerB.id = 1;
+    markerB.pose.position.x = (capB.A.x() + capB.B.x()) / 2.0;
+    markerB.pose.position.y = (capB.A.y() + capB.B.y()) / 2.0;
+    markerB.pose.position.z = (capB.A.z() + capB.B.z()) / 2.0;
+    markerB.scale.x = capB.radius * 2.0;
+    markerB.scale.y = capB.radius * 2.0;
+    markerB.scale.z = (capB.B - capB.A).norm();
+    markerB.color.r = 0.0;
+    markerB.color.b = 1.0;
+
+    marker_array.markers.push_back(markerB);
+
+    // Linea tra punti più vicini
+    visualization_msgs::Marker line;
+    line.header = markerA.header;
+    line.ns = "self_collision_distance";
+    line.id = 2;
+    line.type = visualization_msgs::Marker::LINE_STRIP;
+    line.action = visualization_msgs::Marker::ADD;
+
+    geometry_msgs::Point p1, p2;
+    p1.x = result.p_capsule.x();
+    p1.y = result.p_capsule.y();
+    p1.z = result.p_capsule.z();
+
+    p2.x = result.p_obstacle.x();
+    p2.y = result.p_obstacle.y();
+    p2.z = result.p_obstacle.z();
+
+    line.points.push_back(p1);
+    line.points.push_back(p2);
+
+    line.scale.x = 0.005;
+    line.color.r = 1.0;
+    line.color.g = 1.0;
+    line.color.b = 0.0;
+    line.color.a = 1.0;
+
+    marker_array.markers.push_back(line);
+
+    pub.publish(marker_array);
 }

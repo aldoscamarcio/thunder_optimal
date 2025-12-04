@@ -184,6 +184,7 @@ int main(int argc, char **argv)
 	ros::Subscriber sub_joints = node_handle.subscribe<sensor_msgs::JointState>("/franka_state_controller/joint_states", 1, &jointsCallback);
 	ros::NodeHandle nh;
 	ros::Publisher capsule_viz_pub_ = nh.advertise<visualization_msgs::MarkerArray>("robot_capsules_viz", 10);
+	ros::Publisher marker_pub = node_handle.advertise<visualization_msgs::MarkerArray>("/optimization_markers", 10);
 	// ros::Publisher path_pub = node_handle.advertise<nav_msgs::Path>("/end_effector_path", 1);
 
 	// ros::Subscriber sub_pose =  node_handle.subscribe("/franka_state_controller/franka_ee_pose", 1, &poseCallback);
@@ -223,13 +224,10 @@ int main(int argc, char **argv)
 	// CAPSULE GENERATE DA fr3_franka_hand.urdf
 	// ===========================================
 	std::vector<Capsule> capsule_definitions;
-	capsule_definitions.clear();
-
-	// --- fr3_link0 (Index 0) ---
 	{
 		Capsule cap;
 		cap.link_index = 0;
-		cap.radius = 0.090000;
+		cap.radius = 0.055000;
 		cap.length = 0.030000;
 		cap.T_offset << 0.0000, 0.0000, 1.0000, -0.0750,
 			0.0000, 1.0000, 0.0000, 0.0000,
@@ -242,7 +240,7 @@ int main(int argc, char **argv)
 	{
 		Capsule cap;
 		cap.link_index = 1;
-		cap.radius = 0.090000;
+		cap.radius = 0.060000;
 		cap.length = 0.283000;
 		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
 			0.0000, 1.0000, 0.0000, 0.0000,
@@ -255,7 +253,7 @@ int main(int argc, char **argv)
 	{
 		Capsule cap;
 		cap.link_index = 2;
-		cap.radius = 0.090000;
+		cap.radius = 0.070000;
 		cap.length = 0.120000;
 		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
 			0.0000, 1.0000, 0.0000, 0.0000,
@@ -321,59 +319,39 @@ int main(int argc, char **argv)
 		cap.link_index = 6;
 		cap.radius = 0.080000;
 		cap.length = 0.080000;
-		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+		// Offset X corretto a -0.0100 per centrare sul giunto
+		cap.T_offset << 1.0000, 0.0000, 0.0000, -0.0100,
 			0.0000, 1.0000, 0.0000, 0.0000,
-			0.0000, 0.0000, 1.0000, -0.0300,
+			0.0000, 0.0000, 1.0000, -0.0100,
 			0.0000, 0.0000, 0.0000, 1.0000;
 		capsule_definitions.push_back(cap);
 	}
 
-	// --- fr3_link7 (Index 7) ---
+	// --- fr3_link7 (Index 7)
 	{
+		// Parte 1: Braccio Orizzontale
 		Capsule cap;
 		cap.link_index = 7;
-		cap.radius = 0.070000;
-		cap.length = 0.140000;
-		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-			0.0000, 1.0000, 0.0000, 0.0000,
-			0.0000, 0.0000, 1.0000, 0.0100,
-			0.0000, 0.0000, 0.0000, 1.0000;
-		capsule_definitions.push_back(cap);
-	}
+		cap.radius = 0.050000;
+		cap.length = 0.120000;
 
-	{
-		Capsule cap;
-		cap.link_index = 7;
-		cap.radius = 0.060000;
-		cap.length = 0.010000;
 		cap.T_offset << 0.0000, 0.0000, 1.0000, 0.0600,
 			0.0000, 1.0000, 0.0000, 0.0000,
-			-1.0000, 0.0000, 0.0000, 0.0820,
-			0.0000, 0.0000, 0.0000, 1.0000;
-		capsule_definitions.push_back(cap);
-	}
-
-	// --- fr3_hand (Index 8) ---
-	{
-		Capsule cap;
-		cap.link_index = 8;
-		cap.radius = 0.070000;
-		cap.length = 0.100000;
-		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-			0.0000, 0.0000, -1.0000, 0.0000,
-			0.0000, 1.0000, 0.0000, 0.0400,
+			-1.0000, 0.0000, 0.0000, 0.0100,
 			0.0000, 0.0000, 0.0000, 1.0000;
 		capsule_definitions.push_back(cap);
 	}
 
 	{
+		// Parte 2: Flangia Verticale/Obliqua
 		Capsule cap;
-		cap.link_index = 8;
+		cap.link_index = 7;
 		cap.radius = 0.050000;
-		cap.length = 0.100000;
-		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+		cap.length = 0.150000;
+
+		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.1050,
 			0.0000, 0.0000, -1.0000, 0.0000,
-			0.0000, 1.0000, 0.0000, 0.1000,
+			0.0000, 1.0000, 0.0000, 0.0300,
 			0.0000, 0.0000, 0.0000, 1.0000;
 		capsule_definitions.push_back(cap);
 	}
@@ -486,9 +464,9 @@ int main(int argc, char **argv)
 			// Per semplicità, chiediamo angoli RPY (in gradi) e li convertiamo
 			double roll_deg, pitch_deg, yaw_deg;
 
-			target_ee_pos_input.x() = 0.25; // Posizione EE desiderata in metri
-			target_ee_pos_input.y() = -0.33;
-			target_ee_pos_input.z() = -0.10;
+			target_ee_pos_input.x() = 0.00; // Posizione EE desiderata in metri
+			target_ee_pos_input.y() = -0.00;
+			target_ee_pos_input.z() = 0.150;
 
 			roll_deg = -169.0; // Angolo roll in gradi
 			pitch_deg = 0.3;   // Angolo pitch in gradi
@@ -779,7 +757,7 @@ int main(int argc, char **argv)
 			nlopt::opt opt(nlopt::LD_MMA, NJ * campioni);
 			// opt.set_maxtime(100.0); // Tempo in secondi
 			opt.set_min_objective(objective, &optData);
-			opt.set_xtol_rel(1e-2);		   // Tolleranza di convergenza
+			opt.set_xtol_rel(1e-3);		   // Tolleranza di convergenza
 			opt.set_param("verbosity", 1); // Verbose output
 
 			float tol = 1e-2; // Tolleranza per i vincoli
@@ -822,8 +800,9 @@ int main(int argc, char **argv)
 			std::vector<ConsistencyConstraintIneq> constraints, constraints_vel_f;
 			std::vector<std::shared_ptr<ObstacleConstraintIneq>> sphere_constraints, plane_constraints;
 			std::vector<std::shared_ptr<JointLimitConstraint>> constraints_pos, constraints_vel;
+			std::vector<std::shared_ptr<SelfCollisionConstraint>> self_coll_constraints;
 
-			const double eps = 1e-4;		// Tolleranza per i vincoli di consistenza
+			const double eps = 1e-3;		// Tolleranza per i vincoli di consistenza
 			const double eps_sphere = 1e-4; // Tolleranza per i vincoli di evitamento ostacolo
 
 			// Calcola il numero totale di vincoli correttamente
@@ -851,18 +830,34 @@ int main(int argc, char **argv)
 			obs_plane.plane.P0 = p_piano;				  // Punto sul piano
 			obs_plane.plane.n = Eigen::Vector3d(0, 0, 1); // Normale del piano
 
+			std::vector<std::pair<int, int>> collision_pairs = {
+			    {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 7}, {0, 8},
+			    {1, 3}, {1, 4}, {1, 5}, {1, 6}, {1, 7}, {1, 8},
+			    {2, 4}, {2, 5}, {2, 6}, {2, 7}, {2, 8},
+			    {3, 5}, {3, 6}, {3, 7}, {3, 8},
+			    {4, 6}, {4, 7}, {4, 8},
+			    {5, 7}, {5, 8},
+			};
+
+			ROS_INFO("Total collision pairs: %zu", collision_pairs.size());
+
 			if (numero_totale_vincoli > 0)
 			{
+				constraints.clear();
 				constraints.reserve(numero_totale_vincoli);
+				constraints_vel_f.clear();
 				constraints_vel_f.reserve(numero_totale_vincoli);
+				constraints_pos.clear();
 				constraints_pos.reserve(NJ * 4);
+				self_coll_constraints.clear();
+				self_coll_constraints.reserve((campioni - 1) * 28 * NJ);
 			}
 
 			//  Vincolo di evitamento ostacolo (sfera)
 			for (int k = 0; k < campioni - 1; k++)
 			{
 				auto c_sphere = std::make_shared<ObstacleConstraintIneq>(
-					k, NJ, d_safe, obs_sphere, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
+					k, NJ, d_safe, obs_sphere, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub_);
 				c_sphere->capsules_definitions = capsule_definitions;
 				sphere_constraints.push_back(c_sphere); // Magari rinomina il vettore in obstacle_constraints
 
@@ -870,12 +865,27 @@ int main(int argc, char **argv)
 				opt.add_inequality_constraint(avoid_obstacle_generic, c_sphere.get(), eps_sphere);
 
 				auto c_plane = std::make_shared<ObstacleConstraintIneq>(
-					k, NJ, d_safe, obs_plane, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
+					k, NJ, d_safe, obs_plane, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub_);
 				// Assegniamo le capsule del robot anche a questo vincolo
 				c_plane->capsules_definitions = capsule_definitions;
 				// Salva il puntatore per evitare che venga distrutto
 				plane_constraints.push_back(c_plane);
 				opt.add_inequality_constraint(avoid_obstacle_generic, c_plane.get(), eps_sphere);
+
+				auto c_self = std::make_shared<SelfCollisionConstraint>();
+				c_self->k = k;
+				c_self->NJ = NJ;
+				c_self->dt = optData.dt;
+				c_self->d_safe = 0.08;
+				c_self->q0 = optData.q0;
+				c_self->dq0 = optData.v0;
+				c_self->robot = &robot;
+				c_self->marker_pub = &marker_pub;
+				c_self->capsules_definitions = capsule_definitions;
+				c_self->collision_pairs = collision_pairs;
+
+				self_coll_constraints.push_back(c_self);
+				opt.add_inequality_constraint(avoid_self_collision, c_self.get(), 1e-6);
 
 				// auto c = std::make_shared<ObstacleConstraintIneq>(
 				// 	k, NJ, r_s, d_safe, p_ostacolo, robot, optData.q0, optData.v0, optData.dt,
@@ -952,6 +962,7 @@ int main(int argc, char **argv)
 				nlopt::result result = opt.optimize(vettore, minf);
 				std::cout << "Ottimizzazione eseguita" << std::endl;
 				std::cout << "Costo minimo: " << minf << std::endl;
+				vettore.clear();
 
 				if (result == nlopt::MAXTIME_REACHED)
 				{
@@ -960,6 +971,8 @@ int main(int argc, char **argv)
 				else
 				{
 					std::cout << "Convergenza raggiunta. Soluzione ottimale" << std::endl;
+					minf = 0.0;
+					vettore.clear();
 				}
 			}
 			catch (std::exception &e)
@@ -1093,6 +1106,5 @@ int main(int argc, char **argv)
 			// // }
 		}
 	}
-
 	return 0;
 }

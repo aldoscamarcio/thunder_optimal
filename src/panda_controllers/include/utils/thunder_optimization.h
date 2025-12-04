@@ -7,7 +7,8 @@
 #include <ros/ros.h>
 #include <visualization_msgs/MarkerArray.h>
 #include <visualization_msgs/Marker.h>
-#include "/home/frankino/Tesi/thunder_optimal/src/panda_controllers/src/collision/DistanceFunctions.hpp" // Il file creato nel passaggio precedente
+#include "DistanceFunctions.hpp"
+
 // Dichiarazione della funzione per calcolare i coefficienti del polinomio di quinto grado
 std::vector<double> calculateCoefficients(double q0, double qf, double v0, double vf, double a0, double af, double t0, double tf);
 
@@ -39,6 +40,22 @@ struct Capsule
         T_offset.setIdentity();
     }
 };
+
+struct SelfCollisionConstraint {
+    int k;
+    int NJ;
+    double dt;
+    double d_safe;
+    Eigen::VectorXd q0;
+    Eigen::VectorXd dq0;
+    thunder_franka* robot;
+    
+    std::vector<Capsule> capsules_definitions;
+    std::vector<std::pair<int, int>> collision_pairs;
+    ros::Publisher* marker_pub;
+};
+
+
 
 // struct ObstacleConstraintIneq
 // {
@@ -78,7 +95,7 @@ struct ObstacleConstraintIneq
     Obstacle obstacle; // <--- NUOVO: L'ostacolo generico (Box, Sfera/Capsula, Piano)
 
     // Dati robot e solver
-    thunder_franka robot;
+    thunder_franka* robot;
     Eigen::VectorXd q0;
     Eigen::VectorXd dq0;
     double dt;
@@ -86,10 +103,10 @@ struct ObstacleConstraintIneq
     std::vector<Capsule> capsules_definitions; // Definizioni delle capsule del robot
 
     // Visualizzazione(opzionale)
-        ros::Publisher marker_pub;
+        ros::Publisher* marker_pub;
 
-    ObstacleConstraintIneq(int k_, int NJ_, double d_safe_, Obstacle obs_,
-                           thunder_franka robot_, const Eigen::VectorXd &q0_, const Eigen::VectorXd &dq0_, double dt_,ros::Publisher pub_)
+ObstacleConstraintIneq(int k_, int NJ_, double d_safe_, Obstacle obs_,
+                           thunder_franka* robot_, const Eigen::VectorXd &q0_, const Eigen::VectorXd &dq0_, double dt_, ros::Publisher* pub_)
         : k(k_), NJ(NJ_), d_safe(d_safe_), obstacle(obs_),
           robot(robot_), q0(q0_), dq0(dq0_), dt(dt_), marker_pub(pub_) {}
 };
@@ -153,6 +170,27 @@ void publish_capsule_markers(
 // Funzione per evitare ostacoli generici con gradiente
 double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> &grad, void *data);
 
+// Funzione vincolo self-collision
+double avoid_self_collision(
+    const std::vector<double> &x, 
+    std::vector<double> &grad, 
+    void *data);
+
+// Helper Jacobiano capsula
+Eigen::MatrixXd compute_capsule_jacobian(
+    const Eigen::Matrix4d &T_link,
+    const Capsule &cap_def,
+    const Eigen::MatrixXd &J_link,
+    double t_param,
+    int NJ);
+
+// Visualizzazione (opzionale)
+void publish_self_collision_markers(
+    const CapsuleWorld &capA,
+    const CapsuleWorld &capB,
+    const CapsuleDistanceResult &result,
+    ros::Publisher pub);   // Per valore (i Publisher ROS si passano per valore)
+    
 // Funzione per calcolare le distanze dei link da un punto (ostacolo)
 LinkDistanceResult compute_link_distances_to_point(
     const Eigen::VectorXd &q,

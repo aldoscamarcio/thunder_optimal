@@ -25,6 +25,34 @@ int main()
     // Capsula con estremi A=(0,0,1), B=(0,0,2), radius=0.2
     // Distanza attesa: |1| - 0.2 = 0.8
     //--------------------------------------------------------------------------------------------------
+    
+    CapsuleWorld capA;
+    capA.A = Eigen::Vector3d(0, 0, 0);
+    capA.B = Eigen::Vector3d(0, 0, 1);
+    capA.radius = 0.05;
+    
+    CapsuleWorld capB;
+    capB.A = Eigen::Vector3d(0.2, 0, 0.5);
+    capB.B = Eigen::Vector3d(1.0, 0, 0.5);
+    capB.radius = 0.05;
+    
+    double s, t;
+    Eigen::Vector3d pA, pB;
+    
+    // Debug: chiama direttamente closestSegmentSegment
+    closestSegmentSegment(capA.A, capA.B, capB.A, capB.B, s, t, pA, pB);
+    
+    std::cout << "s = " << s << ", t = " << t << std::endl;
+    std::cout << "pA = " << pA.transpose() << std::endl;
+    std::cout << "pB = " << pB.transpose() << std::endl;
+    std::cout << "Distance between points: " << (pA - pB).norm() << std::endl;
+    
+    CapsuleDistanceResult result;
+    double dist = dist_capsule_capsule(capA, capB, &result);
+    
+    std::cout << "\nSigned distance: " << dist << " m" << std::endl;
+    std::cout << "Expected: 0.1 m" << std::endl;
+
     CapsuleWorld cap1;
     cap1.A = Eigen::Vector3d(0, 0, 1);
     cap1.B = Eigen::Vector3d(0, 0, 2);
