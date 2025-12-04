@@ -9,7 +9,7 @@
 #include <visualization_msgs/MarkerArray.h>
 #include <visualization_msgs/Marker.h>
 
-#include <sstream> // ✅ Per std::stringstream
+#include <sstream>
 #include <iomanip>
 
 // Poi le librerie di terze parti
@@ -746,20 +746,20 @@ double avoid_self_collision(const std::vector<double> &x, std::vector<double> &g
     // 6. Definizione vincolo: dist > d_safe => d_safe - dist < 0
     double constraint_value = c_self->d_safe - min_signed_dist;
 
-    static int debug_calls = 0;
-    debug_calls++;
-    if (debug_calls % 1 == 0)
-    {
-        std::cout << "[k=" << c_self->k << ", call #" << debug_calls << "]"
-                  << " dist=" << min_signed_dist
-                  << ", d_safe=" << c_self->d_safe
-                  << ", constraint=" << constraint_value
-                  << " | Caps " << closest_cap_i << " (Link "
-                  << c_self->capsules_definitions[closest_cap_i].link_index
-                  << ") <-> " << closest_cap_j << " (Link "
-                  << c_self->capsules_definitions[closest_cap_j].link_index << ")"
-                  << std::endl;
-    }
+    // static int debug_calls = 0;
+    // debug_calls++;
+    // if (debug_calls % 1 == 0)
+    // {
+    //     std::cout << "[k=" << c_self->k << ", call #" << debug_calls << "]"
+    //               << " dist=" << min_signed_dist
+    //               << ", d_safe=" << c_self->d_safe
+    //               << ", constraint=" << constraint_value
+    //               << " | Caps " << closest_cap_i << " (Link "
+    //               << c_self->capsules_definitions[closest_cap_i].link_index
+    //               << ") <-> " << closest_cap_j << " (Link "
+    //               << c_self->capsules_definitions[closest_cap_j].link_index << ")"
+    //               << std::endl;
+    // }
 
     // Debug output (throttled)
     if (k % 10 == 0 && constraint_value > -0.05)
@@ -874,10 +874,6 @@ Eigen::MatrixXd compute_capsule_jacobian(
     return (1.0 - t_param) * J_A + t_param * J_B;
 }
 
-// ============================================================================
-// HELPER: VISUALIZZAZIONE SELF-COLLISION IN RVIZ
-// ============================================================================
-
 void publish_self_collision_markers(
     const CapsuleWorld &capA,
     const CapsuleWorld &capB,
@@ -885,8 +881,8 @@ void publish_self_collision_markers(
     ros::Publisher pub)
 {
     visualization_msgs::MarkerArray marker_array;
-
-    // Marker per capsula A (rossa)
+    
+    // ========== CAPSULA A (ROSSA) ==========
     visualization_msgs::Marker markerA;
     markerA.header.frame_id = "panda_link0";
     markerA.header.stamp = ros::Time::now();
@@ -894,66 +890,134 @@ void publish_self_collision_markers(
     markerA.id = 0;
     markerA.type = visualization_msgs::Marker::CYLINDER;
     markerA.action = visualization_msgs::Marker::ADD;
-
-    // Posizione: punto medio tra A e B della capsula
-    markerA.pose.position.x = (capA.A.x() + capA.B.x()) / 2.0;
-    markerA.pose.position.y = (capA.A.y() + capA.B.y()) / 2.0;
-    markerA.pose.position.z = (capA.A.z() + capA.B.z()) / 2.0;
-    markerA.pose.orientation.w = 1.0;
-
+    markerA.lifetime = ros::Duration(0.5);
+    
+    // Posizione: centro della capsula
+    Eigen::Vector3d center_A = (capA.A + capA.B) / 2.0;
+    markerA.pose.position.x = center_A.x();
+    markerA.pose.position.y = center_A.y();
+    markerA.pose.position.z = center_A.z();
+    
+    // Orientamento corretto
+    Eigen::Vector3d axis_A = (capA.B - capA.A).normalized();
+    Eigen::Quaterniond quat_A = quaternion_from_z_axis(axis_A);
+    
+    markerA.pose.orientation.x = quat_A.x();
+    markerA.pose.orientation.y = quat_A.y();
+    markerA.pose.orientation.z = quat_A.z();
+    markerA.pose.orientation.w = quat_A.w();
+    
+    // Scala
     markerA.scale.x = capA.radius * 2.0;
     markerA.scale.y = capA.radius * 2.0;
     markerA.scale.z = (capA.B - capA.A).norm();
-
+    
+    // Colore rosso trasparente
     markerA.color.r = 1.0;
     markerA.color.g = 0.0;
     markerA.color.b = 0.0;
-    markerA.color.a = 0.5;
-
+    markerA.color.a = 0.6;
+    
     marker_array.markers.push_back(markerA);
-
-    // Marker per capsula B (blu)
-    visualization_msgs::Marker markerB = markerA;
+    
+    // ========== CAPSULA B (BLU) ==========
+    visualization_msgs::Marker markerB;
+    markerB.header = markerA.header;
     markerB.ns = "self_collision_capsule_B";
     markerB.id = 1;
-    markerB.pose.position.x = (capB.A.x() + capB.B.x()) / 2.0;
-    markerB.pose.position.y = (capB.A.y() + capB.B.y()) / 2.0;
-    markerB.pose.position.z = (capB.A.z() + capB.B.z()) / 2.0;
+    markerB.type = visualization_msgs::Marker::CYLINDER;
+    markerB.action = visualization_msgs::Marker::ADD;
+    markerB.lifetime = ros::Duration(0.5);
+    
+    // Posizione: centro della capsula
+    Eigen::Vector3d center_B = (capB.A + capB.B) / 2.0;
+    markerB.pose.position.x = center_B.x();
+    markerB.pose.position.y = center_B.y();
+    markerB.pose.position.z = center_B.z();
+    
+    // Orientamento corretto
+    Eigen::Vector3d axis_B = (capB.B - capB.A).normalized();
+    Eigen::Quaterniond quat_B = quaternion_from_z_axis(axis_B);
+    
+    markerB.pose.orientation.x = quat_B.x();
+    markerB.pose.orientation.y = quat_B.y();
+    markerB.pose.orientation.z = quat_B.z();
+    markerB.pose.orientation.w = quat_B.w();
+    
+    // Scala
     markerB.scale.x = capB.radius * 2.0;
     markerB.scale.y = capB.radius * 2.0;
     markerB.scale.z = (capB.B - capB.A).norm();
+    
+    // Colore blu trasparente
     markerB.color.r = 0.0;
+    markerB.color.g = 0.0;
     markerB.color.b = 1.0;
-
+    markerB.color.a = 0.6;
+    
     marker_array.markers.push_back(markerB);
-
-    // Linea tra punti più vicini
+    
+    // ========== LINEA TRA PUNTI PIÙ VICINI ==========
     visualization_msgs::Marker line;
     line.header = markerA.header;
     line.ns = "self_collision_distance";
     line.id = 2;
     line.type = visualization_msgs::Marker::LINE_STRIP;
     line.action = visualization_msgs::Marker::ADD;
-
+    line.lifetime = ros::Duration(2.0);  
+    
     geometry_msgs::Point p1, p2;
     p1.x = result.p_capsule.x();
     p1.y = result.p_capsule.y();
     p1.z = result.p_capsule.z();
-
+    
     p2.x = result.p_obstacle.x();
     p2.y = result.p_obstacle.y();
     p2.z = result.p_obstacle.z();
-
+    
     line.points.push_back(p1);
     line.points.push_back(p2);
-
-    line.scale.x = 0.005;
+    
+    line.scale.x = 0.01;  // Linea visibile
     line.color.r = 1.0;
     line.color.g = 1.0;
     line.color.b = 0.0;
     line.color.a = 1.0;
-
+    
     marker_array.markers.push_back(line);
-
+    
+    // Pubblica
     pub.publish(marker_array);
+}
+
+
+// ============================================================================
+// HELPER: CALCOLA QUATERNIONE DA VETTORE DIREZIONE
+// ============================================================================
+
+Eigen::Quaterniond quaternion_from_z_axis(const Eigen::Vector3d &target_axis)
+{
+    // Il cilindro RViz è orientato lungo Z per default
+    Eigen::Vector3d z_default(0, 0, 1);
+    
+    // Caso speciale: asse già allineato
+    if (target_axis.dot(z_default) > 0.9999) {
+        return Eigen::Quaterniond::Identity();
+    }
+    
+    // Caso speciale: asse opposto
+    if (target_axis.dot(z_default) < -0.9999) {
+        // Ruota 180° attorno a X
+        return Eigen::Quaterniond(0, 1, 0, 0);
+    }
+    
+    // Caso generale: usa formula quaternione per rotazione tra due vettori
+    Eigen::Vector3d v = z_default.cross(target_axis);
+    double c = z_default.dot(target_axis);
+    
+    Eigen::Quaterniond q;
+    q.w() = std::sqrt((1.0 + c) / 2.0);
+    q.vec() = v / (2.0 * q.w());
+    
+    return q.normalized();
 }

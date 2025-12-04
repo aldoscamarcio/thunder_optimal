@@ -7,7 +7,9 @@
 #include <ros/ros.h>
 #include <visualization_msgs/MarkerArray.h>
 #include <visualization_msgs/Marker.h>
+#include <Eigen/Geometry>
 #include "DistanceFunctions.hpp"
+
 
 // Dichiarazione della funzione per calcolare i coefficienti del polinomio di quinto grado
 std::vector<double> calculateCoefficients(double q0, double qf, double v0, double vf, double a0, double af, double t0, double tf);
@@ -163,6 +165,8 @@ void publish_capsule_markers(
     ros::Publisher &marker_pub,           // Publisher (passato per riferimento)
     const std::vector<Capsule> &capsules, // Definizioni delle capsule
     int closest_capsule_index = -1);      // Per colorare la più vicina
+
+Eigen::Quaterniond quaternion_from_z_axis(const Eigen::Vector3d &target_axis);
 
 // Funzione per evitare ostacoli sferici con gradiente
 // double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<double> &grad, void *data);

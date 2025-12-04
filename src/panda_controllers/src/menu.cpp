@@ -464,9 +464,9 @@ int main(int argc, char **argv)
 			// Per semplicità, chiediamo angoli RPY (in gradi) e li convertiamo
 			double roll_deg, pitch_deg, yaw_deg;
 
-			target_ee_pos_input.x() = 0.00; // Posizione EE desiderata in metri
-			target_ee_pos_input.y() = -0.00;
-			target_ee_pos_input.z() = 0.150;
+			target_ee_pos_input.x() = 0.0; // Posizione EE desiderata in metri
+			target_ee_pos_input.y() = 0.0;
+			target_ee_pos_input.z() = 0.15;
 
 			roll_deg = -169.0; // Angolo roll in gradi
 			pitch_deg = 0.3;   // Angolo pitch in gradi
