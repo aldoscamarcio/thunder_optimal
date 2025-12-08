@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<launch>
+
+    <arg name="csv_file_path" default="/home/frankino/Tesi/thunder_optimal/src/panda_controllers/data/simulation_data.csv" />
+    
+    <arg name="control_frequency" default="1000.0" />
+
+    <node pkg="panda_controllers" name="csv_player_node" type="csv_player" output="screen">
+        
+        <param name="csv_path" value="$(arg csv_file_path)" />
+        <param name="frequency" value="$(arg control_frequency)" />
+        
+    </node>
+
+</launch>

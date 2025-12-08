@@ -46,5 +46,41 @@
         </inertial>
       </link>
     </model>
+    <!-- Il tuo rettangolo  -->
+    <!-- <model name="wall">
+      <pose>0.11 -0.50 0.0 0 0 0</pose>
+      <link name="link">
+        <gravity></gravity>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.02 0.4 0.7</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0 0 1</ambient>
+            <diffuse>1 0 0 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.02 0.4 0.7</size>
+            </box>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass>10.0</mass>
+          <inertia>
+            <ixx>0.004</ixx>
+            <iyy>0.004</iyy>
+            <izz>0.004</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model> -->
   </world>
 </sdf>

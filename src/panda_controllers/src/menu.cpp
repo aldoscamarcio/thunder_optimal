@@ -431,9 +431,7 @@ int main(int argc, char **argv)
 
 		else if (choice == 6)
 		{
-			tf = 10;
-
-			// q_int << -1.25962, -0.663669, -0.692637, -2.17138, -0.264125, 1.50759, 0.0630972; // Posizioni iniziali
+			tf = 5.0;
 
 			for (int i = 0; i < 7; i++)
 			{
@@ -443,8 +441,6 @@ int main(int argc, char **argv)
 			}
 
 			std::cout << "Random final joint positions: " << qf.transpose() << std::endl;
-
-			// qf << -1.25962, -0.663669, -0.692637, -2.17138, -0.264125, 1.50759, 0.0630972; // Posizioni finali
 
 			v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
 
@@ -458,26 +454,7 @@ int main(int argc, char **argv)
 			// cin >> tf;
 			// cout << "final_joint_positions: " << endl;
 			// cin >> qf(0);
-			// cin >> qf(1);
-			// cin >> qf(2);
-			// cin >> qf(3);
-			// cin >> qf(4);
-			// cin >> qf(5);
-			// cin >> qf(6);
-			// cin >> vf(0);
-			// cin >> vf(1);
-			// cin >> vf(2);
-			// cin >> vf(3);
-			// cin >> vf(4);
-			// cin >> vf(5);
-			// cin >> vf(6);
-			// cin >> af(0);
-			// cin >> af(1);
-			// cin >> af(2);
-			// cin >> af(3);
-			// cin >> af(4);
-			// cin >> af(5);
-			// cin >> af(6);
+			// ecc...
 		}
 		else if (choice == 7) // OPZIONE PER POSA EE
 		{
@@ -695,9 +672,6 @@ int main(int argc, char **argv)
 
 			q_int = q0;
 
-			// cout << "q0 "<< q0 << endl;
-			// cout << "q_int " << q_int << endl;
-
 			// Calcolo dei coefficienti per ciascun giunto
 			std::vector<std::vector<double>> joint_coeffs(NJ);
 			for (int i = 0; i < NJ; ++i)
@@ -707,7 +681,6 @@ int main(int argc, char **argv)
 			}
 			while (t <= tf)
 			{
-				// std::cout << "Time_inizio: " << t << std::endl;
 				//  Generazione della traiettoria
 				for (int i = 0; i < NJ; i++)
 				{
@@ -730,24 +703,7 @@ int main(int argc, char **argv)
 					// VEL_INIT(i) = vel;
 					// ACC_INIT(i) = acc;
 				}
-
-				// std::vector<double> pos_des{POS_INIT[time_step * NJ + 0], POS_INIT[time_step * NJ +1], POS_INIT[time_step * NJ +2], POS_INIT[time_step * NJ +3], POS_INIT[time_step * NJ +4], POS_INIT[time_step * NJ +5], POS_INIT[time_step * NJ +6]};
-				// traj_msg.position = pos_des;
-				// std::vector<double> vel_des{VEL_INIT[time_step * NJ +0], VEL_INIT[time_step * NJ +1], VEL_INIT[time_step * NJ +2], VEL_INIT[time_step * NJ +3], VEL_INIT[time_step * NJ +4], VEL_INIT[time_step * NJ +5], VEL_INIT[time_step * NJ +6]};
-				// traj_msg.velocity = vel_des;
-				// std::vector<double> acc_des{ACC_INIT[time_step * NJ +0], ACC_INIT[time_step * NJ +1], ACC_INIT[time_step * NJ +2], ACC_INIT[time_step * NJ +3], ACC_INIT[time_step * NJ +4], ACC_INIT[time_step * NJ +5], ACC_INIT[time_step * NJ +6]};
-				// traj_msg.effort = acc_des;
-				// pub_cmd.publish(traj_msg);
-
 				time_step++;
-
-				// std::vector<double> pos_des{POS_INIT[0], POS_INIT[1], POS_INIT[2], POS_INIT[3], POS_INIT[4], POS_INIT[5], POS_INIT[6]};
-				// traj_msg.position = pos_des;
-				// std::vector<double> vel_des{VEL_INIT[0], VEL_INIT[1], VEL_INIT[2], VEL_INIT[3], VEL_INIT[4], VEL_INIT[5], VEL_INIT[6]};
-				// traj_msg.velocity = vel_des;
-				// std::vector<double> acc_des{ACC_INIT[0], ACC_INIT[1], ACC_INIT[2], ACC_INIT[3], ACC_INIT[4], ACC_INIT[5], ACC_INIT[6]};
-				// traj_msg.effort = acc_des;
-				// pub_cmd.publish(traj_msg);
 
 				loop_rate.sleep();
 
@@ -849,13 +805,30 @@ int main(int argc, char **argv)
 
 			// Posizione dell'ostacolo (sfera) in coordinate del robot
 			Eigen::Vector3d p_ostacolo(0.11, -0.35, 0.53);
+			Eigen::Vector3d p_sfera2(0.11, -0.35, 0.80);
 			Eigen::Vector3d p_piano(0.0, 0.0, 0.0); // Punto sul piano
+			Eigen::Vector3d p_rettangolo(0.0, 0.0, 0.0);
+
+			// // Test obstacle definitions for autocollision of robot
+			// Obstacle cap_7;
+			// cap_7.type = ObstacleType::CAPSULE;
+			// cap_7.capsule.A = (robot.get_T_0_7()*capsule_definitions.get(7)).T_offset.block<3, 1>(0, 3); // Punto A della capsula
+			// cap_7.capsule.B = 0; //punto lungo l'asse della capsula
+			// cap_7.capsule.radius = 0.0;		   // Raggio della capsula
+
+			// //Domanda: devo eliminare ogni volta la definizione della capsula 7 e ricrearla con la nuova posizione ad ogni step?
 
 			Obstacle obs_sphere;
 			obs_sphere.type = ObstacleType::CAPSULE;
 			obs_sphere.capsule.A = p_ostacolo; // Centro sfera
 			obs_sphere.capsule.B = p_ostacolo; // Stesso punto
 			obs_sphere.capsule.radius = r_s;   // Raggio sfera
+
+			// Obstacle obs_sphere2;
+			// obs_sphere2.type = ObstacleType::CAPSULE;
+			// obs_sphere2.capsule.A = p_sfera2; // Centro sfera
+			// obs_sphere2.capsule.B = p_sfera2; // Stwesso punto
+			// obs_sphere2.capsule.radius = r_s; // Raggio sfera
 
 			Obstacle obs_plane;
 			obs_plane.type = ObstacleType::PLANE;
@@ -864,25 +837,34 @@ int main(int argc, char **argv)
 
 			Obstacle obs_rectangle;
 			obs_rectangle.type = ObstacleType::RECTANGLE;
-			obs_rectangle.rect.P0 = p_ostacolo; // Centro del rettangolo
-			obs_rectangle.rect.Ux = Eigen::Vector3d(0, 1, 0);	 // Vettore direzione u
-			obs_rectangle.rect.Uy = Eigen::Vector3d(0, 0, 1);	 // Vettore direzione v
-			obs_rectangle.rect.width = 0.2;			 // Lunghezza lungo u
-			obs_rectangle.rect.height = 0.9;			 // Lunghezza lungo v
+			obs_rectangle.rect.P0 = p_rettangolo;												// Centro del rettangolo
+			obs_rectangle.rect.Ux = Eigen::Vector3d(1, 0, 0);								// Vettore direzione u
+			obs_rectangle.rect.Uy = Eigen::Vector3d(0, -1, 0);								// Vettore direzione v
+			obs_rectangle.rect.width = 2;													// ux												// Lunghezza lungo u
+			obs_rectangle.rect.height = 2;													// Lunghezza lungo v
 			obs_rectangle.rect.normal = obs_rectangle.rect.Ux.cross(obs_rectangle.rect.Uy); // Normale del rettangolo
 
 			if (numero_totale_vincoli > 0)
 			{
 				// RISERVE CORRETTE:
+				sphere_constraints.clear();
+				//sphere2_constraints.clear();
+				plane_constraints.clear();
+				rectangle_constraints.clear();
 				sphere_constraints.reserve(num_steps);
+				// sphere2_constraints.reserve(num_steps);
 				plane_constraints.reserve(num_steps);
 				rectangle_constraints.reserve(num_steps);
 
 				// Per constraints_pos e constraints_vel: ogni step × ogni giunto × 2 (upper+lower)
+				constraints_pos.clear();
+				constraints_vel.clear();
 				constraints_pos.reserve(num_steps * NJ * 2);
 				constraints_vel.reserve(num_steps * NJ * 2);
 
 				// constraints e constraints_vel_f hanno solo vincoli finali (NJ ciascuno)
+				constraints.clear();
+				constraints_vel_f.clear();
 				constraints.reserve(NJ);	   // Solo posizione finale
 				constraints_vel_f.reserve(NJ); // Solo velocità finale
 			}
@@ -897,21 +879,35 @@ int main(int argc, char **argv)
 				// NOTA: eps_sphere è la tolleranza
 				opt.add_inequality_constraint(avoid_obstacle_generic, c_sphere.get(), eps_sphere);
 
-				auto c_plane = std::make_shared<ObstacleConstraintIneq>(
-					k, NJ, d_safe, obs_plane, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
-				// Assegniamo le capsule del robot anche a questo vincolo
-				c_plane->capsules_definitions = capsule_definitions;
-				// Salva il puntatore per evitare che venga distrutto
-				plane_constraints.push_back(c_plane);
-				opt.add_inequality_constraint(avoid_obstacle_generic, c_plane.get(), eps_sphere);
+				// auto c_sphere2 = std::make_shared<ObstacleConstraintIneq>(
+				// 	k, NJ, d_safe, obs_sphere2, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
+				// c_sphere2->capsules_definitions = capsule_definitions;
+				// sphere2_constraints.push_back(c_sphere2);
+				// opt.add_inequality_constraint(avoid_obstacle_generic, c_sphere2.get(), eps_sphere);
 
-				// auto c_rectangle = std::make_shared<ObstacleConstraintIneq>(
-				// 	k, NJ, d_safe, obs_rectangle, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
+				// auto c_plane = std::make_shared<ObstacleConstraintIneq>(
+				// 	k, NJ, d_safe, obs_plane, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
 				// // Assegniamo le capsule del robot anche a questo vincolo
-				// c_rectangle->capsules_definitions = capsule_definitions;
+				// c_plane->capsules_definitions = capsule_definitions;
 				// // Salva il puntatore per evitare che venga distrutto
-				// rectangle_constraints.push_back(c_rectangle);
-				// opt.add_inequality_constraint(avoid_obstacle_generic, c_rectangle.get(), eps_sphere);
+				// plane_constraints.push_back(c_plane);
+				// opt.add_inequality_constraint(avoid_obstacle_generic, c_plane.get(), eps_sphere);
+
+				// auto cap_7 = std::make_shared<ObstacleConstraintIneq>(
+				// 	k, NJ, d_safe, capsule_definitions.get(7), robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
+				// // Assegniamo le capsule del robot anche a questo vincolo
+				// cap_7->capsules_definitions = capsule_definitions;
+				// // Salva il puntatore per evitare che venga distrutto
+				// cap_7_constraints.push_back(cap_7);
+				// opt.add_inequality_constraint(avoid_obstacle_generic, cap_7.get(), eps_sphere);
+
+				auto c_rectangle = std::make_shared<ObstacleConstraintIneq>(
+					k, NJ, d_safe, obs_rectangle, robot, optData.q0, optData.v0, optData.dt, capsule_viz_pub_);
+				// Assegniamo le capsule del robot anche a questo vincolo
+				c_rectangle->capsules_definitions = capsule_definitions;
+				// Salva il puntatore per evitare che venga distrutto
+				rectangle_constraints.push_back(c_rectangle);
+				opt.add_inequality_constraint(avoid_obstacle_generic, c_rectangle.get(), eps_sphere);
 
 				// auto c = std::make_shared<ObstacleConstraintIneq>(
 				// 	k, NJ, r_s, d_safe, p_ostacolo, robot, optData.q0, optData.v0, optData.dt,
@@ -992,10 +988,14 @@ int main(int argc, char **argv)
 				if (result == nlopt::MAXTIME_REACHED)
 				{
 					std::cout << "Timeout raggiunto! Soluzione subottima" << std::endl;
+					minf = 0.0;
+					vettore.clear();
 				}
 				else
 				{
 					std::cout << "Convergenza raggiunta. Soluzione ottimale" << std::endl;
+					minf = 0.0;
+					vettore.clear();
 				}
 			}
 			catch (std::exception &e)

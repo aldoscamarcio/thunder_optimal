@@ -512,12 +512,12 @@ double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> 
     std::vector<Eigen::Matrix4d> link_poses = {
         c->robot.get_T_0_0(), c->robot.get_T_0_1(), c->robot.get_T_0_2(), c->robot.get_T_0_3(),
         c->robot.get_T_0_4(), c->robot.get_T_0_5(), c->robot.get_T_0_5(), /*link flange?*/
-        c->robot.get_T_0_6(), c->robot.get_T_0_7()};
+        c->robot.get_T_0_6(), c->robot.get_T_0_7(),c->robot.get_T_0_7()};
 
     std::vector<Eigen::MatrixXd> J_links = {
         Eigen::MatrixXd::Zero(6, 7), c->robot.get_J_1(), c->robot.get_J_2(), c->robot.get_J_3(),
         c->robot.get_J_4(), c->robot.get_J_5(), c->robot.get_J_5(),
-        c->robot.get_J_6(), c->robot.get_J_7()};
+        c->robot.get_J_6(), c->robot.get_J_7(),c->robot.get_J_7()};
 
     // 3. Trova la distanza minima tra TUTTE le capsule del robot e l'OSTACOLO
     double min_signed_dist = 1e6;

@@ -143,6 +143,13 @@ target_link_libraries(test_collision
     yaml-cpp
 )
 
+add_executable(csv_player src/csv_player.cpp)
+target_link_libraries(csv_player 
+	${PROJECT_NAME} 
+	${catkin_LIBRARIES}
+	yaml-cpp
+)
+
 # add_dependencies(menu
 # 	${${PROJECT_NAME}_EXPORTED_TARGETS} 
 # 	${catkin_EXPORTED_TARGETS}
@@ -177,5 +184,6 @@ target_link_libraries(test_collision
 catkin_install_python(PROGRAMS
   scripts/ee_trajectory_visualizer.py
   scripts/ball_marker_publisher.py
+  scripts/wall_marker_publisher.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
