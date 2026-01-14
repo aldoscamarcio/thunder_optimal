@@ -103,6 +103,7 @@ void ComputedTorque::starting(const ros::Time& time)
 
 	std::array<double, 49> mass_array = model_handle_->getMass();
 	std::array<double, 7> coriolis_array = model_handle_->getCoriolis();
+	std::array<double, 7> gravity_array = model_handle_->getGravity();
 
 	/* Mapping actual joints position, actual joints velocity, Mass matrix and Coriolis vector onto Eigen form  */
 	q_curr = Eigen::Map<Eigen::Matrix<double, 7, 1>>(robot_state.q.data());
@@ -110,6 +111,7 @@ void ComputedTorque::starting(const ros::Time& time)
 
 	M = Eigen::Map<Eigen::Matrix<double, 7, 7>>(mass_array.data());
 	C = Eigen::Map<Eigen::Matrix<double, 7, 1>>(coriolis_array.data());
+	G = Eigen::Map<Eigen::Matrix<double, 7, 1>>(gravity_array.data());
 
 	/* Secure Initialization */
 	command_q_d = q_curr;
@@ -124,6 +126,10 @@ void ComputedTorque::starting(const ros::Time& time)
 	Kp_apix = Kp;
 	Kv_apix = Kv;
 
+	total_energy_cost = 0.0;
+    tau_eft.setZero();
+	is_trajectory_active = false;
+
 }
 
 void ComputedTorque::update(const ros::Time&, const ros::Duration& period)
@@ -132,9 +138,11 @@ void ComputedTorque::update(const ros::Time&, const ros::Duration& period)
 
 	std::array<double, 49> mass_array = model_handle_->getMass();
 	std::array<double, 7> coriolis_array = model_handle_->getCoriolis();
+	std::array<double, 7> gravity_array = model_handle_->getGravity();
 
 	M = Eigen::Map<Eigen::Matrix<double, 7, 7>>(mass_array.data());
 	C = Eigen::Map<Eigen::Matrix<double, 7, 1>>(coriolis_array.data());
+	G = Eigen::Map<Eigen::Matrix<double, 7, 1>>(gravity_array.data());
 	
 	/* Actual position and velocity of the joints */
 
@@ -175,6 +183,34 @@ void ComputedTorque::update(const ros::Time&, const ros::Duration& period)
 	
 	/* Verify the tau_cmd not exceed the desired joint torque value tau_J_d */
 	tau_cmd = saturateTorqueRate(tau_cmd, tau_J_d);
+	tau_eft = M * command_dot_dot_q_d + C + G;
+
+	double vel_norm = command_dot_q_d.norm();
+    double motion_threshold = 0.001; // Soglia di sensibilità (rad/s)
+
+    // RISING EDGE: Se eravamo fermi e ora ci muoviamo -> START
+    if (!is_trajectory_active && vel_norm > motion_threshold) {
+        is_trajectory_active = true;
+        total_energy_cost = 0.0; // Reset del costo
+        ROS_INFO("ComputedTorque: Traiettoria iniziata (vel > 0). Calcolo costo avviato.");
+    }
+    
+    // FALLING EDGE: Se ci muovevamo e ora siamo fermi -> STOP
+    else if (is_trajectory_active && vel_norm < motion_threshold) {
+        is_trajectory_active = false;
+        
+        // Stampa il risultato finale
+        ROS_INFO("ComputedTorque: Traiettoria terminata. COSTO TOTALE: %f", total_energy_cost);
+        
+        // Opzionale: Se vuoi pubblicarlo su un topic, fallo qui.
+    }
+
+    // ACCUMULO: Se la traiettoria è attiva, somma i quadrati
+    if (is_trajectory_active) {
+        double instant_cost = tau_eft.squaredNorm();
+        total_energy_cost += instant_cost * period.toSec();
+    }
+    // ------------------------------------
 	
 	/* Set the command for each joint */
 	for (size_t i = 0; i < 7; i++) {
@@ -206,18 +242,18 @@ void ComputedTorque::setCommandCB(const sensor_msgs::JointStateConstPtr& msg)
 {
 	if ((msg->position).size() != 7 || (msg->position).empty()) {
 
-		ROS_FATAL("Desired position has not dimension 7 or is empty!", (msg->position).size());
+		ROS_FATAL("Desired position has not dimension 7 or is empty! Size: %lu", (msg->position).size());
 	}
 
 	if ((msg->velocity).size() != 7 || (msg->velocity).empty()) {
 
-		ROS_FATAL("Desired velocity has not dimension 7 or is empty!", (msg->velocity).size());
+		ROS_FATAL("Desired velocity has not dimension 7 or is empty! Size: %lu", (msg->velocity).size());
 	}
 
 	// TODO: Here we assign acceleration to effort (use trajectory_msgs::JointTrajectoryMessage)
 	if ((msg->effort).size() != 7 || (msg->effort).empty()) {
 
-		ROS_FATAL("Desired effort (acceleration) has not dimension 7 or is empty!", (msg->effort).size());
+		ROS_FATAL("Desired effort (acceleration) has not dimension 7 or is empty! Size: %lu", (msg->effort).size());
 	}
 
 	command_q_d = Eigen::Map<const Eigen::Matrix<double, 7, 1>>((msg->position).data());

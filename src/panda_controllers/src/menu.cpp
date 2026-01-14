@@ -1,6 +1,5 @@
 #include <iostream>
 #include <eigen3/Eigen/Dense>
-
 #include <unistd.h>
 #include <cstdlib>
 #include <signal.h>
@@ -8,6 +7,7 @@
 #include <vector>
 #include <geometry_msgs/PoseStamped.h>
 #include "ros/ros.h"
+#include <random>
 #include "utils/thunder_franka.h"
 #include "utils/thunder_optimization.h"
 #include <visualization_msgs/MarkerArray.h>
@@ -122,6 +122,18 @@ bool solveIK_DLS(
 	return false;
 }
 
+Eigen::Vector3d generaOstacoloRandom() {
+	// Inizializza generatore casuale con seed fisso per riproducibilità
+	std::mt19937 gen(1);
+	
+	// Definisci range per le coordinate (modifica secondo necessità)
+	std::uniform_real_distribution<double> dist_x(-0.7, 0.7);   // x tra 0.0 e 0.2
+	std::uniform_real_distribution<double> dist_y(-0.7, 0.7); // y tra -0.5 e -0.2
+	std::uniform_real_distribution<double> dist_z(0.06, 1.2);   // z tra 0.4 e 0.6
+	
+	return Eigen::Vector3d(dist_x(gen), dist_y(gen), dist_z(gen));
+}
+
 const std::string conf_file = "../config/franka_conf.yaml";
 
 using namespace std;
@@ -182,11 +194,9 @@ int main(int argc, char **argv)
 
 	ros::Publisher pub_cmd = node_handle.advertise<sensor_msgs::JointState>("/computed_torque_controller/command", 1000);
 	ros::Subscriber sub_joints = node_handle.subscribe<sensor_msgs::JointState>("/franka_state_controller/joint_states", 1, &jointsCallback);
-	ros::NodeHandle nh;
-	ros::Publisher capsule_viz_pub_ = nh.advertise<visualization_msgs::MarkerArray>("robot_capsules_viz", 10);
+	ros::Publisher capsule_viz_pub_ = node_handle.advertise<visualization_msgs::MarkerArray>("robot_capsules_viz", 10);
 	ros::Publisher marker_pub = node_handle.advertise<visualization_msgs::MarkerArray>("/optimization_markers", 10);
 	// ros::Publisher path_pub = node_handle.advertise<nav_msgs::Path>("/end_effector_path", 1);
-
 	// ros::Subscriber sub_pose =  node_handle.subscribe("/franka_state_controller/franka_ee_pose", 1, &poseCallback);
 
 	// creating trajectory message
@@ -224,37 +234,37 @@ int main(int argc, char **argv)
 	// CAPSULE GENERATE DA fr3_franka_hand.urdf
 	// ===========================================
 	std::vector<Capsule> capsule_definitions;
-	{
-		Capsule cap;
-		cap.link_index = 0;
-		cap.radius = 0.055000;
-		cap.length = 0.030000;
-		cap.T_offset << 0.0000, 0.0000, 1.0000, -0.0750,
-			0.0000, 1.0000, 0.0000, 0.0000,
-			-1.0000, 0.0000, 0.0000, 0.0600,
-			0.0000, 0.0000, 0.0000, 1.0000;
-		capsule_definitions.push_back(cap);
-	}
+	// {
+	// 	Capsule cap;
+	// 	cap.link_index = 0;
+	// 	cap.radius = 0.055000;
+	// 	cap.length = 0.030000;
+	// 	cap.T_offset << 0.0000, 0.0000, 1.0000, -0.0750,
+	// 		0.0000, 1.0000, 0.0000, 0.0000,
+	// 		-1.0000, 0.0000, 0.0000, 0.0600,
+	// 		0.0000, 0.0000, 0.0000, 1.0000;
+	// 	capsule_definitions.push_back(cap);
+	// }
 
 	// --- fr3_link1 (Index 1) ---
-	{
-		Capsule cap;
-		cap.link_index = 1;
-		cap.radius = 0.060000;
-		cap.length = 0.283000;
-		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-			0.0000, 1.0000, 0.0000, 0.0000,
-			0.0000, 0.0000, 1.0000, -0.1915,
-			0.0000, 0.0000, 0.0000, 1.0000;
-		capsule_definitions.push_back(cap);
-	}
+	// {
+	// 	Capsule cap;
+	// 	cap.link_index = 1;
+	// 	cap.radius = 0.060000;
+	// 	cap.length = 0.183000;
+	// 	cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+	// 		0.0000, 1.0000, 0.0000, 0.0000,
+	// 		0.0000, 0.0000, 1.0000, -0.1915,
+	// 		0.0000, 0.0000, 0.0000, 1.0000;
+	// 	capsule_definitions.push_back(cap);
+	// }
 
 	// --- fr3_link2 (Index 2) ---
 	{
 		Capsule cap;
 		cap.link_index = 2;
 		cap.radius = 0.070000;
-		cap.length = 0.120000;
+		cap.length = 0.240000;
 		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
 			0.0000, 1.0000, 0.0000, 0.0000,
 			0.0000, 0.0000, 1.0000, 0.0000,
@@ -279,8 +289,8 @@ int main(int argc, char **argv)
 	{
 		Capsule cap;
 		cap.link_index = 4;
-		cap.radius = 0.090000;
-		cap.length = 0.120000;
+		cap.radius = 0.080000;
+		cap.length = 0.200000;
 		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
 			0.0000, 1.0000, 0.0000, 0.0000,
 			0.0000, 0.0000, 1.0000, 0.0000,
@@ -293,7 +303,7 @@ int main(int argc, char **argv)
 		Capsule cap;
 		cap.link_index = 5;
 		cap.radius = 0.090000;
-		cap.length = 0.100000;
+		cap.length = 0.140000;
 		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
 			0.0000, 1.0000, 0.0000, 0.0000,
 			0.0000, 0.0000, 1.0000, -0.2600,
@@ -305,7 +315,7 @@ int main(int argc, char **argv)
 		Capsule cap;
 		cap.link_index = 5;
 		cap.radius = 0.055000;
-		cap.length = 0.140000;
+		cap.length = 0.150000;
 		cap.T_offset << 0.9968, -0.0799, 0.0000, 0.0000,
 			0.0799, 0.9968, 0.0000, 0.0800,
 			0.0000, 0.0000, 1.0000, -0.1300,
@@ -317,13 +327,13 @@ int main(int argc, char **argv)
 	{
 		Capsule cap;
 		cap.link_index = 6;
-		cap.radius = 0.080000;
-		cap.length = 0.080000;
+		cap.radius = 0.070000;
+		cap.length = 0.150000;
 		// Offset X corretto a -0.0100 per centrare sul giunto
-		cap.T_offset << 1.0000, 0.0000, 0.0000, -0.0100,
-			0.0000, 1.0000, 0.0000, 0.0000,
-			0.0000, 0.0000, 1.0000, -0.0100,
-			0.0000, 0.0000, 0.0000, 1.0000;
+cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
+                0.0000,  0.0000, -1.0000,  0.0300,  // Y → -Z
+                0.0000,  1.0000,  0.0000, -0.0100,  // Z → Y
+                0.0000,  0.0000,  0.0000,  1.0000;
 		capsule_definitions.push_back(cap);
 	}
 
@@ -346,12 +356,12 @@ int main(int argc, char **argv)
 		// Parte 2: Flangia Verticale/Obliqua
 		Capsule cap;
 		cap.link_index = 7;
-		cap.radius = 0.050000;
-		cap.length = 0.150000;
+		cap.radius = 0.060000;
+		cap.length = 0.190000;
 
 		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.1050,
-			0.0000, 0.0000, -1.0000, 0.0000,
-			0.0000, 1.0000, 0.0000, 0.0300,
+			0.0000, 0.0000, -1.0000, -0.0100,
+			0.0000, 1.0000, 0.0000, 0.0000,
 			0.0000, 0.0000, 0.0000, 1.0000;
 		capsule_definitions.push_back(cap);
 	}
@@ -409,7 +419,7 @@ int main(int argc, char **argv)
 
 		else if (choice == 6)
 		{
-			tf = 10;
+			tf = 5.0;
 
 			// q_int << -1.25962, -0.663669, -0.692637, -2.17138, -0.264125, 1.50759, 0.0630972; // Posizioni iniziali
 
@@ -431,31 +441,6 @@ int main(int argc, char **argv)
 			a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
 
 			af << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni finali
-
-			// cout << "duration: " << endl;
-			// cin >> tf;
-			// cout << "final_joint_positions: " << endl;
-			// cin >> qf(0);
-			// cin >> qf(1);
-			// cin >> qf(2);
-			// cin >> qf(3);
-			// cin >> qf(4);
-			// cin >> qf(5);
-			// cin >> qf(6);
-			// cin >> vf(0);
-			// cin >> vf(1);
-			// cin >> vf(2);
-			// cin >> vf(3);
-			// cin >> vf(4);
-			// cin >> vf(5);
-			// cin >> vf(6);
-			// cin >> af(0);
-			// cin >> af(1);
-			// cin >> af(2);
-			// cin >> af(3);
-			// cin >> af(4);
-			// cin >> af(5);
-			// cin >> af(6);
 		}
 		else if (choice == 7) // OPZIONE PER POSA EE
 		{
@@ -463,17 +448,21 @@ int main(int argc, char **argv)
 			Eigen::Quaterniond target_ee_orient_input;
 			// Per semplicità, chiediamo angoli RPY (in gradi) e li convertiamo
 			double roll_deg, pitch_deg, yaw_deg;
+			
 
-			target_ee_pos_input.x() = 0.0; // Posizione EE desiderata in metri
-			target_ee_pos_input.y() = 0.0;
-			target_ee_pos_input.z() = 0.15;
+			// target_ee_pos_input.x() = 0.30; // Posizione EE desiderata in metri
+			// target_ee_pos_input.y() = 0.40;
+			// target_ee_pos_input.z() = 0.68; // Posizione EE desiderata in metri
+
+			//RANDOM Z
+			// target_ee_pos_input.z() = -0.3 + (float(rand()) / RAND_MAX) * (0.8 - (-0.3)); // Tra -0.3 e 0.8 m
 
 			roll_deg = -169.0; // Angolo roll in gradi
-			pitch_deg = 0.3;   // Angolo pitch in gradi
+			pitch_deg = 0.4;   // Angolo pitch in gradi
 			yaw_deg = 62.6;	   // Angolo yaw in gradi
 
-			// cout << "Enter desired EE position (x y z) in meters: ";
-			// cin >> target_ee_pos_input.x() >> target_ee_pos_input.y() >> target_ee_pos_input.z();
+			cout << "Enter desired EE position (x y z) in meters: ";
+			cin >> target_ee_pos_input.x() >> target_ee_pos_input.y() >> target_ee_pos_input.z();
 
 			// cout << "Enter desired EE orientation RPY (roll pitch yaw) in degrees: ";
 			// cin >> roll_deg >> pitch_deg >> yaw_deg;
@@ -530,7 +519,6 @@ int main(int argc, char **argv)
 			if (ik_solved)
 			{
 				qf = q_target_ik; // Imposta la configurazione finale dei giunti
-
 				// qf << 0.0, 0.0, 0.0, -0.1, 0.0, 3.14, 3.14/4;  //posizione estesa
 
 				ROS_INFO_STREAM("IK successful. Target joint configuration: " << qf.transpose());
@@ -547,26 +535,10 @@ int main(int argc, char **argv)
 					a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
 
 					af << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni finali
-
-					// choice = 6; // Imposta choice a 6 comunque per usare l'interpolazione min-jerk
-
-					// v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
-
-					// vf << 0.0, 0.0, 0.0, 0.0, 0.0, -2.0, 0.0; // Velocità finali
-
-					// a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
-
-					// af << 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0; // Accelerazioni finali
 				}
 				else if (optimize_movement == 0)
 				{
-					qf << -0.14724,
-						-0.526,
-						-0.565,
-						-2.1099,
-						-0.312,
-						1.557,
-						-1.733;
+					qf << q_target_ik;
 					choice = 1; // Torna al menu principale
 				}
 				else
@@ -590,24 +562,13 @@ int main(int argc, char **argv)
 				if (optimize_movement == 1)
 				{
 					choice = 6; // Imposta choice a 6 comunque per usare l'interpolazione min-jerk
-
 					v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
-
 					vf << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità finali
-
 					a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
-
 					af << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni finali
 				}
 				else if (optimize_movement == 0)
 				{
-					qf << -0.14724,
-						-0.526,
-						-0.565,
-						-2.1099,
-						-0.312,
-						1.557,
-						-1.733;
 					choice = 1; // movimento senza ottimizzazione (semplice interpolazione)
 				}
 				else
@@ -639,7 +600,6 @@ int main(int argc, char **argv)
 		{
 			if (choice == 1)
 			{
-
 				interpolator_pos(q0, qf, tf, t);
 			}
 			else if (choice == 4)
@@ -755,9 +715,8 @@ int main(int argc, char **argv)
 
 			// define the optimization problem
 			nlopt::opt opt(nlopt::LD_MMA, NJ * campioni);
-			// opt.set_maxtime(100.0); // Tempo in secondi
 			opt.set_min_objective(objective, &optData);
-			opt.set_xtol_rel(1e-3);		   // Tolleranza di convergenza
+			opt.set_xtol_rel(1e-4);		   // Tolleranza di convergenza
 			opt.set_param("verbosity", 1); // Verbose output
 
 			float tol = 1e-2; // Tolleranza per i vincoli
@@ -798,7 +757,7 @@ int main(int argc, char **argv)
 
 			// Vincoli di consistenza + evitamento ostacolo
 			std::vector<ConsistencyConstraintIneq> constraints, constraints_vel_f;
-			std::vector<std::shared_ptr<ObstacleConstraintIneq>> sphere_constraints, plane_constraints;
+			std::vector<std::shared_ptr<ObstacleConstraintIneq>> sphere_constraints, plane_constraints, rectangle_constraints;
 			std::vector<std::shared_ptr<JointLimitConstraint>> constraints_pos, constraints_vel;
 			std::vector<std::shared_ptr<SelfCollisionConstraint>> self_coll_constraints;
 
@@ -806,43 +765,86 @@ int main(int argc, char **argv)
 			const double eps_sphere = 1e-4; // Tolleranza per i vincoli di evitamento ostacolo
 
 			// Calcola il numero totale di vincoli correttamente
-			int vincoli_ostacolo_per_step = 2; // Sfera + piano
+			int vincoli_ostacolo_per_step = 3; // Sfera + piano + self-collision
 			int vincoli_pos_per_step = 2 * NJ; // Upper + lower per ogni giunto
 			int vincoli_vel_per_step = 2 * NJ; // Upper + lower per ogni giunto
 			int vincoli_per_step = vincoli_ostacolo_per_step + vincoli_pos_per_step + vincoli_vel_per_step;
 
 			int numero_totale_vincoli = (campioni - 1) * vincoli_per_step + 2 * NJ;
-			const double r_s = 0.05;   // raggio ostacolo
-			const double d_safe = 0.1; // margine sicurezza
+			const double r_s = 0.07;   // raggio ostacolo
+			const double d_safe = 0.05; // margine sicurezza
+
+			Eigen::Vector3d p_sfera(0.40, 0, 0.65); // Posizione fissa ostacolo
 
 			// Posizione dell'ostacolo (sfera) in coordinate del robot
-			Eigen::Vector3d p_ostacolo(0.11, -0.35, 0.53);
+			// Eigen::Vector3d p_ostacolo = Eigen::Vector3d::Zero();  // Dichiarazione e inizializzazione a zero
+			// p_ostacolo = generaOstacoloRandom();                   // Assegnazione successiva
+
+			// std::mt19937 gen(std::random_device{}());
+			// std::uniform_real_distribution<double> dist_x(-0.35, 0.35);
+			// std::uniform_real_distribution<double> dist_y(-0.35, 0.35);
+			// std::uniform_real_distribution<double> dist_z(-0.2, 0.75);
+			// Eigen::Vector3d p_ostacolo(dist_x(gen), dist_y(gen), dist_z(gen));
+			// std::cout << "Posizione ostacolo: " << p_ostacolo.transpose() << std::endl;
 			Eigen::Vector3d p_piano(0.0, 0.0, 0.0); // Punto sul piano
+			Eigen::Vector3d p_rettangolo(0.25, -0.01, 0.50);
 
 			Obstacle obs_sphere;
 			obs_sphere.type = ObstacleType::CAPSULE;
-			obs_sphere.capsule.A = p_ostacolo; // Centro sfera
-			obs_sphere.capsule.B = p_ostacolo; // Stesso punto
+			obs_sphere.capsule.A = p_sfera; // Centro sfera
+			obs_sphere.capsule.B = p_sfera; // Stesso punto
 			obs_sphere.capsule.radius = r_s;   // Raggio sfera
+				
+			// Cilindro Verticale
+			// Obstacle obs_cylinder;
+			// obs_cylinder.type = ObstacleType::CAPSULE;
+			// double altezza_cilindrica = 0.18;  // 10 cm tra i centri delle semisfere
+			// Eigen::Vector3d p_cilindro_A(0.38, 0, 0.60 - altezza_cilindrica/2);  // (0.38, 0, 0.55)
+			// Eigen::Vector3d p_cilindro_B(0.38, 0, 0.60 + altezza_cilindrica/2);  // (0.38, 0, 0.65)
+
+			// obs_cylinder.capsule.A = p_cilindro_A;
+			// obs_cylinder.capsule.B = p_cilindro_B;
+			// obs_cylinder.capsule.radius = 0.05;
+
+			// Cilindro Orizzontale
+			// Per il cilindro orizzontale lungo X (capsula con estremi separati)
+			double r_c = 0.02;
+			double lunghezza_cilindro = 0.10;  // Lunghezza del cilindro (senza le semisfere)
+			double distanza_AB = lunghezza_cilindro - 2*r_c;  // Parte cilindrica pura
+
+			Eigen::Vector3d p_cilindro_A(0.38 - distanza_AB/2, 0, 0.60);  // Estremo sinistro
+			Eigen::Vector3d p_cilindro_B(0.38 + distanza_AB/2, 0, 0.60);  // Estremo destro
+
+			Obstacle obs_cilindro;
+			obs_cilindro.type = ObstacleType::CAPSULE;
+			obs_cilindro.capsule.A = p_cilindro_A;
+			obs_cilindro.capsule.B = p_cilindro_B;
+			obs_cilindro.capsule.radius = r_c;
+
 
 			Obstacle obs_plane;
 			obs_plane.type = ObstacleType::PLANE;
 			obs_plane.plane.P0 = p_piano;				  // Punto sul piano
 			obs_plane.plane.n = Eigen::Vector3d(0, 0, 1); // Normale del piano
 
+			Obstacle obs_rectangle;
+			obs_rectangle.type = ObstacleType::RECTANGLE;
+			obs_rectangle.rect.P0 = p_rettangolo;												// Vertice in basso a sinistra
+			obs_rectangle.rect.Ux = Eigen::Vector3d(1, 0, 0);								// Vettore direzione u (larghezza)
+			obs_rectangle.rect.Uy = Eigen::Vector3d(0, 0, 1);								// Vettore direzione v (altezza)
+			obs_rectangle.rect.width = 0.2;													// Lunghezza lungo u
+			obs_rectangle.rect.height = 0.2;												// Lunghezza lungo v
+			obs_rectangle.rect.normal = obs_rectangle.rect.Ux.cross(obs_rectangle.rect.Uy); // Normale del rettangolo
+
 			std::vector<std::pair<int, int>> collision_pairs = {
 			    {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 7}, {0, 8},
-			    {1, 3}, {1, 4}, {1, 5}, {1, 6}, {1, 7}, {1, 8},
-			    {2, 4}, {2, 5}, {2, 6}, {2, 7}, {2, 8},
-			    {3, 5}, {3, 6}, {3, 7}, {3, 8},
-			    {4, 6}, {4, 7}, {4, 8},
-			    {5, 7}, {5, 8},
+			    {1, 4}, {1, 5}, {1, 6}, {1, 7}, {1, 8}, {1, 9}, {0, 9},
+			    {2, 5}, {2, 6}, {2, 7}, {2, 8}, {2, 9},
+			    {3, 6}, {3, 7}, {3, 8},
+			    {4, 7}, {4, 8},
+				// {5, 8}, {4, 6}, {2, 4}, {3, 5}
 			};
 
-			ROS_INFO("Total collision pairs: %zu", collision_pairs.size());
-
-			if (numero_totale_vincoli > 0)
-			{
 				constraints.clear();
 				constraints.reserve(numero_totale_vincoli);
 				constraints_vel_f.clear();
@@ -850,42 +852,46 @@ int main(int argc, char **argv)
 				constraints_pos.clear();
 				constraints_pos.reserve(NJ * 4);
 				self_coll_constraints.clear();
-				self_coll_constraints.reserve((campioni - 1) * 28 * NJ);
-			}
+				self_coll_constraints.reserve(collision_pairs.size() * (campioni - 1));
+				rectangle_constraints.clear();
+				rectangle_constraints.reserve(numero_totale_vincoli);
 
-			//  Vincolo di evitamento ostacolo (sfera)
+			//  Vincoli aggiuntivi per collisione con ostacoli e self-collision
 			for (int k = 0; k < campioni - 1; k++)
 			{
 				auto c_sphere = std::make_shared<ObstacleConstraintIneq>(
 					k, NJ, d_safe, obs_sphere, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub_);
 				c_sphere->capsules_definitions = capsule_definitions;
-				sphere_constraints.push_back(c_sphere); // Magari rinomina il vettore in obstacle_constraints
-
-				// NOTA: eps_sphere è la tolleranza
-				opt.add_inequality_constraint(avoid_obstacle_generic, c_sphere.get(), eps_sphere);
+				sphere_constraints.push_back(c_sphere);				
 
 				auto c_plane = std::make_shared<ObstacleConstraintIneq>(
 					k, NJ, d_safe, obs_plane, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub_);
-				// Assegniamo le capsule del robot anche a questo vincolo
 				c_plane->capsules_definitions = capsule_definitions;
-				// Salva il puntatore per evitare che venga distrutto
 				plane_constraints.push_back(c_plane);
-				opt.add_inequality_constraint(avoid_obstacle_generic, c_plane.get(), eps_sphere);
 
-				auto c_self = std::make_shared<SelfCollisionConstraint>();
-				c_self->k = k;
-				c_self->NJ = NJ;
-				c_self->dt = optData.dt;
-				c_self->d_safe = 0.08;
-				c_self->q0 = optData.q0;
-				c_self->dq0 = optData.v0;
-				c_self->robot = &robot;
-				c_self->marker_pub = &marker_pub;
-				c_self->capsules_definitions = capsule_definitions;
-				c_self->collision_pairs = collision_pairs;
+				auto c_self = std::make_shared<SelfCollisionConstraint>(SelfCollisionConstraint{
+					.k = k,
+					.NJ = NJ,
+					.dt = optData.dt,
+					.d_safe = 0.15,
+					.q0 = optData.q0,
+					.dq0 = optData.v0,
+					.robot = &robot,
+					.capsules_definitions = capsule_definitions,
+					.collision_pairs = collision_pairs,
+					.marker_pub = &marker_pub
+				});
+
+				auto c_rectangle = std::make_shared<ObstacleConstraintIneq>(
+					k, NJ, d_safe, obs_rectangle, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub_);
+				c_rectangle->capsules_definitions = capsule_definitions;
+				rectangle_constraints.push_back(c_rectangle);
+				opt.add_inequality_constraint(avoid_obstacle_generic, c_rectangle.get(), eps_sphere);
 
 				self_coll_constraints.push_back(c_self);
-				opt.add_inequality_constraint(avoid_self_collision, c_self.get(), 1e-6);
+				// opt.add_inequality_constraint(avoid_obstacle_generic, c_sphere.get(), eps_sphere);
+				opt.add_inequality_constraint(avoid_obstacle_generic, c_plane.get(), 1e-4);
+				// opt.add_inequality_constraint(avoid_self_collision, c_self.get(), 1e-4);
 
 				// auto c = std::make_shared<ObstacleConstraintIneq>(
 				// 	k, NJ, r_s, d_safe, p_ostacolo, robot, optData.q0, optData.v0, optData.dt,
@@ -954,115 +960,135 @@ int main(int argc, char **argv)
 			{
 				vettore[i] = ACC_INIT[i];
 			}
-
 			double minf;
 
 			try
-			{
-				nlopt::result result = opt.optimize(vettore, minf);
-				std::cout << "Ottimizzazione eseguita" << std::endl;
-				std::cout << "Costo minimo: " << minf << std::endl;
-				vettore.clear();
+            {
+                nlopt::result result = opt.optimize(vettore, minf);
+                std::cout << "Ottimizzazione Completata." << std::endl;
+                std::cout << "Costo minimo: " << minf << std::endl;
+                
+                // NOTA: Ho rimosso vettore.clear() da qui perché serve nel ciclo sotto!
 
-				if (result == nlopt::MAXTIME_REACHED)
-				{
-					std::cout << "Timeout raggiunto! Soluzione subottima" << std::endl;
-				}
-				else
-				{
-					std::cout << "Convergenza raggiunta. Soluzione ottimale" << std::endl;
-					minf = 0.0;
-					vettore.clear();
-				}
-			}
-			catch (std::exception &e)
-			{
-				std::cerr << "Errore: " << e.what() << std::endl;
-			}
+                if (result == nlopt::MAXTIME_REACHED)
+                {
+                    std::cout << "Timeout raggiunto! Soluzione subottima" << std::endl;
+                }
+                else
+                {
+                    std::cout << "Convergenza raggiunta. Soluzione ottimale" << std::endl;
+                }
+            }
+            catch (std::exception &e)
+            {
+                std::cerr << "Errore NLOpt: " << e.what() << std::endl;
+				continue; // Torna al menu principale in caso di errore
+            }
 
-			// Inizializzo le posizioni, velocità e accelerazioni
-			for (int j = 0; j < NJ; ++j)
-			{
-				POS[j] = q0[j]; // posizione iniziale
-				VEL[j] = v0[j]; // velocità iniziale
-								// ACC[j] = vettore[j]; // accelerazione iniziale
-			}
+            // 1. RICOSTRUZIONE DELLA TRAIETTORIA (SENZA ESEGUIRE)
+            // Inizializzione posizioni, velocità e accelerazioni
+            for (int j = 0; j < NJ; ++j)
+            {
+                POS[j] = q0[j]; // posizione iniziale
+                VEL[j] = v0[j]; // velocità iniziale
+            }
 
-			for (int k = 0; k < campioni - 1; k++)
-			{
+            for (int k = 0; k < campioni - 1; k++)
+            {
+                for (int j = 0; j < NJ; ++j)
+                {
+                    // Qui usiamo 'vettore', quindi non doveva essere cancellato prima!
+                    ACC[k * NJ + j] = vettore[k * NJ + j]; 
+                    VEL[(k + 1) * NJ + j] = VEL[k * NJ + j] + ACC[k * NJ + j] * optData.dt;
+                    POS[(k + 1) * NJ + j] = POS[k * NJ + j] + VEL[k * NJ + j] * optData.dt + 0.5 * ACC[k * NJ + j] * std::pow(optData.dt, 2);
+                }
+            }
+            
+            // Ora che abbiamo estratto i dati, puliamo il vettore dell'ottimizzatore
+            vettore.clear();
+            std::cout << "Eseguire il movimento sul robot? (y/n): ";
+            
+            char user_input;
+            std::cin >> user_input;
+            
+            // Pulisce il buffer nel caso l'utente abbia premuto invio o digitato caratteri extra
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-				for (int j = 0; j < NJ; ++j)
-				{
-					ACC[k * NJ + j] = vettore[k * NJ + j]; // prendi la ddq del giunto j al tempo k
-					VEL[(k + 1) * NJ + j] = VEL[k * NJ + j] + ACC[k * NJ + j] * optData.dt;
-					POS[(k + 1) * NJ + j] = POS[k * NJ + j] + VEL[k * NJ + j] * optData.dt + 0.5 * ACC[k * NJ + j] * std::pow(optData.dt, 2);
-				}
-			}
+            if (user_input != 'y' && user_input != 'Y') 
+            {
+                std::cout << ">>>Esecuzione ANNULLATA dall'utente. Robot fermo." << std::endl;
+				continue;
+            }
+            else 
+            {
+                std::cout << "Esecuzione Traiettoria..." << std::endl;
+                
+                for (int j = 0; j < campioni - 1; j++)
+                {
+                    double t_start = ros::Time::now().toSec();
+                    // Calcolo dei coefficienti per ciascun giunto
+                    std::vector<std::vector<double>> joint_coeffs(NJ);
+                    for (int i = 0; i < NJ; ++i)
+                    {
+                    q_int(i) = POS[j * NJ + i];
+                    qf(i) = POS[(j + 1) * NJ + i];
+                    v0(i) = VEL[j * NJ + i];
+                    vf(i) = VEL[(j + 1) * NJ + i];
+                    a0(i) = ACC[j * NJ + i];
+                    af(i) = ACC[(j + 1) * NJ + i];
+                    tf = t_start + 1.0 / frequenza;
 
-			// Traiettoria finale smussata
+                    joint_coeffs[i] = calculateCoefficients(q_int[i], qf[i], v0[i], vf[i], a0[i], af[i], t_start, tf);
+                    }
 
-			for (int j = 0; j < campioni - 1; j++)
-			{
-				double t_start = ros::Time::now().toSec();
-				// Calcolo dei coefficienti per ciascun giunto
-				std::vector<std::vector<double>> joint_coeffs(NJ);
-				for (int i = 0; i < NJ; ++i)
-				{
-					q_int(i) = POS[j * NJ + i];
-					qf(i) = POS[(j + 1) * NJ + i];
-					v0(i) = VEL[j * NJ + i];
-					vf(i) = VEL[(j + 1) * NJ + i];
-					// std::cout << "vf(" << i << ") = " << vf(i) << std::endl;
-					a0(i) = ACC[j * NJ + i];
-					af(i) = ACC[(j + 1) * NJ + i];
-					tf = t_start + 1.0 / frequenza;
-					joint_coeffs[i] = calculateCoefficients(q_int[i], qf[i], v0[i], vf(i), a0(i), af(i), t_start, tf);
-				}
+                    t = t_start;
+                    while (t <= tf)
+                    {
+                        for (int i = 0; i < NJ; i++)
+                        {
+                            double pos, vel, acc;
+                            calculateTrajectory(t, t_start, joint_coeffs[i], pos, vel, acc);
+                            
+                            POS_INIT(j * NJ + i) = pos;
+                            VEL_INIT(j * NJ + i) = vel;
+                            ACC_INIT(j * NJ + i) = acc;
+                        }
 
-				t = t_start;
+                        std::vector<double> pos_des(NJ), vel_des(NJ), acc_des(NJ);
+                        for(int k=0; k<NJ; k++) {
+                             pos_des[k] = POS_INIT(j * NJ + k);
+                             vel_des[k] = VEL_INIT(j * NJ + k);
+                             acc_des[k] = ACC_INIT(j * NJ + k);
+                        }
 
-				while (t <= tf)
-				{
+                        traj_msg.position = pos_des;
+                        traj_msg.velocity = vel_des;
+                        traj_msg.effort = acc_des;
+                        
+                        robot.set_q(Eigen::Map<Eigen::VectorXd>(pos_des.data(), NJ));
+                        robot.set_dq(Eigen::Map<Eigen::VectorXd>(vel_des.data(), NJ));
+                        robot.set_ddq(Eigen::Map<Eigen::VectorXd>(acc_des.data(), NJ));
+                        
+                        pub_cmd.publish(traj_msg);
+                        publish_capsule_markers(robot, capsule_viz_pub_, capsule_definitions, -1);
 
-					for (int i = 0; i < NJ; i++)
-					{
+                        loop_rate_controller.sleep();
+                        t = ros::Time::now().toSec();
+                    }
+                }
 
-						double pos, vel, acc;
-						calculateTrajectory(t, t_init.toSec(), joint_coeffs[i], pos, vel, acc);
-						// std::cout << "  Joint " << i << ": Pos = " << pos << ", Vel = " << vel << ", Acc = " << acc << std::endl;
-						//  // In riga tutti i giunti e colonn i vari step
-						//  POS(i, time_step) = pos;
-						//  VEL(i, time_step) = vel;
-						//  ACC(i, time_step) = acc;
+                // Invio pacchetto finale di stop (sicurezza)
+                std::vector<double> final_pos(NJ), final_vel(NJ, 0.0), final_acc(NJ, 0.0);
+                for(int i=0; i<NJ; i++) {
+                    final_pos[i] = POS[(campioni - 1) * NJ + i];
+                }
+                traj_msg.position = final_pos;
+                traj_msg.velocity = final_vel;
+                traj_msg.effort = final_acc;
+                pub_cmd.publish(traj_msg);
 
-						// Incolonna e colleziona tutte le varibili di giunto per ogni step
-						POS_INIT(j * NJ + i) = pos;
-						VEL_INIT(j * NJ + i) = vel;
-						ACC_INIT(j * NJ + i) = acc;
-
-						// // Incolonna tutte le varibili di giunto ad ogni step
-						// POS_INIT(i) = pos;
-						// VEL_INIT(i) = vel;
-						// ACC_INIT(i) = acc;
-					}
-					std::vector<double> pos_des{POS_INIT[j * NJ + 0], POS_INIT[j * NJ + 1], POS_INIT[j * NJ + 2], POS_INIT[j * NJ + 3], POS_INIT[j * NJ + 4], POS_INIT[j * NJ + 5], POS_INIT[j * NJ + 6]};
-					traj_msg.position = pos_des;
-					robot.set_q(Eigen::Map<Eigen::VectorXd>(pos_des.data(), pos_des.size()));
-					std::vector<double> vel_des{VEL_INIT[j * NJ + 0], VEL_INIT[j * NJ + 1], VEL_INIT[j * NJ + 2], VEL_INIT[j * NJ + 3], VEL_INIT[j * NJ + 4], VEL_INIT[j * NJ + 5], VEL_INIT[j * NJ + 6]};
-					traj_msg.velocity = vel_des;
-					robot.set_dq(Eigen::Map<Eigen::VectorXd>(vel_des.data(), vel_des.size()));
-					std::vector<double> acc_des{ACC_INIT[j * NJ + 0], ACC_INIT[j * NJ + 1], ACC_INIT[j * NJ + 2], ACC_INIT[j * NJ + 3], ACC_INIT[j * NJ + 4], ACC_INIT[j * NJ + 5], ACC_INIT[j * NJ + 6]};
-					traj_msg.effort = acc_des;
-					robot.set_ddq(Eigen::Map<Eigen::VectorXd>(acc_des.data(), acc_des.size()));
-					pub_cmd.publish(traj_msg);
-					publish_capsule_markers(robot, capsule_viz_pub_, capsule_definitions, -1);
-
-					loop_rate_controller.sleep();
-
-					t = ros::Time::now().toSec();
-					// std::cout << "Time: " << t << std::endl;
-				}
-			}
+                std::cout << "Esecuzione completata." << std::endl;
+            }
 
 			// // Print the optimized values
 			// printf("Optimized values:\n");

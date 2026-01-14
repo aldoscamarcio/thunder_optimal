@@ -40,6 +40,7 @@ struct Rectangle {
     Eigen::Vector3d Uy;
     double width;
     double height;
+    Eigen::Vector3d normal;
 };
 
 struct BoxOBB {

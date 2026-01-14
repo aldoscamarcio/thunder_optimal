@@ -1,0 +1,177 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="default">
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    
+    <!-- <model name="SphereObstacle">
+      <pose>0.40 0 0.65 0 0 0</pose>
+      <link name="sphere_link">
+        <gravity>false</gravity>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>0.07</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0 0 1 1</ambient>
+            <diffuse>0 0 1 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.07</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass>10.0</mass>
+          <inertia>
+            <ixx>0.004</ixx>
+            <iyy>0.004</iyy>
+            <izz>0.004</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model> -->
+   
+    <model name="WallObstacle">
+      <pose>0.35 0 0.60 0 0 0</pose>
+      <link name="wall_link">
+        <gravity>false</gravity>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.2 0.02 0.2</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0 0 1</ambient>
+            <diffuse>1 0 0 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.2 0.02 0.2</size>
+            </box>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass>5.71</mass>
+          <inertia>
+            <ixx>0.07638</ixx>
+            <iyy>0.09523</iyy>
+            <izz>0.01923</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+
+  </world>
+</sdf>
+    
+
+    <!-- Cilindro orizzontale giallo come ostacolo nella scena -->
+    <!-- <model name="CylinderObstacle">
+      <pose>0.38 0 0.60 0 0 0</pose>
+      <link name="cylinder_link">
+        <gravity>false</gravity>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.05</radius>
+              <length>0.18</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>1 1 0 1</ambient>
+            <diffuse>1 1 0 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.05</radius>
+              <length>0.18</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass>3.0</mass> 
+          <inertia>
+            <ixx>0.001</ixx>
+            <iyy>0.001</iyy>
+            <izz>0.0002</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model> -->
+
+
+     <!-- <model name="CylinderHorizontal">
+     <pose>0.38 0 0.60 0 1.5708 0</pose>
+     <link name="cylinder_link">
+       <gravity>false</gravity>
+       <visual name="visual">
+         <geometry>
+           <cylinder>
+             <radius>0.02</radius>
+             <length>0.10</length><model name="CylinderHorizontal">
+     <pose>0.38 0 0.60 0 1.5708 0</pose>
+     <link name="cylinder_link">
+       <gravity>false</gravity>
+       <visual name="visual">
+         <geometry>
+           <cylinder>
+             <radius>0.02</radius>
+             <length>0.10</length>
+           </cylinder>
+         </geometry>
+         <material>
+           <ambient>1 1 0 1</ambient>  <!-- Giallo -->
+           <diffuse>1 1 0 1</diffuse>
+         </material>
+       </visual>
+       <collision name="collision">
+         <geometry>
+           <cylinder>
+             <radius>0.02</radius>
+             <length>0.10</length>
+           </cylinder>
+         </geometry>
+       </collision>
+       <inertial>
+         <mass>3.0</mass>
+         <inertia>
+           <ixx>0.001</ixx>
+           <iyy>0.001</iyy>
+           <izz>0.0002</izz>
+           <ixy>0</ixy>
+           <ixz>0</ixz>
+           <iyz>0</iyz>
+         </inertia>
+       </inertial>
+      </link>
+    </model>/ -->
+
+    </world>
+</sdf>
+  

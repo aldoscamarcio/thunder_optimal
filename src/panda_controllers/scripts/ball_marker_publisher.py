@@ -2,7 +2,7 @@
 import rospy
 from visualization_msgs.msg import Marker
 
-def ball_publisher():
+def ball_publisher():   
     rospy.init_node('ball_marker_publisher')
     pub = rospy.Publisher('/ball_marker', Marker, queue_size=10)
 
@@ -13,9 +13,9 @@ def ball_publisher():
     marker.id = 1
     marker.type = Marker.SPHERE
     marker.action = Marker.ADD
-    marker.pose.position.x = 0.11  # Cambia con le tue coordinate
-    marker.pose.position.y = -0.35
-    marker.pose.position.z = 0.53
+    marker.pose.position.x = -0.15126  
+    marker.pose.position.y = 0.336159
+    marker.pose.position.z = 0.545768
     marker.pose.orientation.w = 1.0
     marker.scale.x = 0.1  # diametro della sfera
     marker.scale.y = 0.1

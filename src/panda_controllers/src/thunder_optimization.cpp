@@ -57,8 +57,7 @@ double objective(const std::vector<double> &x, std::vector<double> &grad, void *
     Eigen::VectorXd q = optData->q0;  // Inizializza q con q0
     Eigen::VectorXd dq = optData->v0; // Inizializza dq con v0
     Eigen::VectorXd ddq(NJ), tau_dyn(NJ);
-    Eigen::VectorXd tau_tot(NJ * campioni); // salva tutte le tau
-
+    Eigen::VectorXd tau_tot(NJ * campioni); // Salva tutte le TAU
     double cost = 0.0;
 
     // Se gradiente richiesto, inizializza
@@ -78,8 +77,7 @@ double objective(const std::vector<double> &x, std::vector<double> &grad, void *
         }
 
         // std::cout << "Campione: " << k << " q: " << q.transpose() << " dq: " << dq.transpose() << " ddq: " << ddq.transpose() << std::endl;
-
-        // aggiorna stato robot
+        // Aggiorna Stato Robot
         optData->robot.set_q(q);
         optData->robot.set_dq(dq);
         optData->robot.set_ddq(ddq);
@@ -89,15 +87,19 @@ double objective(const std::vector<double> &x, std::vector<double> &grad, void *
         Eigen::Matrix<double, 7, 1> G = optData->robot.get_G();
 
         tau_dyn = M * ddq + C * dq + G;
+        double tau_norm_sq = 0.0;
 
-        // salva tau per cost finale
+        // Salva TAU per Costo Finale
         for (int i = 0; i < NJ; i++)
         {
-            tau_tot[k * NJ + i] = tau_dyn[i];
-            cost += tau_dyn[i] * tau_dyn[i]; // somma al costo
+            // tau_tot[k * NJ + i] = tau_dyn[i];
+            // cost += tau_dyn[i] * tau_dyn[i]; // Somma al Costo
+            tau_norm_sq += tau_dyn[i] * tau_dyn[i];
+            
         }
+        cost += tau_norm_sq;
 
-        // calcola gradiente rispetto a ddq_k
+        // Calcola Gradiente Rispetto a ddq_k
         if (!grad.empty())
         {
             Eigen::VectorXd grad_ddq = 2.0 * M.transpose() * tau_dyn;
@@ -107,12 +109,12 @@ double objective(const std::vector<double> &x, std::vector<double> &grad, void *
             }
         }
     }
-
+    
+    cost *= dt; // Moltiplica per il Costo
     return cost;
 }
 
 // Vincolo per i limiti di posizione dei giunti
-
 double joint_position_limit(unsigned n, const double *x, double *grad, void *data)
 {
     JointLimitConstraint *c = reinterpret_cast<JointLimitConstraint *>(data);
@@ -514,14 +516,14 @@ double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> 
     // Recupera pose e Jacobiani (come nel tuo script originale)
     // Nota: Assumo che get_T... e get_J... siano metodi della tua classe Robot
     std::vector<Eigen::Matrix4d> link_poses = {
-        c->robot->get_T_0_0(), c->robot->get_T_0_1(), c->robot->get_T_0_2(), c->robot->get_T_0_3(),
-        c->robot->get_T_0_4(), c->robot->get_T_0_5(), c->robot->get_T_0_5(), /*link flange?*/
-        c->robot->get_T_0_6(), c->robot->get_T_0_7()};
+        c->robot->get_T_0_0(), c->robot->get_T_0_1(), c->robot->get_T_0_2(),
+        c->robot->get_T_0_3(), c->robot->get_T_0_4(), c->robot->get_T_0_5(), c->robot->get_T_0_5(),
+        c->robot->get_T_0_6(), c->robot->get_T_0_7(), c->robot->get_T_0_7()};
 
     std::vector<Eigen::MatrixXd> J_links = {
-        Eigen::MatrixXd::Zero(6, 7), c->robot->get_J_1(), c->robot->get_J_2(), c->robot->get_J_3(),
+        Eigen::MatrixXd::Zero(6, NJ), c->robot->get_J_1(), c->robot->get_J_2(), c->robot->get_J_3(),
         c->robot->get_J_4(), c->robot->get_J_5(), c->robot->get_J_5(),
-        c->robot->get_J_6(), c->robot->get_J_7()};
+        c->robot->get_J_6(), c->robot->get_J_7(), c->robot->get_J_7()};
 
     // 3. Trova la distanza minima tra TUTTE le capsule del robot e l'OSTACOLO
     double min_signed_dist = 1e6;
@@ -537,9 +539,10 @@ double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> 
 
         // Calcola A e B in World Frame
         Eigen::Matrix4d T = link_poses[cap_def.link_index] * cap_def.T_offset;
-        Eigen::Vector3d A_world = T.block<3, 1>(0, 3);
+        Eigen::Vector3d M_world = T.block<3, 1>(0, 3);
+        Eigen::Vector3d A_world = M_world - T.block<3, 1>(0, 2) * (cap_def.length / 2.0);
         // Nota: Nel tuo URDF le capsule sembrano allineate lungo Z locale
-        Eigen::Vector3d B_world = A_world + T.block<3, 1>(0, 2) * cap_def.length;
+        Eigen::Vector3d B_world = M_world + T.block<3, 1>(0, 2) * (cap_def.length / 2.0);
 
         // Costruisci la capsula per il framework DistanceFunctions
         CapsuleWorld cap_world;
@@ -547,10 +550,9 @@ double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> 
         cap_world.B = B_world;
         cap_world.radius = cap_def.radius;
 
-        // --- CHIAMATA AL NUOVO FRAMEWORK ---
+        // CHIAMATA AL NUOVO FRAMEWORK
         CapsuleDistanceResult res;
         double dist = capsule_distance(cap_world, c->obstacle, &res);
-        // -----------------------------------
 
         if (dist < min_signed_dist)
         {
@@ -637,7 +639,6 @@ double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> 
         // Per i passi j >= k il gradiente è 0 (causalità)
         std::fill(grad.begin() + k * NJ, grad.end(), 0.0);
     }
-
     return constraint_value;
 }
 
@@ -669,15 +670,15 @@ double avoid_self_collision(const std::vector<double> &x, std::vector<double> &g
 
     // 3. Recupera pose e Jacobiani per tutti i link
     std::vector<Eigen::Matrix4d> link_poses = {
-        c_self->robot->get_T_0_0(), c_self->robot->get_T_0_0(), c_self->robot->get_T_0_1(), c_self->robot->get_T_0_2(),
+        c_self->robot->get_T_0_0(), c_self->robot->get_T_0_1(), c_self->robot->get_T_0_2(),
         c_self->robot->get_T_0_3(), c_self->robot->get_T_0_4(), c_self->robot->get_T_0_5(), c_self->robot->get_T_0_5(),
-        c_self->robot->get_T_0_6(), c_self->robot->get_T_0_7(), c_self->robot->get_T_0_7(), c_self->robot->get_T_0_8()};
+        c_self->robot->get_T_0_6(), c_self->robot->get_T_0_7(), c_self->robot->get_T_0_7()};
 
     std::vector<Eigen::MatrixXd> J_links = {
-        Eigen::MatrixXd::Zero(6, NJ), // Link 0 (base fissa)
+        Eigen::MatrixXd::Zero(6, NJ),
         c_self->robot->get_J_1(), c_self->robot->get_J_2(), c_self->robot->get_J_3(),
-        c_self->robot->get_J_4(), c_self->robot->get_J_5(), c_self->robot->get_J_6(),
-        c_self->robot->get_J_7(), c_self->robot->get_J_ee()};
+        c_self->robot->get_J_4(), c_self->robot->get_J_5(), c_self->robot->get_J_5(), c_self->robot->get_J_6(),
+        c_self->robot->get_J_7(), c_self->robot->get_J_7()};
 
     // 4. Calcola posizioni world di tutte le capsule
     std::vector<CapsuleWorld> capsules_world;
@@ -686,12 +687,10 @@ double avoid_self_collision(const std::vector<double> &x, std::vector<double> &g
     for (const auto &cap_def : c_self->capsules_definitions)
     {
         Eigen::Matrix4d T = link_poses[cap_def.link_index] * cap_def.T_offset;
-
         CapsuleWorld cap_world;
         cap_world.A = T.block<3, 1>(0, 3);
         cap_world.B = cap_world.A + T.block<3, 1>(0, 2) * cap_def.length;
         cap_world.radius = cap_def.radius;
-
         capsules_world.push_back(cap_world);
     }
 
@@ -824,8 +823,6 @@ double avoid_self_collision(const std::vector<double> &x, std::vector<double> &g
         }
     }
 
-    // 8. Visualizzazione (opzionale)
-    if (c_self->marker_pub && (c_self->k == 25 || constraint_value > -0.02))
     {
         publish_self_collision_markers(capsules_world[closest_cap_i],
                                        capsules_world[closest_cap_j],
@@ -834,9 +831,6 @@ double avoid_self_collision(const std::vector<double> &x, std::vector<double> &g
 
     return constraint_value;
 }
-// ============================================================================
-// HELPER: CALCOLA JACOBIANO DI UN PUNTO SU UNA CAPSULA
-// ============================================================================
 
 Eigen::MatrixXd compute_capsule_jacobian(
     const Eigen::Matrix4d &T_link,
@@ -900,7 +894,8 @@ void publish_self_collision_markers(
     
     // Orientamento corretto
     Eigen::Vector3d axis_A = (capA.B - capA.A).normalized();
-    Eigen::Quaterniond quat_A = quaternion_from_z_axis(axis_A);
+    Eigen::Quaterniond quat_A = Eigen::Quaterniond::FromTwoVectors(
+    Eigen::Vector3d::UnitZ(), axis_A);
     
     markerA.pose.orientation.x = quat_A.x();
     markerA.pose.orientation.y = quat_A.y();
@@ -937,7 +932,8 @@ void publish_self_collision_markers(
     
     // Orientamento corretto
     Eigen::Vector3d axis_B = (capB.B - capB.A).normalized();
-    Eigen::Quaterniond quat_B = quaternion_from_z_axis(axis_B);
+    Eigen::Quaterniond quat_B = Eigen::Quaterniond::FromTwoVectors(
+    Eigen::Vector3d::UnitZ(), axis_B);
     
     markerB.pose.orientation.x = quat_B.x();
     markerB.pose.orientation.y = quat_B.y();

@@ -65,6 +65,13 @@ private:
     Eigen::Matrix<double, 7, 1> q_curr;
     Eigen::Matrix<double, 7, 1> dot_q_curr;
     Eigen::Matrix<double, 7, 1> tau_cmd;
+
+    Eigen::Matrix<double, 7, 1> tau_eft;  // torque for effort comparison
+
+    private:
+    double total_energy_cost = 0.0;
+    bool is_trajectory_active;
+    // Add member variables here
     
     /* Error and dot error feedback */
     
@@ -85,6 +92,7 @@ private:
     
     Eigen::Matrix<double, 7, 7> M;
     Eigen::Matrix<double, 7, 1> C;
+    Eigen::Matrix<double, 7, 1> G;
 
     /* Check the effort limits */
     

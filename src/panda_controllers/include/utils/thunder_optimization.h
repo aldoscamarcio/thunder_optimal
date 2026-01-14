@@ -10,6 +10,8 @@
 #include <Eigen/Geometry>
 #include "DistanceFunctions.hpp"
 
+extern Eigen::Vector3d p_ostacolo;
+
 
 // Dichiarazione della funzione per calcolare i coefficienti del polinomio di quinto grado
 std::vector<double> calculateCoefficients(double q0, double qf, double v0, double vf, double a0, double af, double t0, double tf);
@@ -166,13 +168,16 @@ void publish_capsule_markers(
     const std::vector<Capsule> &capsules, // Definizioni delle capsule
     int closest_capsule_index = -1);      // Per colorare la più vicina
 
-Eigen::Quaterniond quaternion_from_z_axis(const Eigen::Vector3d &target_axis);
-
 // Funzione per evitare ostacoli sferici con gradiente
 // double avoid_sphere_with_gradient(const std::vector<double> &x, std::vector<double> &grad, void *data);
 
 // Funzione per evitare ostacoli generici con gradiente
 double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> &grad, void *data);
+
+Eigen::Quaterniond quaternion_from_z_axis(const Eigen::Vector3d &target_axis);
+
+Eigen::Vector3d generaOstacoloRandom();
+
 
 // Funzione vincolo self-collision
 double avoid_self_collision(
