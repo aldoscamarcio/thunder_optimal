@@ -58,6 +58,7 @@ void closestSegmentSegment(
         // Caso generale
         sN = (b * e - c * d);
         tN = (a * e - b * d);
+        // tN = (b * d) - (a * e);
 
         // Clamp s
         if (sN < 0.0) {

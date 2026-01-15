@@ -194,7 +194,7 @@ int main(int argc, char **argv)
 
 	ros::Publisher pub_cmd = node_handle.advertise<sensor_msgs::JointState>("/computed_torque_controller/command", 1000);
 	ros::Subscriber sub_joints = node_handle.subscribe<sensor_msgs::JointState>("/franka_state_controller/joint_states", 1, &jointsCallback);
-	ros::Publisher capsule_viz_pub_ = node_handle.advertise<visualization_msgs::MarkerArray>("robot_capsules_viz", 10);
+	ros::Publisher capsule_viz_pub = node_handle.advertise<visualization_msgs::MarkerArray>("robot_capsules_viz", 10);
 	ros::Publisher marker_pub = node_handle.advertise<visualization_msgs::MarkerArray>("/optimization_markers", 10);
 	// ros::Publisher path_pub = node_handle.advertise<nav_msgs::Path>("/end_effector_path", 1);
 	// ros::Subscriber sub_pose =  node_handle.subscribe("/franka_state_controller/franka_ee_pose", 1, &poseCallback);
@@ -203,10 +203,10 @@ int main(int argc, char **argv)
 	sensor_msgs::JointState traj_msg;
 
 	// SET SLEEP TIME 1000 ---> 1 kHz
-	double frequenza = 10; // Hz
+	double frequenza = 10;
 	ros::Rate loop_rate(frequenza);
-	double frequenza_controller = 200;					  // Hz
-	ros::Rate loop_rate_controller(frequenza_controller); // Hz
+	double frequenza_controller = 200;
+	ros::Rate loop_rate_controller(frequenza_controller);
 
 	srand(time(NULL));
 	double tf;
@@ -860,12 +860,12 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 			for (int k = 0; k < campioni - 1; k++)
 			{
 				auto c_sphere = std::make_shared<ObstacleConstraintIneq>(
-					k, NJ, d_safe, obs_sphere, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub_);
+					k, NJ, d_safe, obs_sphere, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub);
 				c_sphere->capsules_definitions = capsule_definitions;
 				sphere_constraints.push_back(c_sphere);				
 
 				auto c_plane = std::make_shared<ObstacleConstraintIneq>(
-					k, NJ, d_safe, obs_plane, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub_);
+					k, NJ, d_safe, obs_plane, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub);
 				c_plane->capsules_definitions = capsule_definitions;
 				plane_constraints.push_back(c_plane);
 
@@ -883,7 +883,7 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 				});
 
 				auto c_rectangle = std::make_shared<ObstacleConstraintIneq>(
-					k, NJ, d_safe, obs_rectangle, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub_);
+					k, NJ, d_safe, obs_rectangle, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub);
 				c_rectangle->capsules_definitions = capsule_definitions;
 				rectangle_constraints.push_back(c_rectangle);
 				opt.add_inequality_constraint(avoid_obstacle_generic, c_rectangle.get(), eps_sphere);
@@ -1070,7 +1070,7 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
                         robot.set_ddq(Eigen::Map<Eigen::VectorXd>(acc_des.data(), NJ));
                         
                         pub_cmd.publish(traj_msg);
-                        publish_capsule_markers(robot, capsule_viz_pub_, capsule_definitions, -1);
+                        publish_capsule_markers(robot, capsule_viz_pub, capsule_definitions, -1);
 
                         loop_rate_controller.sleep();
                         t = ros::Time::now().toSec();

@@ -1,11 +1,12 @@
 <?xml version="1.0" ?>
 <launch>
   <arg name="world_file" default="$(find panda_controllers)/worlds/Obstacle.world" />
+  <arg name="rviz_config" default="$(find panda_controllers)/config/franka_obstacle_test.rviz" />
 
   <!-- Avvia il robot e gazebo insieme -->
   <include file="$(find franka_gazebo)/launch/panda.launch">
     <arg name="gazebo" value="true" />
-    <arg name="rviz" value="true" />
+    <arg name="rviz" value="false" />
     <arg name="world" value="$(arg world_file)" />
     <arg name="controller" value="computed_torque_controller" />
     <arg name="use_gripper" value="false" />
@@ -18,5 +19,10 @@
 
   <!-- Carica i parametri dei controller -->
   <rosparam command="load" file="$(find panda_controllers)/config/panda_controllers_default.yaml" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_config)" required="true" />
+
+  <node name="trajectory_publisher" pkg="panda_controllers" type="ee_trajectory_visualizer.py" output="screen">
+    <param name="trajectory_rate" type="double" value="20.0" />
+  </node>
 
 </launch>

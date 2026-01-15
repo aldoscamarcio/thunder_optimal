@@ -15,7 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
 	nav_msgs
 	franka_msgs
 	hardware_interface
-	# message_generation #
+	message_generation
 	pluginlib
 	realtime_tools
 	roscpp
@@ -95,7 +95,6 @@ add_library(${PROJECT_NAME}
 	src/franka_gen.cpp
 	src/thunder_franka.cpp
 	src/thunder_optimization.cpp
-	# src/optimal_control.cpp
 
 	# Collision framework
 	src/collision/DistanceFunctions.cpp
@@ -121,8 +120,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 
 add_executable(menu
  	src/menu.cpp
-	# src/thunder_franka.cpp
-	# src/franka_gen.cpp
 )
 
 target_link_libraries(menu
@@ -130,17 +127,6 @@ target_link_libraries(menu
 	${catkin_LIBRARIES}
 	${NLOPT_LIBRARIES}
 	yaml-cpp
-)
-
-# ====== TEST COLLISION FRAMEWORK ======
-add_executable(test_collision
-    src/tests/test_collision_framework.cpp
-)
-
-target_link_libraries(test_collision
-    ${PROJECT_NAME}
-    ${catkin_LIBRARIES}
-    yaml-cpp
 )
 
 # add_dependencies(menu
