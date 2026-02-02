@@ -82,6 +82,41 @@
       </link>
     </model>
 
+    <!-- <model name="SphereObstacle">
+      <pose>0.30 0.45 0.80 0 0 0</pose>
+      <link name="sphere_link">
+        <gravity>false</gravity>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>0.08</radius> </sphere>
+          </geometry>
+          <material>
+            <ambient>0 0 1 1</ambient>
+            <diffuse>0 0 1 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.08</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass>1.0</mass>
+          <inertia>
+            <ixx>0.01</ixx>
+            <iyy>0.01</iyy>
+            <izz>0.01</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model> -->
+
   </world>
 </sdf>
     

@@ -21,8 +21,12 @@
   <rosparam command="load" file="$(find panda_controllers)/config/panda_controllers_default.yaml" />
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_config)" required="true" />
 
-  <node name="trajectory_publisher" pkg="panda_controllers" type="ee_trajectory_visualizer.py" output="screen">
+  <node name="ee_trajectory_visualizer" pkg="panda_controllers" type="ee_trajectory_visualizer.py" output="screen">
     <param name="trajectory_rate" type="double" value="20.0" />
+  </node>
+
+  <node name="obstacle_visualizer" pkg="panda_controllers" type="obstacle_pub.py" output="screen">
+    <param name="frame_id" value="panda_link0" />
   </node>
 
 </launch>
