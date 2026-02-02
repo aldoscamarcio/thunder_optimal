@@ -10,8 +10,6 @@
 #include <Eigen/Geometry>
 #include "DistanceFunctions.hpp"
 
-extern Eigen::Vector3d p_ostacolo;
-
 
 // Dichiarazione della funzione per calcolare i coefficienti del polinomio di quinto grado
 std::vector<double> calculateCoefficients(double q0, double qf, double v0, double vf, double a0, double af, double t0, double tf);
@@ -53,11 +51,34 @@ struct SelfCollisionConstraint {
     Eigen::VectorXd q0;
     Eigen::VectorXd dq0;
     thunder_franka* robot;
+
+    std::vector<Eigen::Matrix4d> link_poses_cache;
+    std::vector<Eigen::MatrixXd> J_links_cache;
     
     std::vector<Capsule> capsules_definitions;
     std::vector<std::pair<int, int>> collision_pairs;
     ros::Publisher* marker_pub;
 };
+
+struct JointLimitsData {
+    int NJ;
+    double dt;
+    int campioni;
+    // Condizioni iniziali (FONDAMENTALI per integrare)
+    Eigen::Matrix<double, 7, 1> q0; 
+    Eigen::Matrix<double, 7, 1> v0;
+
+    Eigen::Matrix<double, 7, 1> qf;
+    Eigen::Matrix<double, 7, 1> vf;
+
+    // Limiti (Bounds)
+    Eigen::Matrix<double, 7, 1> ubq;  // Upper Bound Position
+    Eigen::Matrix<double, 7, 1> lbq;  // Lower Bound Position
+    // Puoi aggiungere anche limiti di velocità qui se vuoi fare tutto insieme
+    Eigen::Matrix<double, 7, 1> ubdq; 
+    Eigen::Matrix<double, 7, 1> lbdq;
+};
+
 
 
 
@@ -105,14 +126,18 @@ struct ObstacleConstraintIneq
     double dt;
 
     std::vector<Capsule> capsules_definitions; // Definizioni delle capsule del robot
-
-    // Visualizzazione(opzionale)
         ros::Publisher* marker_pub;
+
+    std::vector<Eigen::Matrix4d> link_poses_cache;
+    std::vector<Eigen::MatrixXd> J_links_cache;
 
 ObstacleConstraintIneq(int k_, int NJ_, double d_safe_, Obstacle obs_,
                            thunder_franka* robot_, const Eigen::VectorXd &q0_, const Eigen::VectorXd &dq0_, double dt_, ros::Publisher* pub_)
         : k(k_), NJ(NJ_), d_safe(d_safe_), obstacle(obs_),
-          robot(robot_), q0(q0_), dq0(dq0_), dt(dt_), marker_pub(pub_) {}
+          robot(robot_), q0(q0_), dq0(dq0_), dt(dt_), marker_pub(pub_) {
+            link_poses_cache.resize(10, Eigen::Matrix4d::Identity());
+            J_links_cache.resize(10, Eigen::MatrixXd::Zero(6, 7));
+          }
 };
 
 struct ConsistencyConstraintIneq
@@ -152,6 +177,13 @@ struct JointLimitConstraint
 
 // Funzione obiettivo per l'ottimizzazione
 double objective(const std::vector<double> &x, std::vector<double> &grad, void *data);
+
+// Nuove funzioni per i vincoli multipli con gradiente
+void position_limits_mconstraint(unsigned m, double *result, unsigned n, const double* x, double* grad, void* data);
+void velocity_limits_mconstraint(unsigned m, double *result, unsigned n, const double* x, double* grad, void* data);
+void final_position_inequality_mconstraint(unsigned m, double *result, unsigned n, const double* x, double* grad, void* data);
+void final_velocity_inequality_mconstraint(unsigned m, double *result, unsigned n, const double* x, double* grad, void* data);
+
 
 // Funzione per i vincoli
 double final_position_constraint(unsigned n, const double *x, double *grad, void *data);

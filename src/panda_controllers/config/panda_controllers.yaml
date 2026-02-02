@@ -29,8 +29,3 @@ cartesian_impedance_controller_softbots:
         - $(arg prefix)arm_joint5
         - $(arg prefix)arm_joint6
         - $(arg prefix)arm_joint7
-
-
-
-
-

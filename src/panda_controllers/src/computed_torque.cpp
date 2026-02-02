@@ -1,6 +1,9 @@
 //various library on which we work on
 #include <pluginlib/class_list_macros.h>
-#include <panda_controllers/computed_torque.h> //library of the computed torque 
+#include <panda_controllers/computed_torque.h> //library of the computed torque controller
+#include <fstream>  
+#include <iostream>
+
 
 namespace panda_controllers{
 
@@ -92,6 +95,28 @@ bool ComputedTorque::init(hardware_interface::RobotHW* robot_hw, ros::NodeHandle
 	/*Start command subscriber */
 	this->sub_command_ = node_handle.subscribe<sensor_msgs::JointState> ("command", 1, &ComputedTorque::setCommandCB, this);   //it verify with the callback that the command has been received
 	this->pub_err_ = node_handle.advertise<sensor_msgs::JointState> ("tracking_error", 1);
+
+	// Inizializza variabili
+	last_msg_time = ros::Time(0);
+	is_trajectory_active = false;
+	total_energy_cost = 0.0;
+	average_power = 0.0;
+	execution_time = 0.0;
+	total_jerk_cost = 0.0;
+	stored_optimization_time = 0.0;
+	total_path_length = 0.0;
+
+	last_q_metric.setZero();
+
+	tau_eft.setZero();
+	metrics_msg.tau_eft.resize(7);
+	std::fill(metrics_msg.tau_eft.begin(), metrics_msg.tau_eft.end(), 0.0);
+    last_command_dot_dot_q_d.setZero();
+	jerk_vec.setZero();
+
+	// Crea il publisher
+	// metrics_pub = node_handle.advertise<std_msgs::Float64MultiArray>("/computed_torque/metrics", 10);
+	metrics_pub = node_handle.advertise<panda_controllers::PerformanceMetrics>("/computed_torque/metrics", 10);
 	
 	return true;
 }
@@ -183,39 +208,130 @@ void ComputedTorque::update(const ros::Time&, const ros::Duration& period)
 	
 	/* Verify the tau_cmd not exceed the desired joint torque value tau_J_d */
 	tau_cmd = saturateTorqueRate(tau_cmd, tau_J_d);
-	tau_eft = M * command_dot_dot_q_d + C + G;
 
-	double vel_norm = command_dot_q_d.norm();
-    double motion_threshold = 0.001; // Soglia di sensibilità (rad/s)
+    tau_eft = M * command_dot_dot_q_d + C + G;
+	/* Metrics Calculation */
+    double time_since_last_msg = (ros::Time::now() - last_msg_time).toSec();
+    double timeout_limit = 0.2; // Timeout largo per start/stop
 
-    // RISING EDGE: Se eravamo fermi e ora ci muoviamo -> START
-    if (!is_trajectory_active && vel_norm > motion_threshold) {
+    double cmd_vel_norm = command_dot_q_d.norm();
+    bool is_motion_commanded = (cmd_vel_norm > 0.001);
+
+    if (!is_trajectory_active && time_since_last_msg < 0.1 && is_motion_commanded) {
         is_trajectory_active = true;
-        total_energy_cost = 0.0; // Reset del costo
-        ROS_INFO("ComputedTorque: Traiettoria iniziata (vel > 0). Calcolo costo avviato.");
+        total_energy_cost = 0.0;
+		total_jerk_cost   = 0.0;
+		total_path_length = 0.0;
+        execution_time = 0.0;
+		last_q_metric = command_q_d;
+		last_command_dot_dot_q_d = command_dot_dot_q_d;
+        
+        if (ros::param::has("/thunder/last_optimization_time")) {
+            ros::param::get("/thunder/last_optimization_time", stored_optimization_time);
+        } else {
+            stored_optimization_time = 0.0; 
+        }
+		// 1. Leggiamo l'ID del Planner (es. "RRTConnect" o "NLOPT_Thunder")
+        if (ros::param::has("/thunder/last_planner_id")) {
+            ros::param::get("/thunder/last_planner_id", stored_planner_id);
+        } else {
+            stored_planner_id = "Unknown"; // Default se non è stato settato nulla
+        }
+        ROS_INFO("Inizio Traiettoria (Motion Detected)");
     }
     
-    // FALLING EDGE: Se ci muovevamo e ora siamo fermi -> STOP
-    else if (is_trajectory_active && vel_norm < motion_threshold) {
-        is_trajectory_active = false;
+    if (is_trajectory_active) {        
+        bool stream_dead = (time_since_last_msg > timeout_limit);
         
-        // Stampa il risultato finale
-        ROS_INFO("ComputedTorque: Traiettoria terminata. COSTO TOTALE: %f", total_energy_cost);
-        
-        // Opzionale: Se vuoi pubblicarlo su un topic, fallo qui.
-    }
+        // Se lo stream muore, chiudiamo subito.
+        if (stream_dead) {
+            is_trajectory_active = false;
+                ROS_INFO("Fine Traiettoria (Timeout)");
+				ROS_INFO("Planner Usato:        %s", stored_planner_id.c_str());
+				ROS_INFO("Tempo Ottimizzatore:  %.2f s", stored_optimization_time);
+                ROS_INFO("Tempo di Esecuzione:  %.2f s", execution_time);
+                ROS_INFO("Energia Totale:       %.2f J", total_energy_cost);
+                ROS_INFO("Potenza Media:        %.2f W", ( execution_time > 0.0 ? total_energy_cost / execution_time : 0.0) );
+				ROS_INFO("Jerk:                 %.2f", total_jerk_cost);
+				ROS_INFO("Lunghezza Traj:       %.2f rad", total_path_length);
 
-    // ACCUMULO: Se la traiettoria è attiva, somma i quadrati
-    if (is_trajectory_active) {
-        double instant_cost = tau_eft.squaredNorm();
-        total_energy_cost += instant_cost * period.toSec();
+				std::string full_path;
+				// Se il parametro non esiste, userà il percorso di default specificato
+				this->cvc_nh.param<std::string>("csv_log_path", full_path, "/home/franko/Documenti/metrics.csv");
+
+				// 2. Controlla se il file esiste già (per l'header) usando full_path
+				std::ifstream check_file(full_path);
+				bool file_exists = check_file.good();
+				check_file.close();
+
+				// 3. Apri il file in modalità append usando full_path
+				std::ofstream csv_file;
+				csv_file.open(full_path, std::ios::app);
+
+				if (csv_file.is_open()) {
+					if (!file_exists) {
+						csv_file << "Planner_ID,Opt_Time,Exec_Time,Total_Energy,Avg_Power,Total_Jerk,Path_Length\n";
+					}
+
+					double avg_power = (execution_time > 0.0 ? total_energy_cost / execution_time : 0.0);
+
+					csv_file << stored_planner_id << ","
+							<< stored_optimization_time << ","
+							<< execution_time << ","
+							<< total_energy_cost << ","
+							<< avg_power << ","
+							<< total_jerk_cost << ","
+							<< total_path_length << "\n";
+
+					csv_file.close();
+					ROS_INFO("Dati salvati con successo in: %s", full_path.c_str());
+				} else {
+					ROS_ERROR("Errore fatale: Impossibile creare o aprire il file in %s. Verifica i permessi della cartella!", full_path.c_str());
+				}
+			}
+        else {
+            double dt = period.toSec();
+                if (is_motion_commanded) {
+                    double instant_power = tau_eft.squaredNorm(); 
+                    total_energy_cost += instant_power * dt;
+                    execution_time += dt;
+
+                    jerk_vec = (command_dot_dot_q_d - last_command_dot_dot_q_d) / dt;
+                    
+                    // Moltiplichiamo per dt per fare l'integrale
+                    total_jerk_cost += jerk_vec.squaredNorm() * dt;
+
+					double step_distance = (command_q_d - last_q_metric).norm(); 
+        
+        			total_path_length += step_distance;
+				}
+
+                // AGGIORNAMENTO MEMORIA (FONDAMENTALE)
+                // Salviamo l'accelerazione di oggi per usarla domani
+                last_command_dot_dot_q_d = command_dot_dot_q_d;
+				last_q_metric = command_q_d;
+
+
+                metrics_msg.header.stamp = ros::Time::now();
+                metrics_msg.total_energy = total_energy_cost;
+                metrics_msg.execution_time = execution_time;
+				metrics_msg.total_jerk   = total_jerk_cost;
+				metrics_msg.path_length = total_path_length;
+				metrics_msg.planner_id = stored_planner_id;
+
+                metrics_msg.average_power = (execution_time > 0.0 ? total_energy_cost / execution_time : 0.0);
+                metrics_msg.optimization_time = stored_optimization_time;
+
+                for (int i = 0; i < 7; i++) metrics_msg.tau_eft[i] = tau_eft(i);
+
+                metrics_pub.publish(metrics_msg);
+			}
+        }
+		
+    /* Set the command for each joint */
+    for (size_t i = 0; i < 7; i++) {
+        joint_handles_[i].setCommand(tau_cmd[i]);
     }
-    // ------------------------------------
-	
-	/* Set the command for each joint */
-	for (size_t i = 0; i < 7; i++) {
-		joint_handles_[i].setCommand(tau_cmd[i]);
-	}
 }
 
 void ComputedTorque::stopping(const ros::Time&)
@@ -240,6 +356,7 @@ Eigen::Matrix<double, 7, 1> ComputedTorque::saturateTorqueRate(
 
 void ComputedTorque::setCommandCB(const sensor_msgs::JointStateConstPtr& msg)
 {
+	last_msg_time = ros::Time::now();
 	if ((msg->position).size() != 7 || (msg->position).empty()) {
 
 		ROS_FATAL("Desired position has not dimension 7 or is empty! Size: %lu", (msg->position).size());

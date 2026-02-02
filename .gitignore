@@ -7,3 +7,4 @@
 
 # VSCode settings
 .vscode/
+.catkin_tools/

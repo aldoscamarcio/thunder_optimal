@@ -11,6 +11,9 @@
 
 #include <sstream>
 #include <iomanip>
+#include <termios.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 // Poi le librerie di terze parti
 #include <eigen3/Eigen/Dense>
@@ -21,6 +24,280 @@
 #include <geometry_msgs/Point.h>
 
 const std::string conf_file = "../robots/franka_conf.yaml";
+
+void position_limits_mconstraint(unsigned m, double *result, unsigned n, const double* x, double* grad, void* data)
+{
+    JointLimitsData *d = static_cast<JointLimitsData*>(data);
+    
+    double dt = d->dt;
+    double dt2 = dt * dt;
+    int NJ = d->NJ;
+    int n_steps = d->campioni;
+
+    // Se richiesto, azzeriamo il gradiente (matrice enorme m * n)
+    if (grad) {
+        std::fill(grad, grad + m*n, 0.0);
+    }
+
+    // Variabili temporanee per l'integrazione corrente
+    Eigen::Matrix<double, 7, 1> q_curr =  d->q0;
+    Eigen::Matrix<double, 7, 1> dq_curr = d->v0;
+
+    int c_idx = 0; // Indice progressivo dei vincoli
+
+    // Ciclo sui passi temporali (k) -> Ricostruiamo la traiettoria
+    for (int k = 0; k < n_steps; ++k) {
+        
+        // Per ogni giunto
+        for (int i = 0; i < NJ; ++i) {
+            
+            // 1. Recuperiamo l'accelerazione dall'ottimizzatore (variabile x)
+            // Assumiamo layout x: [ddq_step0_joint0, ddq_step0_joint1, ... ]
+            int x_idx_current = k * NJ + i; 
+            double ddq = x[x_idx_current];
+
+            // 2. Integrazione (Legge del moto)
+            // q_new = q + v*dt + 0.5*a*dt^2
+            double q_next = q_curr[i] + dq_curr[i] * dt + 0.5 * ddq * dt2;
+            // v_new = v + a*dt
+            double dq_next = dq_curr[i] + ddq * dt;
+
+            // Aggiorniamo stato per il prossimo giro
+            q_curr[i] = q_next;
+            dq_curr[i] = dq_next;
+
+            // 3. CALCOLO VINCOLI (Sulla posizione q_next appena calcolata)
+            
+            // Vincolo A: q <= ubq  -->  q - ubq <= 0
+            result[c_idx] = q_next - d->ubq[i];
+
+            // CALCOLO GRADIENTE A (Se richiesto)
+            if (grad) {
+                // q_next al passo k dipende da TUTTE le accelerazioni precedenti (j <= k)
+                // del giunto i-esimo.
+                for (int j = 0; j <= k; ++j) {
+                    int x_idx_past = j * NJ + i; // Variabile di decisione passata
+                    
+                    // Derivata dq_k / dddq_j
+                    // Quanto l'accelerazione al passo j influenza la posizione al passo k?
+                    // Formula: (k - j + 0.5) * dt^2 
+                    // Nota: il "+0.5" deriva dal termine 0.5*a*dt^2 dell'ultimo step
+                    double derivata = ((double)(k - j) + 0.5) * dt2;
+                    
+                    // Posizione nella matrice gradiente (riga c_idx, colonna x_idx_past)
+                    grad[c_idx * n + x_idx_past] = derivata;
+                }
+            }
+            c_idx++; // Next constraint
+
+            // Vincolo B: q >= lbq  -->  lbq - q <= 0
+            result[c_idx] = d->lbq[i] - q_next;
+
+            // CALCOLO GRADIENTE B
+            if (grad) {
+                for (int j = 0; j <= k; ++j) {
+                    int x_idx_past = j * NJ + i;
+                    // Derivata identica ma con segno meno
+                    double derivata = ((double)(k - j) + 0.5) * dt2;
+                    grad[c_idx * n + x_idx_past] = -derivata;
+                }
+            }
+            c_idx++; // Next constraint
+        }
+    }
+}
+
+void velocity_limits_mconstraint(unsigned m, double *result, unsigned n, const double* x, double* grad, void* data)
+{
+    JointLimitsData *d = static_cast<JointLimitsData*>(data);
+    
+    double dt = d->dt;
+    int NJ = d->NJ;
+    int n_steps = d->campioni;
+
+    if (grad) {
+        std::fill(grad, grad + m*n, 0.0);
+    }
+
+    // Vettore per tenere traccia della velocità corrente (inizia da v0)
+    Eigen::Matrix<double, 7, 1> dq_curr = d->v0;
+
+    int c_idx = 0; // Indice progressivo vincoli
+
+    // Ciclo nel tempo
+    for (int k = 0; k < n_steps; ++k) {
+        
+        for (int i = 0; i < NJ; ++i) {
+            
+            // Recupera accelerazione (variabile di ottimizzazione)
+            int x_idx_current = k * NJ + i; 
+            double ddq = x[x_idx_current];
+
+            // Integrazione: v_next = v_curr + a * dt
+            double dq_next = dq_curr[i] + ddq * dt;
+            
+            // Aggiorniamo lo stato per il prossimo step
+            dq_curr[i] = dq_next;
+
+            // --- VINCOLO 1: Upper Bound (v <= max) ---
+            result[c_idx] = dq_next - d->ubdq[i];
+
+            // GRADIENTE 1: d(v_next)/d(acc) = dt
+            if (grad) {
+                // La velocità al passo k dipende linearmente da TUTTE le accelerazioni passate
+                // Il contributo è sempre 'dt'
+                for (int j = 0; j <= k; ++j) {
+                    int x_idx_past = j * NJ + i;
+                    grad[c_idx * n + x_idx_past] = dt; 
+                }
+            }
+            c_idx++;
+
+            // --- VINCOLO 2: Lower Bound (v >= min) ---
+            result[c_idx] = d->lbdq[i] - dq_next;
+
+            // GRADIENTE 2: d(-v_next)/d(acc) = -dt
+            if (grad) {
+                for (int j = 0; j <= k; ++j) {
+                    int x_idx_past = j * NJ + i;
+                    grad[c_idx * n + x_idx_past] = -dt;
+                }
+            }
+            c_idx++;
+        }
+    }
+}
+
+void final_position_inequality_mconstraint(unsigned m, double *result, unsigned n, const double* x, double* grad, void* data)
+{
+    JointLimitsData *d = static_cast<JointLimitsData*>(data);
+    double dt = d->dt;
+    double dt2 = dt * dt;
+    int NJ = d->NJ;
+    // Le accelerazioni agiscono sugli intervalli tra i campioni
+    int num_intervalli = d->campioni; 
+
+    if (m != NJ) { // O qualsiasi numero ti aspetti
+    std::cerr << "ERRORE: Mi aspettavo " << NJ << " vincoli, ma NLopt ne chiede " << m << std::endl;
+    return; // O gestisci l'errore
+}
+
+    // Reset Gradiente
+    if (grad) {
+        std::fill(grad, grad + m*n, 0.0);
+    }
+
+    // Ciclo sui Giunti (i)
+    for (int i = 0; i < NJ; ++i) {
+        
+        // Integrazione
+        double dq = d->v0[i];
+        double q = d->q0[i];
+
+        // Ciclo nel tempo (k)
+        for (int k = 0; k < num_intervalli; ++k) {
+            
+            int x_idx = k * NJ + i; 
+            double ddq = x[x_idx];
+            
+            dq += ddq * dt;
+            q += dq * dt + 0.5 * ddq * dt2;
+        }
+
+        double err = q - d->qf[i];
+        
+        // Risultato: Errore al quadrato (sempre positivo)
+        result[i] = err * err;
+
+        if (grad) {
+            for (int k = 0; k < num_intervalli; ++k) {
+                int x_idx = k * NJ + i;
+
+                // Spiega all'ottimizzatore quanto influisce l'accelerazione 'k' sulla posizione finale
+                double coeff = ((double)(num_intervalli - k) - 0.5) * dt2;
+
+                // Chain Rule per Errore Quadratico: d(err^2) = 2 * err * d(err)
+                grad[i * n + x_idx] = 2.0 * err * coeff;
+            }
+        }
+    }
+}
+
+void final_velocity_inequality_mconstraint(unsigned m, double *result, unsigned n, const double* x, double* grad, void* data)
+{
+    JointLimitsData *d = static_cast<JointLimitsData*>(data);
+    double dt = d->dt;
+    int NJ = d->NJ;
+    int num_intervalli = d->campioni;
+
+
+    if (m != NJ) { // O qualsiasi numero ti aspetti
+    std::cerr << "ERRORE: Mi aspettavo " << NJ << " vincoli, ma NLopt ne chiede " << m << std::endl;
+    return; // O gestisci l'errore
+}
+
+    // Reset Gradiente
+    if (grad) {
+        std::fill(grad, grad + m*n, 0.0);
+    }
+
+    // Ciclo sui Giunti (i)
+    for (int i = 0; i < NJ; ++i) {
+        
+        // v_final = v0 + sum(acc * dt)
+        double v_final_calc = d->v0[i];
+
+        for (int k = 0; k < num_intervalli; ++k) {
+            int x_idx = k * NJ + i; // Solito indice [Tempo -> Giunto]
+            double ddq = x[x_idx];
+            
+            v_final_calc += ddq * dt;
+        }
+
+        // Errore: v_calcolata - v_desiderata
+        double err = v_final_calc - d->vf[i];
+        
+        // Errore quadratico
+        result[i] = err * err;
+
+        // --- 3. CALCOLO GRADIENTE ---
+        if (grad) {
+            // d(err^2)/d(acc) = 2 * err * dt
+            
+            double gradient_value = 2.0 * err * dt;
+
+            for (int k = 0; k < num_intervalli; ++k) {
+                int x_idx = k * NJ + i;
+                grad[i * n + x_idx] = gradient_value;
+            }
+        }
+    }
+}
+
+int kbhit(void)
+{
+    struct termios oldt, newt;
+    int ch;
+    int oldf;
+
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+    fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+
+    ch = getchar();
+
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    fcntl(STDIN_FILENO, F_SETFL, oldf);
+
+    if(ch != EOF) {
+        ungetc(ch, stdin);
+        return 1;
+    }
+    return 0;
+}
 
 std::vector<double> calculateCoefficients(double q0, double qf, double v0, double vf, double a0, double af, double t0, double tf)
 {
@@ -53,6 +330,14 @@ double objective(const std::vector<double> &x, std::vector<double> &grad, void *
     int NJ = optData->robot.get_numJoints();
     int campioni = optData->campioni;
     double dt = optData->dt;
+
+    if (kbhit()) {
+        char c = getchar(); // Leggi il tasto
+        if (c == 'q' || c == 'Q') {
+            std::cout << " Tasto 'q' premuto: Arresto Ottimizzazione... " << std::endl;
+            throw nlopt::forced_stop();
+        }
+    }
 
     Eigen::VectorXd q = optData->q0;  // Inizializza q con q0
     Eigen::VectorXd dq = optData->v0; // Inizializza dq con v0
@@ -195,10 +480,10 @@ double final_position_constraint(unsigned n, const double *x, double *grad, void
         dq += ddq * c->dt;
         q += dq * c->dt + 0.5 * ddq * std::pow(c->dt, 2);
     }
-    // std::cout << "i: " << c->i << " q: " << q << std::endl;
 
     double err = q - c->qf[c->i];
     double val = err * err;
+    std::cout << "i: " << c->i << " q: " << q << " qf: " << c->qf[c->i] << " err: " << err << " val: " << val << std::endl;
 
     if (grad)
     {
@@ -214,7 +499,7 @@ double final_position_constraint(unsigned n, const double *x, double *grad, void
     return val;
 }
 
-// Vincolo "soft" sulla velocità finale del giunto i
+// Vincolo sulla velocità finale del giunto i
 double final_velocity_constraint(unsigned n, const double *x, double *grad, void *data)
 {
     ConsistencyConstraintIneq *c = reinterpret_cast<ConsistencyConstraintIneq *>(data);
@@ -515,12 +800,21 @@ double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> 
 
     // Recupera pose e Jacobiani (come nel tuo script originale)
     // Nota: Assumo che get_T... e get_J... siano metodi della tua classe Robot
-    std::vector<Eigen::Matrix4d> link_poses = {
+    // std::vector<Eigen::Matrix4d> link_poses = {
+    //     c->robot->get_T_0_0(), c->robot->get_T_0_1(), c->robot->get_T_0_2(),
+    //     c->robot->get_T_0_3(), c->robot->get_T_0_4(), c->robot->get_T_0_5(), c->robot->get_T_0_5(),
+    //     c->robot->get_T_0_6(), c->robot->get_T_0_7(), c->robot->get_T_0_7()};
+    c->link_poses_cache = {
         c->robot->get_T_0_0(), c->robot->get_T_0_1(), c->robot->get_T_0_2(),
         c->robot->get_T_0_3(), c->robot->get_T_0_4(), c->robot->get_T_0_5(), c->robot->get_T_0_5(),
         c->robot->get_T_0_6(), c->robot->get_T_0_7(), c->robot->get_T_0_7()};
 
-    std::vector<Eigen::MatrixXd> J_links = {
+    // std::vector<Eigen::MatrixXd> J_links = {
+    //     Eigen::MatrixXd::Zero(6, NJ), c->robot->get_J_1(), c->robot->get_J_2(), c->robot->get_J_3(),
+    //     c->robot->get_J_4(), c->robot->get_J_5(), c->robot->get_J_5(),
+    //     c->robot->get_J_6(), c->robot->get_J_7(), c->robot->get_J_7()};
+
+    c->J_links_cache = {
         Eigen::MatrixXd::Zero(6, NJ), c->robot->get_J_1(), c->robot->get_J_2(), c->robot->get_J_3(),
         c->robot->get_J_4(), c->robot->get_J_5(), c->robot->get_J_5(),
         c->robot->get_J_6(), c->robot->get_J_7(), c->robot->get_J_7()};
@@ -538,7 +832,7 @@ double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> 
         auto &cap_def = c->capsules_definitions[idx];
 
         // Calcola A e B in World Frame
-        Eigen::Matrix4d T = link_poses[cap_def.link_index] * cap_def.T_offset;
+        Eigen::Matrix4d T = c->link_poses_cache[cap_def.link_index] * cap_def.T_offset;
         Eigen::Vector3d M_world = T.block<3, 1>(0, 3);
         Eigen::Vector3d A_world = M_world - T.block<3, 1>(0, 2) * (cap_def.length / 2.0);
         // Nota: Nel tuo URDF le capsule sembrano allineate lungo Z locale
@@ -568,9 +862,9 @@ double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> 
             double t = res.t_capsule; // 0.0 = A, 1.0 = B
 
             int link_idx = cap_def.link_index;
-            Eigen::MatrixXd J_trans = J_links[link_idx].block(0, 0, 3, NJ);
-            Eigen::MatrixXd J_rot = J_links[link_idx].block(3, 0, 3, NJ);
-            Eigen::Vector3d p_link_origin = link_poses[link_idx].block<3, 1>(0, 3);
+            Eigen::MatrixXd J_trans = c->J_links_cache[link_idx].block(0, 0, 3, NJ);
+            Eigen::MatrixXd J_rot = c->J_links_cache[link_idx].block(3, 0, 3, NJ);
+            Eigen::Vector3d p_link_origin = c->link_poses_cache[link_idx].block<3, 1>(0, 3);
 
             // Bracci di leva per A e B
             Eigen::Vector3d r_A = A_world - p_link_origin;
@@ -590,26 +884,12 @@ double avoid_obstacle_generic(const std::vector<double> &x, std::vector<double> 
         }
     }
 
-    // if (closest_cap_idx != -1 && k > 90)
-    // {
-    //     std::cout << "[Step " << k << "] Closest Capsule ID: " << closest_cap_idx
-    //               << " | Dist: " << min_signed_dist << std::endl;
-    // }
-
-    if (closest_cap_idx == -1)
-        return -1.0; // Fallback
-
     // 4. Definizione del valore del vincolo
     // Vogliamo: dist > d_safe  =>  d_safe - dist < 0
     // min_signed_dist è la distanza effettiva tra le superfici (già sottratti i raggi)
     double constraint_value = c->d_safe - min_signed_dist;
 
-    /*
-    std::cout << "Min Dist: " << min_signed_dist
-              << " | Cons: " << constraint_value
-              << " | Obs Type: " << (int)c->obstacle.type << std::endl;
-    */
-
+    // std::cout << "Distanza minima dall'ostacolo: " << min_signed_dist << ", Vincolo: " << constraint_value << std::endl;
     // Visualizzazione
     if (c->marker_pub)
     {
@@ -650,6 +930,9 @@ double avoid_self_collision(const std::vector<double> &x, std::vector<double> &g
     int NJ = c_self->NJ;
     double dt = c_self->dt;
 
+    c_self->link_poses_cache.resize(10, Eigen::Matrix4d::Identity());
+    c_self->J_links_cache.resize(10, Eigen::MatrixXd::Zero(6, 7));
+
     // 1. Integrazione per ottenere q(k)
     Eigen::VectorXd q_k = c_self->q0;
     Eigen::VectorXd dq_k = c_self->dq0;
@@ -669,12 +952,23 @@ double avoid_self_collision(const std::vector<double> &x, std::vector<double> &g
     c_self->robot->set_q(q_k);
 
     // 3. Recupera pose e Jacobiani per tutti i link
-    std::vector<Eigen::Matrix4d> link_poses = {
+    // std::vector<Eigen::Matrix4d> link_poses = {
+    //     c_self->robot->get_T_0_0(), c_self->robot->get_T_0_1(), c_self->robot->get_T_0_2(),
+    //     c_self->robot->get_T_0_3(), c_self->robot->get_T_0_4(), c_self->robot->get_T_0_5(), c_self->robot->get_T_0_5(),
+    //     c_self->robot->get_T_0_6(), c_self->robot->get_T_0_7(), c_self->robot->get_T_0_7()};
+
+    c_self->link_poses_cache = {
         c_self->robot->get_T_0_0(), c_self->robot->get_T_0_1(), c_self->robot->get_T_0_2(),
         c_self->robot->get_T_0_3(), c_self->robot->get_T_0_4(), c_self->robot->get_T_0_5(), c_self->robot->get_T_0_5(),
         c_self->robot->get_T_0_6(), c_self->robot->get_T_0_7(), c_self->robot->get_T_0_7()};
 
-    std::vector<Eigen::MatrixXd> J_links = {
+    // std::vector<Eigen::MatrixXd> J_links = {
+    //     Eigen::MatrixXd::Zero(6, NJ),
+    //     c_self->robot->get_J_1(), c_self->robot->get_J_2(), c_self->robot->get_J_3(),
+    //     c_self->robot->get_J_4(), c_self->robot->get_J_5(), c_self->robot->get_J_5(), c_self->robot->get_J_6(),
+    //     c_self->robot->get_J_7(), c_self->robot->get_J_7()};
+
+    c_self->J_links_cache = {
         Eigen::MatrixXd::Zero(6, NJ),
         c_self->robot->get_J_1(), c_self->robot->get_J_2(), c_self->robot->get_J_3(),
         c_self->robot->get_J_4(), c_self->robot->get_J_5(), c_self->robot->get_J_5(), c_self->robot->get_J_6(),
@@ -686,10 +980,19 @@ double avoid_self_collision(const std::vector<double> &x, std::vector<double> &g
 
     for (const auto &cap_def : c_self->capsules_definitions)
     {
-        Eigen::Matrix4d T = link_poses[cap_def.link_index] * cap_def.T_offset;
+        // Eigen::Matrix4d T = c_self->link_poses_cache[cap_def.link_index] * cap_def.T_offset;
+        // CapsuleWorld cap_world;
+        // cap_world.A = T.block<3, 1>(0, 3);
+        // cap_world.B = cap_world.A + T.block<3, 1>(0, 2) * cap_def.length;
+        // cap_world.radius = cap_def.radius;
+        // capsules_world.push_back(cap_world);
+
+        Eigen::Matrix4d T = c_self->link_poses_cache[cap_def.link_index] * cap_def.T_offset;
         CapsuleWorld cap_world;
-        cap_world.A = T.block<3, 1>(0, 3);
-        cap_world.B = cap_world.A + T.block<3, 1>(0, 2) * cap_def.length;
+        Eigen::Vector3d M_world = T.block<3, 1>(0, 2);
+        cap_world.A = M_world - T.block<3, 1>(0, 2) * (cap_def.length / 2.0);
+        // Nota: Nel tuo URDF le capsule sembrano allineate lungo Z locale
+        cap_world.B = M_world + T.block<3, 1>(0, 2) * (cap_def.length / 2.0);
         cap_world.radius = cap_def.radius;
         capsules_world.push_back(cap_world);
     }
@@ -760,14 +1063,6 @@ double avoid_self_collision(const std::vector<double> &x, std::vector<double> &g
     //               << std::endl;
     // }
 
-    // Debug output (throttled)
-    if (k % 10 == 0 && constraint_value > -0.05)
-    {
-        ROS_DEBUG("Step %d: Self-collision dist=%.3f (caps %d<->%d, links %d<->%d)",
-                  k, min_signed_dist, closest_cap_i, closest_cap_j,
-                  c_self->capsules_definitions[closest_cap_i].link_index,
-                  c_self->capsules_definitions[closest_cap_j].link_index);
-    }
 
     // 7. Calcolo Gradiente Analitico
     if (!grad.empty())
@@ -790,12 +1085,11 @@ double avoid_self_collision(const std::vector<double> &x, std::vector<double> &g
 
         // Jacobiano per capsula i
         Eigen::MatrixXd J_i = compute_capsule_jacobian(
-            link_poses[link_i], cap_i_def, J_links[link_i], t_i, NJ);
+            c_self->link_poses_cache[link_i], cap_i_def, c_self->J_links_cache[link_i], t_i, NJ);
 
         // Jacobiano per capsula j
         Eigen::MatrixXd J_j = compute_capsule_jacobian(
-            link_poses[link_j], cap_j_def, J_links[link_j], t_j, NJ);
-
+            c_self->link_poses_cache[link_j], cap_j_def, c_self->J_links_cache[link_j], t_j, NJ);
         // Gradiente della distanza rispetto a q:
         // d(dist)/dq = normal^T * (J_i - J_j)
         Eigen::RowVectorXd ddist_dq = normal.transpose() * (J_i - J_j);

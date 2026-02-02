@@ -12,6 +12,9 @@
 #include "utils/thunder_optimization.h"
 #include <visualization_msgs/MarkerArray.h>
 #include <visualization_msgs/Marker.h>
+#include <chrono>
+#include <iostream>
+#include <iomanip>
 #include <sstream>
 // #include <eigen_conversions/eigen_msg.h>
 #include "nlopt.hpp"
@@ -23,6 +26,8 @@
 #include "sensor_msgs/JointState.h"
 #include <eigen3/Eigen/Geometry> // Per AngleAxisd, Quaterniond
 #include "collision/CollisionEngine.hpp"
+#include <rosbag/bag.h>
+#include <std_msgs/Float64.h>
 
 // Funzione per calcolare l'errore di orientamento
 Eigen::Vector3d getOrientationError(const Eigen::Quaterniond &q_desired, const Eigen::Quaterniond &q_current)
@@ -120,6 +125,23 @@ bool solveIK_DLS(
 			 q_solution(0), q_solution(1), q_solution(2), q_solution(3), q_solution(4), q_solution(5), q_solution(6));
 	ROS_INFO("Last Pos Error: %.5f m, Orient Error: %.5f rad", error_vector.head(3).norm(), error_vector.tail(3).norm());
 	return false;
+}
+
+std::string nloptResultToString(nlopt::result res) {
+    switch (res) {
+        case nlopt::SUCCESS: return "SUCCESS (Convergenza raggiunta)";
+        case nlopt::STOPVAL_REACHED: return "STOPVAL_REACHED";
+        case nlopt::FTOL_REACHED: return "FTOL_REACHED (Variazione f minima)";
+        case nlopt::XTOL_REACHED: return "XTOL_REACHED (Variazione x minima)";
+        case nlopt::MAXEVAL_REACHED: return "MAXEVAL_REACHED (Troppe iterazioni)";
+        case nlopt::MAXTIME_REACHED: return "MAXTIME_REACHED (Tempo scaduto)";
+        case nlopt::FAILURE: return "FAILURE (Errore generico)";
+        case nlopt::INVALID_ARGS: return "INVALID_ARGS (Argomenti errati)";
+        case nlopt::OUT_OF_MEMORY: return "OUT_OF_MEMORY";
+        case nlopt::ROUNDOFF_LIMITED: return "ROUNDOFF_LIMITED (Errori arrotondamento)";
+        case nlopt::FORCED_STOP: return "FORCED_STOP";
+        default: return "UNKNOWN CODE";
+    }
 }
 
 Eigen::Vector3d generaOstacoloRandom() {
@@ -234,30 +256,30 @@ int main(int argc, char **argv)
 	// CAPSULE GENERATE DA fr3_franka_hand.urdf
 	// ===========================================
 	std::vector<Capsule> capsule_definitions;
-	// {
-	// 	Capsule cap;
-	// 	cap.link_index = 0;
-	// 	cap.radius = 0.055000;
-	// 	cap.length = 0.030000;
-	// 	cap.T_offset << 0.0000, 0.0000, 1.0000, -0.0750,
-	// 		0.0000, 1.0000, 0.0000, 0.0000,
-	// 		-1.0000, 0.0000, 0.0000, 0.0600,
-	// 		0.0000, 0.0000, 0.0000, 1.0000;
-	// 	capsule_definitions.push_back(cap);
-	// }
+	{
+		Capsule cap;
+		cap.link_index = 0;
+		cap.radius = 0.055000;
+		cap.length = 0.030000;
+		cap.T_offset << 0.0000, 0.0000, 1.0000, -0.0750,
+			0.0000, 1.0000, 0.0000, 0.0000,
+			-1.0000, 0.0000, 0.0000, 0.0600,
+			0.0000, 0.0000, 0.0000, 1.0000;
+		capsule_definitions.push_back(cap);
+	}
 
 	// --- fr3_link1 (Index 1) ---
-	// {
-	// 	Capsule cap;
-	// 	cap.link_index = 1;
-	// 	cap.radius = 0.060000;
-	// 	cap.length = 0.183000;
-	// 	cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
-	// 		0.0000, 1.0000, 0.0000, 0.0000,
-	// 		0.0000, 0.0000, 1.0000, -0.1915,
-	// 		0.0000, 0.0000, 0.0000, 1.0000;
-	// 	capsule_definitions.push_back(cap);
-	// }
+	{
+		Capsule cap;
+		cap.link_index = 1;
+		cap.radius = 0.060000;
+		cap.length = 0.183000;
+		cap.T_offset << 1.0000, 0.0000, 0.0000, 0.0000,
+			0.0000, 1.0000, 0.0000, 0.0000,
+			0.0000, 0.0000, 1.0000, -0.1915,
+			0.0000, 0.0000, 0.0000, 1.0000;
+		capsule_definitions.push_back(cap);
+	}
 
 	// --- fr3_link2 (Index 2) ---
 	{
@@ -420,9 +442,6 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 		else if (choice == 6)
 		{
 			tf = 5.0;
-
-			// q_int << -1.25962, -0.663669, -0.692637, -2.17138, -0.264125, 1.50759, 0.0630972; // Posizioni iniziali
-
 			for (int i = 0; i < 7; i++)
 			{
 				double q_low = q_lim_low[i];
@@ -431,38 +450,31 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 			}
 
 			std::cout << "Random final joint positions: " << qf.transpose() << std::endl;
-
-			// qf << -1.25962, -0.663669, -0.692637, -2.17138, -0.264125, 1.50759, 0.0630972; // Posizioni finali
-
 			v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
-
 			vf << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità finali
-
 			a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
-
 			af << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni finali
 		}
-		else if (choice == 7) // OPZIONE PER POSA EE
+		else if (choice == 7) // Opzione per Posizione e Orientamento EE
 		{
 			Eigen::Vector3d target_ee_pos_input;
 			Eigen::Quaterniond target_ee_orient_input;
-			// Per semplicità, chiediamo angoli RPY (in gradi) e li convertiamo
 			double roll_deg, pitch_deg, yaw_deg;
-			
 
 			// target_ee_pos_input.x() = 0.30; // Posizione EE desiderata in metri
 			// target_ee_pos_input.y() = 0.40;
 			// target_ee_pos_input.z() = 0.68; // Posizione EE desiderata in metri
 
-			//RANDOM Z
+			// RANDOM Z per test Autocollisione
 			// target_ee_pos_input.z() = -0.3 + (float(rand()) / RAND_MAX) * (0.8 - (-0.3)); // Tra -0.3 e 0.8 m
 
-			roll_deg = -169.0; // Angolo roll in gradi
-			pitch_deg = 0.4;   // Angolo pitch in gradi
-			yaw_deg = 62.6;	   // Angolo yaw in gradi
+			roll_deg = -180; // Angolo roll in gradi
+			pitch_deg = 0;   // Angolo pitch in gradi
+			yaw_deg = 60;	   // Angolo yaw in gradi
 
-			cout << "Enter desired EE position (x y z) in meters: ";
-			cin >> target_ee_pos_input.x() >> target_ee_pos_input.y() >> target_ee_pos_input.z();
+			// Sezione di input manuale
+			// cout << "Enter desired EE position (x y z) in meters: ";
+			// cin >> target_ee_pos_input.x() >> target_ee_pos_input.y() >> target_ee_pos_input.z();
 
 			// cout << "Enter desired EE orientation RPY (roll pitch yaw) in degrees: ";
 			// cin >> roll_deg >> pitch_deg >> yaw_deg;
@@ -486,8 +498,6 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 				 << target_ee_orient_input.y() << ", "
 				 << target_ee_orient_input.z() << endl;
 
-			// Chiedi se vuole ottimizzare il movimento
-
 			cout << "Do you want to optimize the movement? (1: Yes, 0: No): ";
 			int optimize_movement;
 			cin >> optimize_movement;
@@ -507,7 +517,6 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 			bool ik_solved = false;
 
 			// Chiama il solutore IK
-			// 'robot' è l'istanza della tua classe thunder_franka
 			ik_solved = solveIK_DLS(robot, // L'oggetto robot
 									target_ee_pos_input,
 									target_ee_orient_input,
@@ -516,65 +525,44 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 									q_lim_low,	 // Limiti inferiori dei giunti
 									q_lim_upp);	 // Limiti superiori dei giunti
 
+			// 1. Assegnazione Target (Comune a entrambi i casi)
+			// qf = ik_solved ? q_target_ik : qf; // Scommenta se usi la IK calcolata quando disponibile
+			// qf << 0.48145, 0.482112, 0.776829, -1.50611, -0.254019, 1.85678, 0.178126; // Target MultiOstacolo
+			// qf << 0.5889, 0.3757, 0.9471, -1.6643, -0.2357, 1.9641, 0.1780;
+			qf << 0.335, -0.321, 0.701, -2.145, 0.174, 1.884, 1.740; // Posizione di Arrivo test singolo ostacolo
+
 			if (ik_solved)
 			{
-				qf = q_target_ik; // Imposta la configurazione finale dei giunti
-				// qf << 0.0, 0.0, 0.0, -0.1, 0.0, 3.14, 3.14/4;  //posizione estesa
-
 				ROS_INFO_STREAM("IK successful. Target joint configuration: " << qf.transpose());
-
-				// Ora la logica di ottimizzazione esistente prenderà qf come target
-				if (optimize_movement == 1)
-				{
-					choice = 6; // Imposta choice a 6 comunque per usare l'interpolazione min-jerk
-
-					v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
-
-					vf << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità finali
-
-					a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
-
-					af << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni finali
-				}
-				else if (optimize_movement == 0)
-				{
-					qf << q_target_ik;
-					choice = 1; // Torna al menu principale
-				}
-				else
-				{
-					continue; // Torna al menu principale
-				}
 			}
 			else
 			{
-				ROS_ERROR("Failed to find IK solution for the desired pose. Skipping movement.");
+				ROS_ERROR("Failed to find IK solution. Forcing movement anyway.");
+				// qf = q_target_ik;
+				qf << 0.335, -0.321, 0.701, -2.145, 0.174, 1.884, 1.740; // Posizione di Arrivo test Collisione
+				// qf << 0.48145, 0.482112, 0.776829, -1.50611, -0.254019, 1.85678, 0.178126; // Posizione di Arrivo test MultiOstacolo 
+				// qf << 0.5889, 0.3757, 0.9471, -1.6643, -0.2357, 1.9641, 0.1780;
+				ROS_INFO_STREAM("Debug - Current q0: " << q0.transpose());
+				ROS_INFO_STREAM("Debug - Target EE: " << target_ee_pos_input.transpose());
+				ROS_INFO_STREAM("Force Target: " << qf.transpose());
+			}
 
-				// Stampa l'ultima configurazione q0 e la posa target per debugging
-				ROS_INFO_STREAM("Current q0 for IK: " << q0.transpose());
-				ROS_INFO_STREAM("Target EE Pos: " << target_ee_pos_input.transpose());
-				ROS_INFO_STREAM("Target EE Orient (quat w,x,y,z): " << target_ee_orient_input.w() << ", " << target_ee_orient_input.vec().transpose());
-
-				ROS_INFO_STREAM("Force IK with error. Target joint configuration: " << qf.transpose());
-				ROS_INFO_STREAM("Tf for movement: " << tf << " seconds");
-				qf = q_target_ik;
-
-				if (optimize_movement == 1)
-				{
-					choice = 6; // Imposta choice a 6 comunque per usare l'interpolazione min-jerk
-					v0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità iniziali
-					vf << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Velocità finali
-					a0 << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni iniziali
-					af << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0; // Accelerazioni finali
-				}
-				else if (optimize_movement == 0)
-				{
-					choice = 1; // movimento senza ottimizzazione (semplice interpolazione)
-				}
-				else
-				{
-					continue; // Torna al menu principale
-				}
+			if (optimize_movement == 1)
+			{
+				choice = 6; // Min-Jerk Optimization
+				// Reset dinamica (usa setZero di Eigen per pulizia)
+				v0.setZero();
+				vf.setZero();
+				a0.setZero();
+				af.setZero();
+			}
+			else if (optimize_movement == 0)
+			{
+				choice = 1; // Interpolazione semplice
+			}
+			else
+			{
+				continue;
 			}
 		}
 
@@ -630,7 +618,6 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 		{
 
 			ros::Duration(1.0 / frequenza).sleep(); // pausa forzata all'inizio affinchè si possa calcolare la traiettoria adeguatamente
-
 			q_int = q0;
 
 			// cout << "q0 "<< q0 << endl;
@@ -704,6 +691,20 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 			optData.dt = 1.0 / frequenza; // Passo temporale
 			optData.campioni = campioni;
 
+			// 1. Prepara i dati
+			JointLimitsData pos_data;
+			pos_data.NJ = NJ;
+			pos_data.dt = optData.dt;    // Tuo dt
+			pos_data.q0 = q0; // Start conf
+			pos_data.v0 = v0; // Start vel
+			pos_data.qf = qf; // End acc
+			pos_data.vf = vf; // End vel
+			pos_data.campioni = campioni;
+			pos_data.ubq = (Eigen::Matrix<double, 7, 1>() << 2.8973, 1.7628, 2.8973, -0.0698, 2.8973, 3.7525, 2.8973).finished(); // Vettori limiti
+			pos_data.lbq = (Eigen::Matrix<double, 7, 1>() << -2.8973, -1.7628, -2.8973, -3.0718, -2.8973, -0.0175, -2.8973).finished(); // Vettori limiti
+			pos_data.ubdq = (Eigen::Matrix<double, 7, 1>() << 2.175, 2.175, 2.175, 2.175, 2.61, 2.61, 2.61).finished();
+			pos_data.lbdq = (Eigen::Matrix<double, 7, 1>() << -2.175, -2.175, -2.175, -2.175, -2.61, -2.61, -2.61).finished();
+
 			// Imposto vettori limiti superiori e inferiori per i vincoli
 			std::vector<double> ub(NJ * campioni), lb(NJ * campioni), ubq(NJ), lbq(NJ), ubdq(NJ), lbdq(NJ), ubddq(NJ), lbddq(NJ);
 			lbq = {-2.8973, -1.7628, -2.8973, -3.0718, -2.8973, -0.0175, -2.8973};
@@ -716,13 +717,15 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 			// define the optimization problem
 			nlopt::opt opt(nlopt::LD_MMA, NJ * campioni);
 			opt.set_min_objective(objective, &optData);
-			opt.set_xtol_rel(1e-4);		   // Tolleranza di convergenza
-			opt.set_param("verbosity", 1); // Verbose output
 
-			float tol = 1e-2; // Tolleranza per i vincoli
+			opt.set_ftol_rel(1e-4);	   // Tolleranza di convergenza funzione obiettivo
+			// opt.set_xtol_abs(1e-5);	   // Tolleranza di convergenza variabili	Funziona bene solo 0.01 di errore
+			// opt.set_xtol_rel(1e-3);	   // Tolleranza di convergenza variabili
+
+			opt.set_param("verbosity", 1); // Verbose output
+			const double tol = 1e-2;		   // Tolleranza per i vincoli di uguaglianza
 
 			// Vincoli sulle condizioni iniziali, imponiamo all'ottimizzatore che le condizioni iniziali siano rispettate
-
 			for (int i = 0; i < NJ; i++)
 			{
 
@@ -756,36 +759,30 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 			opt.set_lower_bounds(lb);
 
 			// Vincoli di consistenza + evitamento ostacolo
-			std::vector<ConsistencyConstraintIneq> constraints, constraints_vel_f;
 			std::vector<std::shared_ptr<ObstacleConstraintIneq>> sphere_constraints, plane_constraints, rectangle_constraints;
-			std::vector<std::shared_ptr<JointLimitConstraint>> constraints_pos, constraints_vel;
 			std::vector<std::shared_ptr<SelfCollisionConstraint>> self_coll_constraints;
-
-			const double eps = 1e-3;		// Tolleranza per i vincoli di consistenza
+			// Tolleranze per i vincoli
 			const double eps_sphere = 1e-4; // Tolleranza per i vincoli di evitamento ostacolo
 
 			// Calcola il numero totale di vincoli correttamente
-			int vincoli_ostacolo_per_step = 3; // Sfera + piano + self-collision
+			int vincoli_ostacolo_per_step = 4; // Sfera + piano + self-collision + rettangolo
 			int vincoli_pos_per_step = 2 * NJ; // Upper + lower per ogni giunto
 			int vincoli_vel_per_step = 2 * NJ; // Upper + lower per ogni giunto
 			int vincoli_per_step = vincoli_ostacolo_per_step + vincoli_pos_per_step + vincoli_vel_per_step;
 
-			int numero_totale_vincoli = (campioni - 1) * vincoli_per_step + 2 * NJ;
+			unsigned m_pos_vel = 2 * NJ * campioni;
+			std::vector<double> tolm(m_pos_vel, 1e-2); // Tolleranza
+
+			unsigned m_final =  NJ; 
+			double precision_pos = 1e-4; 
+			std::vector<double> tol_final(m_final, precision_pos);
+
+
+			int numero_totale_vincoli = (campioni) * vincoli_per_step;
 			const double r_s = 0.07;   // raggio ostacolo
-			const double d_safe = 0.05; // margine sicurezza
+			const double d_safe = 0.05; // Margine di Sicurezza (8 cm per la sfera)/*(5cm per il piano)
 
 			Eigen::Vector3d p_sfera(0.40, 0, 0.65); // Posizione fissa ostacolo
-
-			// Posizione dell'ostacolo (sfera) in coordinate del robot
-			// Eigen::Vector3d p_ostacolo = Eigen::Vector3d::Zero();  // Dichiarazione e inizializzazione a zero
-			// p_ostacolo = generaOstacoloRandom();                   // Assegnazione successiva
-
-			// std::mt19937 gen(std::random_device{}());
-			// std::uniform_real_distribution<double> dist_x(-0.35, 0.35);
-			// std::uniform_real_distribution<double> dist_y(-0.35, 0.35);
-			// std::uniform_real_distribution<double> dist_z(-0.2, 0.75);
-			// Eigen::Vector3d p_ostacolo(dist_x(gen), dist_y(gen), dist_z(gen));
-			// std::cout << "Posizione ostacolo: " << p_ostacolo.transpose() << std::endl;
 			Eigen::Vector3d p_piano(0.0, 0.0, 0.0); // Punto sul piano
 			Eigen::Vector3d p_rettangolo(0.25, -0.01, 0.50);
 
@@ -794,6 +791,17 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 			obs_sphere.capsule.A = p_sfera; // Centro sfera
 			obs_sphere.capsule.B = p_sfera; // Stesso punto
 			obs_sphere.capsule.radius = r_s;   // Raggio sfera
+
+			Eigen::Vector3d p_sphere_blue(0.30, 0.45, 0.80);
+			Obstacle obs_sphere_blue;
+			const double r_sb = 0.08;   // raggio ostacolo
+			const double d_safe_blue = 0.06; // Margine di Sicurezza (5 cm per la sfera blu)
+    		obs_sphere_blue.type = ObstacleType::CAPSULE;
+    
+			obs_sphere_blue.capsule.A = p_sphere_blue;
+			obs_sphere_blue.capsule.B = p_sphere_blue;
+			obs_sphere_blue.capsule.radius = r_sb;   // Raggio sfera
+
 				
 			// Cilindro Verticale
 			// Obstacle obs_cylinder;
@@ -808,19 +816,18 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 
 			// Cilindro Orizzontale
 			// Per il cilindro orizzontale lungo X (capsula con estremi separati)
-			double r_c = 0.02;
-			double lunghezza_cilindro = 0.10;  // Lunghezza del cilindro (senza le semisfere)
-			double distanza_AB = lunghezza_cilindro - 2*r_c;  // Parte cilindrica pura
+			// double r_c = 0.02;
+			// double lunghezza_cilindro = 0.10;  // Lunghezza del cilindro (senza le semisfere)
+			// double distanza_AB = lunghezza_cilindro - 2*r_c;  // Parte cilindrica pura
 
-			Eigen::Vector3d p_cilindro_A(0.38 - distanza_AB/2, 0, 0.60);  // Estremo sinistro
-			Eigen::Vector3d p_cilindro_B(0.38 + distanza_AB/2, 0, 0.60);  // Estremo destro
+			// Eigen::Vector3d p_cilindro_A(0.38 - distanza_AB/2, 0, 0.60);  // Estremo sinistro
+			// Eigen::Vector3d p_cilindro_B(0.38 + distanza_AB/2, 0, 0.60);  // Estremo destro
 
-			Obstacle obs_cilindro;
-			obs_cilindro.type = ObstacleType::CAPSULE;
-			obs_cilindro.capsule.A = p_cilindro_A;
-			obs_cilindro.capsule.B = p_cilindro_B;
-			obs_cilindro.capsule.radius = r_c;
-
+			// Obstacle obs_cilindro;
+			// obs_cilindro.type = ObstacleType::CAPSULE;
+			// obs_cilindro.capsule.A = p_cilindro_A;
+			// obs_cilindro.capsule.B = p_cilindro_B;
+			// obs_cilindro.capsule.radius = r_c;
 
 			Obstacle obs_plane;
 			obs_plane.type = ObstacleType::PLANE;
@@ -845,24 +852,42 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 				// {5, 8}, {4, 6}, {2, 4}, {3, 5}
 			};
 
-				constraints.clear();
-				constraints.reserve(numero_totale_vincoli);
-				constraints_vel_f.clear();
-				constraints_vel_f.reserve(numero_totale_vincoli);
-				constraints_pos.clear();
-				constraints_pos.reserve(NJ * 4);
+			// Preallocazione vettori vincoli
+
+				// constraints_pos_f.clear();
+				// constraints_pos_f.reserve((campioni) * vincoli_per_step + 2 * NJ);
+				// constraints_vel_f.clear();
+				// constraints_vel_f.reserve((campioni) * vincoli_per_step + 2 * NJ);
+				// constraints_pos.clear();
+				// constraints_pos.reserve(NJ * 4);
+				sphere_constraints.clear();
+				sphere_constraints.reserve(numero_totale_vincoli);
+				plane_constraints.clear();
+				plane_constraints.reserve(numero_totale_vincoli);
 				self_coll_constraints.clear();
-				self_coll_constraints.reserve(collision_pairs.size() * (campioni - 1));
+				self_coll_constraints.reserve(collision_pairs.size() * numero_totale_vincoli);
 				rectangle_constraints.clear();
 				rectangle_constraints.reserve(numero_totale_vincoli);
 
+			opt.add_inequality_mconstraint(position_limits_mconstraint, &pos_data, tolm);
+			opt.add_inequality_mconstraint(velocity_limits_mconstraint, &pos_data, tolm);
+			opt.add_inequality_mconstraint(final_position_inequality_mconstraint, &pos_data, tol_final);
+			opt.add_inequality_mconstraint(final_velocity_inequality_mconstraint, &pos_data, tol_final);
+
+
 			//  Vincoli aggiuntivi per collisione con ostacoli e self-collision
-			for (int k = 0; k < campioni - 1; k++)
+			for (int k = 0; k < campioni; k++)
 			{
 				auto c_sphere = std::make_shared<ObstacleConstraintIneq>(
 					k, NJ, d_safe, obs_sphere, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub);
 				c_sphere->capsules_definitions = capsule_definitions;
-				sphere_constraints.push_back(c_sphere);				
+				sphere_constraints.push_back(c_sphere);
+				
+				// Sfera Blu Aggiuntiva per Scenari complessi
+				auto c_sphere_blue = std::make_shared<ObstacleConstraintIneq>(
+					k, NJ, d_safe_blue, obs_sphere_blue, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub);
+				c_sphere_blue->capsules_definitions = capsule_definitions;
+				sphere_constraints.push_back(c_sphere_blue);
 
 				auto c_plane = std::make_shared<ObstacleConstraintIneq>(
 					k, NJ, d_safe, obs_plane, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub);
@@ -873,7 +898,7 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 					.k = k,
 					.NJ = NJ,
 					.dt = optData.dt,
-					.d_safe = 0.15,
+					.d_safe = 0.10, // Margine di sicurezza per self-collision
 					.q0 = optData.q0,
 					.dq0 = optData.v0,
 					.robot = &robot,
@@ -881,6 +906,7 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 					.collision_pairs = collision_pairs,
 					.marker_pub = &marker_pub
 				});
+				self_coll_constraints.push_back(c_self);
 
 				auto c_rectangle = std::make_shared<ObstacleConstraintIneq>(
 					k, NJ, d_safe, obs_rectangle, &robot, optData.q0, optData.v0, optData.dt, &capsule_viz_pub);
@@ -888,71 +914,16 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 				rectangle_constraints.push_back(c_rectangle);
 				opt.add_inequality_constraint(avoid_obstacle_generic, c_rectangle.get(), eps_sphere);
 
-				self_coll_constraints.push_back(c_self);
+				
 				// opt.add_inequality_constraint(avoid_obstacle_generic, c_sphere.get(), eps_sphere);
-				opt.add_inequality_constraint(avoid_obstacle_generic, c_plane.get(), 1e-4);
-				// opt.add_inequality_constraint(avoid_self_collision, c_self.get(), 1e-4);
+				// opt.add_inequality_constraint(avoid_obstacle_generic, c_sphere_blue.get(), eps_sphere);
+				// opt.add_inequality_constraint(avoid_obstacle_generic, c_plane.get(), 1e-4);
+				// opt.add_inequality_constraint(avoid_self_collision, c_self.get(), 1e-2);
 
-				// auto c = std::make_shared<ObstacleConstraintIneq>(
-				// 	k, NJ, r_s, d_safe, p_ostacolo, robot, optData.q0, optData.v0, optData.dt,
-				// 	capsule_viz_pub_ // <-- Passa il publisher ROS 1
-				// );
-				// c->capsules = capsule_definitions;
-
-				// sphere_constraints.push_back(c);
-				// opt.add_inequality_constraint(avoid_sphere_with_gradient, c.get(), eps_sphere);
-
-				// Upper and lower joint limits
-				for (int i = 0; i < NJ; i++)
-				{
-					// Vincoli di posizione
-					{
-						// Posizione upper
-						auto c_up = std::make_unique<JointLimitConstraint>(
-							JointLimitConstraint{NJ, k, i, optData.dt, q0, v0, ubq[i], true});
-						constraints_pos.push_back(std::move(c_up));
-						opt.add_inequality_constraint(joint_position_limit, constraints_pos.back().get(), eps);
-
-						// Posizione lower
-						auto c_low = std::make_unique<JointLimitConstraint>(
-							JointLimitConstraint{NJ, k, i, optData.dt, q0, v0, lbq[i], false});
-						constraints_pos.push_back(std::move(c_low));
-						opt.add_inequality_constraint(joint_position_limit, constraints_pos.back().get(), eps);
-					}
-
-					// Vincoli di velocità
-
-					{
-						// Velocità upper
-						auto c_up = std::make_unique<JointLimitConstraint>(
-							JointLimitConstraint{NJ, k, i, optData.dt, q0, v0, ubdq[i], true});
-						constraints_vel.push_back(std::move(c_up));
-						opt.add_inequality_constraint(joint_velocity_limit, constraints_vel.back().get(), eps);
-
-						// Velocità lower
-						auto c_low = std::make_unique<JointLimitConstraint>(
-							JointLimitConstraint{NJ, k, i, optData.dt, q0, v0, lbdq[i], false});
-						constraints_vel.push_back(std::move(c_low));
-						opt.add_inequality_constraint(joint_velocity_limit, constraints_vel.back().get(), eps);
-					}
-				}
 			}
 
-			for (int i = 0; i < NJ; i++)
-			{
-
-				// Vincoli di posizione finale
-				{
-					constraints.push_back({campioni, NJ, size_q, optData.dt, 0, +1, campioni, q0, v0, qf, vf, i});
-					opt.add_inequality_constraint(final_position_constraint, &constraints.back(), eps);
-				}
-
-				// Vincoli di velocità finale
-				{
-					constraints_vel_f.push_back({campioni, NJ, size_q, optData.dt, 0, +1, campioni, q0, v0, qf, vf, i});
-					opt.add_inequality_constraint(final_velocity_constraint, &constraints_vel_f.back(), eps);
-				}
-			}
+			// Define start time for optimization
+			auto start_time = std::chrono::high_resolution_clock::now();
 
 			// Define the initial guess
 			std::vector<double> vettore(NJ * campioni); // Inizializza il vettore x
@@ -965,25 +936,34 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 			try
             {
                 nlopt::result result = opt.optimize(vettore, minf);
-                std::cout << "Ottimizzazione Completata." << std::endl;
+                std::cout << "Ottimizzazione Completata con codice: " << result << std::endl;
+				std::cout << nloptResultToString(result) << std::endl;
                 std::cout << "Costo minimo: " << minf << std::endl;
-                
-                // NOTA: Ho rimosso vettore.clear() da qui perché serve nel ciclo sotto!
 
-                if (result == nlopt::MAXTIME_REACHED)
-                {
-                    std::cout << "Timeout raggiunto! Soluzione subottima" << std::endl;
-                }
-                else
-                {
-                    std::cout << "Convergenza raggiunta. Soluzione ottimale" << std::endl;
-                }
             }
+			catch (nlopt::forced_stop &e) {
+				ROS_WARN("Ottimizzazione interrotta manualmente dall'utente! ");
+				ROS_WARN("Salvataggio della migliore traiettoria trovata finora (Costo: %f)", minf);
+				
+			}
             catch (std::exception &e)
             {
-                std::cerr << "Errore NLOpt: " << e.what() << std::endl;
+                std::cerr << "Errore NLOPT!: " << e.what() << std::endl;
 				continue; // Torna al menu principale in caso di errore
             }
+
+			// Define end time for optimization
+			double optimization_time = 0.0;
+    		auto end_time = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double, std::ratio<1>> elapsed_ms = end_time - start_time;
+
+			std::cout << "  Tempo Ottimizzazione: " << std::fixed << std::setprecision(2) << elapsed_ms.count() << " s" << std::endl;
+			ros::NodeHandle nh;
+			// nh.setParam("/thunder/last_optimization_time", elapsed_ms.count());
+
+			ros::param::set("/thunder/last_planner_id", "NLOPT_MMA");
+        	ros::param::set("/thunder/last_planning_time_cpu", elapsed_ms.count());
+        	ros::param::set("/thunder/last_optimization_time", elapsed_ms.count());
 
             // 1. RICOSTRUZIONE DELLA TRAIETTORIA (SENZA ESEGUIRE)
             // Inizializzione posizioni, velocità e accelerazioni
@@ -1016,12 +996,12 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 
             if (user_input != 'y' && user_input != 'Y') 
             {
-                std::cout << ">>>Esecuzione ANNULLATA dall'utente. Robot fermo." << std::endl;
+                std::cout << ">>> Esecuzione ANNULLATA dall'utente. Robot fermo. " << std::endl;
 				continue;
             }
             else 
             {
-                std::cout << "Esecuzione Traiettoria..." << std::endl;
+                std::cout << "Esecuzione Traiettoria in corso" << std::endl;
                 
                 for (int j = 0; j < campioni - 1; j++)
                 {
@@ -1089,47 +1069,6 @@ cap.T_offset << 1.0000,  0.0000,  0.0000, -0.0100,
 
                 std::cout << "Esecuzione completata." << std::endl;
             }
-
-			// // Print the optimized values
-			// printf("Optimized values:\n");
-			// printf("q_opt:\n");
-			// for (int i = 0; i < POS_INIT.size(); i++)
-			// {
-			// 	printf("%g ", vettore[i]);
-			// 	printf(",\n");
-			// }
-			// printf(",\n");
-			// printf("dq_opt:\n");
-			// for (int i = POS_INIT.size(); i < 2 * POS_INIT.size(); i++)
-			// {
-			// 	printf("%g ", vettore[i]);
-			// 	printf(",\n");
-			// }
-			// printf(",\n");
-			// printf("ddq_opt:\n");
-			// for (int i = 2 * POS_INIT.size(); i < 3 * POS_INIT.size(); i++)
-			// {
-			// 	printf("%g ", vettore[i]);
-			// 	printf(",\n");
-			// }
-
-			// // time_step = 0;
-
-			// // while (time_step < campioni)
-
-			// // {
-
-			// // 	std::vector<double> pos_des{vettore[time_step * NJ + 0], vettore[time_step * NJ + 1], vettore[time_step * NJ + 2], vettore[time_step * NJ + 3], vettore[time_step * NJ + 4], vettore[time_step * NJ + 5], vettore[time_step * NJ + 6]};
-
-			// // 	traj_msg.position = pos_des;
-			// // 	std::vector<double> vel_des{vettore[NJ * campioni + time_step * NJ + 0], vettore[NJ * campioni + time_step * NJ + 1], vettore[NJ * campioni + time_step * NJ + 2], vettore[NJ * campioni + time_step * NJ + 3], vettore[NJ * campioni + time_step * NJ + 4], vettore[NJ * campioni + time_step * NJ + 5], vettore[NJ * campioni + time_step * NJ + 6]};
-			// // 	traj_msg.velocity = vel_des;
-			// // 	std::vector<double> acc_des{vettore[2 * NJ * campioni + time_step * NJ + 0], vettore[2 * NJ * campioni + time_step * NJ + 1], vettore[2 * NJ * campioni + time_step * NJ + 2], vettore[2 * NJ * campioni + time_step * NJ + 3], vettore[2 * NJ * campioni + time_step * NJ + 4], vettore[2 * NJ * campioni + time_step * NJ + 5], vettore[2 * NJ * campioni + time_step * NJ + 6]};
-			// // 	traj_msg.effort = acc_des;
-			// // 	pub_cmd.publish(traj_msg);
-
-			// // 	time_step++;
-			// // }
 		}
 	}
 	return 0;

@@ -17,6 +17,9 @@
 #include <ros/console.h>
 #include <ros/node_handle.h>
 #include <ros/time.h>
+#include <panda_controllers/PerformanceMetrics.h>
+#include <std_msgs/Float64.h>
+#include <std_msgs/Float64MultiArray.h>
 
 #include <franka/robot_state.h>
 
@@ -42,7 +45,6 @@ public:
 private:
   
     bool flag = false;           // flag for check of the desired command velocity
-    
     /* Definig the timing */
     
     double dt;
@@ -69,9 +71,21 @@ private:
     Eigen::Matrix<double, 7, 1> tau_eft;  // torque for effort comparison
 
     private:
-    double total_energy_cost = 0.0;
+    ros::Publisher metrics_pub;
+
+    // Variabili di stato per le metriche
     bool is_trajectory_active;
-    // Add member variables here
+    double total_energy_cost;
+    double execution_time;
+    double average_power;
+    double stored_optimization_time;
+    std::string stored_planner_id;
+    double stored_planning_time_cpu;
+    double total_jerk_cost;
+    double total_path_length; // Il contatore accumulatore
+
+
+    panda_controllers::PerformanceMetrics metrics_msg;
     
     /* Error and dot error feedback */
     
@@ -87,6 +101,10 @@ private:
     Eigen::Matrix<double, 7, 1> command_dot_q_d_old;
     
     Eigen::Matrix<double, 7, 1> command_dot_dot_q_d;   // estimated desired acceleration command 
+    Eigen::Matrix<double, 7, 1> last_command_dot_dot_q_d; // last estimated desired acceleration command
+
+    Eigen::Matrix<double, 7, 1> last_q_metric;
+    Eigen::Matrix<double, 7, 1> jerk_vec;
 
     /* Mass Matrix and Coriolis vector */
     
@@ -109,6 +127,8 @@ private:
     ros::NodeHandle cvc_nh;
     ros::Subscriber sub_command_;
     ros::Publisher pub_err_;
+
+    ros::Time last_msg_time;
     
     /* Setting Command Callback*/
     

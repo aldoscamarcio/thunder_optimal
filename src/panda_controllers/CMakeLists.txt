@@ -14,8 +14,10 @@ find_package(catkin REQUIRED COMPONENTS
 	geometry_msgs
 	nav_msgs
 	franka_msgs
+	rosbag
 	hardware_interface
 	message_generation
+	std_msgs
 	pluginlib
 	realtime_tools
 	roscpp
@@ -40,24 +42,25 @@ find_package(yaml-cpp REQUIRED)
 #find_package(CasADi REQUIRED) # for regressor
 #find_library(CASADI_LIB casadi)
 
-# # to add custom msg
-# add_message_files(FILES
-# 	desTrajEE.msg
-# 	log_adaptive_cartesian.msg
-# 	log_adaptive_joints.msg
-# 	point.msg
-# 	link_params.msg
-# 	flag.msg
-# 	Vec7D.msg
-# 	rpy.msg
-# 	impedanceGain.msg
-# )
-## to create msg, specify dependecies
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-#   geometry_msgs
-# )
+# to add custom msg
+	add_message_files(FILES
+	PerformanceMetrics.msg
+	# desTrajEE.msg
+	# log_adaptive_cartesian.msg
+	# log_adaptive_joints.msg
+	# point.msg
+	# link_params.msg
+	# flag.msg
+	# Vec7D.msg
+	# rpy.msg
+	# impedanceGain.msg
+)
+# to create msg, specify dependecies
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+  geometry_msgs
+)
 
 include_directories(
 	include
@@ -87,6 +90,7 @@ catkin_package(
 	pluginlib
 	realtime_tools
 	roscpp
+	std_msgs
 	# DEPENDS Franka #
 )
 
