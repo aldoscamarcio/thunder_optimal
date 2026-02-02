@@ -292,62 +292,60 @@ double dist_capsule_rectangle(
     double x_proj = v.dot(R.Ux);
     double y_proj = v.dot(R.Uy);
 
-    // SE IL PUNTO CADE DENTRO I CONFINI DEL RETTANGOLO:
+        // Verifica se il punto proiettato è dentro il rettangolo
     if (x_proj >= 0.0 && x_proj <= R.width && y_proj >= 0.0 && y_proj <= R.height)
     {
         double distPlaneAbs = std::abs(d_plane);
-        double signedDist = distPlaneAbs - cap.radius; // Distanza euclidea reale
+        double signedDist = distPlaneAbs - cap.radius; 
+        
+        // Soglia di attivazione "campo di guida"
+        double d_activation = 0.10; 
 
-        // Se siamo vicini alla collisione o dentro, attiviamo la logica di scivolamento
         if (out)
         {
             out->p_capsule = P_cap;
             out->p_obstacle = P_proj;
             out->t_capsule = t_cap;
-            out->t_obstacle = 0.0; // Convenzionale per la faccia
+            out->t_obstacle = 0.0; 
 
-            // --- LOGICA DI SCIVOLAMENTO (ANTI-BLOCCO) ---
-            if (signedDist < 0) // Solo se c'è compenetrazione
+            // Sliding scale con la zona di attivazione
+            if (signedDist < d_activation) 
             {
-                // 1. Calcola distanza dai 4 bordi
                 double d_left = x_proj;
                 double d_right = R.width - x_proj;
                 double d_bottom = y_proj;
                 double d_top = R.height - y_proj;
                 
-                // Trova il bordo più vicino
                 double min_edge_dist = std::min({d_left, d_right, d_bottom, d_top});
                 
-                // Direzione vettoriale verso quel bordo
                 Eigen::Vector3d dir_edge = Eigen::Vector3d::Zero();
                 if (min_edge_dist == d_left)       dir_edge = -R.Ux;
                 else if (min_edge_dist == d_right) dir_edge = R.Ux;
                 else if (min_edge_dist == d_bottom) dir_edge = -R.Uy;
                 else                               dir_edge = R.Uy;
 
-                // Fattore di pendenza laterale (0.5 - 0.8 è un buon range)
-                double k_lateral = 0.7; 
+                // Alpha: 0 a d_activation, 1 a collisione, >1 dentro
+                double alpha = (d_activation - signedDist) / d_activation;
+                
+                // Guadagno laterale aggressivo per garantire l'uscita
+                double k_effective = 1.5 * std::max(0.5, alpha);
 
-                // FIX 1: Modifica il VALORE della distanza
-                // Sottraiamo una penalità basata sulla distanza dal bordo.
-                // Al centro del rettangolo il valore sarà molto più negativo che ai bordi.
-                out->distance = signedDist - (min_edge_dist * k_lateral);
+                // Penalizziamo il centro per creare una "collina" repulsiva verso i bordi
+                out->distance = signedDist - (min_edge_dist * 0.5 * alpha); 
 
-                // FIX 2: Modifica la NORMALE (Gradiente)
-                // Sommiamo la normale del piano con la direzione verso l'uscita
+                // Normale inclinata
                 Eigen::Vector3d plane_n = (d_plane >= 0.0) ? n : -n;
-                out->normal = (plane_n + k_lateral * dir_edge).normalized();
+                out->normal = (plane_n + dir_edge * k_effective).normalized();
             }
             else 
             {
-                // Nessuna collisione: Comportamento standard Euclideo
+                // Comportamento standard fuori dalla zona di pericolo
                 out->distance = signedDist;
                 out->normal = (d_plane >= 0.0) ? n : -n;
             }
         }
         
-        // Ritorniamo il valore modificato se siamo in collisione (così l'ottimizzatore lo vede)
-        return (out && signedDist < 0) ? out->distance : signedDist;
+        return (out && signedDist < d_activation) ? out->distance : signedDist;
     }
 
     // -----------------------------------------------------------
