@@ -40,4 +40,6 @@ This repository reflects the following implementation phases described in the th
 - **Framework:** ROS (Robot Operating System) properly installed and configured.
 - **Math Libraries:** NLopt library for solving nonlinear optimization problems.
 - **Hardware Dependencies (Optional):** Specific ROS packages for manipulator control and qb SoftHand drivers (only required for execution on the physical robot).
-  ## Author: Aldo Scamarcio
+
+  
+  ### Author: Aldo Scamarcio
