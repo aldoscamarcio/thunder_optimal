@@ -27,6 +27,9 @@ This repository reflects the following implementation phases described in the th
   - Executing a dynamic task of throwing a ball into a container, utilizing the qb SoftHand robotic hand and imposing a specific non-zero final velocity.
 - **Statistical Comparative Analysis:** Acquired data at 1 kHz to measure Control Energy, Jerk, and Path Length. The data was statistically analyzed against RRT* and PRM* using Raincloud Plots and the Wilcoxon non-parametric test.
 
+<video src="assets/MVI_8147_light.MP4" controls="controls" style="max-width: 730px;">
+</video>
+
 ## 💻 Tools Used
 
 - **NLopt (LD-MMA Solver):** Used to minimize the cost functional based on gradients (Method of Moving Asymptotes).
