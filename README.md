@@ -27,8 +27,23 @@ This repository reflects the following implementation phases described in the th
   - Executing a dynamic task of throwing a ball into a container, utilizing the qb SoftHand robotic hand and imposing a specific non-zero final velocity.
 - **Statistical Comparative Analysis:** Acquired data at 1 kHz to measure Control Energy, Jerk, and Path Length. The data was statistically analyzed against RRT* and PRM* using Raincloud Plots and the Wilcoxon non-parametric test.
 
-<video src="assets/MVI_8147_light.MP4" controls="controls" style="max-width: 730px;">
-</video>
+## 💻 Test Real Robot 
+
+**Con Ottimizzazione**:
+
+https://github.com/user-attachments/assets/46c58f69-7bae-43c4-b196-d2fa0a0264cc
+
+**Senza Ottimizzazione**:
+
+https://github.com/user-attachments/assets/d2defda8-770b-4c16-bfc2-f6db5b990187
+
+
+**Test Collision Avoidance con Ostacolo Rettangolare**:
+
+
+![m_franka](https://github.com/user-attachments/assets/831d5cf3-688e-45a2-82e5-b66db97dbfb3)
+
+
 
 ## 💻 Tools Used
 
